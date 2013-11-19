@@ -206,6 +206,37 @@
             </ExtendedAttribute>
          </ExtendedAttributes>
       </DataField>
+      <DataField Id="CoverageDecision" Name="CoverageDecision" IsArray="FALSE">
+         <DataType>
+            <SchemaType/>
+         </DataType>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="CarnotExt">
+               <carnot:DataField Oid="118" Type="plainXML">
+                  <carnot:Attributes>
+                     <carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+                     <carnot:Attribute Name="carnot:engine:schemaType" Value="none"/>
+                  </carnot:Attributes>
+               </carnot:DataField>
+            </ExtendedAttribute>
+         </ExtendedAttributes>
+      </DataField>
+      <DataField Id="AccidentReport" Name="Accident Report" IsArray="FALSE">
+         <DataType>
+            <ExternalReference location="org.eclipse.stardust.engine.api.runtime.Document"/>
+         </DataType>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="CarnotExt">
+               <carnot:DataField Oid="137" Type="dmsDocument">
+                  <carnot:Attributes>
+                     <carnot:Attribute Name="carnot:engine:visibility" Value="Public"/>
+                     <carnot:Attribute Name="carnot:engine:className" Value="org.eclipse.stardust.engine.api.runtime.Document"/>
+                     <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+                  </carnot:Attributes>
+               </carnot:DataField>
+            </ExtendedAttribute>
+         </ExtendedAttributes>
+      </DataField>
       <DataField Id="DamageReport" Name="Damage Report" IsArray="FALSE">
          <DataType>
             <ExternalReference location="org.eclipse.stardust.engine.api.runtime.Document"/>
@@ -222,60 +253,11 @@
             </ExtendedAttribute>
          </ExtendedAttributes>
       </DataField>
-      <DataField Id="CoverageDecision" Name="CoverageDecision" IsArray="FALSE">
-         <DataType>
-            <SchemaType/>
-         </DataType>
-         <ExtendedAttributes>
-            <ExtendedAttribute Name="CarnotExt">
-               <carnot:DataField Oid="118" Type="plainXML">
-                  <carnot:Attributes>
-                     <carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
-                     <carnot:Attribute Name="carnot:engine:schemaType" Value="none"/>
-                  </carnot:Attributes>
-               </carnot:DataField>
-            </ExtendedAttribute>
-         </ExtendedAttributes>
-      </DataField>
    </DataFields>
    <WorkflowProcesses>
       <WorkflowProcess Id="CoverageDecision" Name="Coverage Decision" AccessLevel="PUBLIC">
          <ProcessHeader/>
          <Activities>
-            <Activity Id="CheckForExisting" Name="CheckForExisting">
-               <Implementation>
-                  <Task>
-                     <TaskApplication Id="JMSApplication1">
-                        <ActualParameters>
-                           <ActualParameter>DamageReport</ActualParameter>
-                        </ActualParameters>
-                     </TaskApplication>
-                  </Task>
-               </Implementation>
-               <StartMode>
-                  <Automatic/>
-               </StartMode>
-               <FinishMode>
-                  <Automatic/>
-               </FinishMode>
-               <ExtendedAttributes>
-                  <ExtendedAttribute Name="CarnotExt">
-                     <carnot:Activity Oid="60" Implementation="Application">
-                        <carnot:EventHandlers/>
-                        <carnot:QualityCodes/>
-                        <carnot:DataFlows>
-                           <carnot:DataFlow Oid="114" Id="Document1" Name="Document1" Direction="IN" Context="application">
-                              <carnot:DataRef Id="DamageReport"/>
-                              <carnot:AccessPointRef/>
-                           </carnot:DataFlow>
-                        </carnot:DataFlows>
-                        <carnot:Attributes>
-                           <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
-                        </carnot:Attributes>
-                     </carnot:Activity>
-                  </ExtendedAttribute>
-               </ExtendedAttributes>
-            </Activity>
             <Activity Id="AnalyzeDRandAR" Name="Analyze DR and AR">
                <Implementation>
                   <No/>
@@ -292,7 +274,12 @@
                      <carnot:Activity Oid="65" Implementation="Manual">
                         <carnot:EventHandlers/>
                         <carnot:QualityCodes/>
-                        <carnot:DataFlows/>
+                        <carnot:DataFlows>
+                           <carnot:DataFlow Oid="139" Id="AccidentReport" Name="AccidentReport" Direction="IN" Context="default">
+                              <carnot:DataRef Id="AccidentReport"/>
+                              <carnot:AccessPointRef/>
+                           </carnot:DataFlow>
+                        </carnot:DataFlows>
                         <carnot:Attributes>
                            <carnot:Attribute Name="carnot:pwh:includeTime" Value="true" Type="boolean"/>
                         </carnot:Attributes>
@@ -365,14 +352,6 @@
             </Activity>
          </Activities>
          <Transitions>
-            <Transition Id="_Transition_1" Name="&lt;Transition&gt; 1" From="CheckForExisting" To="AnalyzeDRandAR">
-               <Condition Type="CONDITION">true</Condition>
-               <ExtendedAttributes>
-                  <ExtendedAttribute Name="CarnotExt">
-                     <carnot:Transition Oid="67"/>
-                  </ExtendedAttribute>
-               </ExtendedAttributes>
-            </Transition>
             <Transition Id="_Transition_2" Name="&lt;Transition&gt; 2" From="AnalyzeDRandAR" To="Createcoveragedecision">
                <Condition Type="CONDITION">true</Condition>
                <ExtendedAttributes>
@@ -394,7 +373,7 @@
             <ExtendedAttribute Name="CarnotExt">
                <carnot:WorkflowProcess Oid="50">
                   <carnot:Triggers>
-                     <carnot:Trigger Oid="53" Id="InitialContact" Name="InitialContact" Type="jms">
+                     <carnot:Trigger Oid="151" Id="Receiveaccidentreport" Name="Receive accident report" Type="jms">
                         <carnot:AccessPoints/>
                         <carnot:DataFlows/>
                      </carnot:Trigger>
@@ -406,33 +385,32 @@
                         <carnot:Symbols>
                            <carnot:Symbol Kind="POOL" Oid="52" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
                               <carnot:Symbols>
-                                 <carnot:Symbol Kind="STARTEVENT" Oid="54" X="180" Y="75" Width="90" Height="50" ModelElement="InitialContact"/>
-                                 <carnot:Symbol Kind="ACTIVITY" Oid="61" X="135" Y="180" Width="181" Height="51" ModelElement="CheckForExisting"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="66" X="135" Y="275" Width="181" Height="51" ModelElement="AnalyzeDRandAR"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="70" X="135" Y="370" Width="181" Height="51" ModelElement="Createcoveragedecision"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="74" X="135" Y="475" Width="181" Height="51" ModelElement="Sendcoveragedecision"/>
                                  <carnot:Symbol Kind="ENDEVENT" Oid="77" X="205" Y="590" Width="40" Height="40"/>
                                  <carnot:Symbol Kind="ROLE" Oid="106" X="395" Y="310" Width="70" Height="40" ModelElement="_Role_1"/>
-                                 <carnot:Symbol Kind="DATA" Oid="111" X="355" Y="75" Width="100" Height="70" ModelElement="DamageReport"/>
                                  <carnot:Symbol Kind="DATA" Oid="119" X="390" Y="420" Width="110" Height="70" ModelElement="CoverageDecision"/>
-                                 <carnot:Symbol Kind="ANNOTATION" Oid="124" X="340" Y="10" Width="110" Height="55">
-                                    <carnot:Text>Format of Reports is still tbd</carnot:Text>
+                                 <carnot:Symbol Kind="ANNOTATION" Oid="124" X="330" Y="45" Width="205" Height="55">
+                                    <carnot:Text>Format of Reports is still tbd&#13;
+Also, report probably not in JMS, as it comes from customer&#13;
+</carnot:Text>
                                  </carnot:Symbol>
                                  <carnot:Symbol Kind="APPLICATION" Oid="126" X="-35" Y="305" Width="110" Height="40" ModelElement="JMSApplication1"/>
+                                 <carnot:Symbol Kind="DATA" Oid="138" X="360" Y="169" Width="100" Height="70" ModelElement="AccidentReport"/>
+                                 <carnot:Symbol Kind="STARTEVENT" Oid="152" X="155" Y="140" Width="140" Height="50" ModelElement="Receiveaccidentreport"/>
                               </carnot:Symbols>
                               <carnot:Connections>
-                                 <carnot:Connection Kind="TRANSITION" Oid="62" SourceSymbol="54" TargetSymbol="61" SourceAnchor="center" TargetAnchor="top"/>
-                                 <carnot:Connection Kind="TRANSITION" Oid="68" ModelElement="_Transition_1" SourceSymbol="61" TargetSymbol="66" SourceAnchor="center" TargetAnchor="center"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="72" ModelElement="_Transition_2" SourceSymbol="66" TargetSymbol="70" SourceAnchor="bottom" TargetAnchor="top"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="76" ModelElement="_Transition_3" SourceSymbol="70" TargetSymbol="74" SourceAnchor="center" TargetAnchor="top"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="78" SourceSymbol="74" TargetSymbol="77" SourceAnchor="center" TargetAnchor="bottom"/>
                                  <carnot:Connection Kind="PERFORMS" Oid="107" SourceSymbol="106" TargetSymbol="66"/>
                                  <carnot:Connection Kind="PERFORMS" Oid="108" SourceSymbol="106" TargetSymbol="70"/>
-                                 <carnot:Connection Kind="DATA_FLOW" Oid="115" SourceSymbol="111" TargetSymbol="61"/>
                                  <carnot:Connection Kind="DATA_FLOW" Oid="121" SourceSymbol="119" TargetSymbol="70"/>
                                  <carnot:Connection Kind="DATA_FLOW" Oid="123" SourceSymbol="119" TargetSymbol="74"/>
-                                 <carnot:Connection Kind="EXECUTED_BY" Oid="127" SourceSymbol="126" TargetSymbol="61"/>
                                  <carnot:Connection Kind="EXECUTED_BY" Oid="128" SourceSymbol="126" TargetSymbol="74"/>
+                                 <carnot:Connection Kind="DATA_FLOW" Oid="140" SourceSymbol="138" TargetSymbol="66"/>
+                                 <carnot:Connection Kind="TRANSITION" Oid="153" SourceSymbol="152" TargetSymbol="66" SourceAnchor="center" TargetAnchor="top"/>
                               </carnot:Connections>
                            </carnot:Symbol>
                         </carnot:Symbols>
@@ -508,6 +486,10 @@
                                  <carnot:Symbol Kind="STARTEVENT" Oid="87" X="100" Y="45" Width="40" Height="40"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="89" X="30" Y="120" Width="181" Height="51" ModelElement="RemindCustomer"/>
                                  <carnot:Symbol Kind="ENDEVENT" Oid="90" X="100" Y="230" Width="40" Height="40"/>
+                                 <carnot:Symbol Kind="TEXT" Oid="136" X="205" Y="10" Width="105" Height="75">
+                                    <carnot:Text>Some kind of time-based trigger here!&#13;
+</carnot:Text>
+                                 </carnot:Symbol>
                               </carnot:Symbols>
                               <carnot:Connections>
                                  <carnot:Connection Kind="TRANSITION" Oid="91" SourceSymbol="87" TargetSymbol="89" SourceAnchor="center" TargetAnchor="top"/>
@@ -585,6 +567,108 @@
                               <carnot:Connections>
                                  <carnot:Connection Kind="TRANSITION" Oid="101" SourceSymbol="97" TargetSymbol="100" SourceAnchor="center" TargetAnchor="center"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="102" SourceSymbol="100" TargetSymbol="98" SourceAnchor="center" TargetAnchor="bottom"/>
+                              </carnot:Connections>
+                           </carnot:Symbol>
+                        </carnot:Symbols>
+                        <carnot:Connections/>
+                     </carnot:Diagram>
+                  </carnot:Diagrams>
+               </carnot:WorkflowProcess>
+            </ExtendedAttribute>
+         </ExtendedAttributes>
+      </WorkflowProcess>
+      <WorkflowProcess Id="_ProcessDefinition_1" Name="&lt;Process Definition&gt; 1" AccessLevel="PRIVATE">
+         <ProcessHeader/>
+         <Activities/>
+         <Transitions/>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="CarnotExt">
+               <carnot:WorkflowProcess Oid="134">
+                  <carnot:Triggers/>
+                  <carnot:DataPaths/>
+                  <carnot:EventHandlers/>
+                  <carnot:Diagrams>
+                     <carnot:Diagram Oid="133" Name="&lt;Default&gt;" Orientation="Vertical" Mode="MODE_4_0_0">
+                        <carnot:Symbols>
+                           <carnot:Symbol Kind="POOL" Oid="132" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
+                              <carnot:Symbols/>
+                              <carnot:Connections/>
+                           </carnot:Symbol>
+                        </carnot:Symbols>
+                        <carnot:Connections/>
+                     </carnot:Diagram>
+                  </carnot:Diagrams>
+               </carnot:WorkflowProcess>
+            </ExtendedAttribute>
+         </ExtendedAttributes>
+      </WorkflowProcess>
+      <WorkflowProcess Id="Recordincident" Name="Record incident" AccessLevel="PUBLIC">
+         <ProcessHeader/>
+         <Activities>
+            <Activity Id="Checkforexistingcontract" Name="Check for existing contract">
+               <Implementation>
+                  <Task>
+                     <TaskApplication Id="JMSApplication1">
+                        <ActualParameters>
+                           <ActualParameter>DamageReport</ActualParameter>
+                        </ActualParameters>
+                     </TaskApplication>
+                  </Task>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+               <ExtendedAttributes>
+                  <ExtendedAttribute Name="CarnotExt">
+                     <carnot:Activity Oid="60" Implementation="Application">
+                        <carnot:EventHandlers/>
+                        <carnot:QualityCodes/>
+                        <carnot:DataFlows>
+                           <carnot:DataFlow Oid="114" Id="Document1" Name="Document1" Direction="IN" Context="application">
+                              <carnot:DataRef Id="DamageReport"/>
+                              <carnot:AccessPointRef/>
+                           </carnot:DataFlow>
+                        </carnot:DataFlows>
+                        <carnot:Attributes>
+                           <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+                        </carnot:Attributes>
+                     </carnot:Activity>
+                  </ExtendedAttribute>
+               </ExtendedAttributes>
+            </Activity>
+         </Activities>
+         <Transitions/>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="CarnotExt">
+               <carnot:WorkflowProcess Oid="145">
+                  <carnot:Triggers>
+                     <carnot:Trigger Oid="53" Id="InitialContact" Name="InitialContact" Type="jms">
+                        <carnot:AccessPoints/>
+                        <carnot:DataFlows/>
+                     </carnot:Trigger>
+                  </carnot:Triggers>
+                  <carnot:DataPaths/>
+                  <carnot:EventHandlers/>
+                  <carnot:Diagrams>
+                     <carnot:Diagram Oid="144" Name="&lt;Default&gt;" Orientation="Vertical" Mode="MODE_4_0_0">
+                        <carnot:Symbols>
+                           <carnot:Symbol Kind="POOL" Oid="143" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
+                              <carnot:Symbols>
+                                 <carnot:Symbol Kind="ACTIVITY" Oid="61" X="35" Y="135" Width="181" Height="51" ModelElement="Checkforexistingcontract"/>
+                                 <carnot:Symbol Kind="DATA" Oid="111" X="220" Y="68" Width="100" Height="70" ModelElement="DamageReport"/>
+                                 <carnot:Symbol Kind="STARTEVENT" Oid="54" X="75" Y="40" Width="90" Height="50" ModelElement="InitialContact"/>
+                                 <carnot:Symbol Kind="ANNOTATION" Oid="147" X="280" Y="10" Width="120" Height="50">
+                                    <carnot:Text>Store in db, maybe create first timer?</carnot:Text>
+                                 </carnot:Symbol>
+                                 <carnot:Symbol Kind="ENDEVENT" Oid="148" X="95" Y="215" Width="40" Height="40"/>
+                              </carnot:Symbols>
+                              <carnot:Connections>
+                                 <carnot:Connection Kind="TRANSITION" Oid="62" SourceSymbol="54" TargetSymbol="61" SourceAnchor="center" TargetAnchor="top"/>
+                                 <carnot:Connection Kind="DATA_FLOW" Oid="115" SourceSymbol="111" TargetSymbol="61"/>
+                                 <carnot:Connection Kind="TRANSITION" Oid="150" SourceSymbol="61" TargetSymbol="148" SourceAnchor="bottom" TargetAnchor="bottom"/>
                               </carnot:Connections>
                            </carnot:Symbol>
                         </carnot:Symbols>
@@ -896,7 +980,13 @@
             <carnot:Modelers/>
             <carnot:Diagrams>
                <carnot:Diagram Oid="1" Name="Standard Diagramm" Orientation="Vertical" Mode="MODE_4_0_0">
-                  <carnot:Symbols/>
+                  <carnot:Symbols>
+                     <carnot:Symbol Kind="PROCESS" Oid="129" X="55" Y="185" Width="120" Height="40" ModelElement="CoverageDecision"/>
+                     <carnot:Symbol Kind="PROCESS" Oid="130" X="65" Y="260" Width="100" Height="40" ModelElement="MakePayment"/>
+                     <carnot:Symbol Kind="PROCESS" Oid="131" X="60" Y="105" Width="110" Height="40" ModelElement="RemindCustomer"/>
+                     <carnot:Symbol Kind="PROCESS" Oid="135" X="-25" Y="-55" Width="140" Height="40" ModelElement="_ProcessDefinition_1"/>
+                     <carnot:Symbol Kind="PROCESS" Oid="146" X="45" Y="35" Width="140" Height="40" ModelElement="Recordincident"/>
+                  </carnot:Symbols>
                   <carnot:Connections/>
                </carnot:Diagram>
             </carnot:Diagrams>
