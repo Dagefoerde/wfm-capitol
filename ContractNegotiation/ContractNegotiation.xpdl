@@ -138,6 +138,26 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
+<Application Id="SaveCase" Name="Save case">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10211" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="SaveSignedInsuranceContract" Name="Save signed insurance contract">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10223" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
 </Applications>
 <DataFields>
 <DataField Id="LAST_ACTIVITY_PERFORMER" Name="Last Activity Performer" IsArray="FALSE">
@@ -327,22 +347,6 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </DataField>
-<DataField Id="InsuranceContract" Name="Insurance contract" IsArray="FALSE">
-<DataType>
-<DeclaredType Id="InsuranceContract"/>
-</DataType>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:DataField Oid="10129" Type="struct">
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
-<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
-<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
-</carnot:Attributes>
-</carnot:DataField>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</DataField>
 <DataField Id="CaseTermination" Name="Case termination" IsArray="FALSE">
 <DataType>
 <DeclaredType Id="CaseTermination"/>
@@ -385,6 +389,22 @@
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Document"/>
 <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="InsuranceContract" Name="Insurance contract" IsArray="FALSE">
+<DataType>
+<DeclaredType Id="InsuranceContract"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10129" Type="struct">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -534,7 +554,8 @@
 <Implementation>
 <Tool Id="ConnectionToBVIS" Type="APPLICATION">
 <ActualParameters>
-<ActualParameter>InsuranceContract</ActualParameter>
+<ActualParameter>InsuranceContractDocument</ActualParameter>
+<ActualParameter>InsuranceContractDocument</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -549,8 +570,12 @@
 <carnot:Activity Oid="10074" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
-<carnot:DataFlow Oid="10131" Id="InsuranceContract" Name="InsuranceContract" Direction="IN" Context="application">
-<carnot:DataRef Id="InsuranceContract"/>
+<carnot:DataFlow Oid="10208" Id="InsuranceContractDocument" Name="InsuranceContractDocument" Direction="IN" Context="application">
+<carnot:DataRef Id="InsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10209" Id="InsuranceContractDocument_1" Name="InsuranceContractDocument_1" Direction="IN" Context="application">
+<carnot:DataRef Id="InsuranceContractDocument"/>
 <carnot:AccessPointRef/>
 </carnot:DataFlow>
 </carnot:DataFlows>
@@ -608,8 +633,8 @@
 <Implementation>
 <Tool Id="CreateSignedDocumentFromInsuranceContractData" Type="APPLICATION">
 <ActualParameters>
-<ActualParameter>InsuranceContract</ActualParameter>
 <ActualParameter>InsuranceContractDocument</ActualParameter>
+<ActualParameter>InsuranceContract</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -629,12 +654,12 @@
 <carnot:Activity Oid="10169" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
-<carnot:DataFlow Oid="10178" Id="InsuranceContract" Name="InsuranceContract" Direction="IN" Context="application">
-<carnot:DataRef Id="InsuranceContract"/>
-<carnot:AccessPointRef/>
-</carnot:DataFlow>
 <carnot:DataFlow Oid="10180" Id="InsuranceContract" Name="InsuranceContract" Direction="OUT" Context="application">
 <carnot:DataRef Id="InsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10178" Id="InsuranceContract" Name="InsuranceContract" Direction="IN" Context="application">
+<carnot:DataRef Id="InsuranceContract"/>
 <carnot:AccessPointRef/>
 </carnot:DataFlow>
 </carnot:DataFlows>
@@ -759,15 +784,15 @@
 <carnot:Symbol Kind="DATA" Oid="10112" X="665" Y="20" Width="40" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10116" X="480" Y="25" Width="180" Height="40" ModelElement="TransferDataFromCRToCase"/>
 <carnot:Symbol Kind="DATA" Oid="10123" X="335" Y="50" Width="130" Height="60" ModelElement="CustomerRequirements"/>
-<carnot:Symbol Kind="DATA" Oid="10130" X="1410" Y="340" Width="110" Height="60" ModelElement="InsuranceContract"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10134" X="1400" Y="110" Width="110" Height="40" ModelElement="ConnectionToBVIS"/>
-<carnot:Symbol Kind="DATA" Oid="10136" X="970" Y="30" Width="110" Height="60" ModelElement="InsuranceContract"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10140" X="735" Y="55" Width="190" Height="40" ModelElement="BuisnessLogicOfInsuranceContract"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10170" X="1105" Y="210" Width="231" Height="51" ModelElement="CreateSignedInsuranceContractDocument"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10171" X="1025" Y="215" Width="42" Height="42" ModelElement="10170" FlowKind="join"/>
+<carnot:Symbol Kind="DATA" Oid="10136" X="970" Y="30" Width="110" Height="60" ModelElement="InsuranceContract"/>
 <carnot:Symbol Kind="DATA" Oid="10175" X="1090" Y="310" Width="110" Height="60" ModelElement="InsuranceContract"/>
 <carnot:Symbol Kind="DATA" Oid="10177" X="1260" Y="305" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10183" X="1140" Y="125" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10201" X="1570" Y="215" Width="40" Height="40"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10066" SourceSymbol="10048" TargetSymbol="10058" SourceAnchor="center" TargetAnchor="center"/>
@@ -786,15 +811,16 @@
 <carnot:Connection Kind="DATA_FLOW" Oid="10125" SourceSymbol="10123" TargetSymbol="10062"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10126" SourceSymbol="10116" TargetSymbol="10062"/>
 <carnot:Connection Kind="TRANSITION" Oid="10128" ModelElement="Transition_7" SourceSymbol="10070" TargetSymbol="10171" SourceAnchor="center" TargetAnchor="left"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10132" SourceSymbol="10130" TargetSymbol="10075"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10135" SourceSymbol="10134" TargetSymbol="10075"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10138" SourceSymbol="10136" TargetSymbol="10070"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10141" SourceSymbol="10140" TargetSymbol="10070"/>
 <carnot:Connection Kind="TRANSITION" Oid="10172" SourceSymbol="10171" TargetSymbol="10170" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10174" ModelElement="Transition_8" SourceSymbol="10170" TargetSymbol="10075" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10138" SourceSymbol="10136" TargetSymbol="10070"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10179" SourceSymbol="10175" TargetSymbol="10170"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10181" SourceSymbol="10177" TargetSymbol="10170"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10184" SourceSymbol="10183" TargetSymbol="10170"/>
+<carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="right" TargetAnchor="right"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10210" SourceSymbol="10177" TargetSymbol="10075"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -835,7 +861,7 @@
 <Activities>
 <Activity Id="ArchiveCase" Name="Archive case">
 <Implementation>
-<Tool Id="" Type="APPLICATION">
+<Tool Id="SaveCase" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Case</ActualParameter>
 </ActualParameters>
@@ -852,7 +878,7 @@
 <carnot:Activity Oid="10147" Implementation="Application">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
-<carnot:DataFlow Oid="10167" Id="Case" Name="Case" Direction="IN" Context="engine">
+<carnot:DataFlow Oid="10167" Id="Case" Name="Case" Direction="IN" Context="application">
 <carnot:DataRef Id="Case"/>
 <carnot:AccessPointRef/>
 </carnot:DataFlow>
@@ -941,11 +967,12 @@
 <carnot:Symbol Kind="STARTEVENT" Oid="10146" X="5" Y="150" Width="150" Height="50" ModelElement="CaseTerminationArrives"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10148" X="410" Y="150" Width="141" Height="51" ModelElement="ArchiveCase"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10149" X="630" Y="155" Width="40" Height="40"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10153" X="190" Y="145" Width="141" Height="51" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10153" X="190" Y="150" Width="141" Height="51" ModelElement="RetrieveCase"/>
 <carnot:Symbol Kind="DATA" Oid="10158" X="125" Y="220" Width="100" Height="60" ModelElement="CaseTermination"/>
 <carnot:Symbol Kind="DATA" Oid="10161" X="320" Y="220" Width="40" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10164" X="220" Y="290" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
-<carnot:Symbol Kind="DATA" Oid="10166" X="495" Y="225" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="DATA" Oid="10166" X="525" Y="225" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10212" X="430" Y="295" Width="100" Height="40" ModelElement="SaveCase"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10151" SourceSymbol="10148" TargetSymbol="10149" SourceAnchor="center" TargetAnchor="center"/>
@@ -955,6 +982,7 @@
 <carnot:Connection Kind="DATA_FLOW" Oid="10163" SourceSymbol="10161" TargetSymbol="10153"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10165" SourceSymbol="10164" TargetSymbol="10153"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10168" SourceSymbol="10166" TargetSymbol="10148"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10213" SourceSymbol="10212" TargetSymbol="10148"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -970,8 +998,11 @@
 <Activities>
 <Activity Id="RetrieveCase" Name="Retrieve case">
 <Implementation>
-<Tool Id="" Type="APPLICATION">
-<ActualParameters/>
+<Tool Id="FindCaseByCaseID" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+<ActualParameter>SignedInsuranceContractDocument</ActualParameter>
+</ActualParameters>
 </Tool>
 </Implementation>
 <StartMode>
@@ -984,7 +1015,16 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10190" Implementation="Application">
 <carnot:EventHandlers/>
-<carnot:DataFlows/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10215" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10219" Id="SignedInsuranceContractDocument" Name="SignedInsuranceContractDocument" Direction="IN" Context="application">
+<carnot:DataRef Id="SignedInsuranceContractDocument"/>
+<carnot:AccessPointRef Id="documentInfo"/>
+</carnot:DataFlow>
+</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
 </carnot:Attributes>
@@ -994,8 +1034,10 @@
 </Activity>
 <Activity Id="FileSignedInsuranceContract" Name="File signed insurance contract">
 <Implementation>
-<Tool Id="" Type="APPLICATION">
-<ActualParameters/>
+<Tool Id="SaveSignedInsuranceContract" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>SignedInsuranceContractDocument</ActualParameter>
+</ActualParameters>
 </Tool>
 </Implementation>
 <StartMode>
@@ -1008,7 +1050,12 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10193" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
-<carnot:DataFlows/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10221" Id="SignedInsuranceContractDocument" Name="SignedInsuranceContractDocument" Direction="IN" Context="application">
+<carnot:DataRef Id="SignedInsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
 <carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
@@ -1052,16 +1099,24 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10187" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10189" X="20" Y="200" Width="80" Height="50" ModelElement="SignedInsuranceContractArrival"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10189" X="20" Y="195" Width="80" Height="50" ModelElement="SignedInsuranceContractArrival"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10191" X="125" Y="195" Width="141" Height="51" ModelElement="RetrieveCase"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10194" X="315" Y="195" Width="170" Height="51" ModelElement="FileSignedInsuranceContract"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10197" X="545" Y="200" Width="40" Height="40"/>
-<carnot:Symbol Kind="DATA" Oid="10200" X="305" Y="90" Width="190" Height="60" ModelElement="SignedInsuranceContractDocument"/>
+<carnot:Symbol Kind="DATA" Oid="10200" X="200" Y="90" Width="190" Height="60" ModelElement="SignedInsuranceContractDocument"/>
+<carnot:Symbol Kind="DATA" Oid="10214" X="180" Y="290" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10217" X="45" Y="310" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10224" X="305" Y="305" Width="170" Height="40" ModelElement="SaveSignedInsuranceContract"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10192" SourceSymbol="10189" TargetSymbol="10191" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10196" ModelElement="Transition_1" SourceSymbol="10191" TargetSymbol="10194" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10198" SourceSymbol="10194" TargetSymbol="10197" SourceAnchor="right" TargetAnchor="bottom"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10216" SourceSymbol="10214" TargetSymbol="10191"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10218" SourceSymbol="10217" TargetSymbol="10191"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10220" SourceSymbol="10200" TargetSymbol="10191"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10222" SourceSymbol="10200" TargetSymbol="10194"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10225" SourceSymbol="10224" TargetSymbol="10194"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -1422,7 +1477,12 @@
 <carnot:Modelers/>
 <carnot:Diagrams>
 <carnot:Diagram Oid="10001" Name="Default Diagram" Orientation="Vertical" Mode="MODE_4_0_0">
-<carnot:Symbols/>
+<carnot:Symbols>
+<carnot:Symbol Kind="PROCESS" Oid="10203" X="120" Y="75" Width="100" Height="40" ModelElement="CaseTermination"/>
+<carnot:Symbol Kind="PROCESS" Oid="10204" X="305" Y="80" Width="120" Height="40" ModelElement="ContractAcceptance"/>
+<carnot:Symbol Kind="PROCESS" Oid="10205" X="65" Y="175" Width="230" Height="40" ModelElement="CustomerRequirementsToInsuranceContract"/>
+<carnot:Symbol Kind="PROCESS" Oid="10206" X="395" Y="170" Width="110" Height="40" ModelElement="ProcessDefinition_2"/>
+</carnot:Symbols>
 <carnot:Connections/>
 </carnot:Diagram>
 </carnot:Diagrams>
