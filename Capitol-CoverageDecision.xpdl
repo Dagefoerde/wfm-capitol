@@ -351,22 +351,6 @@
             </ExtendedAttribute>
          </ExtendedAttributes>
       </DataField>
-      <DataField Id="Case" Name="Case" IsArray="FALSE">
-         <DataType>
-            <DeclaredType Id=""/>
-         </DataType>
-         <ExtendedAttributes>
-            <ExtendedAttribute Name="CarnotExt">
-               <carnot:DataField Oid="308" Type="struct">
-                  <carnot:Attributes>
-                     <carnot:Attribute Name="carnot:engine:visibility" Value="Public"/>
-                     <carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
-                     <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
-                  </carnot:Attributes>
-               </carnot:DataField>
-            </ExtendedAttribute>
-         </ExtendedAttributes>
-      </DataField>
       <DataField Id="CostEstimation" Name="Cost Estimation" IsArray="FALSE">
          <DataType>
             <DeclaredType Id=""/>
@@ -426,22 +410,6 @@
                   <carnot:Attributes>
                      <carnot:Attribute Name="carnot:engine:visibility" Value="Public"/>
                      <carnot:Attribute Name="carnot:engine:className" Value="org.eclipse.stardust.engine.api.runtime.Document"/>
-                     <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
-                  </carnot:Attributes>
-               </carnot:DataField>
-            </ExtendedAttribute>
-         </ExtendedAttributes>
-      </DataField>
-      <DataField Id="Case" Name="Case" IsArray="FALSE">
-         <DataType>
-            <DeclaredType Id=""/>
-         </DataType>
-         <ExtendedAttributes>
-            <ExtendedAttribute Name="CarnotExt">
-               <carnot:DataField Oid="187" Type="struct">
-                  <carnot:Attributes>
-                     <carnot:Attribute Name="carnot:engine:visibility" Value="Public"/>
-                     <carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
                      <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
                   </carnot:Attributes>
                </carnot:DataField>
