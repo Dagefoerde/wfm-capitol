@@ -1187,9 +1187,9 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 <carnot:Symbols>
 <carnot:Symbol Kind="STARTEVENT" Oid="10200" X="215" Y="-25" Width="90" Height="50" ModelElement="ReceiveInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10202" X="185" Y="60" Width="151" Height="51" ModelElement="LoadCaseData"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10203" X="-10" Y="95" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
-<carnot:Symbol Kind="DATA" Oid="10207" X="10" Y="0" Width="100" Height="60" ModelElement="Invoice"/>
-<carnot:Symbol Kind="DATA" Oid="10210" X="35" Y="260" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10203" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
+<carnot:Symbol Kind="DATA" Oid="10207" X="10" Y="-25" Width="100" Height="60" ModelElement="Invoice"/>
+<carnot:Symbol Kind="DATA" Oid="10210" X="35" Y="180" Width="40" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10212" X="175" Y="180" Width="171" Height="51" ModelElement="CompareDecisionWithInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10214" X="450" Y="305" Width="141" Height="51" ModelElement="SendRejectionNotice"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10216" X="620" Y="310" Width="100" Height="40" ModelElement="RejectionNotice"/>
