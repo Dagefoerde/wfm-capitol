@@ -40,20 +40,6 @@
 </Participant>
 </Participants>
 <Applications>
-<Application Id="RetrieveCaseByCaseID" Name="Retrieve Case by CaseID">
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Application Oid="10081" Type="dmsOperation">
-<carnot:ApplicationContexts/>
-<carnot:AccessPoints/>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:dms:operation:name" Value="getDocument"/>
-<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
-</carnot:Attributes>
-</carnot:Application>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Application>
 <Application Id="ReminderE_Mail" Name="Reminder E-Mail">
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -107,6 +93,20 @@
 <carnot:Application Oid="10215" Type="jms">
 <carnot:ApplicationContexts/>
 <carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="RetrieveCaseByCaseID" Name="Retrieve Case by CaseID">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10081" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:dms:operation:name" Value="getDocument"/>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
 </ExtendedAttributes>
@@ -496,18 +496,18 @@
 </Activities>
 <Transitions>
 <Transition Id="Transition_1" Name="Transition 1" From="CheckForExistingContract" To="SendNotification">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">Contract == null</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10070"/>
+<carnot:Transition Oid="10070" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_2" Name="Transition 2" From="CheckForExistingContract" To="UpdateCase">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">Contract != null</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10076"/>
+<carnot:Transition Oid="10076" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -542,12 +542,12 @@
 <carnot:Symbol Kind="ACTIVITY" Oid="10075" X="225" Y="270" Width="141" Height="51" ModelElement="UpdateCase"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10078" X="135" Y="155" Width="42" Height="42" ModelElement="10063" FlowKind="split"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10067" X="-5" Y="205" Width="110" Height="40" ModelElement="NotificationToBVIS"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10082" X="-150" Y="80" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
 <carnot:Symbol Kind="DATA" Oid="10087" X="450" Y="190" Width="100" Height="60" ModelElement="DamageReport"/>
 <carnot:Symbol Kind="DATA" Oid="10089" X="455" Y="255" Width="100" Height="60" ModelElement="CostEstimation"/>
 <carnot:Symbol Kind="DATA" Oid="10091" X="440" Y="335" Width="90" Height="60" ModelElement="CustomerData"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10185" X="275" Y="390" Width="40" Height="40"/>
 <carnot:Symbol Kind="DATA" Oid="10187" X="460" Y="55" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10082" X="-150" Y="80" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10197" X="130" Y="210" Width="130" Height="40" ModelElement="UpdateCaseInArchive"/>
 </carnot:Symbols>
 <carnot:Connections>
@@ -557,13 +557,13 @@
 <carnot:Connection Kind="TRANSITION" Oid="10077" ModelElement="Transition_2" SourceSymbol="10078" TargetSymbol="10075" SourceAnchor="center" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10079" SourceSymbol="10063" TargetSymbol="10078" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10072" SourceSymbol="10067" TargetSymbol="10065"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10083" SourceSymbol="10082" TargetSymbol="10063"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10093" SourceSymbol="10091" TargetSymbol="10075"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10095" SourceSymbol="10089" TargetSymbol="10075"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10097" SourceSymbol="10087" TargetSymbol="10075"/>
 <carnot:Connection Kind="TRANSITION" Oid="10186" SourceSymbol="10075" TargetSymbol="10185" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10189" SourceSymbol="10187" TargetSymbol="10063"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10191" SourceSymbol="10187" TargetSymbol="10075"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10083" SourceSymbol="10082" TargetSymbol="10063"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10198" SourceSymbol="10197" TargetSymbol="10075"/>
 </carnot:Connections>
 </carnot:Symbol>
@@ -575,13 +575,15 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="RemindCustomer" Name="Remind customer" AccessLevel="PRIVATE">
+<WorkflowProcess Id="RemindCustomer" Name="Remind customer" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="CheckForAccidentReport" Name="Check for Accident Report">
 <Implementation>
 <Tool Id="RetrieveCaseByCaseID" Type="APPLICATION">
-<ActualParameters/>
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
 </Tool>
 </Implementation>
 <StartMode>
@@ -590,11 +592,26 @@
 <FinishMode>
 <Automatic/>
 </FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="Transition_1"/>
+<TransitionRef Id="Transition_2"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10105" Implementation="Application">
 <carnot:EventHandlers/>
-<carnot:DataFlows/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10285" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
 </carnot:Attributes>
@@ -605,7 +622,10 @@
 <Activity Id="RemindCustomer" Name="Remind Customer">
 <Implementation>
 <Tool Id="ReminderE_Mail" Type="APPLICATION">
-<ActualParameters/>
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
 </Tool>
 </Implementation>
 <StartMode>
@@ -618,7 +638,83 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10107" Implementation="Application">
 <carnot:EventHandlers/>
-<carnot:DataFlows/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10264" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10272" Id="Case" Name="Case" Direction="OUT" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="StopRemindingCustomer" Name="Stop reminding customer">
+<Implementation>
+<Tool Id="" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10259" Implementation="Application">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10261" Id="Case" Name="Case" Direction="IN" Context="engine">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10263" Id="Case" Name="Case" Direction="OUT" Context="engine">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="RetrieveCandidateIncidents" Name="Retrieve Candidate Incidents">
+<Implementation>
+<Tool Id="" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10280" Implementation="Application">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10283" Id="Case" Name="Case" Direction="OUT" Context="engine">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
 </carnot:Attributes>
@@ -629,10 +725,26 @@
 </Activities>
 <Transitions>
 <Transition Id="Transition_1" Name="Transition 1" From="CheckForAccidentReport" To="RemindCustomer">
+<Condition Type="CONDITION">Case.getAccidentReport() == null</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10111" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_2" Name="Transition 2" From="CheckForAccidentReport" To="StopRemindingCustomer">
+<Condition Type="CONDITION">Case.getAccidentReport() != null</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10266" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_3" Name="Transition 3" From="RetrieveCandidateIncidents" To="CheckForAccidentReport">
 <Condition Type="CONDITION">true</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10111"/>
+<carnot:Transition Oid="10287"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -640,7 +752,15 @@
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:WorkflowProcess Oid="10048">
-<carnot:Triggers/>
+<carnot:Triggers>
+<carnot:Trigger Oid="10277" Id="Daily" Name="Daily" Type="timer">
+<carnot:AccessPoints/>
+<carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:periodicity" Value="000000:000000:000001:000000:000000:000000" Type="Period"/>
+</carnot:Attributes>
+</carnot:Trigger>
+</carnot:Triggers>
 <carnot:DataPaths/>
 <carnot:EventHandlers/>
 <carnot:Diagrams>
@@ -648,22 +768,36 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10050" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10103" X="50" Y="15" Width="40" Height="40"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10104" X="110" Y="10" Width="215" Height="30">
-<carnot:Text>Some kind of time-based trigger here!</carnot:Text>
+<carnot:Symbol Kind="ACTIVITY" Oid="10106" X="0" Y="235" Width="141" Height="51" ModelElement="CheckForAccidentReport"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10108" X="-80" Y="395" Width="141" Height="51" ModelElement="RemindCustomer"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10109" X="-30" Y="500" Width="40" Height="40"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10119" X="-115" Y="270" Width="100" Height="40" ModelElement="ReminderE_Mail"/>
+<carnot:Symbol Kind="DATA" Oid="10256" X="290" Y="210" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10260" X="160" Y="390" Width="141" Height="51" ModelElement="StopRemindingCustomer"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10268" X="50" Y="305" Width="42" Height="42" ModelElement="10106" FlowKind="split"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10270" X="210" Y="500" Width="40" Height="40"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10278" X="5" Y="10" Width="120" Height="50" ModelElement="Daily"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10281" X="-15" Y="100" Width="161" Height="51" ModelElement="RetrieveCandidateIncidents"/>
+<carnot:Symbol Kind="ANNOTATION" Oid="10289" X="185" Y="60" Width="310" Height="50">
+<carnot:Text>"Candidates" are those incidents, where either&#13;
+1) 8 days have passed since the accident (first reminder), or&#13;
+2) 8 days have passed since the last reminder</carnot:Text>
 </carnot:Symbol>
-<carnot:Symbol Kind="ACTIVITY" Oid="10106" X="0" Y="90" Width="141" Height="51" ModelElement="CheckForAccidentReport"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10108" X="0" Y="175" Width="141" Height="51" ModelElement="RemindCustomer"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10109" X="50" Y="280" Width="40" Height="40"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10119" X="200" Y="180" Width="100" Height="40" ModelElement="ReminderE_Mail"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10193" X="185" Y="80" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
 </carnot:Symbols>
 <carnot:Connections>
-<carnot:Connection Kind="TRANSITION" Oid="10110" SourceSymbol="10103" TargetSymbol="10106" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10112" ModelElement="Transition_1" SourceSymbol="10106" TargetSymbol="10108" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10112" ModelElement="Transition_1" SourceSymbol="10268" TargetSymbol="10108" SourceAnchor="left" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10113" SourceSymbol="10108" TargetSymbol="10109" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10126" SourceSymbol="10119" TargetSymbol="10108"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10194" SourceSymbol="10193" TargetSymbol="10106"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10262" SourceSymbol="10256" TargetSymbol="10260"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10265" SourceSymbol="10256" TargetSymbol="10108"/>
+<carnot:Connection Kind="TRANSITION" Oid="10267" ModelElement="Transition_2" SourceSymbol="10268" TargetSymbol="10260" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10269" SourceSymbol="10106" TargetSymbol="10268" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10271" SourceSymbol="10260" TargetSymbol="10270" SourceAnchor="center" TargetAnchor="bottom"/>
+<carnot:Connection Kind="TRANSITION" Oid="10282" SourceSymbol="10278" TargetSymbol="10281" SourceAnchor="bottom" TargetAnchor="center"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10284" SourceSymbol="10256" TargetSymbol="10281"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10286" SourceSymbol="10256" TargetSymbol="10106"/>
+<carnot:Connection Kind="TRANSITION" Oid="10288" ModelElement="Transition_3" SourceSymbol="10281" TargetSymbol="10106" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="REFERS_TO" Oid="10290" SourceSymbol="10289" TargetSymbol="10281"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -874,9 +1008,21 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:WorkflowProcess Oid="10052">
 <carnot:Triggers>
-<carnot:Trigger Oid="10127" Id="ReceiveAccidentReport" Name="Receive accident report" Type="jms">
-<carnot:AccessPoints/>
+<carnot:Trigger Oid="10273" Id="IncomingAccidentReport" Name="Incoming Accident Report" Type="mail">
+<carnot:AccessPoints>
+<carnot:AccessPoint Oid="10276" Id="mail" Name="mail" Direction="OUT" Type="serializable">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Mail"/>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+</carnot:Attributes>
+</carnot:AccessPoint>
+</carnot:AccessPoints>
 <carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:protocol" Value="pop3" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailProtocol"/>
+<carnot:Attribute Name="carnot:engine:mailFlags" Value="any" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailFlags"/>
+<carnot:Attribute Name="carnot:engine:mailboxAction" Value="leave" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailboxAction"/>
+</carnot:Attributes>
 </carnot:Trigger>
 </carnot:Triggers>
 <carnot:DataPaths/>
@@ -886,11 +1032,6 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10054" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10128" X="125" Y="0" Width="130" Height="50" ModelElement="ReceiveAccidentReport"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10129" X="295" Y="-20" Width="235" Height="50">
-<carnot:Text>Format of report is still tbd.&#13;
-Also, report is probably not in JMS, as it comes from the customer directly.</carnot:Text>
-</carnot:Symbol>
 <carnot:Symbol Kind="ACTIVITY" Oid="10131" X="120" Y="90" Width="141" Height="51" ModelElement="RetrieveCase"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10133" X="120" Y="185" Width="141" Height="51" ModelElement="AnalyseCase"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10135" X="120" Y="270" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
@@ -903,10 +1044,10 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 <carnot:Symbol Kind="APPLICATION" Oid="10171" X="-40" Y="360" Width="130" Height="40" ModelElement="UpdateCaseInArchive"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10174" X="-50" Y="445" Width="130" Height="40" ModelElement="NotificationToPartners"/>
 <carnot:Symbol Kind="ROLE" Oid="10179" X="-60" Y="230" Width="125" Height="50" ModelElement="InsuranceSpecialist"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10274" X="150" Y="5" Width="80" Height="50" ModelElement="IncomingAccidentReport"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10195" X="-75" Y="40" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
 </carnot:Symbols>
 <carnot:Connections>
-<carnot:Connection Kind="TRANSITION" Oid="10141" SourceSymbol="10128" TargetSymbol="10131" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10143" ModelElement="Transition_1" SourceSymbol="10131" TargetSymbol="10133" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10145" ModelElement="Transition_2" SourceSymbol="10133" TargetSymbol="10135" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10147" ModelElement="Transition_3" SourceSymbol="10135" TargetSymbol="10137" SourceAnchor="bottom" TargetAnchor="center"/>
@@ -923,6 +1064,7 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 <carnot:Connection Kind="DATA_FLOW" Oid="10177" SourceSymbol="10153" TargetSymbol="10131"/>
 <carnot:Connection Kind="PERFORMS" Oid="10180" SourceSymbol="10179" TargetSymbol="10133"/>
 <carnot:Connection Kind="PERFORMS" Oid="10181" SourceSymbol="10179" TargetSymbol="10135"/>
+<carnot:Connection Kind="TRANSITION" Oid="10275" SourceSymbol="10274" TargetSymbol="10131" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10196" SourceSymbol="10195" TargetSymbol="10131"/>
 </carnot:Connections>
 </carnot:Symbol>
@@ -1137,34 +1279,34 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_2" Name="Transition 2" From="CompareDecisionWithInvoice" To="SendRejectionNotice">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">Invoice.hasPositionsNotCovered() || Invoice.hasUnknownPositions()</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10221"/>
+<carnot:Transition Oid="10221" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_3" Name="Transition 3" From="CompareDecisionWithInvoice" To="CompareEstimationWithInvoice">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">!Invoice.hasPositionsNotCovered() &amp;&amp; !Invoice.hasUnknownPositions()</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10226"/>
+<carnot:Transition Oid="10226" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_4" Name="Transition 4" From="CompareEstimationWithInvoice" To="MakePayment">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">Invoice.getTotal() &lt;= (Invoice.getEstimatedTotal() * 1.10)</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10241"/>
+<carnot:Transition Oid="10241" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_5" Name="Transition 5" From="CompareEstimationWithInvoice" To="ClarifyInvoiceWithBVIS">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">Invoice.getTotal() &gt; (Invoice.getEstimatedTotal() * 1.10)</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10243"/>
+<carnot:Transition Oid="10243" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -1187,24 +1329,18 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 <carnot:Symbols>
 <carnot:Symbol Kind="STARTEVENT" Oid="10200" X="215" Y="-25" Width="90" Height="50" ModelElement="ReceiveInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10202" X="185" Y="60" Width="151" Height="51" ModelElement="LoadCaseData"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10203" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
 <carnot:Symbol Kind="DATA" Oid="10207" X="10" Y="-25" Width="100" Height="60" ModelElement="Invoice"/>
 <carnot:Symbol Kind="DATA" Oid="10210" X="35" Y="180" Width="40" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10212" X="175" Y="180" Width="171" Height="51" ModelElement="CompareDecisionWithInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10214" X="450" Y="305" Width="141" Height="51" ModelElement="SendRejectionNotice"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10203" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveCaseByCaseID"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10216" X="620" Y="310" Width="100" Height="40" ModelElement="RejectionNotice"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10218" X="500" Y="385" Width="40" Height="40"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10225" X="170" Y="325" Width="181" Height="51" ModelElement="CompareEstimationWithInvoice"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10225" X="170" Y="370" Width="181" Height="51" ModelElement="CompareEstimationWithInvoice"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10228" X="240" Y="250" Width="42" Height="42" ModelElement="10212" FlowKind="split"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10230" X="300" Y="240" Width="225" Height="20">
-<carnot:Text>uncovered positions of the invoice</carnot:Text>
-</carnot:Symbol>
 <carnot:Symbol Kind="ACTIVITY" Oid="10238" X="190" Y="555" Width="141" Height="51" ModelElement="MakePayment"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10240" X="450" Y="555" Width="141" Height="51" ModelElement="ClarifyInvoiceWithBVIS"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10245" X="240" Y="480" Width="42" Height="42" ModelElement="10225" FlowKind="split"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10247" X="275" Y="455" Width="230" Height="20">
-<carnot:Text>Costs exceed estimation by more than 10%</carnot:Text>
-</carnot:Symbol>
+<carnot:Symbol Kind="GATEWAY" Oid="10245" X="240" Y="450" Width="42" Height="42" ModelElement="10225" FlowKind="split"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10248" X="240" Y="630" Width="40" Height="40"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10249" X="500" Y="630" Width="40" Height="40"/>
 <carnot:Symbol Kind="ROLE" Oid="10253" X="620" Y="510" Width="120" Height="40" ModelElement="AccountantSpecialist"/>
@@ -1213,9 +1349,9 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 </carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10204" SourceSymbol="10203" TargetSymbol="10202"/>
 <carnot:Connection Kind="TRANSITION" Oid="10205" SourceSymbol="10200" TargetSymbol="10202" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10209" SourceSymbol="10207" TargetSymbol="10202"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10204" SourceSymbol="10203" TargetSymbol="10202"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10217" SourceSymbol="10216" TargetSymbol="10214"/>
 <carnot:Connection Kind="TRANSITION" Oid="10220" ModelElement="Transition_1" SourceSymbol="10202" TargetSymbol="10212" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10222" ModelElement="Transition_2" SourceSymbol="10228" TargetSymbol="10214" SourceAnchor="center" TargetAnchor="top"/>

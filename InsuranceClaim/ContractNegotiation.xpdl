@@ -704,18 +704,18 @@
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_5" Name="Transition 5" From="CheckForNecessaryContractAdjustments" To="BuildInsuranceContract">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">adjustments needed</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10084"/>
+<carnot:Transition Oid="10084" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_6" Name="Transition 6" From="CheckForNecessaryContractAdjustments" To="CreateSignedInsuranceContractDocument">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="CONDITION">no adjustments</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10088"/>
+<carnot:Transition Oid="10088" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
