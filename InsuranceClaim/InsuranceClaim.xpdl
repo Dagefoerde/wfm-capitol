@@ -1208,6 +1208,9 @@ Also, report is probably not in JMS, as it comes from the customer directly.</ca
 <carnot:Symbol Kind="ENDEVENT" Oid="10248" X="240" Y="630" Width="40" Height="40"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10249" X="500" Y="630" Width="40" Height="40"/>
 <carnot:Symbol Kind="ROLE" Oid="10253" X="620" Y="510" Width="120" Height="40" ModelElement="AccountantSpecialist"/>
+<carnot:Symbol Kind="ANNOTATION" Oid="10255" X="610" Y="580" Width="100" Height="35">
+<carnot:Text>-&gt; Cars&amp;Co?!</carnot:Text>
+</carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10204" SourceSymbol="10203" TargetSymbol="10202"/>
