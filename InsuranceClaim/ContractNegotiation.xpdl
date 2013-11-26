@@ -593,7 +593,9 @@
 </Activity>
 <Activity Id="CheckForNecessaryContractAdjustments" Name="Check for Necessary Contract Adjustments">
 <Implementation>
-<SubFlow Id="" Execution="SYNCHR"/>
+<Tool Id="" Type="APPLICATION">
+<ActualParameters/>
+</Tool>
 </Implementation>
 <StartMode>
 <Automatic/>
@@ -613,7 +615,7 @@
 </TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10078" Implementation="Subprocess" IsHibernatedOnCreation="false" SubProcessMode="sync_shared">
+<carnot:Activity Oid="10078" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows/>
 <carnot:Attributes>
@@ -769,48 +771,48 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10046" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10048" X="15" Y="120" Width="80" Height="50" ModelElement="CustomerRequirementsArrive"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10058" X="155" Y="120" Width="140" Height="50" ModelElement="RetrieveCase"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10062" X="520" Y="120" Width="160" Height="51" ModelElement="InitializeCase"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10070" X="830" Y="120" Width="151" Height="51" ModelElement="BuildInsuranceContract"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10075" X="1385" Y="210" Width="141" Height="51" ModelElement="SendInsuranceContract"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10079" X="405" Y="210" Width="231" Height="51" ModelElement="CheckForNecessaryContractAdjustments"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10082" X="325" Y="125" Width="42" Height="42" ModelElement="10058" FlowKind="split"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10086" X="730" Y="125" Width="42" Height="42" ModelElement="10070" FlowKind="join"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10092" X="690" Y="215" Width="42" Height="42" ModelElement="10079" FlowKind="split"/>
-<carnot:Symbol Kind="DATA" Oid="10095" X="55" Y="225" Width="130" Height="60" ModelElement="CustomerRequirements"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10100" X="100" Y="315" Width="190" Height="40" ModelElement="FindCaseByCaseID"/>
-<carnot:Symbol Kind="DATA" Oid="10103" X="225" Y="215" Width="100" Height="60" ModelElement="Case"/>
-<carnot:Symbol Kind="DATA" Oid="10112" X="665" Y="20" Width="40" Height="60" ModelElement="Case"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10116" X="480" Y="25" Width="180" Height="40" ModelElement="TransferDataFromCRToCase"/>
-<carnot:Symbol Kind="DATA" Oid="10123" X="335" Y="50" Width="130" Height="60" ModelElement="CustomerRequirements"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10134" X="1400" Y="110" Width="110" Height="40" ModelElement="ConnectionToBVIS"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10140" X="735" Y="55" Width="190" Height="40" ModelElement="BuisnessLogicOfInsuranceContract"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10170" X="1105" Y="210" Width="231" Height="51" ModelElement="CreateSignedInsuranceContractDocument"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10171" X="1025" Y="215" Width="42" Height="42" ModelElement="10170" FlowKind="join"/>
-<carnot:Symbol Kind="DATA" Oid="10136" X="970" Y="30" Width="110" Height="60" ModelElement="InsuranceContract"/>
-<carnot:Symbol Kind="DATA" Oid="10175" X="1090" Y="310" Width="110" Height="60" ModelElement="InsuranceContract"/>
-<carnot:Symbol Kind="DATA" Oid="10177" X="1260" Y="305" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10183" X="1140" Y="125" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10201" X="1570" Y="215" Width="40" Height="40"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10048" X="630" Y="20" Width="80" Height="50" ModelElement="CustomerRequirementsArrive"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10058" X="600" Y="120" Width="140" Height="50" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10062" X="735" Y="320" Width="160" Height="51" ModelElement="InitializeCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10070" X="595" Y="560" Width="151" Height="50" ModelElement="BuildInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10075" X="600" Y="925" Width="141" Height="51" ModelElement="SendInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10079" X="415" Y="320" Width="231" Height="51" ModelElement="CheckForNecessaryContractAdjustments"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10082" X="650" Y="210" Width="42" Height="42" ModelElement="10058" FlowKind="split"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10086" X="650" Y="450" Width="42" Height="42" ModelElement="10070" FlowKind="join"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10092" X="510" Y="450" Width="42" Height="42" ModelElement="10079" FlowKind="split"/>
+<carnot:Symbol Kind="DATA" Oid="10095" X="325" Y="85" Width="130" Height="60" ModelElement="CustomerRequirements"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10100" X="385" Y="175" Width="190" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="DATA" Oid="10103" X="495" Y="30" Width="100" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="DATA" Oid="10112" X="1020" Y="355" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10116" X="985" Y="290" Width="180" Height="40" ModelElement="TransferDataFromCRToCase"/>
+<carnot:Symbol Kind="DATA" Oid="10123" X="905" Y="420" Width="130" Height="60" ModelElement="CustomerRequirements"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10134" X="400" Y="995" Width="110" Height="40" ModelElement="ConnectionToBVIS"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10140" X="770" Y="640" Width="190" Height="40" ModelElement="BuisnessLogicOfInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10170" X="555" Y="795" Width="231" Height="51" ModelElement="CreateSignedInsuranceContractDocument"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10171" X="650" Y="685" Width="42" Height="42" ModelElement="10170" FlowKind="join"/>
+<carnot:Symbol Kind="DATA" Oid="10136" X="835" Y="535" Width="110" Height="60" ModelElement="InsuranceContract"/>
+<carnot:Symbol Kind="DATA" Oid="10175" X="365" Y="800" Width="110" Height="60" ModelElement="InsuranceContract"/>
+<carnot:Symbol Kind="DATA" Oid="10177" X="370" Y="905" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10183" X="340" Y="725" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10201" X="650" Y="1035" Width="40" Height="40"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10066" SourceSymbol="10048" TargetSymbol="10058" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10068" ModelElement="Transition_1" SourceSymbol="10082" TargetSymbol="10062" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10072" ModelElement="Transition_2" SourceSymbol="10062" TargetSymbol="10086" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10081" ModelElement="Transition_4" SourceSymbol="10082" TargetSymbol="10079" SourceAnchor="bottom" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10083" SourceSymbol="10058" TargetSymbol="10082" SourceAnchor="right" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10085" ModelElement="Transition_5" SourceSymbol="10092" TargetSymbol="10086" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10068" ModelElement="Transition_1" SourceSymbol="10082" TargetSymbol="10062" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10072" ModelElement="Transition_2" SourceSymbol="10062" TargetSymbol="10086" SourceAnchor="bottom" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10081" ModelElement="Transition_4" SourceSymbol="10082" TargetSymbol="10079" SourceAnchor="left" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10083" SourceSymbol="10058" TargetSymbol="10082" SourceAnchor="bottom" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10085" ModelElement="Transition_5" SourceSymbol="10092" TargetSymbol="10086" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10087" SourceSymbol="10086" TargetSymbol="10070" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10089" ModelElement="Transition_6" SourceSymbol="10092" TargetSymbol="10171" SourceAnchor="center" TargetAnchor="left"/>
-<carnot:Connection Kind="TRANSITION" Oid="10093" SourceSymbol="10079" TargetSymbol="10092" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10089" ModelElement="Transition_6" SourceSymbol="10092" TargetSymbol="10171" SourceAnchor="bottom" TargetAnchor="left"/>
+<carnot:Connection Kind="TRANSITION" Oid="10093" SourceSymbol="10079" TargetSymbol="10092" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10097" SourceSymbol="10095" TargetSymbol="10058"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10101" SourceSymbol="10100" TargetSymbol="10058"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10105" SourceSymbol="10103" TargetSymbol="10058"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10114" SourceSymbol="10112" TargetSymbol="10062"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10125" SourceSymbol="10123" TargetSymbol="10062"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10126" SourceSymbol="10116" TargetSymbol="10062"/>
-<carnot:Connection Kind="TRANSITION" Oid="10128" ModelElement="Transition_7" SourceSymbol="10070" TargetSymbol="10171" SourceAnchor="center" TargetAnchor="left"/>
+<carnot:Connection Kind="TRANSITION" Oid="10128" ModelElement="Transition_7" SourceSymbol="10070" TargetSymbol="10171" SourceAnchor="bottom" TargetAnchor="top"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10135" SourceSymbol="10134" TargetSymbol="10075"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10141" SourceSymbol="10140" TargetSymbol="10070"/>
 <carnot:Connection Kind="TRANSITION" Oid="10172" SourceSymbol="10171" TargetSymbol="10170" SourceAnchor="center" TargetAnchor="center"/>
@@ -819,7 +821,7 @@
 <carnot:Connection Kind="DATA_FLOW" Oid="10179" SourceSymbol="10175" TargetSymbol="10170"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10181" SourceSymbol="10177" TargetSymbol="10170"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10184" SourceSymbol="10183" TargetSymbol="10170"/>
-<carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="right" TargetAnchor="right"/>
+<carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="bottom" TargetAnchor="right"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10210" SourceSymbol="10177" TargetSymbol="10075"/>
 </carnot:Connections>
 </carnot:Symbol>
@@ -964,20 +966,20 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10144" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10146" X="5" Y="150" Width="150" Height="50" ModelElement="CaseTerminationArrives"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10148" X="410" Y="150" Width="141" Height="51" ModelElement="ArchiveCase"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10149" X="630" Y="155" Width="40" Height="40"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10153" X="190" Y="150" Width="141" Height="51" ModelElement="RetrieveCase"/>
-<carnot:Symbol Kind="DATA" Oid="10158" X="125" Y="220" Width="100" Height="60" ModelElement="CaseTermination"/>
-<carnot:Symbol Kind="DATA" Oid="10161" X="320" Y="220" Width="40" Height="60" ModelElement="Case"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10164" X="220" Y="290" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
-<carnot:Symbol Kind="DATA" Oid="10166" X="525" Y="225" Width="40" Height="60" ModelElement="Case"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10212" X="430" Y="295" Width="100" Height="40" ModelElement="SaveCase"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10146" X="320" Y="45" Width="150" Height="50" ModelElement="CaseTerminationArrives"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10148" X="325" Y="255" Width="141" Height="51" ModelElement="ArchiveCase"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10149" X="375" Y="360" Width="40" Height="40"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10153" X="325" Y="145" Width="141" Height="51" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="DATA" Oid="10158" X="160" Y="65" Width="100" Height="60" ModelElement="CaseTermination"/>
+<carnot:Symbol Kind="DATA" Oid="10161" X="200" Y="130" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10164" X="135" Y="190" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="DATA" Oid="10166" X="540" Y="270" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10212" X="500" Y="330" Width="100" Height="40" ModelElement="SaveCase"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10151" SourceSymbol="10148" TargetSymbol="10149" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10154" SourceSymbol="10146" TargetSymbol="10153" SourceAnchor="center" TargetAnchor="left"/>
-<carnot:Connection Kind="TRANSITION" Oid="10156" ModelElement="Transition_1" SourceSymbol="10153" TargetSymbol="10148" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10154" SourceSymbol="10146" TargetSymbol="10153" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10156" ModelElement="Transition_1" SourceSymbol="10153" TargetSymbol="10148" SourceAnchor="bottom" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10160" SourceSymbol="10158" TargetSymbol="10153"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10163" SourceSymbol="10161" TargetSymbol="10153"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10165" SourceSymbol="10164" TargetSymbol="10153"/>
@@ -1099,19 +1101,19 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10187" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10189" X="20" Y="195" Width="80" Height="50" ModelElement="SignedInsuranceContractArrival"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10191" X="125" Y="195" Width="141" Height="51" ModelElement="RetrieveCase"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10194" X="315" Y="195" Width="170" Height="51" ModelElement="FileSignedInsuranceContract"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10197" X="545" Y="200" Width="40" Height="40"/>
-<carnot:Symbol Kind="DATA" Oid="10200" X="200" Y="90" Width="190" Height="60" ModelElement="SignedInsuranceContractDocument"/>
-<carnot:Symbol Kind="DATA" Oid="10214" X="180" Y="290" Width="40" Height="60" ModelElement="Case"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10217" X="45" Y="310" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10224" X="305" Y="305" Width="170" Height="40" ModelElement="SaveSignedInsuranceContract"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10189" X="345" Y="20" Width="80" Height="50" ModelElement="SignedInsuranceContractArrival"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10191" X="315" Y="120" Width="141" Height="51" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10194" X="300" Y="240" Width="170" Height="51" ModelElement="FileSignedInsuranceContract"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10197" X="365" Y="360" Width="40" Height="40"/>
+<carnot:Symbol Kind="DATA" Oid="10200" X="65" Y="160" Width="190" Height="60" ModelElement="SignedInsuranceContractDocument"/>
+<carnot:Symbol Kind="DATA" Oid="10214" X="580" Y="110" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10217" X="540" Y="55" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10224" X="115" Y="290" Width="170" Height="40" ModelElement="SaveSignedInsuranceContract"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10192" SourceSymbol="10189" TargetSymbol="10191" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10196" ModelElement="Transition_1" SourceSymbol="10191" TargetSymbol="10194" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10198" SourceSymbol="10194" TargetSymbol="10197" SourceAnchor="right" TargetAnchor="bottom"/>
+<carnot:Connection Kind="TRANSITION" Oid="10198" SourceSymbol="10194" TargetSymbol="10197" SourceAnchor="bottom" TargetAnchor="bottom"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10216" SourceSymbol="10214" TargetSymbol="10191"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10218" SourceSymbol="10217" TargetSymbol="10191"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10220" SourceSymbol="10200" TargetSymbol="10191"/>
