@@ -73,6 +73,14 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Participant>
+<Participant Id="Sales" Name="Sales">
+<ParticipantType Type="ROLE"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Role Oid="10240"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Participant>
 </Participants>
 <Applications>
 <Application Id="FindCaseByCaseID" Name="Find case by caseID">
@@ -522,11 +530,6 @@
 <FinishMode>
 <Automatic/>
 </FinishMode>
-<TransitionRestrictions>
-<TransitionRestriction>
-<Join Type="XOR"/>
-</TransitionRestriction>
-</TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10069" Implementation="Application" IsHibernatedOnCreation="false">
@@ -607,8 +610,8 @@
 <TransitionRestriction>
 <Split Type="XOR">
 <TransitionRefs>
-<TransitionRef Id="Transition_5"/>
 <TransitionRef Id="Transition_6"/>
+<TransitionRef Id="Transition_11"/>
 </TransitionRefs>
 </Split>
 </TransitionRestriction>
@@ -677,6 +680,43 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Activity>
+<Activity Id="TransformRequirementsIntoBenefits" Name="Transform requirements into benefits">
+<Implementation>
+<No/>
+</Implementation>
+<Performer>Sales</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Manual/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Join Type="XOR"/>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10226" Implementation="Manual">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10236" Id="CustomerRequirements" Name="CustomerRequirements" Direction="IN" Context="default">
+<carnot:DataRef Id="CustomerRequirements"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10238" Id="InsuranceContract" Name="InsuranceContract" Direction="OUT" Context="default">
+<carnot:DataRef Id="InsuranceContract"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="true" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
 </Activities>
 <Transitions>
 <Transition Id="Transition_1" Name="Transition 1" From="RetrieveCase" To="InitializeCase">
@@ -687,27 +727,11 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
-<Transition Id="Transition_2" Name="Transition 2" From="InitializeCase" To="BuildInsuranceContract">
-<Condition Type="CONDITION">true</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10071"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
 <Transition Id="Transition_4" Name="Transition 4" From="RetrieveCase" To="CheckForNecessaryContractAdjustments">
 <Condition Type="OTHERWISE"/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Transition Oid="10080" IsForkingOnTraversal="false"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
-<Transition Id="Transition_5" Name="Transition 5" From="CheckForNecessaryContractAdjustments" To="BuildInsuranceContract">
-<Condition Type="CONDITION">adjustments needed</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10084" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -732,6 +756,30 @@
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Transition Oid="10173"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_9" Name="Transition 9" From="InitializeCase" To="TransformRequirementsIntoBenefits">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10228"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_10" Name="Transition 10" From="TransformRequirementsIntoBenefits" To="BuildInsuranceContract">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10230"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_11" Name="Transition 11" From="CheckForNecessaryContractAdjustments" To="TransformRequirementsIntoBenefits">
+<Condition Type="OTHERWISE"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10232" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -774,12 +822,11 @@
 <carnot:Symbol Kind="STARTEVENT" Oid="10048" X="630" Y="20" Width="80" Height="50" ModelElement="CustomerRequirementsArrive"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10058" X="600" Y="120" Width="140" Height="50" ModelElement="RetrieveCase"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10062" X="735" Y="320" Width="160" Height="51" ModelElement="InitializeCase"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10070" X="595" Y="560" Width="151" Height="50" ModelElement="BuildInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10070" X="595" Y="590" Width="151" Height="50" ModelElement="BuildInsuranceContract"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10075" X="600" Y="925" Width="141" Height="51" ModelElement="SendInsuranceContract"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10079" X="415" Y="320" Width="231" Height="51" ModelElement="CheckForNecessaryContractAdjustments"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10082" X="650" Y="210" Width="42" Height="42" ModelElement="10058" FlowKind="split"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10086" X="650" Y="450" Width="42" Height="42" ModelElement="10070" FlowKind="join"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10092" X="510" Y="450" Width="42" Height="42" ModelElement="10079" FlowKind="split"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10092" X="510" Y="430" Width="42" Height="42" ModelElement="10079" FlowKind="split"/>
 <carnot:Symbol Kind="DATA" Oid="10095" X="325" Y="85" Width="130" Height="60" ModelElement="CustomerRequirements"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10100" X="385" Y="175" Width="190" Height="40" ModelElement="FindCaseByCaseID"/>
 <carnot:Symbol Kind="DATA" Oid="10103" X="495" Y="30" Width="100" Height="60" ModelElement="Case"/>
@@ -795,15 +842,15 @@
 <carnot:Symbol Kind="DATA" Oid="10177" X="370" Y="905" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10183" X="340" Y="725" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10201" X="650" Y="1035" Width="40" Height="40"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10227" X="570" Y="495" Width="201" Height="51" ModelElement="TransformRequirementsIntoBenefits"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10234" X="650" Y="430" Width="42" Height="42" ModelElement="10227" FlowKind="join"/>
+<carnot:Symbol Kind="ROLE" Oid="10241" X="940" Y="500" Width="50" Height="40" ModelElement="Sales"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10066" SourceSymbol="10048" TargetSymbol="10058" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10068" ModelElement="Transition_1" SourceSymbol="10082" TargetSymbol="10062" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10072" ModelElement="Transition_2" SourceSymbol="10062" TargetSymbol="10086" SourceAnchor="bottom" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10081" ModelElement="Transition_4" SourceSymbol="10082" TargetSymbol="10079" SourceAnchor="left" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10083" SourceSymbol="10058" TargetSymbol="10082" SourceAnchor="bottom" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10085" ModelElement="Transition_5" SourceSymbol="10092" TargetSymbol="10086" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10087" SourceSymbol="10086" TargetSymbol="10070" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10089" ModelElement="Transition_6" SourceSymbol="10092" TargetSymbol="10171" SourceAnchor="bottom" TargetAnchor="left"/>
 <carnot:Connection Kind="TRANSITION" Oid="10093" SourceSymbol="10079" TargetSymbol="10092" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10097" SourceSymbol="10095" TargetSymbol="10058"/>
@@ -823,6 +870,13 @@
 <carnot:Connection Kind="EXECUTED_BY" Oid="10184" SourceSymbol="10183" TargetSymbol="10170"/>
 <carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="bottom" TargetAnchor="right"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10210" SourceSymbol="10177" TargetSymbol="10075"/>
+<carnot:Connection Kind="TRANSITION" Oid="10229" ModelElement="Transition_9" SourceSymbol="10062" TargetSymbol="10234" SourceAnchor="bottom" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10231" ModelElement="Transition_10" SourceSymbol="10227" TargetSymbol="10070" SourceAnchor="bottom" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10233" ModelElement="Transition_11" SourceSymbol="10092" TargetSymbol="10234" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10235" SourceSymbol="10234" TargetSymbol="10227" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10237" SourceSymbol="10123" TargetSymbol="10227"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10239" SourceSymbol="10136" TargetSymbol="10227"/>
+<carnot:Connection Kind="PERFORMS" Oid="10242" SourceSymbol="10241" TargetSymbol="10227"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
