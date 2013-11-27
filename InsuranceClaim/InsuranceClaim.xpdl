@@ -1188,6 +1188,11 @@
                <FinishMode>
                   <Automatic/>
                </FinishMode>
+               <TransitionRestrictions>
+                  <TransitionRestriction>
+                     <Join Type="XOR"/>
+                  </TransitionRestriction>
+               </TransitionRestrictions>
                <ExtendedAttributes>
                   <ExtendedAttribute Name="CarnotExt">
                      <carnot:Activity Oid="10213" Implementation="Application">
@@ -1303,34 +1308,6 @@
                   </ExtendedAttribute>
                </ExtendedAttributes>
             </Activity>
-            <Activity Id="IDKROUTE" Name="IDK ROUTE">
-               <Implementation>
-                  <No/>
-               </Implementation>
-               <Performer/>
-               <StartMode>
-                  <Automatic/>
-               </StartMode>
-               <FinishMode>
-                  <Manual/>
-               </FinishMode>
-               <ExtendedAttributes>
-                  <ExtendedAttribute Name="CarnotExt">
-                     <carnot:Activity Oid="10299" IsHibernatedOnCreation="false">
-                        <carnot:EventHandlers/>
-                        <carnot:DataFlows/>
-                        <carnot:Attributes>
-                           <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
-                           <carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
-                           <carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
-                           <carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
-                           <carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
-                           <carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
-                        </carnot:Attributes>
-                     </carnot:Activity>
-                  </ExtendedAttribute>
-               </ExtendedAttributes>
-            </Activity>
          </Activities>
          <Transitions>
             <Transition Id="Transition_1" Name="Transition 1" From="LoadIncidentData" To="CompareDecisionWithInvoice">
@@ -1374,18 +1351,18 @@
                </ExtendedAttributes>
             </Transition>
             <Transition Id="Transition_6" Name="Transition 6" From="ClarifyInvoiceWithCarsCo" To="MakePayment">
-               <Condition Type="CONDITION">true</Condition>
+               <Condition Type="CONDITION">Invoice accepted</Condition>
                <ExtendedAttributes>
                   <ExtendedAttribute Name="CarnotExt">
-                     <carnot:Transition Oid="10295"/>
+                     <carnot:Transition Oid="10295" IsForkingOnTraversal="false"/>
                   </ExtendedAttribute>
                </ExtendedAttributes>
             </Transition>
-            <Transition Id="Transition_7" Name="Transition 7" From="ClarifyInvoiceWithCarsCo" To="IDKROUTE">
-               <Condition Type="CONDITION">true</Condition>
+            <Transition Id="Transition_7" Name="Transition 7" From="ClarifyInvoiceWithCarsCo" To="SendRejectionNotice">
+               <Condition Type="CONDITION">Invoice rejected</Condition>
                <ExtendedAttributes>
                   <ExtendedAttribute Name="CarnotExt">
-                     <carnot:Transition Oid="10301"/>
+                     <carnot:Transition Oid="10305" IsForkingOnTraversal="false"/>
                   </ExtendedAttribute>
                </ExtendedAttributes>
             </Transition>
@@ -1411,24 +1388,23 @@
                                  <carnot:Symbol Kind="DATA" Oid="10207" X="10" Y="-25" Width="100" Height="60" ModelElement="Invoice"/>
                                  <carnot:Symbol Kind="DATA" Oid="10210" X="35" Y="180" Width="40" Height="60" ModelElement="Incident"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="10212" X="175" Y="180" Width="171" Height="51" ModelElement="CompareDecisionWithInvoice"/>
-                                 <carnot:Symbol Kind="ACTIVITY" Oid="10214" X="450" Y="305" Width="141" Height="51" ModelElement="SendRejectionNotice"/>
+                                 <carnot:Symbol Kind="ACTIVITY" Oid="10214" X="700" Y="730" Width="141" Height="51" ModelElement="SendRejectionNotice"/>
                                  <carnot:Symbol Kind="APPLICATION" Oid="10203" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveIncidentByID"/>
-                                 <carnot:Symbol Kind="APPLICATION" Oid="10216" X="620" Y="280" Width="130" Height="70" ModelElement="RejectionNotice"/>
-                                 <carnot:Symbol Kind="ENDEVENT" Oid="10218" X="500" Y="385" Width="40" Height="40"/>
+                                 <carnot:Symbol Kind="APPLICATION" Oid="10216" X="870" Y="665" Width="130" Height="70" ModelElement="RejectionNotice"/>
+                                 <carnot:Symbol Kind="ENDEVENT" Oid="10218" X="750" Y="810" Width="40" Height="40"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="10225" X="170" Y="370" Width="181" Height="51" ModelElement="CompareEstimationWithInvoice"/>
                                  <carnot:Symbol Kind="GATEWAY" Oid="10228" X="240" Y="250" Width="42" Height="42" ModelElement="10212" FlowKind="split"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="10238" X="190" Y="730" Width="141" Height="51" ModelElement="MakePayment"/>
                                  <carnot:Symbol Kind="ACTIVITY" Oid="10240" X="415" Y="555" Width="211" Height="51" ModelElement="ClarifyInvoiceWithCarsCo"/>
                                  <carnot:Symbol Kind="GATEWAY" Oid="10245" X="240" Y="450" Width="42" Height="42" ModelElement="10225" FlowKind="split"/>
                                  <carnot:Symbol Kind="ENDEVENT" Oid="10248" X="240" Y="810" Width="40" Height="40"/>
-                                 <carnot:Symbol Kind="ENDEVENT" Oid="10249" X="500" Y="820" Width="40" Height="40"/>
                                  <carnot:Symbol Kind="ROLE" Oid="10253" X="620" Y="510" Width="120" Height="40" ModelElement="AccountantSpecialist"/>
-                                 <carnot:Symbol Kind="ANNOTATION" Oid="10294" X="625" Y="360" Width="275" Height="20">
+                                 <carnot:Symbol Kind="ANNOTATION" Oid="10294" X="875" Y="745" Width="275" Height="20">
                                     <carnot:Text>Notice sent out to both BVIS and C&amp;C</carnot:Text>
                                  </carnot:Symbol>
                                  <carnot:Symbol Kind="GATEWAY" Oid="10297" X="240" Y="625" Width="42" Height="42" ModelElement="10238" FlowKind="join"/>
                                  <carnot:Symbol Kind="GATEWAY" Oid="10303" X="500" Y="625" Width="42" Height="42" ModelElement="10240" FlowKind="split"/>
-                                 <carnot:Symbol Kind="ACTIVITY" Oid="10300" X="415" Y="735" Width="210" Height="50" ModelElement="IDKROUTE"/>
+                                 <carnot:Symbol Kind="GATEWAY" Oid="10307" X="750" Y="625" Width="42" Height="42" ModelElement="10214" FlowKind="join"/>
                               </carnot:Symbols>
                               <carnot:Connections>
                                  <carnot:Connection Kind="TRANSITION" Oid="10205" SourceSymbol="10200" TargetSymbol="10202" SourceAnchor="center" TargetAnchor="center"/>
@@ -1436,7 +1412,7 @@
                                  <carnot:Connection Kind="EXECUTED_BY" Oid="10204" SourceSymbol="10203" TargetSymbol="10202"/>
                                  <carnot:Connection Kind="EXECUTED_BY" Oid="10217" SourceSymbol="10216" TargetSymbol="10214"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10220" ModelElement="Transition_1" SourceSymbol="10202" TargetSymbol="10212" SourceAnchor="center" TargetAnchor="center"/>
-                                 <carnot:Connection Kind="TRANSITION" Oid="10222" ModelElement="Transition_2" SourceSymbol="10228" TargetSymbol="10214" SourceAnchor="center" TargetAnchor="top"/>
+                                 <carnot:Connection Kind="TRANSITION" Oid="10222" ModelElement="Transition_2" SourceSymbol="10228" TargetSymbol="10307" SourceAnchor="center" TargetAnchor="top"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10223" SourceSymbol="10214" TargetSymbol="10218" SourceAnchor="center" TargetAnchor="bottom"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10227" ModelElement="Transition_3" SourceSymbol="10228" TargetSymbol="10225" SourceAnchor="center" TargetAnchor="top"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10229" SourceSymbol="10212" TargetSymbol="10228" SourceAnchor="center" TargetAnchor="center"/>
@@ -1450,8 +1426,9 @@
                                  <carnot:Connection Kind="PERFORMS" Oid="10254" SourceSymbol="10253" TargetSymbol="10240"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10296" ModelElement="Transition_6" SourceSymbol="10303" TargetSymbol="10297" SourceAnchor="center" TargetAnchor="center"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10298" SourceSymbol="10297" TargetSymbol="10238" SourceAnchor="center" TargetAnchor="center"/>
-                                 <carnot:Connection Kind="TRANSITION" Oid="10302" ModelElement="Transition_7" SourceSymbol="10303" TargetSymbol="10300" SourceAnchor="center" TargetAnchor="center"/>
                                  <carnot:Connection Kind="TRANSITION" Oid="10304" SourceSymbol="10240" TargetSymbol="10303" SourceAnchor="center" TargetAnchor="center"/>
+                                 <carnot:Connection Kind="TRANSITION" Oid="10306" ModelElement="Transition_7" SourceSymbol="10303" TargetSymbol="10307" SourceAnchor="center" TargetAnchor="left"/>
+                                 <carnot:Connection Kind="TRANSITION" Oid="10308" SourceSymbol="10307" TargetSymbol="10214" SourceAnchor="center" TargetAnchor="center"/>
                               </carnot:Connections>
                            </carnot:Symbol>
                         </carnot:Symbols>
