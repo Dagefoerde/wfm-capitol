@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns:carnot="http://www.carnot.ag/xpdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.wfmc.org/2002/XPDL1.0" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd" Id="ContractNegotiation" Name="Contract Negotiation">
+<PackageHeader>
+<XPDLVersion>1.0</XPDLVersion>
+<Vendor>SunGard CSA LLC</Vendor>
+<Created>Mon Nov 18 18:21:00 CET 2013</Created>
+</PackageHeader>
+<RedefinableHeader PublicationStatus="UNDER_REVISION">
+<Author>j_hand02</Author>
+<Version>1</Version>
+</RedefinableHeader>
+<ConformanceClass GraphConformance="NON_BLOCKED"/>
+<xpdl:Script xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns="http://www.carnot.ag/workflowmodel/3.1" Type="text/ecmascript"/>
+<xpdl:TypeDeclarations xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns="http://www.carnot.ag/workflowmodel/3.1">
+<xpdl:TypeDeclaration Id="CustomerRequirements" Name="Customer Requirements">
+<xpdl:SchemaType>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cus="http://www.infinity.com/bpm/model/ContractNegotiation/CustomerRequirements" targetNamespace="http://www.infinity.com/bpm/model/ContractNegotiation/CustomerRequirements">
+<xsd:complexType name="CustomerRequirements">
+<xsd:sequence>
+<xsd:element name="CaseId" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="CustomerRequirements" type="cus:CustomerRequirements"/>
+</xsd:schema>
+</xpdl:SchemaType>
+</xpdl:TypeDeclaration>
+<xpdl:TypeDeclaration Id="Case" Name="Case">
+<xpdl:SchemaType>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cas="http://www.infinity.com/bpm/model/ContractNegotiation/Case" xmlns:cus="http://www.infinity.com/bpm/model/ContractNegotiation/CustomerRequirements" targetNamespace="http://www.infinity.com/bpm/model/ContractNegotiation/Case">
+<xsd:import namespace="http://www.infinity.com/bpm/model/ContractNegotiation/CustomerRequirements" schemaLocation="urn:internal:CustomerRequirements"/>
+<xsd:complexType name="Case">
+<xsd:sequence>
+<xsd:element name="caseID" type="xsd:string"/>
+<xsd:element name="currentCustomerRequirement" type="cus:CustomerRequirements"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Case" type="cas:Case"/>
+</xsd:schema>
+</xpdl:SchemaType>
+</xpdl:TypeDeclaration>
+<xpdl:TypeDeclaration Id="InsuranceContract" Name="Insurance contract">
+<xpdl:SchemaType>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ins="http://www.infinity.com/bpm/model/ContractNegotiation/InsuranceContract" targetNamespace="http://www.infinity.com/bpm/model/ContractNegotiation/InsuranceContract">
+<xsd:complexType name="InsuranceContract">
+<xsd:sequence>
+<xsd:element name="CaseId" type="xsd:string"/>
+<xsd:element name="CustomerId" type="xsd:string"/>
+<xsd:element name="PlainText" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="InsuranceContract" type="ins:InsuranceContract"/>
+</xsd:schema>
+</xpdl:SchemaType>
+</xpdl:TypeDeclaration>
+<xpdl:TypeDeclaration Id="CaseTermination" Name="Case termination">
+<xpdl:SchemaType>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cas="http://www.infinity.com/bpm/model/ContractNegotiation/CaseTermination" targetNamespace="http://www.infinity.com/bpm/model/ContractNegotiation/CaseTermination">
+<xsd:complexType name="CaseTermination">
+<xsd:sequence/>
+</xsd:complexType>
+<xsd:element name="CaseTermination" type="cas:CaseTermination"/>
+</xsd:schema>
+</xpdl:SchemaType>
+</xpdl:TypeDeclaration>
+</xpdl:TypeDeclarations>
+<Participants>
+<Participant Id="Administrator" Name="Administrator">
+<ParticipantType Type="ROLE"/>
+<Description>In charge of all workflow administration activities.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Role Oid="10043"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Participant>
+</Participants>
+<Applications>
+<Application Id="FindCaseByCaseID" Name="Find case by caseID">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10099" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:dms:operation:name" Value="findDocuments"/>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="TransferDataFromCRToCase" Name="Transfer data from CR to Case">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10115" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="ConnectionToBVIS" Name="Connection to BVIS">
+<FormalParameters/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10133" Type="jms">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="BuisnessLogicOfInsuranceContract" Name="Buisness logic of insurance contract">
+<ExternalReference location="" xref=""/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10139" Type="plainJava">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="CreateSignedDocumentFromInsuranceContractData" Name="Create signed document from insurance contract data">
+<ExternalReference location="" xref=""/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10182" Type="plainJava">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="SaveCase" Name="Save case">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10211" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="SaveSignedInsuranceContract" Name="Save signed insurance contract">
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10223" Type="dmsOperation">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+</Applications>
+<DataFields>
+<DataField Id="LAST_ACTIVITY_PERFORMER" Name="Last Activity Performer" IsArray="FALSE">
+<DataType>
+<ExternalReference location="ag.carnot.workflow.runtime.beans.IUser"/>
+</DataType>
+<Description>User performing the last activity of the current process.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10034" Type="entity" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:homeInterface" Value="ag.carnot.workflow.runtime.UserHome"/>
+<carnot:Attribute Name="carnot:engine:isLocal" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:jndiPath" Value="ag.carnot.workflow.runtime.User"/>
+<carnot:Attribute Name="carnot:engine:primaryKey" Value="ag.carnot.workflow.runtime.UserPK"/>
+<carnot:Attribute Name="carnot:engine:remoteInterface" Value="ag.carnot.workflow.runtime.beans.IUser"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="STARTING_USER" Name="Starting User" IsArray="FALSE">
+<DataType>
+<ExternalReference location="ag.carnot.workflow.runtime.beans.IUser"/>
+</DataType>
+<Description>User starting the current process.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10035" Type="entity" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:homeInterface" Value="ag.carnot.workflow.runtime.UserHome"/>
+<carnot:Attribute Name="carnot:engine:isLocal" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:jndiPath" Value="ag.carnot.workflow.runtime.User"/>
+<carnot:Attribute Name="carnot:engine:primaryKey" Value="ag.carnot.workflow.runtime.UserPK"/>
+<carnot:Attribute Name="carnot:engine:remoteInterface" Value="ag.carnot.workflow.runtime.beans.IUser"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="CURRENT_USER" Name="Current User" IsArray="FALSE">
+<DataType>
+<ExternalReference location="ag.carnot.workflow.runtime.beans.IUser"/>
+</DataType>
+<Description>The User currently attached to the activity thread. Usually only available for synchronously executed activity threads.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10036" Type="entity" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:homeInterface" Value="ag.carnot.workflow.runtime.UserHome"/>
+<carnot:Attribute Name="carnot:engine:isLocal" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:jndiPath" Value="ag.carnot.workflow.runtime.User"/>
+<carnot:Attribute Name="carnot:engine:primaryKey" Value="ag.carnot.workflow.runtime.UserPK"/>
+<carnot:Attribute Name="carnot:engine:remoteInterface" Value="ag.carnot.workflow.runtime.beans.IUser"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="PROCESS_ID" Name="Process OID" IsArray="FALSE">
+<DataType>
+<BasicType Type="INTEGER"/>
+</DataType>
+<Description>ID assigned to the current process.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10037" Type="primitive" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:type" Value="long" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="PROCESS_PRIORITY" Name="Process Priority" IsArray="FALSE">
+<DataType>
+<BasicType Type="INTEGER"/>
+</DataType>
+<Description>Priority assigned to the current process.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10038" Type="primitive" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:type" Value="int" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="ROOT_PROCESS_ID" Name="Root Process OID" IsArray="FALSE">
+<DataType>
+<BasicType Type="INTEGER"/>
+</DataType>
+<Description>ID assigned to the root process of the current process.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10039" Type="primitive" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:type" Value="long" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="CURRENT_DATE" Name="Current Date" IsArray="FALSE">
+<DataType>
+<BasicType Type="DATETIME"/>
+</DataType>
+<Description>Current Date.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10040" Type="primitive" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:type" Value="Calendar" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="CURRENT_LOCALE" Name="Current Locale" IsArray="FALSE">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>String representing the current locale.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10041" Type="primitive" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:type" Value="String" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="CURRENT_MODEL" Name="Current Model" IsArray="FALSE">
+<DataType>
+<ExternalReference location="ag.carnot.workflow.runtime.DeployedModelDescription"/>
+</DataType>
+<Description>Current Model.</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10042" Type="serializable" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.DeployedModelDescription"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="CustomerRequirements" Name="Customer requirements" IsArray="FALSE">
+<DataType>
+<DeclaredType Id="CustomerRequirements"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10094" Type="struct">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="Case" Name="Case" IsArray="FALSE">
+<DataType>
+<DeclaredType Id="Case"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10102" Type="struct">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="CaseTermination" Name="Case termination" IsArray="FALSE">
+<DataType>
+<DeclaredType Id="CaseTermination"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10157" Type="struct">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="InsuranceContractDocument" Name="Insurance contract document" IsArray="FALSE">
+<DataType>
+<ExternalReference location="ag.carnot.workflow.runtime.Document"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10176" Type="dmsDocument">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Document"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="SignedInsuranceContractDocument" Name="Signed insurance contract document" IsArray="FALSE">
+<DataType>
+<ExternalReference location="ag.carnot.workflow.runtime.Document"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10199" Type="dmsDocument">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Document"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="InsuranceContract" Name="Insurance contract" IsArray="FALSE">
+<DataType>
+<DeclaredType Id="InsuranceContract"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10129" Type="struct">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
+<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+</DataFields>
+<WorkflowProcesses>
+<WorkflowProcess Id="CustomerRequirementsToInsuranceContract" Name="customer requirements to insurance contract" AccessLevel="PUBLIC">
+<ProcessHeader/>
+<Activities>
+<Activity Id="RetrieveCase" Name="Retrieve case">
+<Implementation>
+<Tool Id="FindCaseByCaseID" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>CustomerRequirements</ActualParameter>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="Transition_1"/>
+<TransitionRef Id="Transition_4"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10057" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10096" Id="CustomerRequirements" Name="CustomerRequirements" Direction="IN" Context="application">
+<carnot:DataRef Id="CustomerRequirements"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10104" Id="struct_1" Name="struct_1" Direction="OUT" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="InitializeCase" Name="Initialize Case">
+<Implementation>
+<Tool Id="TransferDataFromCRToCase" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+<ActualParameter>CustomerRequirements</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10061" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10113" Id="Case" Name="Case" Direction="OUT" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10124" Id="CustomerRequirements" Name="CustomerRequirements" Direction="IN" Context="application">
+<carnot:DataRef Id="CustomerRequirements"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:subprocess:copyAllData" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="BuildInsuranceContract" Name="Build insurance contract">
+<Implementation>
+<Tool Id="BuisnessLogicOfInsuranceContract" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>InsuranceContract</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Join Type="XOR"/>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10069" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10137" Id="InsuranceContract" Name="InsuranceContract" Direction="OUT" Context="application">
+<carnot:DataRef Id="InsuranceContract"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:subprocess:copyAllData" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="SendInsuranceContract" Name="Send Insurance Contract">
+<Implementation>
+<Tool Id="ConnectionToBVIS" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>InsuranceContractDocument</ActualParameter>
+<ActualParameter>InsuranceContractDocument</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10074" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10208" Id="InsuranceContractDocument" Name="InsuranceContractDocument" Direction="IN" Context="application">
+<carnot:DataRef Id="InsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10209" Id="InsuranceContractDocument_1" Name="InsuranceContractDocument_1" Direction="IN" Context="application">
+<carnot:DataRef Id="InsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="CheckForNecessaryContractAdjustments" Name="Check for Necessary Contract Adjustments">
+<Implementation>
+<SubFlow Id="" Execution="SYNCHR"/>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="Transition_5"/>
+<TransitionRef Id="Transition_6"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10078" Implementation="Subprocess" IsHibernatedOnCreation="false" SubProcessMode="sync_shared">
+<carnot:EventHandlers/>
+<carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:subprocess:copyAllData" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="CreateSignedInsuranceContractDocument" Name="Create signed insurance contract document">
+<Implementation>
+<Tool Id="CreateSignedDocumentFromInsuranceContractData" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>InsuranceContractDocument</ActualParameter>
+<ActualParameter>InsuranceContract</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Join Type="XOR"/>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10169" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10180" Id="InsuranceContract" Name="InsuranceContract" Direction="OUT" Context="application">
+<carnot:DataRef Id="InsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10178" Id="InsuranceContract" Name="InsuranceContract" Direction="IN" Context="application">
+<carnot:DataRef Id="InsuranceContract"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+</Activities>
+<Transitions>
+<Transition Id="Transition_1" Name="Transition 1" From="RetrieveCase" To="InitializeCase">
+<Condition Type="CONDITION">Case == null;</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10067" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_2" Name="Transition 2" From="InitializeCase" To="BuildInsuranceContract">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10071"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_4" Name="Transition 4" From="RetrieveCase" To="CheckForNecessaryContractAdjustments">
+<Condition Type="OTHERWISE"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10080" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_5" Name="Transition 5" From="CheckForNecessaryContractAdjustments" To="BuildInsuranceContract">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10084"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_6" Name="Transition 6" From="CheckForNecessaryContractAdjustments" To="CreateSignedInsuranceContractDocument">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10088"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_7" Name="Transition 7" From="BuildInsuranceContract" To="CreateSignedInsuranceContractDocument">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10127"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_8" Name="Transition 8" From="CreateSignedInsuranceContractDocument" To="SendInsuranceContract">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10173"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+</Transitions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:WorkflowProcess Oid="10044">
+<carnot:Triggers>
+<carnot:Trigger Oid="10047" Id="CustomerRequirementsArrive" Name="Customer requirements arrive" Type="mail">
+<carnot:AccessPoints>
+<carnot:AccessPoint Oid="10049" Id="mail" Name="mail" Direction="OUT" Type="serializable">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Mail"/>
+<carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+</carnot:Attributes>
+</carnot:AccessPoint>
+</carnot:AccessPoints>
+<carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:protocol" Value="pop3" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailProtocol"/>
+<carnot:Attribute Name="carnot:engine:mailFlags" Value="any" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailFlags"/>
+<carnot:Attribute Name="carnot:engine:mailboxAction" Value="leave" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailboxAction"/>
+</carnot:Attributes>
+</carnot:Trigger>
+</carnot:Triggers>
+<carnot:DataPaths/>
+<carnot:EventHandlers/>
+<carnot:Attributes>
+<carnot:Attribute Name="authorization:processDefinition.abortProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.modifyProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.deleteProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.readProcessInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:processDefinition.manageEventHandlers[0]" Value="Administrator"/>
+</carnot:Attributes>
+<carnot:Diagrams>
+<carnot:Diagram Oid="10045" Name="Default" Orientation="Vertical" Mode="MODE_4_0_0">
+<carnot:Symbols>
+<carnot:Symbol Kind="POOL" Oid="10046" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
+<carnot:Symbols>
+<carnot:Symbol Kind="STARTEVENT" Oid="10048" X="15" Y="120" Width="80" Height="50" ModelElement="CustomerRequirementsArrive"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10058" X="155" Y="120" Width="140" Height="50" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10062" X="520" Y="120" Width="160" Height="51" ModelElement="InitializeCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10070" X="830" Y="120" Width="151" Height="51" ModelElement="BuildInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10075" X="1385" Y="210" Width="141" Height="51" ModelElement="SendInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10079" X="405" Y="210" Width="231" Height="51" ModelElement="CheckForNecessaryContractAdjustments"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10082" X="325" Y="125" Width="42" Height="42" ModelElement="10058" FlowKind="split"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10086" X="730" Y="125" Width="42" Height="42" ModelElement="10070" FlowKind="join"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10092" X="690" Y="215" Width="42" Height="42" ModelElement="10079" FlowKind="split"/>
+<carnot:Symbol Kind="DATA" Oid="10095" X="55" Y="225" Width="130" Height="60" ModelElement="CustomerRequirements"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10100" X="100" Y="315" Width="190" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="DATA" Oid="10103" X="225" Y="215" Width="100" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="DATA" Oid="10112" X="665" Y="20" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10116" X="480" Y="25" Width="180" Height="40" ModelElement="TransferDataFromCRToCase"/>
+<carnot:Symbol Kind="DATA" Oid="10123" X="335" Y="50" Width="130" Height="60" ModelElement="CustomerRequirements"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10134" X="1400" Y="110" Width="110" Height="40" ModelElement="ConnectionToBVIS"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10140" X="735" Y="55" Width="190" Height="40" ModelElement="BuisnessLogicOfInsuranceContract"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10170" X="1105" Y="210" Width="231" Height="51" ModelElement="CreateSignedInsuranceContractDocument"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10171" X="1025" Y="215" Width="42" Height="42" ModelElement="10170" FlowKind="join"/>
+<carnot:Symbol Kind="DATA" Oid="10136" X="970" Y="30" Width="110" Height="60" ModelElement="InsuranceContract"/>
+<carnot:Symbol Kind="DATA" Oid="10175" X="1090" Y="310" Width="110" Height="60" ModelElement="InsuranceContract"/>
+<carnot:Symbol Kind="DATA" Oid="10177" X="1260" Y="305" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10183" X="1140" Y="125" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10201" X="1570" Y="215" Width="40" Height="40"/>
+</carnot:Symbols>
+<carnot:Connections>
+<carnot:Connection Kind="TRANSITION" Oid="10066" SourceSymbol="10048" TargetSymbol="10058" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10068" ModelElement="Transition_1" SourceSymbol="10082" TargetSymbol="10062" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10072" ModelElement="Transition_2" SourceSymbol="10062" TargetSymbol="10086" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10081" ModelElement="Transition_4" SourceSymbol="10082" TargetSymbol="10079" SourceAnchor="bottom" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10083" SourceSymbol="10058" TargetSymbol="10082" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10085" ModelElement="Transition_5" SourceSymbol="10092" TargetSymbol="10086" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10087" SourceSymbol="10086" TargetSymbol="10070" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10089" ModelElement="Transition_6" SourceSymbol="10092" TargetSymbol="10171" SourceAnchor="center" TargetAnchor="left"/>
+<carnot:Connection Kind="TRANSITION" Oid="10093" SourceSymbol="10079" TargetSymbol="10092" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10097" SourceSymbol="10095" TargetSymbol="10058"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10101" SourceSymbol="10100" TargetSymbol="10058"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10105" SourceSymbol="10103" TargetSymbol="10058"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10114" SourceSymbol="10112" TargetSymbol="10062"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10125" SourceSymbol="10123" TargetSymbol="10062"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10126" SourceSymbol="10116" TargetSymbol="10062"/>
+<carnot:Connection Kind="TRANSITION" Oid="10128" ModelElement="Transition_7" SourceSymbol="10070" TargetSymbol="10171" SourceAnchor="center" TargetAnchor="left"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10135" SourceSymbol="10134" TargetSymbol="10075"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10141" SourceSymbol="10140" TargetSymbol="10070"/>
+<carnot:Connection Kind="TRANSITION" Oid="10172" SourceSymbol="10171" TargetSymbol="10170" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10174" ModelElement="Transition_8" SourceSymbol="10170" TargetSymbol="10075" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10138" SourceSymbol="10136" TargetSymbol="10070"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10179" SourceSymbol="10175" TargetSymbol="10170"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10181" SourceSymbol="10177" TargetSymbol="10170"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10184" SourceSymbol="10183" TargetSymbol="10170"/>
+<carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="right" TargetAnchor="right"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10210" SourceSymbol="10177" TargetSymbol="10075"/>
+</carnot:Connections>
+</carnot:Symbol>
+</carnot:Symbols>
+<carnot:Connections/>
+</carnot:Diagram>
+</carnot:Diagrams>
+</carnot:WorkflowProcess>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</WorkflowProcess>
+<WorkflowProcess Id="ProcessDefinition_2" Name="Process Definition 2" AccessLevel="PRIVATE">
+<ProcessHeader/>
+<Activities/>
+<Transitions/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:WorkflowProcess Oid="10063">
+<carnot:Triggers/>
+<carnot:DataPaths/>
+<carnot:EventHandlers/>
+<carnot:Diagrams>
+<carnot:Diagram Oid="10064" Name="Default" Orientation="Vertical">
+<carnot:Symbols>
+<carnot:Symbol Kind="POOL" Oid="10065" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
+<carnot:Symbols/>
+<carnot:Connections/>
+</carnot:Symbol>
+</carnot:Symbols>
+<carnot:Connections/>
+</carnot:Diagram>
+</carnot:Diagrams>
+</carnot:WorkflowProcess>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</WorkflowProcess>
+<WorkflowProcess Id="CaseTermination" Name="Case termination" AccessLevel="PUBLIC">
+<ProcessHeader/>
+<Activities>
+<Activity Id="ArchiveCase" Name="Archive case">
+<Implementation>
+<Tool Id="SaveCase" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10147" Implementation="Application">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10167" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="RetrieveCase" Name="Retrieve case">
+<Implementation>
+<Tool Id="FindCaseByCaseID" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>CaseTermination</ActualParameter>
+<ActualParameter>Case</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10152" Implementation="Application">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10159" Id="CaseTermination" Name="CaseTermination" Direction="IN" Context="application">
+<carnot:DataRef Id="CaseTermination"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10162" Id="Case" Name="Case" Direction="OUT" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+</Activities>
+<Transitions>
+<Transition Id="Transition_1" Name="Transition 1" From="RetrieveCase" To="ArchiveCase">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10155"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+</Transitions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:WorkflowProcess Oid="10142">
+<carnot:Triggers>
+<carnot:Trigger Oid="10145" Id="CaseTerminationArrives" Name="Case termination arrives" Type="jms">
+<carnot:AccessPoints/>
+<carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:messageAcceptor" Value="ag.carnot.workflow.spi.providers.applications.jms.DefaultMessageAcceptor"/>
+<carnot:Attribute Name="carnot:engine:messageType" Value="Map" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
+</carnot:Attributes>
+</carnot:Trigger>
+</carnot:Triggers>
+<carnot:DataPaths/>
+<carnot:EventHandlers/>
+<carnot:Attributes>
+<carnot:Attribute Name="authorization:processDefinition.abortProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.modifyProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.deleteProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.readProcessInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:processDefinition.manageEventHandlers[0]" Value="Administrator"/>
+</carnot:Attributes>
+<carnot:Diagrams>
+<carnot:Diagram Oid="10143" Name="Default" Orientation="Vertical" Mode="MODE_4_0_0">
+<carnot:Symbols>
+<carnot:Symbol Kind="POOL" Oid="10144" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
+<carnot:Symbols>
+<carnot:Symbol Kind="STARTEVENT" Oid="10146" X="5" Y="150" Width="150" Height="50" ModelElement="CaseTerminationArrives"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10148" X="410" Y="150" Width="141" Height="51" ModelElement="ArchiveCase"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10149" X="630" Y="155" Width="40" Height="40"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10153" X="190" Y="150" Width="141" Height="51" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="DATA" Oid="10158" X="125" Y="220" Width="100" Height="60" ModelElement="CaseTermination"/>
+<carnot:Symbol Kind="DATA" Oid="10161" X="320" Y="220" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10164" X="220" Y="290" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="DATA" Oid="10166" X="525" Y="225" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10212" X="430" Y="295" Width="100" Height="40" ModelElement="SaveCase"/>
+</carnot:Symbols>
+<carnot:Connections>
+<carnot:Connection Kind="TRANSITION" Oid="10151" SourceSymbol="10148" TargetSymbol="10149" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10154" SourceSymbol="10146" TargetSymbol="10153" SourceAnchor="center" TargetAnchor="left"/>
+<carnot:Connection Kind="TRANSITION" Oid="10156" ModelElement="Transition_1" SourceSymbol="10153" TargetSymbol="10148" SourceAnchor="right" TargetAnchor="center"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10160" SourceSymbol="10158" TargetSymbol="10153"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10163" SourceSymbol="10161" TargetSymbol="10153"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10165" SourceSymbol="10164" TargetSymbol="10153"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10168" SourceSymbol="10166" TargetSymbol="10148"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10213" SourceSymbol="10212" TargetSymbol="10148"/>
+</carnot:Connections>
+</carnot:Symbol>
+</carnot:Symbols>
+<carnot:Connections/>
+</carnot:Diagram>
+</carnot:Diagrams>
+</carnot:WorkflowProcess>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</WorkflowProcess>
+<WorkflowProcess Id="ContractAcceptance" Name="Contract acceptance" AccessLevel="PUBLIC">
+<ProcessHeader/>
+<Activities>
+<Activity Id="RetrieveCase" Name="Retrieve case">
+<Implementation>
+<Tool Id="FindCaseByCaseID" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Case</ActualParameter>
+<ActualParameter>SignedInsuranceContractDocument</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10190" Implementation="Application">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10215" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10219" Id="SignedInsuranceContractDocument" Name="SignedInsuranceContractDocument" Direction="IN" Context="application">
+<carnot:DataRef Id="SignedInsuranceContractDocument"/>
+<carnot:AccessPointRef Id="documentInfo"/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="FileSignedInsuranceContract" Name="File signed insurance contract">
+<Implementation>
+<Tool Id="SaveSignedInsuranceContract" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>SignedInsuranceContractDocument</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10193" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10221" Id="SignedInsuranceContractDocument" Name="SignedInsuranceContractDocument" Direction="IN" Context="application">
+<carnot:DataRef Id="SignedInsuranceContractDocument"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+</Activities>
+<Transitions>
+<Transition Id="Transition_1" Name="Transition 1" From="RetrieveCase" To="FileSignedInsuranceContract">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10195"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+</Transitions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:WorkflowProcess Oid="10185">
+<carnot:Triggers>
+<carnot:Trigger Oid="10188" Id="SignedInsuranceContractArrival" Name="Signed insurance contract arrival" Type="jms">
+<carnot:AccessPoints/>
+<carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:messageAcceptor" Value="ag.carnot.workflow.spi.providers.applications.jms.DefaultMessageAcceptor"/>
+<carnot:Attribute Name="carnot:engine:messageType" Value="Map" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
+</carnot:Attributes>
+</carnot:Trigger>
+</carnot:Triggers>
+<carnot:DataPaths/>
+<carnot:EventHandlers/>
+<carnot:Diagrams>
+<carnot:Diagram Oid="10186" Name="Default" Orientation="Vertical" Mode="MODE_4_0_0">
+<carnot:Symbols>
+<carnot:Symbol Kind="POOL" Oid="10187" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
+<carnot:Symbols>
+<carnot:Symbol Kind="STARTEVENT" Oid="10189" X="20" Y="195" Width="80" Height="50" ModelElement="SignedInsuranceContractArrival"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10191" X="125" Y="195" Width="141" Height="51" ModelElement="RetrieveCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10194" X="315" Y="195" Width="170" Height="51" ModelElement="FileSignedInsuranceContract"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10197" X="545" Y="200" Width="40" Height="40"/>
+<carnot:Symbol Kind="DATA" Oid="10200" X="200" Y="90" Width="190" Height="60" ModelElement="SignedInsuranceContractDocument"/>
+<carnot:Symbol Kind="DATA" Oid="10214" X="180" Y="290" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10217" X="45" Y="310" Width="110" Height="40" ModelElement="FindCaseByCaseID"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10224" X="305" Y="305" Width="170" Height="40" ModelElement="SaveSignedInsuranceContract"/>
+</carnot:Symbols>
+<carnot:Connections>
+<carnot:Connection Kind="TRANSITION" Oid="10192" SourceSymbol="10189" TargetSymbol="10191" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10196" ModelElement="Transition_1" SourceSymbol="10191" TargetSymbol="10194" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10198" SourceSymbol="10194" TargetSymbol="10197" SourceAnchor="right" TargetAnchor="bottom"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10216" SourceSymbol="10214" TargetSymbol="10191"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10218" SourceSymbol="10217" TargetSymbol="10191"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10220" SourceSymbol="10200" TargetSymbol="10191"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10222" SourceSymbol="10200" TargetSymbol="10194"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10225" SourceSymbol="10224" TargetSymbol="10194"/>
+</carnot:Connections>
+</carnot:Symbol>
+</carnot:Symbols>
+<carnot:Connections/>
+</carnot:Diagram>
+</carnot:Diagrams>
+</carnot:WorkflowProcess>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</WorkflowProcess>
+</WorkflowProcesses>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Package Oid="1" CarnotVersion="5.3.11" ModelOid="0">
+<carnot:MetaTypes>
+<carnot:DataTypes>
+<carnot:DataType Oid="10002" Id="primitive" Name="Primitive Data" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:accessPathEditor" Value="ag.carnot.workflow.spi.providers.data.java.POJOAccessPathEditor"/>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/data/java/images/primitive_data.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.data.java.PrimitivePropertiesEditor"/>
+<carnot:Attribute Name="carnot:engine:evaluator" Value="ag.carnot.workflow.spi.providers.data.java.PrimitiveAccessPathEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.data.java.PrimitiveValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.dataTypes.PrimitiveValidator"/>
+</carnot:Attributes>
+</carnot:DataType>
+<carnot:DataType Oid="10003" Id="serializable" Name="Serializable Data" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:accessPathEditor" Value="ag.carnot.workflow.spi.providers.data.java.POJOAccessPathEditor"/>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/data/java/images/serializable_data.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.data.java.SerializablePropertiesEditor"/>
+<carnot:Attribute Name="carnot:engine:evaluator" Value="ag.carnot.workflow.spi.providers.data.java.JavaBeanAccessPathEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.data.java.SerializableValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.dataTypes.SerializableValidator"/>
+</carnot:Attributes>
+</carnot:DataType>
+<carnot:DataType Oid="10004" Id="entity" Name="Entity Bean" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:accessPathEditor" Value="ag.carnot.workflow.spi.providers.data.java.POJOAccessPathEditor"/>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/data/entitybean/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.data.entitybean.EntityBeanPropertiesEditor"/>
+<carnot:Attribute Name="carnot:engine:evaluator" Value="ag.carnot.workflow.spi.providers.data.entitybean.EntityBeanEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.data.entitybean.EntityBeanValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.dataTypes.EntityBeanValidator"/>
+</carnot:Attributes>
+</carnot:DataType>
+<carnot:DataType Oid="10005" Id="plainXML" Name="XML Document" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:accessPathEditor" Value="ag.carnot.workflow.spi.providers.data.plainxml.XPathEditor"/>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/data/plainxml/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.data.plainxml.XMLDocumentPropertiesEditor"/>
+<carnot:Attribute Name="carnot:engine:evaluator" Value="ag.carnot.workflow.spi.providers.data.plainxml.XPathEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.data.plainxml.XMLValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.dataTypes.XMLValidator"/>
+</carnot:Attributes>
+</carnot:DataType>
+<carnot:DataType Oid="10006" Id="struct" Name="Structured Data" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:evaluator" Value="ag.carnot.bpm.rt.data.structured.spi.StructuredDataXPathEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.bpm.rt.data.structured.spi.StructuredDataXMLValidator"/>
+<carnot:Attribute Name="carnot:engine:dataFilterExtension" Value="ag.carnot.bpm.rt.data.structured.spi.StructuredDataFilterExtension"/>
+<carnot:Attribute Name="carnot:engine:dataLoader" Value="ag.carnot.bpm.rt.data.structured.spi.StructuredDataLoader"/>
+</carnot:Attributes>
+</carnot:DataType>
+<carnot:DataType Oid="10052" Id="dmsDocument" Name="Document" IsPredefined="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:evaluator" Value="com.infinity.bpm.rt.integration.data.dms.VfsDocumentAccessPathEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.infinity.bpm.rt.integration.data.dms.VfsDocumentValidator"/>
+<carnot:Attribute Name="carnot:engine:dataLoader" Value="ag.carnot.bpm.rt.data.structured.spi.StructuredDataLoader"/>
+<carnot:Attribute Name="carnot:engine:dataFilterExtension" Value="ag.carnot.bpm.rt.data.structured.spi.StructuredDataFilterExtension"/>
+</carnot:Attributes>
+</carnot:DataType>
+</carnot:DataTypes>
+<carnot:ApplicationTypes>
+<carnot:ApplicationType Oid="10007" Id="sessionBean" Name="Session Bean Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/applications/sessionbean/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.applications.sessionbean.SessionBeanApplicationPanel"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.spi.providers.applications.sessionbean.SessionBeanAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="ag.carnot.workflow.spi.providers.applications.sessionbean.SessionBeanApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.applications.sessionbean.SessionBeanValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.applicationTypes.SessionBeanValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10008" Id="plainJava" Name="Plain Java Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/applications/plainjava/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.applications.plainjava.PlainJavaApplicationPanel"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.spi.providers.applications.plainjava.PlainJavaAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="ag.carnot.workflow.spi.providers.applications.plainjava.PlainJavaApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.applications.plainjava.PlainJavaValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.applicationTypes.PlainJavaValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10009" Id="jms" Name="JMS Application" IsPredefined="true" IsSynchronous="false">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/applications/jms/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.applications.jms.JMSApplicationPanel"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="ag.carnot.workflow.spi.providers.applications.jms.JMSApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.applications.jms.JMSValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.applicationTypes.JMSValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10010" Id="webservice" Name="Web Service Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/applications/ws/gui/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.applications.ws.gui.WebserviceApplicationPanel"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="ag.carnot.workflow.spi.providers.applications.ws.WebserviceApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.applications.ws.WebserviceApplicationValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.applicationTypes.WebserviceApplicationValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10073" Id="messageTransformationBean" Name="Message Transformation Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value=""/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="com.infinity.bpm.messaging.runtime.transformation.MessageTransformationApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.infinity.bpm.messaging.runtime.transformation.MessageProcessingValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10098" Id="dmsOperation" Name="DMS Operation" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="com.infinity.bpm.rt.integration.data.dms.VfsOperationApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.infinity.bpm.rt.integration.data.dms.VfsOperationValidator"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="com.infinity.bpm.rt.integration.data.dms.VfsOperationAccessPointProvider"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10117" Id="mailBean" Name="Mail Application" IsPredefined="true" IsSynchronous="false">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value=""/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.spi.providers.applications.mail.MailAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="ag.carnot.workflow.spi.providers.applications.mail.MailApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.applications.mail.MailValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10118" Id="messageParsingBean" Name="Message Parsing Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value=""/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="com.infinity.bpm.messaging.runtime.parsing.MessageParsingApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.infinity.bpm.messaging.runtime.parsing.MessageParsingValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10119" Id="messageSerializationBean" Name="Message Serialization Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value=""/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="com.infinity.bpm.messaging.runtime.serialization.MessageSerializationApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.infinity.bpm.messaging.runtime.serialization.MessageSerializationValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10120" Id="rulesEngineBean" Name="Drools Rules Engine" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value=""/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="com.sungard.bpm.rules.engines.drools.runtime.RulesEngineAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="com.sungard.bpm.rules.engines.drools.runtime.RulesEngineApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.sungard.bpm.rules.engines.drools.runtime.RulesEngineValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10121" Id="springBean" Name="Spring Bean Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/applications/plainjava/icon.gif"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.runtime.spring.application.SpringBeanAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="ag.carnot.workflow.runtime.spring.application.SpringBeanApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.runtime.spring.application.SpringBeanValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+<carnot:ApplicationType Oid="10122" Id="xslMessageTransformationBean" Name="XSL Message Transformation Application" IsPredefined="true" IsSynchronous="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value=""/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="com.infinity.bpm.messaging.runtime.transformation.xsl.XSLMessageTransformationAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:applicationInstance" Value="com.infinity.bpm.messaging.runtime.transformation.xsl.XSLMessageTransformationApplicationInstance"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="com.infinity.bpm.messaging.runtime.transformation.xsl.XSLMessageTransformationValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationType>
+</carnot:ApplicationTypes>
+<carnot:ApplicationContextTypes>
+<carnot:ApplicationContextType Oid="10011" Id="default" Name="Default Context" IsPredefined="true" HasApplicationPath="false" HasMappingId="true"/>
+<carnot:ApplicationContextType Oid="10012" Id="engine" Name="Engine Context" IsPredefined="true" HasApplicationPath="true" HasMappingId="false"/>
+<carnot:ApplicationContextType Oid="10013" Id="application" Name="Noninteractive Application Context" IsPredefined="true" HasApplicationPath="true" HasMappingId="false"/>
+<carnot:ApplicationContextType Oid="10014" Id="jfc" Name="JFC Application" IsPredefined="true" HasApplicationPath="true" HasMappingId="false">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/contexts/jfc/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.contexts.jfc.JFCContextTypePanel"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.spi.providers.contexts.jfc.JFCAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.contexts.jfc.JFCValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.contextTypes.JFCValidator"/>
+<carnot:Attribute Name="carnot:exdesk:instance" Value="ag.carnot.workflow.spi.providers.contexts.jfc.JFCApplicationInstance"/>
+</carnot:Attributes>
+</carnot:ApplicationContextType>
+<carnot:ApplicationContextType Oid="10015" Id="jsp" Name="JSP Application" IsPredefined="true" HasApplicationPath="false" HasMappingId="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/contexts/jsp/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.contexts.jsp.JSPContextTypePanel"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.contexts.jsp.JSPValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.contextTypes.JSPValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationContextType>
+</carnot:ApplicationContextTypes>
+<carnot:TriggerTypes>
+<carnot:TriggerType Oid="10016" Id="manual" Name="Manual Trigger" IsPredefined="true" IsPullTrigger="false">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/triggers/manual/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.triggers.manual.ManualTriggerPanel"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.triggers.manual.ManualTriggerValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.triggerTypes.ManualTriggerValidator"/>
+</carnot:Attributes>
+</carnot:TriggerType>
+<carnot:TriggerType Oid="10017" Id="jms" Name="JMS Trigger" IsPredefined="true" IsPullTrigger="false">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/triggers/jms/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.triggers.jms.JMSTriggerPanel"/>
+<carnot:Attribute Name="carnot:engine:jmsAcceptor" Value="ag.carnot.workflow.spi.providers.triggers.jms.DefaultTriggerMessageAcceptor"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.triggers.jms.JMSTriggerValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.triggerTypes.JMSTriggerValidator"/>
+</carnot:Attributes>
+</carnot:TriggerType>
+<carnot:TriggerType Oid="10018" Id="mail" Name="Mail Trigger" IsPredefined="true" IsPullTrigger="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/triggers/mail/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerPanel"/>
+<carnot:Attribute Name="carnot:engine:pullTriggerEvaluator" Value="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.triggerTypes.MailTriggerValidator"/>
+</carnot:Attributes>
+</carnot:TriggerType>
+<carnot:TriggerType Oid="10019" Id="timer" Name="Timer Based Trigger" IsPredefined="true" IsPullTrigger="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/triggers/timer/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.triggers.timer.TimerTriggerPanel"/>
+<carnot:Attribute Name="carnot:engine:pullTriggerEvaluator" Value="ag.carnot.workflow.spi.providers.triggers.timer.TimerTriggerEvaluator"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.triggers.timer.TimerTriggerValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.triggerTypes.TimerTriggerValidator"/>
+</carnot:Attributes>
+</carnot:TriggerType>
+</carnot:TriggerTypes>
+<carnot:EventConditionTypes>
+<carnot:EventConditionType Oid="10020" Id="timer" Name="Timer" IsPredefined="true" IsProcessCondition="true" IsActivityCondition="true" Implementation="PULL">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/conditions/timer/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.conditions.timer.PeriodPropertiesPanel"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.spi.providers.conditions.timer.TimerAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:binder" Value="ag.carnot.workflow.spi.providers.conditions.timer.TimeStampBinder"/>
+<carnot:Attribute Name="carnot:engine:condition" Value="ag.carnot.workflow.spi.providers.conditions.timer.TimeStampCondition"/>
+<carnot:Attribute Name="carnot:engine:pullEventEmitter" Value="ag.carnot.workflow.spi.providers.conditions.timer.TimeStampEmitter"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.conditions.timer.TimerValidator"/>
+<carnot:Attribute Name="carnot:exdesk:runtimePanel" Value="ag.carnot.workflow.spi.providers.conditions.timer.TimerbasedRuntimeBindPanel"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.conditionTypes.TimerValidator"/>
+</carnot:Attributes>
+</carnot:EventConditionType>
+<carnot:EventConditionType Oid="10021" Id="exception" Name="On Exception" IsPredefined="true" IsProcessCondition="false" IsActivityCondition="true" Implementation="ENGINE">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/conditions/exception/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.conditions.exception.ExceptionConditionPropertiesPanel"/>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.workflow.spi.providers.conditions.exception.ExceptionConditionAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:condition" Value="ag.carnot.workflow.spi.providers.conditions.exception.ExceptionCondition"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.conditions.exception.ExceptionConditionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.conditionTypes.ExceptionConditionValidator"/>
+</carnot:Attributes>
+</carnot:EventConditionType>
+<carnot:EventConditionType Oid="10022" Id="statechange" Name="On Activity State Change" IsPredefined="true" IsProcessCondition="false" IsActivityCondition="true" Implementation="ENGINE">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/conditions/statechange/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.conditions.statechange.StatechangeConditionPropertiesPanel"/>
+<carnot:Attribute Name="carnot:engine:condition" Value="ag.carnot.workflow.spi.providers.conditions.statechange.StatechangeCondition"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.conditions.statechange.StatechangeConditionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.conditionTypes.StatechangeConditionValidator"/>
+</carnot:Attributes>
+</carnot:EventConditionType>
+<carnot:EventConditionType Oid="10023" Id="processStatechange" Name="On Process State Change" IsPredefined="true" IsProcessCondition="true" IsActivityCondition="false" Implementation="ENGINE">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/conditions/statechange/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.conditions.statechange.ProcessStatechangeConditionPropertiesPanel"/>
+<carnot:Attribute Name="carnot:engine:condition" Value="ag.carnot.workflow.spi.providers.conditions.statechange.ProcessStatechangeCondition"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.conditions.statechange.StatechangeConditionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.conditionTypes.StatechangeConditionValidator"/>
+</carnot:Attributes>
+</carnot:EventConditionType>
+<carnot:EventConditionType Oid="10024" Id="onAssignment" Name="On Assignment" IsPredefined="true" IsProcessCondition="false" IsActivityCondition="true" Implementation="ENGINE">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/conditions/assignment/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.conditions.assignment.AssignmentConditionPropertiesPanel"/>
+<carnot:Attribute Name="carnot:engine:condition" Value="ag.carnot.workflow.spi.providers.conditions.assignment.AssignmentCondition"/>
+</carnot:Attributes>
+</carnot:EventConditionType>
+</carnot:EventConditionTypes>
+<carnot:EventActionTypes>
+<carnot:EventActionType Oid="10025" Id="trigger" Name="Process Trigger" IsPredefined="true" IsProcessAction="true" IsActivityAction="true" SupportedConditionTypes="timer, exception, statechange, processStatechange, onAssignment">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/trigger/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.actions.trigger.TriggerProcessActionPanel"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.trigger.TriggerProcessAction"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.actions.trigger.TriggerActionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.actionTypes.TriggerActionValidator"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10026" Id="mail" Name="Send Mail" IsPredefined="true" IsProcessAction="true" IsActivityAction="true" SupportedConditionTypes="timer, exception, statechange, processStatechange, onAssignment">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/mail/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.actions.mail.SendmailActionPanel"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.mail.SendmailAction"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.actions.mail.MailActionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.actionTypes.MailActionValidator"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10027" Id="abortProcess" Name="Abort Process" IsPredefined="true" IsProcessAction="true" IsActivityAction="true" SupportedConditionTypes="timer, exception" UnsupportedContexts="bind">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/abort/icon.gif"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.abort.AbortProcessEventAction"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10028" Id="completeActivity" Name="Complete Activity" IsPredefined="true" IsProcessAction="false" IsActivityAction="true" SupportedConditionTypes="timer, exception" UnsupportedContexts="bind">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/complete/icon.gif"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.complete.CompleteActivityEventAction"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10029" Id="activateActivity" Name="Activate Activity" IsPredefined="true" IsProcessAction="false" IsActivityAction="true" SupportedConditionTypes="timer, exception, onAssignment">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/awake/icon.gif"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.awake.AwakeActivityEventAction"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10030" Id="delegateActivity" Name="Delegate Activity" IsPredefined="true" IsProcessAction="false" IsActivityAction="true" SupportedConditionTypes="timer, exception, statechange">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/delegate/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.actions.delegate.DelegateEventActionPanel"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.delegate.DelegateEventAction"/>
+<carnot:Attribute Name="carnot:exdesk:runtimePanel" Value="ag.carnot.workflow.spi.providers.actions.delegate.DelegateEventActionRuntimePanel"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10031" Id="scheduleActivity" Name="Schedule Activity" IsPredefined="true" IsProcessAction="false" IsActivityAction="true" SupportedConditionTypes="timer, exception, statechange">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/schedule/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.actions.schedule.ScheduleEventActionPanel"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.schedule.ScheduleEventAction"/>
+<carnot:Attribute Name="carnot:exdesk:runtimePanel" Value="ag.carnot.workflow.spi.providers.actions.schedule.ScheduleEventActionRuntimePanel"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10032" Id="excludeUser" Name="Exclude User" IsPredefined="true" IsProcessAction="false" IsActivityAction="true" SupportedConditionTypes="onAssignment">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/excludeuser/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.actions.excludeuser.ExcludeUserActionPanel"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.excludeuser.ExcludeUserAction"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.actions.excludeuser.ExcludeUserActionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.actionTypes.ExcludeUserActionValidator"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+<carnot:EventActionType Oid="10033" Id="setData" Name="Set Data" IsPredefined="true" IsProcessAction="true" IsActivityAction="true" SupportedConditionTypes="timer, exception, statechange, processStatechange, onAssignment">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:defdesk:icon" Value="/ag/carnot/workflow/spi/providers/actions/setdata/icon.gif"/>
+<carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.actions.setdata.SetDataActionPropertiesPanel"/>
+<carnot:Attribute Name="carnot:engine:action" Value="ag.carnot.workflow.spi.providers.actions.setdata.SetDataAction"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.actions.setdata.SetDataActionValidator"/>
+<carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.actionTypes.SetDataActionValidator"/>
+</carnot:Attributes>
+</carnot:EventActionType>
+</carnot:EventActionTypes>
+<carnot:LinkTypes/>
+</carnot:MetaTypes>
+<carnot:Modelers/>
+<carnot:Diagrams>
+<carnot:Diagram Oid="10001" Name="Default Diagram" Orientation="Vertical" Mode="MODE_4_0_0">
+<carnot:Symbols>
+<carnot:Symbol Kind="PROCESS" Oid="10203" X="120" Y="75" Width="100" Height="40" ModelElement="CaseTermination"/>
+<carnot:Symbol Kind="PROCESS" Oid="10204" X="305" Y="80" Width="120" Height="40" ModelElement="ContractAcceptance"/>
+<carnot:Symbol Kind="PROCESS" Oid="10205" X="65" Y="175" Width="230" Height="40" ModelElement="CustomerRequirementsToInsuranceContract"/>
+<carnot:Symbol Kind="PROCESS" Oid="10206" X="395" Y="170" Width="110" Height="40" ModelElement="ProcessDefinition_2"/>
+</carnot:Symbols>
+<carnot:Connections/>
+</carnot:Diagram>
+</carnot:Diagrams>
+<carnot:Views/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:revision" Value="0" Type="int"/>
+</carnot:Attributes>
+</carnot:Package>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Package>
