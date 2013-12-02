@@ -76,6 +76,7 @@
 </Participants>
 <Applications>
 <Application Id="FindCaseByCaseID" Name="Find case by caseID">
+<Description>Finds the case by the caseId inside of the database and retrieves it.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10099" Type="dmsOperation">
@@ -90,6 +91,7 @@
 </ExtendedAttributes>
 </Application>
 <Application Id="TransferDataFromCRToCase" Name="Transfer data from CR to Case">
+<Description>Transfers the data from the customer requirements into the data structure in which it is save inside of the case object.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10115" Type="dmsOperation">
@@ -114,17 +116,22 @@
 </ExtendedAttributes>
 </Application>
 <Application Id="BuisnessLogicOfInsuranceContract" Name="Buisness logic of insurance contract">
+<Description>Creates the structured insurance contract from the customer requirements.</Description>
 <ExternalReference location="" xref=""/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10139" Type="plainJava">
 <carnot:ApplicationContexts/>
 <carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
 <Application Id="CreateSignedDocumentFromInsuranceContractData" Name="Create signed document from insurance contract data">
+<Description>Creates a human readable document from the structured insurance contract document.</Description>
 <ExternalReference location="" xref=""/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -139,21 +146,29 @@
 </ExtendedAttributes>
 </Application>
 <Application Id="SaveCase" Name="Save case">
+<Description>Saves the case inside of the database.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10211" Type="dmsOperation">
 <carnot:ApplicationContexts/>
 <carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
 <Application Id="SaveSignedInsuranceContract" Name="Save signed insurance contract">
+<Description>Save the  signed insurance contract inside of the database.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10223" Type="dmsOperation">
 <carnot:ApplicationContexts/>
 <carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
 </ExtendedAttributes>
@@ -319,6 +334,7 @@
 <DataType>
 <DeclaredType Id="CustomerRequirements"/>
 </DataType>
+<Description>The customer requirements are send from BVIS to Capitol. These include what kind of insurance contract the customer wants. For this purpose Capitol provides BVIS with a database of some kind, which contains information about insurance contracts both BVIS and the customer understand. The customer requirements there for include facts about the rented cars and the ids of the insurance products.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10094" Type="struct">
@@ -335,6 +351,7 @@
 <DataType>
 <DeclaredType Id="Case"/>
 </DataType>
+<Description>The case is a structured object documenting the whole negotiation process. It contains a list of customer requirements, a list of the created preliminary contracts as well as the customer data and an unique idl.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10102" Type="struct">
@@ -367,6 +384,7 @@
 <DataType>
 <ExternalReference location="ag.carnot.workflow.runtime.Document"/>
 </DataType>
+<Description>The insurance contract document is a human readable document, which contains all paragraphs describing the real contract between Capitol and the customer.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10176" Type="dmsDocument">
@@ -383,12 +401,14 @@
 <DataType>
 <ExternalReference location="ag.carnot.workflow.runtime.Document"/>
 </DataType>
+<Description>The signed insurance contract document equals the insurance contract document we send to BVIS but includes the signature of the customer.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10199" Type="dmsDocument">
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Document"/>
 <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -398,6 +418,7 @@
 <DataType>
 <DeclaredType Id="InsuranceContract"/>
 </DataType>
+<Description>The structured insurance contract includes a machine readable allocation of all benefits and paragraphs the human readable contract will contain.</Description>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10129" Type="struct">
@@ -413,15 +434,19 @@
 </DataFields>
 <WorkflowProcesses>
 <WorkflowProcess Id="CustomerRequirementsToInsuranceContract" Name="customer requirements to insurance contract" AccessLevel="PUBLIC">
-<ProcessHeader/>
+<ProcessHeader>
+<Description>Describes the workflow from the arrival of the customer requirements to the sending of the finished insurance contract.</Description>
+</ProcessHeader>
 <Activities>
 <Activity Id="RetrieveCase" Name="Retrieve case">
+<Description>We try to retrieve a case from our database if it already exists.</Description>
 <Implementation>
 <Tool Id="FindCaseByCaseID" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>CustomerRequirements</ActualParameter>
 <ActualParameter>Case</ActualParameter>
 </ActualParameters>
+<Description>We try to retrieve a case from our database if it already exists.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -467,12 +492,14 @@
 </ExtendedAttributes>
 </Activity>
 <Activity Id="InitializeCase" Name="Initialize Case">
+<Description>We create a case object and include the customer data from the customer requirements.</Description>
 <Implementation>
 <Tool Id="TransferDataFromCRToCase" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Case</ActualParameter>
 <ActualParameter>CustomerRequirements</ActualParameter>
 </ActualParameters>
+<Description>We create a case object and include the customer data from the customer requirements.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -509,11 +536,14 @@
 </ExtendedAttributes>
 </Activity>
 <Activity Id="BuildInsuranceContract" Name="Build insurance contract">
+<Description>From the customer requirements we create a structured insurance contract and save it inside of the case object.</Description>
 <Implementation>
 <Tool Id="BuisnessLogicOfInsuranceContract" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>InsuranceContract</ActualParameter>
+<ActualParameter>Case</ActualParameter>
 </ActualParameters>
+<Description>From the customer requirements we create a structured insurance contract and save it inside of the case object.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -536,6 +566,10 @@
 <carnot:DataRef Id="InsuranceContract"/>
 <carnot:AccessPointRef/>
 </carnot:DataFlow>
+<carnot:DataFlow Oid="10227" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataRef Id="Case"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
@@ -551,12 +585,14 @@
 </ExtendedAttributes>
 </Activity>
 <Activity Id="SendInsuranceContract" Name="Send Insurance Contract">
+<Description>We are sending the readable insurance contract with a digital signature to BVIS.</Description>
 <Implementation>
 <Tool Id="ConnectionToBVIS" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>InsuranceContractDocument</ActualParameter>
 <ActualParameter>InsuranceContractDocument</ActualParameter>
 </ActualParameters>
+<Description>We are sending the readable insurance contract with a digital signature to BVIS.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -592,9 +628,11 @@
 </ExtendedAttributes>
 </Activity>
 <Activity Id="CheckForNecessaryContractAdjustments" Name="Check for Necessary Contract Adjustments">
+<Description>We compare the old requirements stored in the case object with the new requirements and check, if we need to adjust our earlier contract.</Description>
 <Implementation>
 <Tool Id="" Type="APPLICATION">
 <ActualParameters/>
+<Description>We compare the old requirements stored in the case object with the new requirements and check, if we need to adjust our earlier contract.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -632,12 +670,14 @@
 </ExtendedAttributes>
 </Activity>
 <Activity Id="CreateSignedInsuranceContractDocument" Name="Create signed insurance contract document">
+<Description>From the created structured insurance contract we are creating a human readable document.</Description>
 <Implementation>
 <Tool Id="CreateSignedDocumentFromInsuranceContractData" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>InsuranceContractDocument</ActualParameter>
 <ActualParameter>InsuranceContract</ActualParameter>
 </ActualParameters>
+<Description>From the created structured insurance contract we are creating a human readable document.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -741,8 +781,9 @@
 <carnot:WorkflowProcess Oid="10044">
 <carnot:Triggers>
 <carnot:Trigger Oid="10047" Id="CustomerRequirementsArrive" Name="Customer requirements arrive" Type="mail">
+<carnot:Description>The customer requirements are send from BVIS to Capitol. These include what kind of insurance contract the customer wants. For this purpose Capitol provides BVIS with a database of some kind, which contains information about insurance contracts both BVIS and the customer understand. The customer requirements there for include facts about the rented cars and the ids of the insurance products.</carnot:Description>
 <carnot:AccessPoints>
-<carnot:AccessPoint Oid="10049" Id="mail" Name="mail" Direction="OUT" Type="serializable">
+<carnot:AccessPoint Oid="10229" Id="mail" Name="mail" Direction="OUT" Type="serializable">
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Mail"/>
 <carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
@@ -783,14 +824,14 @@
 <carnot:Symbol Kind="DATA" Oid="10095" X="325" Y="85" Width="130" Height="60" ModelElement="CustomerRequirements"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10100" X="385" Y="175" Width="190" Height="40" ModelElement="FindCaseByCaseID"/>
 <carnot:Symbol Kind="DATA" Oid="10103" X="495" Y="30" Width="100" Height="60" ModelElement="Case"/>
-<carnot:Symbol Kind="DATA" Oid="10112" X="1020" Y="355" Width="40" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="DATA" Oid="10112" X="905" Y="495" Width="40" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10116" X="985" Y="290" Width="180" Height="40" ModelElement="TransferDataFromCRToCase"/>
-<carnot:Symbol Kind="DATA" Oid="10123" X="905" Y="420" Width="130" Height="60" ModelElement="CustomerRequirements"/>
+<carnot:Symbol Kind="DATA" Oid="10123" X="975" Y="380" Width="130" Height="60" ModelElement="CustomerRequirements"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10134" X="400" Y="995" Width="110" Height="40" ModelElement="ConnectionToBVIS"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10140" X="770" Y="640" Width="190" Height="40" ModelElement="BuisnessLogicOfInsuranceContract"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10140" X="770" Y="690" Width="190" Height="40" ModelElement="BuisnessLogicOfInsuranceContract"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10170" X="555" Y="795" Width="231" Height="51" ModelElement="CreateSignedInsuranceContractDocument"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10171" X="650" Y="685" Width="42" Height="42" ModelElement="10170" FlowKind="join"/>
-<carnot:Symbol Kind="DATA" Oid="10136" X="835" Y="535" Width="110" Height="60" ModelElement="InsuranceContract"/>
+<carnot:Symbol Kind="DATA" Oid="10136" X="830" Y="590" Width="110" Height="60" ModelElement="InsuranceContract"/>
 <carnot:Symbol Kind="DATA" Oid="10175" X="365" Y="800" Width="110" Height="60" ModelElement="InsuranceContract"/>
 <carnot:Symbol Kind="DATA" Oid="10177" X="370" Y="905" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10183" X="340" Y="725" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
@@ -823,32 +864,8 @@
 <carnot:Connection Kind="EXECUTED_BY" Oid="10184" SourceSymbol="10183" TargetSymbol="10170"/>
 <carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="bottom" TargetAnchor="right"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10210" SourceSymbol="10177" TargetSymbol="10075"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10228" SourceSymbol="10112" TargetSymbol="10070"/>
 </carnot:Connections>
-</carnot:Symbol>
-</carnot:Symbols>
-<carnot:Connections/>
-</carnot:Diagram>
-</carnot:Diagrams>
-</carnot:WorkflowProcess>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</WorkflowProcess>
-<WorkflowProcess Id="ProcessDefinition_2" Name="Process Definition 2" AccessLevel="PRIVATE">
-<ProcessHeader/>
-<Activities/>
-<Transitions/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:WorkflowProcess Oid="10063">
-<carnot:Triggers/>
-<carnot:DataPaths/>
-<carnot:EventHandlers/>
-<carnot:Diagrams>
-<carnot:Diagram Oid="10064" Name="Default" Orientation="Vertical">
-<carnot:Symbols>
-<carnot:Symbol Kind="POOL" Oid="10065" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
-<carnot:Symbols/>
-<carnot:Connections/>
 </carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections/>
@@ -862,11 +879,13 @@
 <ProcessHeader/>
 <Activities>
 <Activity Id="ArchiveCase" Name="Archive case">
+<Description>We archive the case as it is only needed for later analysis but not in the operative business.</Description>
 <Implementation>
 <Tool Id="SaveCase" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Case</ActualParameter>
 </ActualParameters>
+<Description>We archive the case as it is only needed for later analysis but not in the operative business.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -877,7 +896,7 @@
 </FinishMode>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10147" Implementation="Application">
+<carnot:Activity Oid="10147" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10167" Id="Case" Name="Case" Direction="IN" Context="application">
@@ -887,18 +906,25 @@
 </carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
 </carnot:Attributes>
 </carnot:Activity>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Activity>
 <Activity Id="RetrieveCase" Name="Retrieve case">
+<Description>We  retrieve the case from our database.</Description>
 <Implementation>
 <Tool Id="FindCaseByCaseID" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>CaseTermination</ActualParameter>
 <ActualParameter>Case</ActualParameter>
 </ActualParameters>
+<Description>We  retrieve the case from our database.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -909,7 +935,7 @@
 </FinishMode>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10152" Implementation="Application">
+<carnot:Activity Oid="10152" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10159" Id="CaseTermination" Name="CaseTermination" Direction="IN" Context="application">
@@ -923,6 +949,11 @@
 </carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
 </carnot:Attributes>
 </carnot:Activity>
 </ExtendedAttribute>
@@ -999,12 +1030,14 @@
 <ProcessHeader/>
 <Activities>
 <Activity Id="RetrieveCase" Name="Retrieve case">
+<Description>We  retrieve the case from our database.</Description>
 <Implementation>
 <Tool Id="FindCaseByCaseID" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Case</ActualParameter>
 <ActualParameter>SignedInsuranceContractDocument</ActualParameter>
 </ActualParameters>
+<Description>We  retrieve the case from our database.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -1015,7 +1048,7 @@
 </FinishMode>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10190" Implementation="Application">
+<carnot:Activity Oid="10190" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10215" Id="Case" Name="Case" Direction="IN" Context="application">
@@ -1029,17 +1062,24 @@
 </carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
 </carnot:Attributes>
 </carnot:Activity>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Activity>
 <Activity Id="FileSignedInsuranceContract" Name="File signed insurance contract">
+<Description>We save the received contract in the database.</Description>
 <Implementation>
 <Tool Id="SaveSignedInsuranceContract" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>SignedInsuranceContractDocument</ActualParameter>
 </ActualParameters>
+<Description>We save the received contract in the database.</Description>
 </Tool>
 </Implementation>
 <StartMode>
@@ -1086,6 +1126,7 @@
 <carnot:WorkflowProcess Oid="10185">
 <carnot:Triggers>
 <carnot:Trigger Oid="10188" Id="SignedInsuranceContractArrival" Name="Signed insurance contract arrival" Type="jms">
+<carnot:Description>The insurance contract signed by the customer arrives.</carnot:Description>
 <carnot:AccessPoints/>
 <carnot:DataFlows/>
 <carnot:Attributes>
@@ -1483,7 +1524,6 @@
 <carnot:Symbol Kind="PROCESS" Oid="10203" X="120" Y="75" Width="100" Height="40" ModelElement="CaseTermination"/>
 <carnot:Symbol Kind="PROCESS" Oid="10204" X="305" Y="80" Width="120" Height="40" ModelElement="ContractAcceptance"/>
 <carnot:Symbol Kind="PROCESS" Oid="10205" X="65" Y="175" Width="230" Height="40" ModelElement="CustomerRequirementsToInsuranceContract"/>
-<carnot:Symbol Kind="PROCESS" Oid="10206" X="395" Y="170" Width="110" Height="40" ModelElement="ProcessDefinition_2"/>
 </carnot:Symbols>
 <carnot:Connections/>
 </carnot:Diagram>
