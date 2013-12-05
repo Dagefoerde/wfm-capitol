@@ -884,7 +884,7 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="CustomerRequirementsToInsuranceContract" Name="customer requirements to insurance contract" AccessLevel="PUBLIC">
+<WorkflowProcess Id="ContractNegotiation_Start" Name="ContractNegotiation_Start" AccessLevel="PUBLIC">
 <ProcessHeader>
 <Description>Describes the workflow from the arrival of the customer requirements to the sending of the finished insurance contract.</Description>
 </ProcessHeader>
@@ -1231,21 +1231,21 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:WorkflowProcess Oid="10044">
 <carnot:Triggers>
-<carnot:Trigger Oid="10047" Id="CustomerRequirementsArrive" Name="Customer requirements arrive" Type="mail">
+<carnot:Trigger Oid="10443" Id="CustomerRequirementsArrive" Name="Customer requirements arrive" Type="jms">
 <carnot:Description>The customer requirements are send from BVIS to Capitol. These include what kind of insurance contract the customer wants. For this purpose Capitol provides BVIS with a database of some kind, which contains information about insurance contracts both BVIS and the customer understand. The customer requirements there for include facts about the rented cars and the ids of the insurance products.</carnot:Description>
 <carnot:AccessPoints>
-<carnot:AccessPoint Oid="10229" Id="mail" Name="mail" Direction="OUT" Type="serializable">
+<carnot:AccessPoint Oid="10446" Id="content" Name="Content" Direction="OUT" Type="serializable">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="ag.carnot.workflow.runtime.Mail"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.msg.contractnegotiation.CustomerRequirementsMessage"/>
 <carnot:Attribute Name="carnot:engine:browsable" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:jms.location" Value="BODY" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
 </carnot:Attributes>
 </carnot:AccessPoint>
 </carnot:AccessPoints>
 <carnot:DataFlows/>
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:protocol" Value="pop3" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailProtocol"/>
-<carnot:Attribute Name="carnot:engine:mailFlags" Value="any" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailFlags"/>
-<carnot:Attribute Name="carnot:engine:mailboxAction" Value="leave" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailboxAction"/>
+<carnot:Attribute Name="carnot:engine:messageAcceptor" Value="ag.carnot.workflow.spi.providers.applications.jms.DefaultMessageAcceptor"/>
+<carnot:Attribute Name="carnot:engine:messageType" Value="Object" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
 </carnot:Attributes>
 </carnot:Trigger>
 </carnot:Triggers>
@@ -1263,7 +1263,6 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10046" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="STARTEVENT" Oid="10048" X="630" Y="20" Width="80" Height="50" ModelElement="CustomerRequirementsArrive"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10058" X="600" Y="120" Width="140" Height="50" ModelElement="RetrieveCase"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10062" X="735" Y="320" Width="160" Height="51" ModelElement="InitializeCase"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10070" X="595" Y="560" Width="151" Height="50" ModelElement="BuildInsuranceContract"/>
@@ -1272,9 +1271,9 @@
 <carnot:Symbol Kind="GATEWAY" Oid="10082" X="650" Y="210" Width="42" Height="42" ModelElement="10058" FlowKind="split"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10086" X="650" Y="450" Width="42" Height="42" ModelElement="10070" FlowKind="join"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10092" X="510" Y="450" Width="42" Height="42" ModelElement="10079" FlowKind="split"/>
-<carnot:Symbol Kind="DATA" Oid="10095" X="325" Y="85" Width="130" Height="60" ModelElement="CustomerRequirements"/>
+<carnot:Symbol Kind="DATA" Oid="10095" X="325" Y="100" Width="130" Height="60" ModelElement="CustomerRequirements"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10100" X="385" Y="175" Width="190" Height="40" ModelElement="FindCaseByCaseID"/>
-<carnot:Symbol Kind="DATA" Oid="10103" X="495" Y="30" Width="100" Height="60" ModelElement="Case"/>
+<carnot:Symbol Kind="DATA" Oid="10103" X="475" Y="35" Width="100" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="DATA" Oid="10112" X="905" Y="495" Width="40" Height="60" ModelElement="Case"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10116" X="985" Y="290" Width="180" Height="40" ModelElement="TransferDataFromCRToCase"/>
 <carnot:Symbol Kind="DATA" Oid="10123" X="975" Y="380" Width="130" Height="60" ModelElement="CustomerRequirements"/>
@@ -1287,9 +1286,9 @@
 <carnot:Symbol Kind="DATA" Oid="10177" X="370" Y="905" Width="110" Height="60" ModelElement="InsuranceContractDocument"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10183" X="340" Y="725" Width="130" Height="40" ModelElement="CreateSignedDocumentFromInsuranceContractData"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10201" X="650" Y="1035" Width="40" Height="40"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10444" X="630" Y="20" Width="80" Height="50" ModelElement="CustomerRequirementsArrive"/>
 </carnot:Symbols>
 <carnot:Connections>
-<carnot:Connection Kind="TRANSITION" Oid="10066" SourceSymbol="10048" TargetSymbol="10058" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10068" ModelElement="Transition_1" SourceSymbol="10082" TargetSymbol="10062" SourceAnchor="center" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10072" ModelElement="Transition_2" SourceSymbol="10062" TargetSymbol="10086" SourceAnchor="bottom" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10081" ModelElement="Transition_4" SourceSymbol="10082" TargetSymbol="10079" SourceAnchor="left" TargetAnchor="top"/>
@@ -1316,6 +1315,7 @@
 <carnot:Connection Kind="TRANSITION" Oid="10202" SourceSymbol="10075" TargetSymbol="10201" SourceAnchor="bottom" TargetAnchor="right"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10210" SourceSymbol="10177" TargetSymbol="10075"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10228" SourceSymbol="10112" TargetSymbol="10070"/>
+<carnot:Connection Kind="TRANSITION" Oid="10445" SourceSymbol="10444" TargetSymbol="10058" SourceAnchor="center" TargetAnchor="center"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -3007,7 +3007,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Diagrams>
 <carnot:Diagram Oid="10001" Name="Default Diagram" Orientation="Vertical" Mode="MODE_4_0_0">
 <carnot:Symbols>
-<carnot:Symbol Kind="PROCESS" Oid="10205" X="-30" Y="110" Width="230" Height="40" ModelElement="CustomerRequirementsToInsuranceContract"/>
+<carnot:Symbol Kind="PROCESS" Oid="10205" X="-30" Y="110" Width="230" Height="40" ModelElement="ContractNegotiation_Start"/>
 <carnot:Symbol Kind="PROCESS" Oid="10204" X="-40" Y="190" Width="120" Height="40" ModelElement="ContractAcceptance"/>
 <carnot:Symbol Kind="PROCESS" Oid="10203" X="105" Y="190" Width="100" Height="40" ModelElement="CaseTermination"/>
 <carnot:Symbol Kind="PROCESS" Oid="10059" X="305" Y="250" Width="110" Height="40" ModelElement="MakePayment"/>

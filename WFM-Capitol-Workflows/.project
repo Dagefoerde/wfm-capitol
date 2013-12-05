@@ -3,6 +3,7 @@
 	<name>Sc4-Capitol</name>
 	<comment></comment>
 	<projects>
+		<project>ExchangeMessages</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
