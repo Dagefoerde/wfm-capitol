@@ -11,14 +11,16 @@ public class UpdateAccidentReport {
 	
 	public Incident complete() {
 	
-		if (incident.getAccidentReport() != null) {
+		/*if (incident.getAccidentReport() != null) {
 			throw new IllegalStateException("Trying to add an accident report where there is one already!");
 		}
 		
 		incident.setAccidentReport(accidentReport);
 		service.persist(incident);
 		
-		return incident;
+		return incident;*/
+		System.out.println("UpdateAccidentReport#complete()");
+		return null;
 	}
 	
 	public void setIncident(Incident incident) {
