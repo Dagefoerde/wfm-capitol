@@ -355,6 +355,40 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
+<Application Id="RetrieveIncidentByID-Java" Name="Retrieve Incident by ID">
+<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.RetrieveIncidentByID" xref="complete:"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10460" Type="plainJava">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.RetrieveIncidentByID"/>
+<carnot:Attribute Name="carnot:engine:constructorName" Value="RetrieveIncidentByID()"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+</carnot:Attributes>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
+<Application Id="UpdateAccidentReport" Name="Update Accident Report">
+<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.UpdateAccidentReport" xref="complete:"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10466" Type="plainJava">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.UpdateAccidentReport"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+<carnot:Attribute Name="carnot:engine:constructorName" Value="UpdateAccidentReport()"/>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
 </Applications>
 <DataFields>
 <DataField Id="LAST_ACTIVITY_PERFORMER" Name="Last Activity Performer" IsArray="FALSE">
@@ -726,6 +760,21 @@
 <carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
 <carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
+<DataField Id="IncidentID" Name="IncidentID" IsArray="FALSE">
+<DataType>
+<BasicType Type="INTEGER"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10454" Type="primitive">
+<carnot:Attributes>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:type" Value="int" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -2360,10 +2409,10 @@ AND no accident report was received yet.</carnot:Text>
 <Activity Id="RetrieveIncident" Name="Retrieve Incident">
 <Description>Retrieve the incident from the database.</Description>
 <Implementation>
-<Tool Id="RetrieveIncidentByID" Type="APPLICATION">
+<Tool Id="RetrieveIncidentByID-Java" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
-<ActualParameter>AccidentReport</ActualParameter>
+<ActualParameter>IncidentID</ActualParameter>
 </ActualParameters>
 <Description>Retrieve the incident from the database.</Description>
 </Tool>
@@ -2381,11 +2430,11 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10368" Id="Case" Name="Case" Direction="OUT" Context="application">
 <carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef/>
+<carnot:AccessPointRef Id="returnValue"/>
 </carnot:DataFlow>
-<carnot:DataFlow Oid="10369" Id="AccidentReport" Name="AccidentReport" Direction="IN" Context="application">
-<carnot:DataRef Id="AccidentReport"/>
-<carnot:AccessPointRef/>
+<carnot:DataFlow Oid="10458" Id="IncidentID" Name="IncidentID" Direction="IN" Context="application">
+<carnot:DataRef Id="IncidentID"/>
+<carnot:AccessPointRef Id="setIncidentID(int)"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
@@ -2548,9 +2597,78 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Activity>
+<Activity Id="ManuallyEnterIncidentID" Name="Manually enter IncidentID">
+<Implementation>
+<No/>
+</Implementation>
+<Performer/>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Manual/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10447" Implementation="Manual">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10456" Id="IncidentID" Name="IncidentID" Direction="OUT" Context="default">
+<carnot:DataRef Id="IncidentID"/>
+<carnot:AccessPointRef/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="true" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="AddAccidentReport" Name="Add Accident Report">
+<Implementation>
+<Tool Id="UpdateAccidentReport" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>AccidentReport</ActualParameter>
+<ActualParameter>Incident</ActualParameter>
+</ActualParameters>
+</Tool>
+</Implementation>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10462" Implementation="Application" IsHibernatedOnCreation="false">
+<carnot:EventHandlers/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10469" Id="AccidentReport" Name="AccidentReport" Direction="IN" Context="application">
+<carnot:DataRef Id="AccidentReport"/>
+<carnot:AccessPointRef Id="setAccidentReport(de.wwu.wfm.sc4.capitol.data.AccidentReport)"/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10471" Id="Incident" Name="Incident" Direction="IN" Context="application">
+<carnot:DataRef Id="Incident"/>
+<carnot:AccessPointRef Id="setIncident(de.wwu.wfm.sc4.capitol.data.Incident)"/>
+</carnot:DataFlow>
+</carnot:DataFlows>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
 </Activities>
 <Transitions>
-<Transition Id="Transition_1" Name="Transition 1" From="RetrieveIncident" To="AnalyseCase">
+<Transition Id="Transition_1" Name="Transition 1" From="RetrieveIncident" To="AddAccidentReport">
 <Condition Type="CONDITION">true</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -2582,6 +2700,22 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
+<Transition Id="Transition_5" Name="Transition 5" From="ManuallyEnterIncidentID" To="RetrieveIncident">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10452"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_6" Name="Transition 6" From="AddAccidentReport" To="AnalyseCase">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10464"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
 </Transitions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -2604,6 +2738,10 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Attribute Name="carnot:engine:mailboxAction" Value="read" Type="ag.carnot.workflow.spi.providers.triggers.mail.MailTriggerMailboxAction"/>
 </carnot:Attributes>
 </carnot:Trigger>
+<carnot:Trigger Oid="10449" Id="ManualTriggerForPresentationPurposes" Name="Manual Trigger for Presentation Purposes" Type="manual">
+<carnot:AccessPoints/>
+<carnot:DataFlows/>
+</carnot:Trigger>
 </carnot:Triggers>
 <carnot:DataPaths/>
 <carnot:EventHandlers/>
@@ -2613,22 +2751,27 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="POOL" Oid="10054" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
 <carnot:Symbol Kind="ACTIVITY" Oid="10131" X="120" Y="90" Width="141" Height="51" ModelElement="RetrieveIncident"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10382" X="120" Y="185" Width="141" Height="51" ModelElement="AnalyseCase"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10383" X="120" Y="270" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10384" X="120" Y="360" Width="141" Height="51" ModelElement="StoreCoverageDecision"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10385" X="120" Y="440" Width="141" Height="51" ModelElement="SendCoverageDecision"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10386" X="170" Y="525" Width="40" Height="40"/>
-<carnot:Symbol Kind="DATA" Oid="10387" X="-40" Y="110" Width="90" Height="60" ModelElement="AccidentReport"/>
-<carnot:Symbol Kind="DATA" Oid="10388" X="345" Y="160" Width="100" Height="60" ModelElement="Incident"/>
-<carnot:Symbol Kind="DATA" Oid="10389" X="350" Y="340" Width="110" Height="60" ModelElement="CoverageDecision"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10390" X="-40" Y="360" Width="130" Height="40" ModelElement="UpdateIncidentInArchive"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10391" X="-50" Y="445" Width="130" Height="40" ModelElement="NotificationToPartners"/>
-<carnot:Symbol Kind="ROLE" Oid="10392" X="-60" Y="230" Width="125" Height="50" ModelElement="InsuranceSpecialist"/>
-<carnot:Symbol Kind="STARTEVENT" Oid="10274" X="150" Y="5" Width="80" Height="50" ModelElement="IncomingAccidentReport"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10393" X="-80" Y="40" Width="150" Height="40" ModelElement="RetrieveIncidentByID"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10382" X="120" Y="285" Width="141" Height="51" ModelElement="AnalyseCase"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10383" X="120" Y="370" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10384" X="120" Y="460" Width="141" Height="51" ModelElement="StoreCoverageDecision"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10385" X="120" Y="540" Width="141" Height="51" ModelElement="SendCoverageDecision"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10386" X="170" Y="625" Width="40" Height="40"/>
+<carnot:Symbol Kind="DATA" Oid="10387" X="-55" Y="250" Width="90" Height="60" ModelElement="AccidentReport"/>
+<carnot:Symbol Kind="DATA" Oid="10388" X="345" Y="185" Width="100" Height="60" ModelElement="Incident"/>
+<carnot:Symbol Kind="DATA" Oid="10389" X="350" Y="440" Width="110" Height="60" ModelElement="CoverageDecision"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10390" X="-40" Y="460" Width="130" Height="40" ModelElement="UpdateIncidentInArchive"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10391" X="-50" Y="545" Width="130" Height="40" ModelElement="NotificationToPartners"/>
+<carnot:Symbol Kind="ROLE" Oid="10392" X="-60" Y="330" Width="125" Height="50" ModelElement="InsuranceSpecialist"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10274" X="270" Y="-45" Width="80" Height="50" ModelElement="IncomingAccidentReport"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10448" X="25" Y="-15" Width="141" Height="51" ModelElement="ManuallyEnterIncidentID"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10450" X="-15" Y="-95" Width="220" Height="50" ModelElement="ManualTriggerForPresentationPurposes"/>
+<carnot:Symbol Kind="DATA" Oid="10455" X="-100" Y="5" Width="90" Height="60" ModelElement="IncidentID"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10461" X="-85" Y="90" Width="130" Height="40" ModelElement="RetrieveIncidentByID-Java"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10463" X="120" Y="185" Width="141" Height="51" ModelElement="AddAccidentReport"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10467" X="-75" Y="175" Width="130" Height="40" ModelElement="UpdateAccidentReport"/>
 </carnot:Symbols>
 <carnot:Connections>
-<carnot:Connection Kind="TRANSITION" Oid="10394" ModelElement="Transition_1" SourceSymbol="10131" TargetSymbol="10382" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10394" ModelElement="Transition_1" SourceSymbol="10131" TargetSymbol="10463" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10395" ModelElement="Transition_2" SourceSymbol="10382" TargetSymbol="10383" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10396" ModelElement="Transition_3" SourceSymbol="10383" TargetSymbol="10384" SourceAnchor="bottom" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10397" ModelElement="Transition_4" SourceSymbol="10384" TargetSymbol="10385" SourceAnchor="center" TargetAnchor="center"/>
@@ -2641,11 +2784,17 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connection Kind="DATA_FLOW" Oid="10403" SourceSymbol="10389" TargetSymbol="10385"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10404" SourceSymbol="10390" TargetSymbol="10384"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10405" SourceSymbol="10391" TargetSymbol="10385"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10406" SourceSymbol="10387" TargetSymbol="10131"/>
 <carnot:Connection Kind="PERFORMS" Oid="10407" SourceSymbol="10392" TargetSymbol="10382"/>
 <carnot:Connection Kind="PERFORMS" Oid="10408" SourceSymbol="10392" TargetSymbol="10383"/>
 <carnot:Connection Kind="TRANSITION" Oid="10275" SourceSymbol="10274" TargetSymbol="10131" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10409" SourceSymbol="10393" TargetSymbol="10131"/>
+<carnot:Connection Kind="TRANSITION" Oid="10451" SourceSymbol="10450" TargetSymbol="10448" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10453" ModelElement="Transition_5" SourceSymbol="10448" TargetSymbol="10131" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10457" SourceSymbol="10455" TargetSymbol="10448"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10459" SourceSymbol="10455" TargetSymbol="10131"/>
+<carnot:Connection Kind="TRANSITION" Oid="10465" ModelElement="Transition_6" SourceSymbol="10463" TargetSymbol="10382" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10468" SourceSymbol="10467" TargetSymbol="10463"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10470" SourceSymbol="10387" TargetSymbol="10463"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10472" SourceSymbol="10388" TargetSymbol="10463"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>

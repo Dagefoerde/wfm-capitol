@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>ExchangeMessages</project>
+		<project>Sc4-Capitol-Implementation</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
