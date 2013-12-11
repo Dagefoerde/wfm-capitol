@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context displayName="SunGard CSA LLC - Process Portal">
+	<ResourceLink name="jdbc/AuditTrail.DataSource"
+		type="javax.sql.DataSource" global="AuditTrail.DataSource"
+		auth="Container" />
+</Context>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+<wb-module deploy-name="Praesentation">
+<wb-resource deploy-path="/" source-path="/WebContent"/>
+<wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+<wb-resource deploy-path="/WEB-INF" source-path="/carnot-diagrams/WEB-INF"/>
+<wb-resource deploy-path="/WEB-INF" source-path="/carnot-jackrabbit/WEB-INF"/>
+<wb-resource deploy-path="/" source-path="/carnot-reporting/WebContent"/>
+<wb-resource deploy-path="/WEB-INF" source-path="/carnot-reporting/WEB-INF"/>
+<wb-resource deploy-path="/" source-path="/ipp-portal"/>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_ENGINE_LIBS/lib/carnot-engine.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_J2EE_LIBS/lib/ejb-2.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_J2EE_LIBS/lib/jms-1.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_XML_LIBS/xercesImpl.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/activation.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-portal-core.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/carnot-dms.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/carnot-hibernate.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/carnot-webservices.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/trinidad-api-1.0.10.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/trinidad-impl-1.0.10.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-beanutils-1.7.0.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-codec-1.3.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-collections-3.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-digester-1.6.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-el-1.0.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-fileupload-1.2.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-lang-2.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/commons-logging-1.0.4.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/el-api.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/el-ri.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jsf-facelets.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jstl.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/mail.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/myfaces-api-1.1.5.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/myfaces-impl-1.1.5.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/saxon.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/standard.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/tomahawk-1.1.5.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jcr-1.0.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jcr-vfs-1.7.8.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jaxen-1.1.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/xom-1.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jencks-2.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/geronimo-transaction-2.0.2.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/geronimo-connector-2.0.2.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/geronimo-jta_1.1_spec-1.1.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/geronimo-j2ee-connector_1.5_spec-1.0.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/tranql-connector-1.4.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/cglib-nodep-2.1.3.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/dom4j-1.6.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/hibernate3.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_JAXWS_LIBS/lib/webservices-api.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_JAXWS_LIBS/lib/webservices-extra-api.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_JAXWS_METRO_LIBS/lib/webservices-extra.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/CARNOT_JAXWS_METRO_LIBS/lib/webservices-rt.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jsr311-api-1.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jsr250-api-1.0.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jersey-core-1.1.5.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jersey-server-1.1.5.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/gson-1.3.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/asm-3.1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/metawidget.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/jxl.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/icefaces-ee-EE-1.8.2.GA_P03.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/icefaces-comps-ee-EE-1.8.2.GA_P03.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/icefaces-facelets-ee-EE-1.8.2.GA_P03.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/backport-util-concurrent.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/bcprov-jdk15.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/core-renderer.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/htmlcleaner2_1.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/iText-2.0.8.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/icepdf-core.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-administration-perspective.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-business-control-center.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-portal-api.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-portal-common.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-views-common.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-workflow-perspective.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-end-user-doc.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/carnot-spring.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/spring-2.5.6.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/spring-webmvc-2.5.6.jar">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<property name="context-root" value="Praesentation"/>
+<property name="java-output-path"/>
+</wb-module>
+</project-modules>

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-Activator: org.eclipse.core.internal.compatibility.PluginActiva
+ tor
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: ag.carnot.oda.processdatabase,ag.carnot.oda.processdat
+ abase.i18n,ag.carnot.oda.processdatabase.plugin
+Bundle-Version: 5.3.11.4-r48203
+Bundle-Name: %plugin.name
+Bundle-ClassPath: carnot-oda-processdatabase.jar
+Bundle-ManifestVersion: 2
+Bundle-Vendor: SunGard CSA LLC
+Plugin-Class: ag.carnot.oda.processdatabase.plugin.ProcessDatabasePlug
+ in
+Bundle-SymbolicName: ag.carnot.oda.processdatabase; singleton:=true
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime.compatibility,org.eclipse.bir
+ t.core,org.eclipse.datatools.connectivity.oda,ag.carnot.workflow.engi
+ ne,ag.carnot.reporting.common;visibility:=reexport,org.eclipse.core.r
+ untime
+

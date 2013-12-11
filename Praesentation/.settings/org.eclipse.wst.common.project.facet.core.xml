@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <fixed facet="jst.web"/>
+  <fixed facet="jst.java"/>
+  <installed facet="jst.java" version="5.0"/>
+  <installed facet="jst.web" version="2.4"/>
+  <installed facet="ag.carnot.bpm.wst.diagrams.wst-facet" version="5.3.10"/>
+  <installed facet="ag.carnot.bpm.wst.jackrabbit.server.wst-facet" version="5.3.10"/>
+  <installed facet="ag.carnot.bpm.wst.reporting.wst-facet" version="5.3.10"/>
+  <installed facet="jst.jsf" version="1.1"/>
+  <installed facet="com.infinity.bpm.ide.wst.portals.wst-facet" version="5.3.10"/>
+</faceted-project>

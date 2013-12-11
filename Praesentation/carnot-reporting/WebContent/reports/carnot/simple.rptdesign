@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.2" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.0.N20060628-1351 Build &lt;20060628-1537></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <data-sources>
+        <oda-data-source extensionID="ag.carnot.oda.processdatabase" name="Procurement Audit Trail" id="8">
+            <property name="HOME">;;java:/AuditTrail.DataSource;com.ibm.db2.jcc.DB2Driver;jdbc:derby:net://localhost/carnot;carnot;74P9FyMMwXQ=;;ag.carnot.reporting.common.calendarBasedWorktimeCalculator;</property>
+        </oda-data-source>
+        <oda-data-source extensionID="ag.carnot.oda.processmodel" name="Procurement Model" id="9">
+            <property name="HOME">;/home/jan/Desktop/reporting-war/reporting-demoXXX/ProcurementDemo_2.cwm</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="ag.carnot.oda.processmodel.dataSet" name="ProcessDefinitions" id="10">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Modellversionen</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">".*"</expression>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Prozessdefinitionen des Modells</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">".*"</expression>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Procurement Model</property>
+            <property name="queryText">/modelVersions/processDefinitions</property>
+        </oda-data-set>
+        <oda-data-set extensionID="ag.carnot.oda.processdatabase.dataSet" name="ProcessInstances" id="11">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessName</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceOID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceState</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">StartDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue">"2006-01-01 21:19:51.656"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">EndDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">6</property>
+                    <expression name="defaultValue">"2006-08-25 21:19:51.656"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration</property>
+                    <property name="dataType">string</property>
+                    <property name="position">7</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">UseIntervalEnds</property>
+                    <property name="dataType">string</property>
+                    <property name="position">9</property>
+                    <expression name="defaultValue">"false"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">UseOuterJoins</property>
+                    <property name="dataType">string</property>
+                    <property name="position">10</property>
+                    <expression name="defaultValue">"false"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">IntervalPiStateFilter</property>
+                    <property name="dataType">string</property>
+                    <property name="position">11</property>
+                    <expression name="defaultValue">"started"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">12</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">OID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">State</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">StartingUser</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">StartingActivityInstance</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">RootProcessInstance</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">StartTimestamp</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">EndTimestamp</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">ProcessDuration</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">ProcessWorktime</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">TotalActiveTime</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">SubTotalActiveTime</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">SubProcessesWorktime</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Procurement Audit Trail</property>
+            <property name="queryText">@lt;view type='ag.carnot.reporting.ProcessInstanceView' name='Process Instances' cumulated='false' addTotalActiveTimeColumn='false'@gt;
+@lt;/view@gt;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="ag.carnot.oda.processdatabase.dataSet" name="Pathes" id="61">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ProcessID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">ActivityIDs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Duration</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Procurement Audit Trail</property>
+            <property name="queryText">@lt;view type='ag.carnot.reporting.PathView' name='Pathes' cumulated='false' addTotalActiveTimeColumn='false'@gt;
+@lt;/view@gt;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="ag.carnot.oda.processdatabase.dataSet" name="ProcessInstancesCumulated" id="62">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessName</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceOID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceState</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue">"2"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">StartDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue">"2006-01-01 05:58:08.187"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">EndDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">6</property>
+                    <expression name="defaultValue">"2006-08-28 05:58:08.187"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration</property>
+                    <property name="dataType">string</property>
+                    <property name="position">7</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">UseIntervalEnds</property>
+                    <property name="dataType">string</property>
+                    <property name="position">9</property>
+                    <expression name="defaultValue">"false"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">UseOuterJoins</property>
+                    <property name="dataType">string</property>
+                    <property name="position">10</property>
+                    <expression name="defaultValue">"false"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">IntervalPiStateFilter</property>
+                    <property name="dataType">string</property>
+                    <property name="position">11</property>
+                    <expression name="defaultValue">"started"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">12</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">IntervalTimestamp</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Volume</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">State</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">StartingUser</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">StartingActivityInstance</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">ProcessDuration_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ProcessDuration_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">ProcessDuration_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">ProcessDuration_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">ProcessWorktime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">ProcessWorktime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">ProcessWorktime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">ProcessWorktime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">TotalActiveTime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">TotalActiveTime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">TotalActiveTime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">TotalActiveTime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">SubTotalActiveTime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">SubTotalActiveTime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">SubTotalActiveTime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">SubTotalActiveTime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">SubProcessesWorktime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">SubProcessesWorktime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">SubProcessesWorktime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">SubProcessesWorktime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Procurement Audit Trail</property>
+            <property name="queryText">@lt;view type='ag.carnot.reporting.ProcessInstanceView' name='ProcessInstancesCumulated' cumulated='true' cumulationIntervalType='month' addTotalActiveTimeColumn='false'@gt;
+@lt;/view@gt;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="ag.carnot.oda.processdatabase.dataSet" name="DataValue" id="189">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">DataID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">StartDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue">"2006-01-01 09:36:48.726"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">EndDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue">"2006-08-28 09:36:48.726"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Value</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Procurement Audit Trail</property>
+            <property name="queryText">@lt;view type='ag.carnot.reporting.DataValueView' name='DataValue' cumulated='false' addTotalActiveTimeColumn='false'@gt;
+@lt;/view@gt;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="ag.carnot.oda.processdatabase.dataSet" name="ActivityInstances" id="191">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ProcessDefinitionID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceOID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceState</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue">"2"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ActivityID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ActivityInstanceOID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ActivityInstanceState</property>
+                    <property name="dataType">string</property>
+                    <property name="position">6</property>
+                    <expression name="defaultValue">"2"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">StartDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">7</property>
+                    <expression name="defaultValue">"2006-01-01 14:59:07.737"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">EndDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <expression name="defaultValue">"2006-08-29 14:59:07.737"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ProcessID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">ProcessName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">ProcessDescription</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">OID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">State</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">ProcessInstanceOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">WorklistPerformerOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">UserPerformerOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">StartTimestamp</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">EndTimestamp</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">ActivityDuration</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">ActivityWorktime</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Procurement Audit Trail</property>
+            <property name="queryText">@lt;view type='ag.carnot.reporting.ActivityInstanceView' name='AvtivityInstances' cumulated='false' addTotalActiveTimeColumn='false'@gt;
+@lt;/view@gt;</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="44">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">large</property>
+            <property name="fontWeight">bold</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<H1>
+Process Instances (cumulated)
+</H1>]]></text-property>
+        </text>
+        <table id="344">
+            <property name="width">100%</property>
+            <property name="dataSet">ProcessInstances</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ID</property>
+                    <expression name="expression">dataSetRow["ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Name</property>
+                    <expression name="expression">dataSetRow["Name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Description</property>
+                    <expression name="expression">dataSetRow["Description"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OID</property>
+                    <expression name="expression">dataSetRow["OID"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">StartTimestamp</property>
+                    <expression name="expression">dataSetRow["StartTimestamp"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">EndTimestamp</property>
+                    <expression name="expression">dataSetRow["EndTimestamp"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration</property>
+                    <expression name="expression">dataSetRow["ProcessDuration"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="383"/>
+            <column id="384"/>
+            <column id="385"/>
+            <column id="386"/>
+            <column id="387"/>
+            <column id="388"/>
+            <column id="389"/>
+            <header>
+                <row id="345">
+                    <cell id="346">
+                        <label id="347">
+                            <text-property name="text">ID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="348">
+                        <label id="349">
+                            <text-property name="text">Name</text-property>
+                        </label>
+                    </cell>
+                    <cell id="350">
+                        <label id="351">
+                            <text-property name="text">Description</text-property>
+                        </label>
+                    </cell>
+                    <cell id="352">
+                        <label id="353">
+                            <text-property name="text">OID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="354">
+                        <label id="355">
+                            <text-property name="text">StartTimestamp</text-property>
+                        </label>
+                    </cell>
+                    <cell id="356">
+                        <label id="357">
+                            <text-property name="text">EndTimestamp</text-property>
+                        </label>
+                    </cell>
+                    <cell id="358">
+                        <label id="359">
+                            <text-property name="text">ProcessDuration</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="360">
+                    <cell id="361">
+                        <data id="362">
+                            <property name="resultSetColumn">ID</property>
+                        </data>
+                    </cell>
+                    <cell id="363">
+                        <data id="364">
+                            <property name="resultSetColumn">Name</property>
+                        </data>
+                    </cell>
+                    <cell id="365">
+                        <data id="366">
+                            <property name="resultSetColumn">Description</property>
+                        </data>
+                    </cell>
+                    <cell id="367">
+                        <data id="368">
+                            <property name="resultSetColumn">OID</property>
+                        </data>
+                    </cell>
+                    <cell id="369">
+                        <data id="370">
+                            <property name="resultSetColumn">StartTimestamp</property>
+                        </data>
+                    </cell>
+                    <cell id="371">
+                        <data id="372">
+                            <property name="resultSetColumn">EndTimestamp</property>
+                        </data>
+                    </cell>
+                    <cell id="373">
+                        <data id="374">
+                            <property name="resultSetColumn">ProcessDuration</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="375">
+                    <cell id="376"/>
+                    <cell id="377"/>
+                    <cell id="378"/>
+                    <cell id="379"/>
+                    <cell id="380"/>
+                    <cell id="381"/>
+                    <cell id="382"/>
+                </row>
+            </footer>
+        </table>
+        <text id="262">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">large</property>
+            <property name="fontWeight">bold</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<H1>
+Data Values
+</H1>]]></text-property>
+        </text>
+        <table id="391">
+            <property name="width">100%</property>
+            <property name="dataSet">DataValue</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ID</property>
+                    <expression name="expression">dataSetRow["ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Name</property>
+                    <expression name="expression">dataSetRow["Name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Description</property>
+                    <expression name="expression">dataSetRow["Description"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Type</property>
+                    <expression name="expression">dataSetRow["Type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Value</property>
+                    <expression name="expression">dataSetRow["Value"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="420"/>
+            <column id="421"/>
+            <column id="422"/>
+            <column id="423"/>
+            <column id="424"/>
+            <header>
+                <row id="392">
+                    <cell id="393">
+                        <label id="394">
+                            <text-property name="text">ID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="395">
+                        <label id="396">
+                            <text-property name="text">Name</text-property>
+                        </label>
+                    </cell>
+                    <cell id="397">
+                        <label id="398">
+                            <text-property name="text">Description</text-property>
+                        </label>
+                    </cell>
+                    <cell id="399">
+                        <label id="400">
+                            <text-property name="text">Type</text-property>
+                        </label>
+                    </cell>
+                    <cell id="401">
+                        <label id="402">
+                            <text-property name="text">Value</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="403">
+                    <cell id="404">
+                        <data id="405">
+                            <property name="resultSetColumn">ID</property>
+                        </data>
+                    </cell>
+                    <cell id="406">
+                        <data id="407">
+                            <property name="resultSetColumn">Name</property>
+                        </data>
+                    </cell>
+                    <cell id="408">
+                        <data id="409">
+                            <property name="resultSetColumn">Description</property>
+                        </data>
+                    </cell>
+                    <cell id="410">
+                        <data id="411">
+                            <property name="resultSetColumn">Type</property>
+                        </data>
+                    </cell>
+                    <cell id="412">
+                        <data id="413">
+                            <property name="resultSetColumn">Value</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="414">
+                    <cell id="415"/>
+                    <cell id="416"/>
+                    <cell id="417"/>
+                    <cell id="418"/>
+                    <cell id="419"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

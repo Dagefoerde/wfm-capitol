@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE faces-config PUBLIC
+    "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<faces-config>
+
+    <application>
+        <action-listener>
+            ag.carnot.web.jsf.common.listener.AccessForbiddenActionListener
+        </action-listener>
+    </application>
+
+    <lifecycle>
+        <phase-listener>ag.carnot.web.jsf.common.GlobalPageMessage</phase-listener>
+    </lifecycle>
+    
+    <converter>
+        <description>
+            converts a number to a valid date represented by a string
+        </description>
+        <display-name>DoubleStringDateConverter</display-name>
+        <converter-id>doubleStringDateConverter</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.DoubleStringDateConverter
+        </converter-class>
+    </converter>
+    <converter>
+        <description>
+            Provides the Descriptor-Value outline for an activity instance.
+        </description>
+        <display-name>DescriptorOutlineProvider</display-name>
+        <converter-id>descriptorOutlineProvider</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.DescriptorOutlineProvider
+        </converter-class>
+    </converter>
+    <converter>
+        <description>
+            Provides the Descriptor-Value for an activity instance.
+        </description>
+        <display-name>DescriptorConverter</display-name>
+        <converter-id>descriptorConverter</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.converter.DescriptorConverter
+        </converter-class>
+        <property>
+            <property-name>dataPath</property-name>
+            <property-class>ag.carnot.workflow.model.DataPath</property-class>
+        </property>
+    </converter>
+    <converter>
+        <description>
+            Provides the user defined and language specific item name
+        </description>
+        <display-name>ModelElementLabelProvider</display-name>
+        <converter-id>modelElementLabelProvider</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.ModelElementLabelProvider
+        </converter-class>
+    </converter>
+    <converter>
+        <description>
+            Provides the user defined and language specific item name
+        </description>
+        <display-name>StructuredDataLabelProvider</display-name>
+        <converter-id>structuredDataLabelProvider</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.structureddata.StructuredDataLabelProvider
+        </converter-class>
+    </converter>
+    <converter>
+        <description>
+            Convert a given value (number or string that contains a number)
+            into a suitable label and vice versa
+        </description>
+        <display-name>PriorityConverter</display-name>
+        <converter-id>priorityConverter</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.converter.PriorityConverter
+        </converter-class>
+    </converter>
+    <converter>
+        <description>
+            Gets the note of the activity instance
+        </description>
+        <display-name>NoteConverter</display-name>
+        <converter-id>noteConverter</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.common.converter.NoteConverter
+        </converter-class>
+    </converter>
+
+    <managed-bean>
+        <managed-bean-name>loginDialog</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.LoginDialog
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>tenant</property-name>
+            <value>#{param.tenant}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>sessionContext</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.SessionContext
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>carnotApplicationContext</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.ApplicationContext
+        </managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>popupYesNo</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.PopupYesNoBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>simpleSearchDialog</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.SimpleSearchDialogBean
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>genericPage</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.GenericPageBean
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>createOrModifyUser</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.CreateOrModifyUserBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>abortActivity</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.AbortActivityBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+	<managed-bean>
+        <managed-bean-name>userMenuModel</managed-bean-name>
+        <managed-bean-class>org.apache.myfaces.trinidad.model.XMLMenuModel</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>source</property-name>
+            <value>/WEB-INF/config/ipp/jsf/userdialog-menu.xml</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>initSessionBeanList</managed-bean-name>
+        <managed-bean-class>java.util.ArrayList</managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+        <list-entries>
+            <value-class>java.lang.String</value-class>
+            <value>genericPage</value>
+            <value>simpleSearchDialog</value>
+        </list-entries>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>dateUtils</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.DateUtils
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>configuration</managed-bean-name>
+        <managed-bean-class>ag.carnot.web.jsf.common.beans.ConfigurationBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>defaultConfigRearPanel</managed-bean-name>
+        <managed-bean-class>ag.carnot.web.jsf.common.beans.DefaultConfigRearPanelBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>skinFamily</property-name>
+            <property-class>
+                ag.carnot.web.jsf.common.SkinFamily
+            </property-class>
+            <value>#{carnotSkinFamily}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+    	<managed-bean-name>carnotSkinFamily</managed-bean-name>
+    	<managed-bean-class>ag.carnot.web.jsf.common.SkinFamily</managed-bean-class>
+    	<managed-bean-scope>session</managed-bean-scope>
+    	<managed-property>
+    		<property-name>availableSkins</property-name>
+    		<property-class>java.util.List</property-class>
+    		<list-entries>
+    			<value-class>java.lang.String</value-class>
+    		    <value>grey</value>
+  				<value>brown</value>
+    		</list-entries>
+    	</managed-property>
+        <managed-property>
+            <property-name>sessionCtx</property-name>
+            <value>#{sessionContext}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+      <managed-bean-name>filterField</managed-bean-name>
+      <managed-bean-class>
+         ag.carnot.web.jsf.common.beans.BackingComponentBean
+      </managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+      <managed-bean-name>carnotConstants</managed-bean-name>
+      <managed-bean-class>
+         ag.carnot.web.jsf.common.Constants
+      </managed-bean-class>
+      <managed-bean-scope>none</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+      <managed-bean-name>carnotAuthorization</managed-bean-name>
+      <managed-bean-class>
+         ag.carnot.web.jsf.common.beans.AuthorizationBean
+      </managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>portalDefaultDelegationHandler</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.DelegationHandlerBean
+        </managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+        <managed-property>
+            <property-name>dataModelIds</property-name>
+            <property-class>java.util.ArrayList</property-class>
+            <list-entries>
+                <value-class>java.lang.String</value-class>
+                <value>modelIdStoredinSessionContext</value>
+            </list-entries>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>portalDelegation</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.DelegationBean
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>defaultDelegationHandler</property-name>
+            <property-class>
+                ag.carnot.web.jsf.common.IDelegationHandler
+            </property-class>
+            <value>#{portalDefaultDelegationHandler}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>notesEnabled</property-name>
+            <property-class>java.lang.Boolean</property-class>
+            <value>#{false}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>buildDefaultNotes</property-name>
+            <property-class>java.lang.Boolean</property-class>
+            <value>#{false}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>limitedSearchEnabled</property-name>
+            <property-class>boolean</property-class>
+            <value>true</value>
+        </managed-property>
+        <managed-property>
+            <property-name>strictMode</property-name>
+            <property-class>boolean</property-class>
+            <value>true</value>
+        </managed-property>   
+        <managed-property>
+            <property-name>disableAdministrator</property-name>
+            <property-class>boolean</property-class>
+            <value>false</value>
+        </managed-property>                     
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>portalTableUtils</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.TableUtils
+        </managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>structuredDataValidator</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.validator.StructuredDataValidator
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>userConfigPersistor</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.UserConfigPersistorBean
+        </managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>infinityExceptionHandler</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.ExceptionHandlerBean
+        </managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>activityInstanceNotes</managed-bean-name>
+        <managed-bean-class>ag.carnot.web.jsf.common.beans.ActivityInstanceNotesBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>carnotProcessHistoryResolver</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.ProcessHistoryDataModel
+        </managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>activityInstanceDetailsDialog</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.ActivityInstanceDetailsDialogBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>processHistoryDataModelResolver</property-name>
+            <property-class>
+                ag.carnot.web.jsf.common.IProcessHistoryDataModel
+            </property-class>
+            <value>#{carnotProcessHistoryResolver}</value>
+        </managed-property>
+    </managed-bean>    
+    
+    <managed-bean>
+        <managed-bean-name>documentDialog</managed-bean-name>
+        <managed-bean-class>ag.carnot.web.jsf.common.beans.DocumentDialogBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+      <managed-bean-name>infinityEventDelegator</managed-bean-name>
+      <managed-bean-class>com.infinity.bpm.ui.web.jsf.UIEventDelegator
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+</faces-config>

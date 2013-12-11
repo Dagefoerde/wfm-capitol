@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+
+   <!-- Workflow Service (HTTP Basic Authentication) -->
+   <endpoint name="bpmWorkflowServiceHttpBasicAuth"
+      implementation="com.infinity.bpm.rt.impl.api.ws.WorkflowServiceFacade"
+      url-pattern="/services/soap/WorkflowServiceHttpBasicAuth"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}WorkflowServiceHttpBasicAuthEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Workflow Service (HTTP Basic Authentication using SSL) -->
+   <endpoint name="bpmWorkflowServiceHttpBasicAuthSsl"
+      implementation="com.infinity.bpm.rt.impl.api.ws.WorkflowServiceFacade"
+      url-pattern="/services/soap/WorkflowServiceHttpBasicAuthSsl"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}WorkflowServiceHttpBasicAuthSslEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Workflow Service (WS-Security UsernameToken) -->
+   <endpoint name="bpmWorkflowServiceWssUsernameToken"
+      implementation="com.infinity.bpm.rt.impl.api.ws.WorkflowServiceFacade"
+      url-pattern="/services/soap/WorkflowServiceWssUsernameToken"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}WorkflowServiceWssUsernameTokenEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+      
+
+   <!-- Query Service (HTTP Basic Authentication) -->
+   <endpoint name="bpmQueryServiceHttpBasicAuth"
+      implementation="com.infinity.bpm.rt.impl.api.ws.QueryServiceFacade"
+      url-pattern="/services/soap/QueryServiceHttpBasicAuth"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}QueryServiceHttpBasicAuthEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Query Service (HTTP Basic Authentication using SSL) -->
+   <endpoint name="bpmQueryServiceHttpBasicAuthSsl"
+      implementation="com.infinity.bpm.rt.impl.api.ws.QueryServiceFacade"
+      url-pattern="/services/soap/QueryServiceHttpBasicAuthSsl"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}QueryServiceHttpBasicAuthSslEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Query Service (WS-Security UsernameToken) -->
+   <endpoint name="bpmQueryServiceWssUsernameToken"
+      implementation="com.infinity.bpm.rt.impl.api.ws.QueryServiceFacade"
+      url-pattern="/services/soap/QueryServiceWssUsernameToken"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}QueryServiceWssUsernameTokenEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+
+   <!-- Document Management Service (HTTP Basic Authentication) -->
+   <endpoint name="bpmDocumentManagementServiceHttpBasicAuth" enable-mtom="true"
+      mtom-threshold-value="2048"
+      implementation="com.infinity.bpm.rt.impl.api.ws.DocumentManagementServiceFacade"
+      url-pattern="/services/soap/DocumentManagementServiceHttpBasicAuth"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}DocumentManagementServiceHttpBasicAuthEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Document Management Service (HTTP Basic Authentication using SSL) -->
+   <endpoint name="bpmDocumentManagementServiceHttpBasicAuthSsl" enable-mtom="true"
+      mtom-threshold-value="2048"
+      implementation="com.infinity.bpm.rt.impl.api.ws.DocumentManagementServiceFacade"
+      url-pattern="/services/soap/DocumentManagementServiceHttpBasicAuthSsl"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}DocumentManagementServiceHttpBasicAuthSslEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+      
+   <!-- Document Management Service (WS-Security UsernameToken) -->
+   <endpoint name="bpmDocumentManagementServiceWssUsernameToken" enable-mtom="true"
+      mtom-threshold-value="2048"
+      implementation="com.infinity.bpm.rt.impl.api.ws.DocumentManagementServiceFacade"
+      url-pattern="/services/soap/DocumentManagementServiceWssUsernameToken"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}DocumentManagementServiceWssUsernameTokenEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+
+   <!-- User Service (HTTP Basic Authentication) -->
+   <endpoint name="bpmUserServiceHttpBasicAuth"
+      implementation="com.infinity.bpm.rt.impl.api.ws.UserServiceFacade"
+      url-pattern="/services/soap/UserServiceHttpBasicAuth"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}UserServiceHttpBasicAuthEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- User Service (HTTP Basic Authentication using SSL) -->
+   <endpoint name="bpmUserServiceHttpBasicAuthSsl"
+      implementation="com.infinity.bpm.rt.impl.api.ws.UserServiceFacade"
+      url-pattern="/services/soap/UserServiceHttpBasicAuthSsl"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}UserServiceHttpBasicAuthSslEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- User Service (WS-Security UsernameToken) -->
+   <endpoint name="bpmUserServiceWssUsernameToken"
+      implementation="com.infinity.bpm.rt.impl.api.ws.UserServiceFacade"
+      url-pattern="/services/soap/UserServiceWssUsernameToken"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}UserServiceWssUsernameTokenEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+
+   <!-- Administration Service (HTTP Basic Authentication) -->
+   <endpoint name="bpmAdministrationServiceHttpBasicAuth"
+      implementation="com.infinity.bpm.rt.impl.api.ws.AdministrationServiceFacade"
+      url-pattern="/services/soap/AdministrationServiceHttpBasicAuth"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}AdministrationServiceHttpBasicAuthEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Administration Service (HTTP Basic Authentication using SSL) -->
+   <endpoint name="bpmAdministrationServiceHttpBasicAuthSsl"
+      implementation="com.infinity.bpm.rt.impl.api.ws.AdministrationServiceFacade"
+      url-pattern="/services/soap/AdministrationServiceHttpBasicAuthSsl"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}AdministrationServiceHttpBasicAuthSslEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvUsernameHttpBasicAuthConfigurer</handler-class>
+            </handler>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+   <!-- Administration Service (WS-Security UsernameToken) -->
+   <endpoint name="bpmAdministrationServiceWssUsernameToken"
+      implementation="com.infinity.bpm.rt.impl.api.ws.AdministrationServiceFacade"
+      url-pattern="/services/soap/AdministrationServiceWssUsernameToken"
+      wsdl="WEB-INF/wsdl/InfinityBpmService.wsdl"
+      service="{http://infinity.com/bpm/ws/v2009a/api}InfinityBpmServices"
+      port="{http://infinity.com/bpm/ws/v2009a/api}AdministrationServiceWssUsernameTokenEndpoint">
+      <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+         <handler-chain>
+            <handler>
+               <handler-name>WebServiceEnvSessionPropConfigurer</handler-name>
+               <handler-class>com.infinity.bpm.rt.impl.api.ws.configurer.WebServiceEnvSessionPropConfigurer</handler-class>
+            </handler>
+         </handler-chain>
+      </handler-chains>
+   </endpoint>
+
+
+   <!-- BPM Interactions Service -->
+   <endpoint name="bpmInteractionsService"
+      implementation="com.infinity.bpm.rt.impl.api.ws.interactions.InteractionsServiceFacade"
+      url-pattern="/services/soap/BpmInteractionsService" />
+
+</endpoints>

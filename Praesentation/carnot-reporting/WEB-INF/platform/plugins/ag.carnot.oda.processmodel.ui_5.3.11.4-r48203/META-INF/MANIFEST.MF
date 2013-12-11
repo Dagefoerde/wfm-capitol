@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-Activator: ag.carnot.oda.processmodel.ui.plugin.ProcessModelUIP
+ lugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: ag.carnot.oda.processmodel.ui.helper,ag.carnot.oda.pro
+ cessmodel.ui.i18n,ag.carnot.oda.processmodel.ui.plugin,ag.carnot.oda.
+ processmodel.ui.property,ag.carnot.oda.processmodel.ui.wizards
+Bundle-Version: 5.3.11.4-r48203
+Bundle-Name: %plugin.name
+Bundle-ClassPath: carnot-oda-processmodelui.jar
+Bundle-ManifestVersion: 2
+Bundle-Vendor: SunGard CSA LLC
+Bundle-SymbolicName: ag.carnot.oda.processmodel.ui; singleton:=true
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui;visibility:=reexport,org.eclipse.birt.r
+ eport.designer.ui;visibility:=reexport,org.eclipse.birt.report.model;
+ visibility:=reexport,org.eclipse.birt.core;visibility:=reexport,ag.ca
+ rnot.workflow.engine,ag.carnot.oda.processmodel,org.eclipse.datatools
+ .connectivity.oda.design.ui
+

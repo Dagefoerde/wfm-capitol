@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+/**
+ *************************************************************************
+ * Copyright (c) SunGard CSA LLC.
+ * All rights reserved. 
+ *************************************************************************
+ */
+-->
+
+<plugin>
+
+     <extension-point id="worktimeCalculator" name="Worktime Calculator" schema="schema/WorktimeCalculator.exsd"/>
+   <extension
+         point="ag.carnot.reporting.common.worktimeCalculator"
+         id="defaultWorktimeCalculator">
+      <worktimeCalculator
+            class="ag.carnot.reporting.worktime.DefaultWorktimeCalculator"
+            />
+   </extension>
+   <extension
+         point="ag.carnot.reporting.common.worktimeCalculator"
+         id="calendarBasedWorktimeCalculator">
+      <worktimeCalculator
+            class="ag.carnot.reporting.worktime.CalendarBasedWorktimeCalculator"
+            />
+   </extension>
+</plugin>

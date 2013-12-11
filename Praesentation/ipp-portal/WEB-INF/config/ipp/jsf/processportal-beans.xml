@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_0.dtd" >
+<faces-config>
+
+    <converter>
+        <description>
+            Provides the Descriptor-Value outline for an activity instance (in context of a tasks table).
+        </description>
+        <display-name>TasksTableDescriptorOutlineProvider</display-name>
+        <converter-id>tasksTableDescriptorOutlineProvider</converter-id>
+        <converter-class>
+            ag.carnot.web.jsf.processportal.TasksTableDescriptorOutlineProvider
+        </converter-class>
+    </converter>
+
+    <managed-bean>
+        <managed-bean-name>infinityBpmEventsController</managed-bean-name>
+        <managed-bean-class>com.infinity.bpm.ui.web.jsf.JsfBpmEventsController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+       
+        <managed-property>
+            <property-name>parentBpmEventsController</property-name>
+            <value>#{infinityRequestScopedCustomBpmEventsController}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>processPortalSettings</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.processportal.beans.ProcessPortalSettings
+        </managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>userConfigPersistor</property-name>
+            <property-class>ag.carnot.web.jsf.common.IUserConfigPersistor</property-class>
+            <value>#{userConfigPersistor}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>historicalStatesAvailable</property-name>
+            <value>true</value>
+        </managed-property>
+        
+        <managed-property>
+            <property-name>eagerNextActivityActivation</property-name>
+            <value>#{ ! empty infinityPortalCustomization.eagerNextActivityActivation ? infinityPortalCustomization.eagerNextActivityActivation : true}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>nextActivityPollIterations</property-name>
+            <value>#{ ! empty infinityPortalCustomization.nextActivityPollIterations ? infinityPortalCustomization.nextActivityPollIterations : 3}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>nextActivityPollDelay</property-name>
+            <value>#{ ! empty infinityPortalCustomization.nextActivityPollDelay ? infinityPortalCustomization.nextActivityPollDelay : 100}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>globalWorklistFilter</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>carnotSessionContext</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.common.WebPortalSessionContext
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>infinityBpmInteractionsRegistry</managed-bean-name>
+		<managed-bean-class>com.infinity.bpm.rt.impl.interactions.InteractionRegistry</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>processPortalInitializer</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.beans.ProcessPortalSessionListener
+		</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<managed-property>
+			<property-name>initializedBeans</property-name>
+			<value>#{processPortalInitSessionBeanList}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>errorPanel</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.ErrorPanel
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>assemblyLineParticipants</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.processportal.beans.AssemblyLineParticipants
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>portalHeader</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.PortalHeader
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>activityPanelURL</property-name>
+            <value>#{ ! empty infinityPortalCustomization.activityPanelUri ? infinityPortalCustomization.activityPanelUri : "/ipp/process/activity-panel.xhtml"}</value>
+		</managed-property>
+        <managed-property>
+            <property-name>assemblyLineParticipants</property-name>
+            <value>#{assemblyLineParticipants}</value>
+        </managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>activityInstanceDialog</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.beans.ActivityInstanceDialogBean
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>
+			activityInstanceDialogHeader
+		</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.beans.ActivityInstanceDialogHeaderBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>activityInstance</property-name>
+			<value>
+				#{activityInstanceDialog.currentActivityInstance}
+			</value>
+		</managed-property>
+	</managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>processPortalDefaultActivityTypeFilter</managed-bean-name>
+        <managed-bean-class>ag.carnot.web.jsf.common.ActivityTypeFilter</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>auxiliaryActivityIncluded</property-name>
+            <property-class>boolean</property-class>
+            <value>false</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>processHistoryDialog</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.common.beans.ProcessHistoryDialogBean
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>processHistoryDataModelResolver</property-name>
+            <property-class>
+                ag.carnot.web.jsf.common.IProcessHistoryDataModel
+            </property-class>
+            <value>#{carnotProcessHistoryResolver}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>activityTypeFilterTemplate</property-name>
+            <property-class>ag.carnot.web.jsf.common.ActivityTypeFilter</property-class>
+            <value>#{processPortalDefaultActivityTypeFilter}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+		<managed-bean-name>activityMetadataDialog</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.beans.ActivityMetadataDialogBean
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>descriptorFilter</managed-bean-name>
+		<managed-bean-class>
+			ag.carnot.web.jsf.processportal.beans.DescriptorFilterBean
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>processPortalStatusbar</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.web.jsf.processportal.beans.StatusbarBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>
+			processPortalInitSessionBeanList
+		</managed-bean-name>
+		<managed-bean-class>java.util.ArrayList</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+		<list-entries>
+			<value-class>java.lang.String</value-class>
+			<value>genericPage</value>
+			<value>simpleSearchDialog</value>
+		</list-entries>
+	</managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>processPortalMenuModel</managed-bean-name>
+        <managed-bean-class>
+            org.apache.myfaces.trinidad.model.XMLMenuModel
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>source</property-name>
+            <value>/WEB-INF/config/ipp/jsf/processportal-menu.xml</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>carnotResubmissionSearchWizard</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.bpm.client.common.model.ResubmissionSearchWizard
+        </managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>carnotAllActivitiesSearchWizard</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.bpm.client.common.model.AllActivitiesSearchWizard
+        </managed-bean-class>
+        <managed-bean-scope>none</managed-bean-scope>
+        <managed-property>
+            <property-name>includeHibernatedActivities</property-name>
+            <property-class>boolean</property-class>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>carnotUserWorklistSearchWizard</managed-bean-name>
+        <managed-bean-class>
+            ag.carnot.bpm.client.common.model.UserWorklistSearchWizard
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>includeHibernatedActivities</property-name>
+            <property-class>boolean</property-class>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>processPortalSearchWizards</managed-bean-name>
+        <managed-bean-class>java.util.ArrayList</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <list-entries>
+            <value-class>ag.carnot.bpm.client.common.model.ISearchWizardEntry</value-class>
+            <value>#{carnotResubmissionSearchWizard}</value>
+            <value>#{carnotAllActivitiesSearchWizard}</value>
+            <value>#{carnotUserWorklistSearchWizard}</value>
+        </list-entries>
+    </managed-bean>
+
+</faces-config>

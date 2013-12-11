@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.datatools.connectivity.oda.design.ui.dataSource">
+      <dataSourceUI
+            id="%oda.data.source.id">
+         <newDataSourceWizard
+               includesProgressMonitor="true"
+               pageClass="ag.carnot.oda.parameters.ui.wizard.ParametersDataSourceWizardPage">
+         </newDataSourceWizard>
+      </dataSourceUI>
+      <dataSetUI
+            id="%oda.data.set.id"
+            supportsInParameters="true"
+            supportsOutParameters="false">
+         <dataSetWizard
+               class="org.eclipse.datatools.connectivity.oda.design.ui.wizards.DataSetWizard"></dataSetWizard>
+         <dataSetPage
+               displayName="%data.set.name"
+               id="ag.carnot.oda.parameters.ui.wizard.ParametersDataSetWizardPage"
+               wizardPageClass="ag.carnot.oda.parameters.ui.wizard.ParametersDataSetWizardPage">
+         </dataSetPage>
+      </dataSetUI>
+   </extension>
+   <extension
+         point="org.eclipse.datatools.connectivity.connectionProfile">
+      <category
+            name="%data.source.name"
+            parentCategory="org.eclipse.datatools.connectivity.oda.profileCategory"
+            id="%oda.data.source.id">
+      </category>
+      <connectionProfile
+            pingFactory="org.eclipse.datatools.connectivity.oda.profile.OdaConnectionFactory"
+            name="%connection.profile.name"
+            category="%oda.data.source.id"
+            id="%oda.data.source.id">
+      </connectionProfile>
+      <connectionFactory
+            name="ODA Connection Factory"
+            profile="%oda.data.source.id"
+            class="org.eclipse.datatools.connectivity.oda.profile.OdaConnectionFactory"
+            id="org.eclipse.datatools.connectivity.oda.IConnection">
+      </connectionFactory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="ag.carnot.oda.parameters.ui.properties.ParametersPropertyPage"
+            id="%oda.data.source.id"
+            name="%data.source.name"
+            nameFilter="*.*">
+         <enabledWhen>
+            <instanceof
+                  value="org.eclipse.datatools.connectivity.IConnectionProfile">
+            </instanceof>
+         </enabledWhen>
+         <filter
+               name="ag.carnot.oda.parameters.property.filter"
+               value="%oda.data.source.id">
+         </filter>
+      </page>
+   </extension>
+
+</plugin>

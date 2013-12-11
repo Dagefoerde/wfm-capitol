@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.7" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.3.v20070705-1847 Build &lt;20070705-1847></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">CARNOT-library.rptlibrary</property>
+            <property name="namespace">CARNOT-library</property>
+        </structure>
+    </list-property>
+    <data-sources>
+        <oda-data-source extensionID="ag.carnot.oda.processdatabase" name="CARNOT Process Database" id="4"
+ extends="CARNOT-library.CARNOT Process Database"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="ag.carnot.oda.processdatabase.dataSet" name="PIV" id="5">
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">gt</property>
+                    <expression name="expr">row["Volume"]</expression>
+                    <expression name="value1">0</expression>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">IntervalTimestamp</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Volume</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">OID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">State</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">StartingUser</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">StartingActivityInstance</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ProcessDuration_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">ProcessDuration_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">ProcessDuration_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">ProcessDuration_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">ProcessWorktime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">ProcessWorktime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">ProcessWorktime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">ProcessWorktime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">TotalActiveTime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">TotalActiveTime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">TotalActiveTime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">TotalActiveTime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">SubTotalActiveTime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">SubTotalActiveTime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">SubTotalActiveTime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">SubTotalActiveTime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">SubProcessesWorktime_Minimum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">SubProcessesWorktime_Maximum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">SubProcessesWorktime_Sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">SubProcessesWorktime_Deviation</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="rowFetchLimit">10</property>
+            <property name="dataSource">CARNOT Process Database</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessName</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceOID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessInstanceState</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">StartDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue">"2000-01-01 00:00:00"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">EndDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">6</property>
+                    <expression name="defaultValue">"2008-02-21 14:35:05.132"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration</property>
+                    <property name="dataType">string</property>
+                    <property name="position">7</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">UseIntervalEnds</property>
+                    <property name="dataType">string</property>
+                    <property name="position">9</property>
+                    <expression name="defaultValue">"true"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">UseOuterJoins</property>
+                    <property name="dataType">string</property>
+                    <property name="position">10</property>
+                    <expression name="defaultValue">"false"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">IntervalPiStateFilter</property>
+                    <property name="dataType">string</property>
+                    <property name="position">11</property>
+                    <expression name="defaultValue">"started"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessID</property>
+                    <property name="dataType">string</property>
+                    <property name="position">12</property>
+                    <expression name="defaultValue">"%"</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ID</property>
+                    <property name="nativeName">ID</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Name</property>
+                    <property name="nativeName">Name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Description</property>
+                    <property name="nativeName">Description</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">IntervalTimestamp</property>
+                    <property name="nativeName">IntervalTimestamp</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Volume</property>
+                    <property name="nativeName">Volume</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">OID</property>
+                    <property name="nativeName">OID</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">State</property>
+                    <property name="nativeName">State</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">StartingUser</property>
+                    <property name="nativeName">StartingUser</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">StartingActivityInstance</property>
+                    <property name="nativeName">StartingActivityInstance</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ProcessDuration_Minimum</property>
+                    <property name="nativeName">ProcessDuration_Minimum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">ProcessDuration_Maximum</property>
+                    <property name="nativeName">ProcessDuration_Maximum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">ProcessDuration_Sum</property>
+                    <property name="nativeName">ProcessDuration_Sum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">ProcessDuration_Deviation</property>
+                    <property name="nativeName">ProcessDuration_Deviation</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">ProcessWorktime_Minimum</property>
+                    <property name="nativeName">ProcessWorktime_Minimum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">ProcessWorktime_Maximum</property>
+                    <property name="nativeName">ProcessWorktime_Maximum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">ProcessWorktime_Sum</property>
+                    <property name="nativeName">ProcessWorktime_Sum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">ProcessWorktime_Deviation</property>
+                    <property name="nativeName">ProcessWorktime_Deviation</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">TotalActiveTime_Minimum</property>
+                    <property name="nativeName">TotalActiveTime_Minimum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">TotalActiveTime_Maximum</property>
+                    <property name="nativeName">TotalActiveTime_Maximum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">TotalActiveTime_Sum</property>
+                    <property name="nativeName">TotalActiveTime_Sum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">TotalActiveTime_Deviation</property>
+                    <property name="nativeName">TotalActiveTime_Deviation</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">SubTotalActiveTime_Minimum</property>
+                    <property name="nativeName">SubTotalActiveTime_Minimum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">SubTotalActiveTime_Maximum</property>
+                    <property name="nativeName">SubTotalActiveTime_Maximum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">SubTotalActiveTime_Sum</property>
+                    <property name="nativeName">SubTotalActiveTime_Sum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">SubTotalActiveTime_Deviation</property>
+                    <property name="nativeName">SubTotalActiveTime_Deviation</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">SubProcessesWorktime_Minimum</property>
+                    <property name="nativeName">SubProcessesWorktime_Minimum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">SubProcessesWorktime_Maximum</property>
+                    <property name="nativeName">SubProcessesWorktime_Maximum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">SubProcessesWorktime_Sum</property>
+                    <property name="nativeName">SubProcessesWorktime_Sum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">SubProcessesWorktime_Deviation</property>
+                    <property name="nativeName">SubProcessesWorktime_Deviation</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <property name="queryText">@lt;view type='ag.carnot.reporting.ProcessInstanceView' name='PIV' cumulated='true' cumulationIntervalType='single' groupByColumns='ID' provideEmptyGroupValues='false' addTotalActiveTimeColumn='false' useExpressionBuilder='false'@gt;
+@lt;expression@gt;
+@lt;![CDATA[]]@gt;
+@lt;/expression@gt;
+@lt;/view@gt;</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="6">
+            <property name="width">100%</property>
+            <property name="dataSet">PIV</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ID</property>
+                    <expression name="expression">dataSetRow["ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Name</property>
+                    <expression name="expression">dataSetRow["Name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Description</property>
+                    <expression name="expression">dataSetRow["Description"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">IntervalTimestamp</property>
+                    <expression name="expression">dataSetRow["IntervalTimestamp"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">Volume</property>
+                    <expression name="expression">dataSetRow["Volume"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">OID</property>
+                    <expression name="expression">dataSetRow["OID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">State</property>
+                    <expression name="expression">dataSetRow["State"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">StartingUser</property>
+                    <expression name="expression">dataSetRow["StartingUser"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">StartingActivityInstance</property>
+                    <expression name="expression">dataSetRow["StartingActivityInstance"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration_Minimum</property>
+                    <expression name="expression">dataSetRow["ProcessDuration_Minimum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration_Maximum</property>
+                    <expression name="expression">dataSetRow["ProcessDuration_Maximum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration_Sum</property>
+                    <expression name="expression">dataSetRow["ProcessDuration_Sum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessDuration_Deviation</property>
+                    <expression name="expression">dataSetRow["ProcessDuration_Deviation"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime_Minimum</property>
+                    <expression name="expression">dataSetRow["ProcessWorktime_Minimum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime_Maximum</property>
+                    <expression name="expression">dataSetRow["ProcessWorktime_Maximum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime_Sum</property>
+                    <expression name="expression">dataSetRow["ProcessWorktime_Sum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ProcessWorktime_Deviation</property>
+                    <expression name="expression">dataSetRow["ProcessWorktime_Deviation"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TotalActiveTime_Minimum</property>
+                    <expression name="expression">dataSetRow["TotalActiveTime_Minimum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TotalActiveTime_Maximum</property>
+                    <expression name="expression">dataSetRow["TotalActiveTime_Maximum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TotalActiveTime_Sum</property>
+                    <expression name="expression">dataSetRow["TotalActiveTime_Sum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TotalActiveTime_Deviation</property>
+                    <expression name="expression">dataSetRow["TotalActiveTime_Deviation"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubTotalActiveTime_Minimum</property>
+                    <expression name="expression">dataSetRow["SubTotalActiveTime_Minimum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubTotalActiveTime_Maximum</property>
+                    <expression name="expression">dataSetRow["SubTotalActiveTime_Maximum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubTotalActiveTime_Sum</property>
+                    <expression name="expression">dataSetRow["SubTotalActiveTime_Sum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubTotalActiveTime_Deviation</property>
+                    <expression name="expression">dataSetRow["SubTotalActiveTime_Deviation"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessesWorktime_Minimum</property>
+                    <expression name="expression">dataSetRow["SubProcessesWorktime_Minimum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessesWorktime_Maximum</property>
+                    <expression name="expression">dataSetRow["SubProcessesWorktime_Maximum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessesWorktime_Sum</property>
+                    <expression name="expression">dataSetRow["SubProcessesWorktime_Sum"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SubProcessesWorktime_Deviation</property>
+                    <expression name="expression">dataSetRow["SubProcessesWorktime_Deviation"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <column id="155"/>
+            <column id="156"/>
+            <column id="157"/>
+            <column id="158"/>
+            <column id="159"/>
+            <column id="160"/>
+            <column id="161"/>
+            <column id="162"/>
+            <column id="163"/>
+            <column id="164"/>
+            <column id="165"/>
+            <column id="166"/>
+            <column id="167"/>
+            <column id="168"/>
+            <column id="169"/>
+            <column id="170"/>
+            <column id="171"/>
+            <column id="172"/>
+            <column id="173"/>
+            <column id="174"/>
+            <column id="175"/>
+            <column id="176"/>
+            <column id="177"/>
+            <column id="178"/>
+            <column id="179"/>
+            <column id="180"/>
+            <column id="181"/>
+            <column id="182"/>
+            <column id="183"/>
+            <header>
+                <row id="7">
+                    <cell id="8">
+                        <label id="9">
+                            <text-property name="text">ID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="10">
+                        <label id="11">
+                            <text-property name="text">Name</text-property>
+                        </label>
+                    </cell>
+                    <cell id="12">
+                        <label id="13">
+                            <text-property name="text">Description</text-property>
+                        </label>
+                    </cell>
+                    <cell id="14">
+                        <label id="15">
+                            <text-property name="text">IntervalTimestamp</text-property>
+                        </label>
+                    </cell>
+                    <cell id="16">
+                        <label id="17">
+                            <text-property name="text">Volume</text-property>
+                        </label>
+                    </cell>
+                    <cell id="18">
+                        <label id="19">
+                            <text-property name="text">OID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="20">
+                        <label id="21">
+                            <text-property name="text">State</text-property>
+                        </label>
+                    </cell>
+                    <cell id="22">
+                        <label id="23">
+                            <text-property name="text">StartingUser</text-property>
+                        </label>
+                    </cell>
+                    <cell id="24">
+                        <label id="25">
+                            <text-property name="text">StartingActivityInstance</text-property>
+                        </label>
+                    </cell>
+                    <cell id="26">
+                        <label id="27">
+                            <text-property name="text">ProcessDuration_Minimum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="28">
+                        <label id="29">
+                            <text-property name="text">ProcessDuration_Maximum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="30">
+                        <label id="31">
+                            <text-property name="text">ProcessDuration_Sum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="32">
+                        <label id="33">
+                            <text-property name="text">ProcessDuration_Deviation</text-property>
+                        </label>
+                    </cell>
+                    <cell id="34">
+                        <label id="35">
+                            <text-property name="text">ProcessWorktime_Minimum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="36">
+                        <label id="37">
+                            <text-property name="text">ProcessWorktime_Maximum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="38">
+                        <label id="39">
+                            <text-property name="text">ProcessWorktime_Sum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="40">
+                        <label id="41">
+                            <text-property name="text">ProcessWorktime_Deviation</text-property>
+                        </label>
+                    </cell>
+                    <cell id="42">
+                        <label id="43">
+                            <text-property name="text">TotalActiveTime_Minimum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="44">
+                        <label id="45">
+                            <text-property name="text">TotalActiveTime_Maximum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="46">
+                        <label id="47">
+                            <text-property name="text">TotalActiveTime_Sum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="48">
+                        <label id="49">
+                            <text-property name="text">TotalActiveTime_Deviation</text-property>
+                        </label>
+                    </cell>
+                    <cell id="50">
+                        <label id="51">
+                            <text-property name="text">SubTotalActiveTime_Minimum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="52">
+                        <label id="53">
+                            <text-property name="text">SubTotalActiveTime_Maximum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="54">
+                        <label id="55">
+                            <text-property name="text">SubTotalActiveTime_Sum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="56">
+                        <label id="57">
+                            <text-property name="text">SubTotalActiveTime_Deviation</text-property>
+                        </label>
+                    </cell>
+                    <cell id="58">
+                        <label id="59">
+                            <text-property name="text">SubProcessesWorktime_Minimum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="60">
+                        <label id="61">
+                            <text-property name="text">SubProcessesWorktime_Maximum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="62">
+                        <label id="63">
+                            <text-property name="text">SubProcessesWorktime_Sum</text-property>
+                        </label>
+                    </cell>
+                    <cell id="64">
+                        <label id="65">
+                            <text-property name="text">SubProcessesWorktime_Deviation</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="66">
+                    <cell id="67">
+                        <data id="68">
+                            <property name="resultSetColumn">ID</property>
+                        </data>
+                    </cell>
+                    <cell id="69">
+                        <data id="70">
+                            <property name="resultSetColumn">Name</property>
+                        </data>
+                    </cell>
+                    <cell id="71">
+                        <data id="72">
+                            <property name="resultSetColumn">Description</property>
+                        </data>
+                    </cell>
+                    <cell id="73">
+                        <data id="74">
+                            <property name="resultSetColumn">IntervalTimestamp</property>
+                        </data>
+                    </cell>
+                    <cell id="75">
+                        <data id="76">
+                            <property name="resultSetColumn">Volume</property>
+                        </data>
+                    </cell>
+                    <cell id="77">
+                        <data id="78">
+                            <property name="resultSetColumn">OID</property>
+                        </data>
+                    </cell>
+                    <cell id="79">
+                        <data id="80">
+                            <property name="resultSetColumn">State</property>
+                        </data>
+                    </cell>
+                    <cell id="81">
+                        <data id="82">
+                            <property name="resultSetColumn">StartingUser</property>
+                        </data>
+                    </cell>
+                    <cell id="83">
+                        <data id="84">
+                            <property name="resultSetColumn">StartingActivityInstance</property>
+                        </data>
+                    </cell>
+                    <cell id="85">
+                        <data id="86">
+                            <property name="resultSetColumn">ProcessDuration_Minimum</property>
+                        </data>
+                    </cell>
+                    <cell id="87">
+                        <data id="88">
+                            <property name="resultSetColumn">ProcessDuration_Maximum</property>
+                        </data>
+                    </cell>
+                    <cell id="89">
+                        <data id="90">
+                            <property name="resultSetColumn">ProcessDuration_Sum</property>
+                        </data>
+                    </cell>
+                    <cell id="91">
+                        <data id="92">
+                            <property name="resultSetColumn">ProcessDuration_Deviation</property>
+                        </data>
+                    </cell>
+                    <cell id="93">
+                        <data id="94">
+                            <property name="resultSetColumn">ProcessWorktime_Minimum</property>
+                        </data>
+                    </cell>
+                    <cell id="95">
+                        <data id="96">
+                            <property name="resultSetColumn">ProcessWorktime_Maximum</property>
+                        </data>
+                    </cell>
+                    <cell id="97">
+                        <data id="98">
+                            <property name="resultSetColumn">ProcessWorktime_Sum</property>
+                        </data>
+                    </cell>
+                    <cell id="99">
+                        <data id="100">
+                            <property name="resultSetColumn">ProcessWorktime_Deviation</property>
+                        </data>
+                    </cell>
+                    <cell id="101">
+                        <data id="102">
+                            <property name="resultSetColumn">TotalActiveTime_Minimum</property>
+                        </data>
+                    </cell>
+                    <cell id="103">
+                        <data id="104">
+                            <property name="resultSetColumn">TotalActiveTime_Maximum</property>
+                        </data>
+                    </cell>
+                    <cell id="105">
+                        <data id="106">
+                            <property name="resultSetColumn">TotalActiveTime_Sum</property>
+                        </data>
+                    </cell>
+                    <cell id="107">
+                        <data id="108">
+                            <property name="resultSetColumn">TotalActiveTime_Deviation</property>
+                        </data>
+                    </cell>
+                    <cell id="109">
+                        <data id="110">
+                            <property name="resultSetColumn">SubTotalActiveTime_Minimum</property>
+                        </data>
+                    </cell>
+                    <cell id="111">
+                        <data id="112">
+                            <property name="resultSetColumn">SubTotalActiveTime_Maximum</property>
+                        </data>
+                    </cell>
+                    <cell id="113">
+                        <data id="114">
+                            <property name="resultSetColumn">SubTotalActiveTime_Sum</property>
+                        </data>
+                    </cell>
+                    <cell id="115">
+                        <data id="116">
+                            <property name="resultSetColumn">SubTotalActiveTime_Deviation</property>
+                        </data>
+                    </cell>
+                    <cell id="117">
+                        <data id="118">
+                            <property name="resultSetColumn">SubProcessesWorktime_Minimum</property>
+                        </data>
+                    </cell>
+                    <cell id="119">
+                        <data id="120">
+                            <property name="resultSetColumn">SubProcessesWorktime_Maximum</property>
+                        </data>
+                    </cell>
+                    <cell id="121">
+                        <data id="122">
+                            <property name="resultSetColumn">SubProcessesWorktime_Sum</property>
+                        </data>
+                    </cell>
+                    <cell id="123">
+                        <data id="124">
+                            <property name="resultSetColumn">SubProcessesWorktime_Deviation</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="125">
+                    <cell id="126"/>
+                    <cell id="127"/>
+                    <cell id="128"/>
+                    <cell id="129"/>
+                    <cell id="130"/>
+                    <cell id="131"/>
+                    <cell id="132"/>
+                    <cell id="133"/>
+                    <cell id="134"/>
+                    <cell id="135"/>
+                    <cell id="136"/>
+                    <cell id="137"/>
+                    <cell id="138"/>
+                    <cell id="139"/>
+                    <cell id="140"/>
+                    <cell id="141"/>
+                    <cell id="142"/>
+                    <cell id="143"/>
+                    <cell id="144"/>
+                    <cell id="145"/>
+                    <cell id="146"/>
+                    <cell id="147"/>
+                    <cell id="148"/>
+                    <cell id="149"/>
+                    <cell id="150"/>
+                    <cell id="151"/>
+                    <cell id="152"/>
+                    <cell id="153"/>
+                    <cell id="154"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

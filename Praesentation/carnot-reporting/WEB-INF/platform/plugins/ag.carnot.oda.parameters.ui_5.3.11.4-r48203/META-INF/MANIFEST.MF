@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-Activator: ag.carnot.oda.parameters.ui.Activator
+Import-Package: org.eclipse.swt.widgets
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: ag.carnot.oda.parameters.ui,ag.carnot.oda.parameters.u
+ i.properties,ag.carnot.oda.parameters.ui.wizard
+Bundle-Version: 5.3.11.4-r48203
+Bundle-Name: %plugin.name
+Bundle-ClassPath: infinity-oda-parameters-ui.jar
+Bundle-ManifestVersion: 2
+Bundle-Vendor: SunGard CSA LLC
+Bundle-SymbolicName: ag.carnot.oda.parameters.ui;singleton:=true
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.datatools.connect
+ ivity.oda,org.eclipse.datatools.connectivity.oda.profile,org.eclipse.
+ datatools.connectivity.oda.design.ui,org.eclipse.jface,org.eclipse.co
+ re.resources,org.eclipse.ui,ag.carnot.runtime.base,ag.carnot.oda.para
+ meters
+
