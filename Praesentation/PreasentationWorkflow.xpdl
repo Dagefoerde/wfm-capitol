@@ -294,8 +294,13 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10073" Type="serializable">
 <carnot:Attributes>
+<<<<<<< HEAD
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
 <carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.msg.insuranceclaim.CoverageDecisionMessage"/>
+=======
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.msg.insuranceclaim.CoverageDecisionMessage"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+>>>>>>> f2bfec40068e973a06ffe9a6a595a7e1a2674824
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -309,8 +314,13 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10101" Type="serializable">
 <carnot:Attributes>
+<<<<<<< HEAD
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
 <carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.msg.insuranceclaim.CoverageDecisionMessage"/>
+=======
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.msg.insuranceclaim.CoverageDecisionMessage"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+>>>>>>> f2bfec40068e973a06ffe9a6a595a7e1a2674824
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -527,9 +537,12 @@
 <carnot:Trigger Oid="10096" Id="ReceiveInvoice" Name="Receive Invoice" Type="manual">
 <carnot:AccessPoints/>
 <carnot:DataFlows/>
+<<<<<<< HEAD
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:participant" Value="Administrator"/>
 </carnot:Attributes>
+=======
+>>>>>>> f2bfec40068e973a06ffe9a6a595a7e1a2674824
 </carnot:Trigger>
 </carnot:Triggers>
 <carnot:DataPaths/>
