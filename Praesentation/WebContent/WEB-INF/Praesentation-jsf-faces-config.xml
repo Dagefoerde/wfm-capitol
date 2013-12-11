@@ -4,6 +4,12 @@
     "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
 <faces-config>
     <managed-bean>
+        <managed-bean-name>ShowInvoiceBean</managed-bean-name>
+        <managed-bean-class>ag.carnot.praesentation.web.jsf.beans.preasentationworkflow.receiveinvoice.ShowInvoiceBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
         <managed-bean-name>CreateCoverageDecisionBean</managed-bean-name>
         <managed-bean-class>ag.carnot.praesentation.web.jsf.beans.preasentationworkflow.createcoveragedecision.CreateCoverageDecisionBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>

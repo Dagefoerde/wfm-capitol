@@ -2,32 +2,34 @@ package ag.carnot.praesentation.web.jsf.beans.preasentationworkflow.createcovera
 
 import java.util.List;
 import java.util.ArrayList;
+
+import de.wwu.wfm.sc4.msg.insuranceclaim.CoverageDecisionMessage;
+import de.wwu.wfm.sc4.msg.insuranceclaim.DamageReportMessage;
 import de.wwu.wfm.sc4.msg.insuranceclaim.data.*;
 
 public class CreateCoverageDecisionBean {
   public void complete(){
   }
-  private String caseID;
-  private ArrayList<CoverageDecisionEntry> coverageDecisions;
-  
-  
-  public String getCaseID(){
-    return caseID;
-  }
-  public void setCaseID(  String caseID){
-    this.caseID=caseID;
+  private DamageReportMessage damageReportMessage;
+  private List<CoverageDecisionEntry> coverageDecisionEntries;
+  public CreateCoverageDecisionBean(){
   }
   
-  public void setDamageEntries( List<DamageEntry> entries) {
-	  coverageDecisions = new ArrayList<CoverageDecisionEntry>();
-	  /*
-	  for (DamageEntry entry : entries) {
-		coverageDecisions.add(new CoverageDecisionEntry(entry.getName(), entry.getCosts(), false));  
+  public void setDamageReportMessage( DamageReportMessage msg) {
+	  this.damageReportMessage = msg;
+	  coverageDecisionEntries=new ArrayList<CoverageDecisionEntry>(msg.getDamageEntries().size());
+	  for (DamageEntry entry:msg.getDamageEntries()){
+		  coverageDecisionEntries.add(new CoverageDecisionEntry(entry.getName(),entry.getCosts(),false));
 	  }
-	  */
   }
   
-  public List<CoverageDecisionEntry> getCoverageDecisions() {
-	  return coverageDecisions;
+  public DamageReportMessage getDamageReportMessage() {
+	  return damageReportMessage;
+  }
+  public List<CoverageDecisionEntry> getCoverageDecisionEntries(){
+	  return this.coverageDecisionEntries;
+  }
+  public CoverageDecisionMessage getCoverageDecisionMessage(){
+	  return new CoverageDecisionMessage(damageReportMessage.getCaseID(),coverageDecisionEntries);
   }
 }

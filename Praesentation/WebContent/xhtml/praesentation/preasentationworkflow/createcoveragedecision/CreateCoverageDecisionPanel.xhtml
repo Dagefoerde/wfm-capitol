@@ -11,13 +11,23 @@
     </ice:outputHead>
   <ice:outputBody>
     <ice:form id="ipp_form">
-      <h:panelGrid id="data_mappings" columns="2" styleClass="table-form" columnClasses="table-label-column,table-component-column">
-        <ice:outputText value="Case ID:"/>
-        <ice:inputText readonly="true" id="CaseID" value="#{CreateCoverageDecisionBean.caseID}"/>
-        <ui:repeat value="#{CreateCoverageDecisionBean.coverageDecisions}" var="cd">
-	        <ice:outputText value="#{cd.name}" />
-	        <ice:outputText value="#{cd.value}" />
+      <h:panelGrid id="data_mappings" columns="1" styleClass="table-form" columnClasses="table-label-column,table-component-column">
+        	<div><b><ice:outputText value="Case ID:"/></b>
+        	<b><ice:outputText value="#{CreateCoverageDecisionBean.damageReportMessage.caseID}"/></b>  </div><br/>    
+        <table>
+       <tr>
+        	<td><b><ice:outputText value="Is Covered"/></b></td>
+        	<td><b><ice:outputText value="Position"/></b></td>
+        	<td><b><ice:outputText value="Costs"/></b></td>
+        </tr>
+        <ui:repeat value="#{CreateCoverageDecisionBean.coverageDecisionEntries}" var="cd">
+        	<tr>
+        		<td><ice:selectBooleanCheckbox value="#{cd.covered}" /></td>
+	        	<td><ice:outputText value="#{cd.name}" /></td>
+	        	<td><ice:outputText value="#{cd.costs}" /></td>
+	    	</tr>
         </ui:repeat>
+      </table>
       </h:panelGrid>
     </ice:form>
   </ice:outputBody>
