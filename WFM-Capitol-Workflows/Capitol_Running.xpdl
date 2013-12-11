@@ -268,8 +268,8 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10079" Type="primitive">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:type" Value="int" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:type" Value="int" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -578,7 +578,7 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="ACTIVITY" Oid="10048" X="180" Y="120" Width="141" Height="51" ModelElement="RetrieveIncident"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10050" X="180" Y="45" Width="141" Height="51" ModelElement="EnterIncidentID"/>
-<carnot:Symbol Kind="STARTEVENT" Oid="10052" X="110" Y="-30" Width="100" Height="50" ModelElement="manual_1"/>
+<carnot:Symbol Kind="STARTEVENT" Oid="10052" X="205" Y="-30" Width="100" Height="50" ModelElement="manual_1"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10055" X="180" Y="200" Width="141" Height="51" ModelElement="AddAccidentReport"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10057" X="180" Y="270" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10065" X="180" Y="340" Width="141" Height="51" ModelElement="StoreCoverageDecision"/>
