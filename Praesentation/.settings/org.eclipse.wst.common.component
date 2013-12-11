@@ -227,7 +227,10 @@
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/spring-webmvc-2.5.6.jar">
 <dependency-type>uses</dependency-type>
 </dependent-module>
-<property name="context-root" value="Sc4-Capitol-WebProject"/>
+<dependent-module archiveName="ExchangeMessages.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ExchangeMessages/ExchangeMessages">
+<dependency-type>uses</dependency-type>
+</dependent-module>
 <property name="java-output-path"/>
+<property name="context-root" value="Praesentation"/>
 </wb-module>
 </project-modules>
