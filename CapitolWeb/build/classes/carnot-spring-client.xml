@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+	- Application context for a Infinity Process Engine client.
+-->
+<beans>
+
+	<!-- Resolves ${...} placeholders from carnot.properties -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:carnot-spring-client.properties</value>
+		</property>
+	</bean>
+
+	<bean id="carnotHttpInvokerRequestExecutor"
+		class="ag.carnot.workflow.runtime.spring.CarnotHttpInvokerRequestExecutor" />
+
+	<bean id="carnotWorkflowService"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="httpInvokerRequestExecutor" ref="carnotHttpInvokerRequestExecutor" />
+		<property name="serviceUrl"
+			value="${Carnot.Spring.RemotingUrl}/CarnotWorkflowService" />
+		<property name="serviceInterface"
+			value="ag.carnot.workflow.runtime.spring.IWorkflowService" />
+	</bean>
+
+	<bean id="carnotUserService"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="httpInvokerRequestExecutor" ref="carnotHttpInvokerRequestExecutor" />
+		<property name="serviceUrl"
+			value="${Carnot.Spring.RemotingUrl}/CarnotUserService" />
+		<property name="serviceInterface"
+			value="ag.carnot.workflow.runtime.spring.IUserService" />
+	</bean>
+
+	<bean id="carnotQueryService"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="httpInvokerRequestExecutor" ref="carnotHttpInvokerRequestExecutor" />
+		<property name="serviceUrl"
+			value="${Carnot.Spring.RemotingUrl}/CarnotQueryService" />
+		<property name="serviceInterface"
+			value="ag.carnot.workflow.runtime.spring.IQueryService" />
+	</bean>
+
+	<bean id="carnotAdministrationService"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="httpInvokerRequestExecutor" ref="carnotHttpInvokerRequestExecutor" />
+		<property name="serviceUrl"
+			value="${Carnot.Spring.RemotingUrl}/CarnotAdministrationService" />
+		<property name="serviceInterface"
+			value="ag.carnot.workflow.runtime.spring.IAdministrationService" />
+	</bean>
+	
+	<bean id="carnotDocumentManagementService"
+	    class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+	    <property name="httpInvokerRequestExecutor" ref="carnotHttpInvokerRequestExecutor" />
+	    <property name="serviceUrl" 
+            value="${Carnot.Spring.RemotingUrl}/CarnotDocumentManagementService" />
+	    <property name="serviceInterface"
+	        value="ag.carnot.workflow.runtime.spring.IDocumentManagementService" />
+	</bean>
+</beans>

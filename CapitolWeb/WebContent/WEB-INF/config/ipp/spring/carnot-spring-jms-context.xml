@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean class="com.infinity.bpm.rt.integration.spring.jms.JmsResourceRefBinding">
+      <property name="name" value="jms/CarnotXAConnectionFactoryBVIS" />
+      <property name="resourceRef" ref="CarnotJmsConnectionFactoryBVIS" />
+   </bean>
+
+   <bean class="com.infinity.bpm.rt.integration.spring.jms.JmsResourceRefBinding">
+      <property name="name" value="jms/CarnotXAConnectionFactoryCapitol" />
+      <property name="resourceRef" ref="CarnotJmsConnectionFactoryCapitol" />
+   </bean>
+
+   <bean class="com.infinity.bpm.rt.integration.spring.jms.JmsResourceRefBinding">
+      <property name="name" value="jms/CarnotXAConnectionFactoryCarsCo" />
+      <property name="resourceRef" ref="CarnotJmsConnectionFactoryCarsCo" />
+   </bean>
+
+   <bean class="com.infinity.bpm.rt.integration.spring.jms.JmsResourceBinding">
+      <property name="name" value="jms/CarnotSystemQueue" />
+      <property name="resource" ref="CarnotJmsSystemQueue" />
+   </bean>
+
+   <bean class="com.infinity.bpm.rt.integration.spring.jms.JmsResourceBinding">
+      <property name="name" value="jms/CarnotDaemonQueue" />
+      <property name="resource" ref="CarnotJmsDaemonQueue" />
+   </bean>
+
+   <bean class="com.infinity.bpm.rt.integration.spring.jms.JmsResourceBinding">
+      <property name="name" value="jms/CarnotApplicationQueue" />
+      <property name="resource" ref="CarnotJmsApplicationQueue" />
+   </bean>
+   
+   <alias alias="forkingService" name="jmsForkingService" />
+
+   <bean name="jmsForkingService" class="com.infinity.bpm.rt.integration.spring.jms.threading.JmsForkingService"
+      parent="abstractCarnotService">
+   </bean>
+   
+   <bean name="CarnotSystemQueueListenerContainer" parent="AbstractCarnotMessageListenerContainer">
+
+      <property name="destination" ref="CarnotJmsSystemQueue" />
+
+      <property name="messageListener">
+         <bean class="com.infinity.bpm.rt.integration.spring.jms.threading.SystemQueueMessageHandler">
+            <property name="forkingService" ref="forkingService" />
+         </bean>
+      </property>
+
+      <property name="concurrentConsumers" value="5" />
+   </bean>
+
+   <bean name="CarnotDaemonQueueListenerContainer" parent="AbstractCarnotMessageListenerContainer">
+
+      <property name="destination" ref="CarnotJmsDaemonQueue" />
+
+      <property name="messageListener">
+         <bean class="com.infinity.bpm.rt.integration.spring.jms.threading.DaemonQueueMessageHandler">
+            <property name="forkingService" ref="forkingService" />
+         </bean>
+      </property>
+
+      <property name="concurrentConsumers" value="5" />
+   </bean>
+   
+   <bean name="CarnotApplicationQueueListenerContainer" parent="AbstractCarnotMessageListenerContainer">
+
+      <property name="destination" ref="CarnotJmsApplicationQueue" />
+
+      <property name="messageListener">
+         <bean class="com.infinity.bpm.rt.integration.spring.jms.threading.ApplicationQueueMessageHandler">
+            <property name="forkingService" ref="forkingService" />
+         </bean>
+      </property>
+
+      <property name="concurrentConsumers" value="5" />
+   </bean>
+
+   <bean abstract="true" name="AbstractCarnotMessageListenerContainer"
+      class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+
+      <property name="autoStartup" value="true" />
+
+      <property name="transactionManager" ref="jtaTxManager" />
+      <property name="connectionFactory" ref="CarnotJmsConnectionFactoryCapitol" />
+
+      <property name="receiveTimeout" value="3000" />
+      <property name="sessionTransacted" value="true" />
+   </bean>
+
+</beans>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+   <bean id="AmqJmsCapitolAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
+      >
+      <property name="serverUrl" value="tcp://wi-wfm3.uni-muenster.de:61616" />
+   </bean>
+   <bean id="AmqJmsBVISAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
+      >
+      <property name="serverUrl" value="tcp://wi-vm028.uni-muenster.de:61616" />
+   </bean>
+   <bean id="AmqJmsCarsCoAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
+      >
+      <property name="serverUrl" value="tcp://wi-vm028.uni-muenster.de:61617" />
+   </bean>
+
+   <bean id="JencksAmqJmsConnectionManager" class="org.jencks.factory.ConnectionManagerFactoryBean">
+      <property name="transactionManager" ref="xaTransactionManager" />
+      
+      <property name="transaction" value="xa" />
+      
+      <property name="pooling" value="true" />
+      <property name="poolMinSize" value="10" />
+      <property name="poolMaxSize" value="50" />
+      
+   </bean>
+
+   <bean name="CarnotJmsConnectionFactoryCapitol" class="org.springframework.jms.connection.TransactionAwareConnectionFactoryProxy">
+
+      <property name="targetConnectionFactory">
+         <bean class="org.springframework.jca.support.LocalConnectionFactoryBean">
+
+            <property name="managedConnectionFactory">
+               <bean class="org.apache.activemq.ra.ActiveMQManagedConnectionFactory">
+                  <property name="resourceAdapter" ref="AmqJmsCapitolAdapter" />
+               </bean>
+            </property>
+
+            <property name="connectionManager" ref="JencksAmqJmsConnectionManager" />
+
+         </bean>
+      </property>
+
+   </bean>
+   
+      <bean name="CarnotJmsConnectionFactoryBVIS" class="org.springframework.jms.connection.TransactionAwareConnectionFactoryProxy">
+
+      <property name="targetConnectionFactory">
+         <bean class="org.springframework.jca.support.LocalConnectionFactoryBean">
+
+            <property name="managedConnectionFactory">
+               <bean class="org.apache.activemq.ra.ActiveMQManagedConnectionFactory">
+                  <property name="resourceAdapter" ref="AmqJmsBVISAdapter" />
+               </bean>
+            </property>
+
+            <property name="connectionManager" ref="JencksAmqJmsConnectionManager" />
+
+         </bean>
+      </property>
+
+   </bean>
+   <bean name="CarnotJmsConnectionFactoryCarsCo" class="org.springframework.jms.connection.TransactionAwareConnectionFactoryProxy">
+
+      <property name="targetConnectionFactory">
+         <bean class="org.springframework.jca.support.LocalConnectionFactoryBean">
+
+            <property name="managedConnectionFactory">
+               <bean class="org.apache.activemq.ra.ActiveMQManagedConnectionFactory">
+                  <property name="resourceAdapter" ref="AmqJmsCarsCoAdapter" />
+               </bean>
+            </property>
+
+            <property name="connectionManager" ref="JencksAmqJmsConnectionManager" />
+
+         </bean>
+      </property>
+
+   </bean>
+
+</beans>

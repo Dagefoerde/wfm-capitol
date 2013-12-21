@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+   <bean id="jcrPassword" class="java.lang.String">
+      <constructor-arg index="0" value="jcr-password" />
+   </bean>
+
+   <!-- must be lazy-init="true" as the Jackrabbit startup servlet will be executed after the Spring context listener -->
+
+   <bean lazy-init="true" id="carnotJackrabbitRepository" class="org.springframework.jndi.JndiObjectFactoryBean">
+      <property name="jndiName" value="jackrabbit.repository" />
+   </bean>
+
+   <bean lazy-init="true"
+         name="jcrSessionFactory" class="ag.carnot.workflow.runtime.spring.IppJcrSessionFactory">
+      <property name="repository" ref="xaJcrConnectionFactory" />
+   </bean>
+
+
+   <!-- Wrap Jackrabbit repository as JCA resource to hook into JTA TX management. -->
+
+   <bean lazy-init="true"
+         id="xaJcrConnectionFactory" class="org.springframework.jca.support.LocalConnectionFactoryBean">
+
+      <property name="managedConnectionFactory">
+         <bean
+            class="com.sungard.infinity.bpm.vfs.jcr.jca.JackrabbitRepositoryMCF">
+            <property name="repository" ref="carnotJackrabbitRepository" />
+            <property name="bindSessionToTransaction" value="true" />
+         </bean>
+		</property>
+
+      <property name="connectionManager">
+         <bean class="org.jencks.factory.ConnectionManagerFactoryBean">
+            <property name="transactionManager" ref="xaTransactionManager" />
+            <property name="transaction" value="xa" />
+            <!-- http://docs.codehaus.org/display/JCA/notcm+Connection+Manager -->
+            <property name="partitionStrategy" value="by-connector-properties"/>
+         </bean>
+      </property>
+	</bean>
+
+</beans>

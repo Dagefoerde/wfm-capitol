@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+/**
+ *************************************************************************
+ * Copyright (c) SunGard CSA LLC.
+ * All rights reserved. 
+ *************************************************************************
+ */
+-->
+
+<plugin>
+
+   <extension
+         point="org.eclipse.datatools.connectivity.connectionProfile">
+      <category
+            name="%data.source.name"
+            parentCategory="org.eclipse.datatools.connectivity.oda.profileCategory"
+            id="%oda.data.source.id">
+      </category>
+      <connectionProfile
+            pingFactory="org.eclipse.datatools.connectivity.oda.profile.OdaConnectionFactory"
+            name="%connection.profile.name"
+            category="%oda.data.source.id"
+            id="%oda.data.source.id">
+      </connectionProfile>
+      <connectionFactory
+            name="ODA Connection Factory"
+            profile="%oda.data.source.id"
+            class="org.eclipse.datatools.connectivity.oda.profile.OdaConnectionFactory"
+            id="org.eclipse.datatools.connectivity.oda.IConnection">
+      </connectionFactory>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            id="%oda.data.source.id"
+            name="%profile.propertypage.name"
+            class="ag.carnot.oda.processmodel.ui.property.ModelDataSourcePropertyPage">
+         <filter
+               name="org.eclipse.datatools.profile.property.id"
+               value="%oda.data.source.id"/>
+         <enabledWhen>
+            <instanceof
+                  value="org.eclipse.datatools.connectivity.IConnectionProfile">
+            </instanceof>
+         </enabledWhen>
+      </page>
+   </extension>
+   
+   <extension
+         point="org.eclipse.datatools.connectivity.oda.design.ui.dataSource">
+      <dataSourceUI
+            id="%oda.data.source.id">
+         <newDataSourceWizard
+               includesProgressMonitor="false"
+               pageClass="ag.carnot.oda.processmodel.ui.wizards.ModelDataSourceWizardPage">
+         </newDataSourceWizard>
+      </dataSourceUI>
+      <dataSetUI
+            id="%oda.data.set.id"
+            supportsInParameters="true"
+            supportsOutParameters="false">
+         <dataSetWizard
+               class="org.eclipse.datatools.connectivity.oda.design.ui.wizards.DataSetWizard"></dataSetWizard>
+         <dataSetPage
+               id="%dataset.selectcolumns"
+               wizardPageClass="ag.carnot.oda.processmodel.ui.wizards.DatasetSelectionPage">
+         </dataSetPage>
+      </dataSetUI>
+   </extension>
+   
+</plugin>

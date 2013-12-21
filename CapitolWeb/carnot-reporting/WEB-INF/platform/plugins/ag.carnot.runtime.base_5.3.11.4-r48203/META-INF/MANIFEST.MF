@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-Name: %pluginName
+Bundle-ClassPath: lib/carnot-base.jar
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: %providerName
+Bundle-ManifestVersion: 2
+Bundle-Localization: plugin
+Bundle-SymbolicName: ag.carnot.runtime.base; singleton:=true
+Eclipse-BuddyPolicy: registered
+Export-Package: ag.carnot.base,ag.carnot.base.log,ag.carnot.base.rt,ag
+ .carnot.config,ag.carnot.error,ag.carnot.reflect,ag.carnot.security,a
+ g.carnot.security.authentication,ag.carnot.utils.console,ag.carnot.ut
+ ils.ejb,ag.carnot.utils.rt,ag.carnot.utils.xml,ag.carnot.utils.xml.ad
+ apter,ag.carnot.utils.xml.editor
+Require-Bundle: org.eclipse.core.runtime,ag.carnot.runtime.xml,ag.carn
+ ot.3rdparty.org.apache.log4j;resolution:=optional
+Bundle-Version: 5.3.11.4-r48203
+

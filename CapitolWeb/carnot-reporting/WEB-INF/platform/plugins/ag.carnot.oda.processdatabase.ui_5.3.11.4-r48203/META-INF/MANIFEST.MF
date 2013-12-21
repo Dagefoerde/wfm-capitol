@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-Activator: ag.carnot.oda.processdatabase.ui.plugin.ProcessDatab
+ aseUIPlugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: ag.carnot.oda.processdatabase.ui,ag.carnot.oda.process
+ database.ui.i18n,ag.carnot.oda.processdatabase.ui.plugin,ag.carnot.od
+ a.processdatabase.ui.wizards,example,utils
+Bundle-Version: 5.3.11.4-r48203
+Bundle-Name: %plugin.name
+Bundle-ClassPath: carnot-oda-processdatabaseui.jar
+Bundle-ManifestVersion: 2
+Bundle-Vendor: SunGard CSA LLC
+Bundle-SymbolicName: ag.carnot.oda.processdatabase.ui; singleton:=true
+Bundle-Localization: plugin
+Require-Bundle: com.infinity.bpm.birt.report.data.oda.jdbc.ui,org.ecli
+ pse.ui;visibility:=reexport,org.eclipse.birt.report.designer.ui;visib
+ ility:=reexport,org.eclipse.birt.report.model;visibility:=reexport,or
+ g.eclipse.birt.core;visibility:=reexport,org.eclipse.datatools.connec
+ tivity.oda;visibility:=reexport,ag.carnot.workflow.engine,ag.carnot.b
+ pm.modeling.data.structured,ag.carnot.eclipse.ui,org.eclipse.emf.ecor
+ e,ag.carnot.oda.processdatabase,org.eclipse.draw2d,ag.carnot.3rdparty
+ .antlr,ag.carnot.bpm.modeling.dms,org.eclipse.xsd,ag.carnot.workflow.
+ model.carnot,org.eclipse.core.resources,ag.carnot.workflow.model.diag
+ ram,org.eclipse.datatools.connectivity.oda.design.ui
+

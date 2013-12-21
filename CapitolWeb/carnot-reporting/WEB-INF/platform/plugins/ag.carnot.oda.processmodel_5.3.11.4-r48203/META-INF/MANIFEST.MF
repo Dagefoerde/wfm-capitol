@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-Activator: org.eclipse.core.internal.compatibility.PluginActiva
+ tor
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: ag.carnot.oda.processmodel,ag.carnot.oda.processmodel.
+ i18n,ag.carnot.oda.processmodel.plugin
+Bundle-Version: 5.3.11.4-r48203
+Bundle-Name: %plugin.name
+Bundle-ClassPath: carnot-oda-processmodel.jar
+Bundle-ManifestVersion: 2
+Bundle-Vendor: SunGard CSA LLC
+Plugin-Class: ag.carnot.oda.processmodel.plugin.ProcessModelPlugin
+Bundle-SymbolicName: ag.carnot.oda.processmodel; singleton:=true
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.birt.core,org.eclipse.datatools.connectivi
+ ty.oda,ag.carnot.reporting.common;visibility:=reexport,ag.carnot.work
+ flow.engine,ag.carnot.workflow.model.carnot,org.eclipse.core.runtime.
+ compatibility,org.eclipse.core.runtime;bundle-version="2.1"
+
