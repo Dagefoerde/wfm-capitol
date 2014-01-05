@@ -3,6 +3,8 @@
 	<name>CapitolWeb</name>
 	<comment></comment>
 	<projects>
+		<project>Sc4-Capitol-Implementation</project>
+		<project>DTO</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

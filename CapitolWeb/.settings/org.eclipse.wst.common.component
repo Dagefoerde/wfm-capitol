@@ -227,6 +227,12 @@
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/spring-webmvc-2.5.6.jar">
 <dependency-type>uses</dependency-type>
 </dependent-module>
+<dependent-module archiveName="Sc4-Capitol-Implementation.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Sc4-Capitol-Implementation/Sc4-Capitol-Implementation">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module archiveName="DTO.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/DTO/DTO">
+<dependency-type>uses</dependency-type>
+</dependent-module>
 <property name="context-root" value="CapitolWeb"/>
 <property name="java-output-path"/>
 </wb-module>
