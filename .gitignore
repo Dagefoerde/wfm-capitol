@@ -6,6 +6,6 @@
 *.ear
 
 
-.metadata
-Servers
-Infinity Audit Trails
+.metadata/
+Servers/
+Infinity Audit Trails/
