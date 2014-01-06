@@ -1,13 +1,11 @@
-package de.wwu.wfm.sc4.capitol.data;
+import java.util.Collection;
 
 public class Car {
-	private int carID;
 
-	public void setCarID(int carID) {
-		this.carID = carID;
-	}
+	private Collection<Requirements> requirements;
 
-	public int getCarID() {
-		return carID;
-	}
+	private Incident incident;
+
+	private Collection<Contract> contract;
+
 }

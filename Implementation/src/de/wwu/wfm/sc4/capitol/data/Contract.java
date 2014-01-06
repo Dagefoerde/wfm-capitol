@@ -1,22 +1,13 @@
-package de.wwu.wfm.sc4.capitol.data;
-
-import java.util.List;
+import java.util.Collection;
 
 public class Contract {
-	private int contractID;
-	private List<Car> cars;
-	
-	
-	public int getContractID() {
-		return contractID;
-	}
-	public void setContractID(int contractID) {
-		this.contractID = contractID;
-	}
-	public List<Car> getCars() {
-		return cars;
-	}
-	public void setCars(List<Car> cars) {
-		this.cars = cars;
-	}
+
+	private Collection<Case> case;
+
+	private Incident incident;
+
+	private Collection<Customer> customer;
+
+	private Car car;
+
 }

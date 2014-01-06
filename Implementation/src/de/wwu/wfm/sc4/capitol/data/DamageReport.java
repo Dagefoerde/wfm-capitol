@@ -1,4 +1,4 @@
-public class AccidentReport {
+public class DamageReport {
 
 	private Incident incident;
 
