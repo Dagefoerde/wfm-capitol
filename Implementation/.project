@@ -3,6 +3,7 @@
 	<name>Sc4-Capitol-Implementation</name>
 	<comment></comment>
 	<projects>
+		<project>DTO</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
