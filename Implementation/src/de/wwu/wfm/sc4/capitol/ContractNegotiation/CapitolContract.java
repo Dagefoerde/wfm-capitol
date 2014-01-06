@@ -1,5 +1,6 @@
-package de.wwu.wfm.sc4.capitol.ContractNegotiation;
+package de.wwu.wfm.sc4.capitol.contractnegotiation;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
 import com.itextpdf.text.Chunk;
@@ -24,11 +25,14 @@ public class CapitolContract {
 	double policyFee = 10;
 	double premiumBasic = totalInsured * premiumRate;
 	double premiumTotal = premiumBasic + policyFee;
+	ByteArrayOutputStream outputStream;
 	
 	public CapitolContract() throws Exception {
 		/* Basic document attributes */
+		outputStream= new ByteArrayOutputStream();
 		Document document = new Document(PageSize.A4, Utilities.millimetersToPoints(20), Utilities.millimetersToPoints(20), Utilities.millimetersToPoints(25), Utilities.millimetersToPoints(25));
-		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Capitol Contract.pdf"));
+		//PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Capitol Contract.pdf"));
+		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		
 		document.open();
 		PdfContentByte canvas = writer.getDirectContent();
@@ -189,7 +193,10 @@ public class CapitolContract {
 	
 	public static void main(String[] args) {
 		try {
-			new CapitolContract();
+			CapitolContract capitolContract=new CapitolContract();
+			//System.out.println(capitolContract.outputStream.toString());
+			FileOutputStream output= new FileOutputStream("Capitol.pdf");
+			output.write(capitolContract.outputStream.toByteArray());			
 		}
 		catch (Exception e) {
 			System.out.println(e);
