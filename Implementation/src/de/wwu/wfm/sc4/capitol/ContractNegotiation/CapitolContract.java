@@ -1,4 +1,4 @@
-package contract;
+package de.wwu.wfm.sc4.capitol.ContractNegotiation;
 
 import java.io.FileOutputStream;
 
