@@ -1,10 +1,10 @@
+package de.wwu.wfm.sc4.capitol.data;
+
 import java.util.Collection;
 
 public class Customer {
 
-	private Case case;
-
-	private Collection<Case> case;
+	private Collection<Case> case0;
 
 	private Contract contract;
 
