@@ -1,10 +1,9 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.insuranceclaim.logic.IncidentService;
+import de.wwu.wfm.sc4.capitol.data.service.IncidentService;
 
 public class RetrieveIncidentByID {
-	IncidentService service = new IncidentService();
 	private int incidentID;
 	
 	public void setIncidentID(int id) {
@@ -12,6 +11,6 @@ public class RetrieveIncidentByID {
 	}
 	
 	public Incident complete() {
-		return service.getByID(incidentID);
+		return IncidentService.getSingleton().getByID(incidentID);
 	}
 }
