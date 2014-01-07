@@ -25,4 +25,16 @@ public class Customer extends AbstractDataClass {
 	@OneToOne
 	private Contract contract;
 
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 }

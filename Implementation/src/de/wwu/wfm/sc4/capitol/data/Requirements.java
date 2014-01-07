@@ -17,14 +17,27 @@ public class Requirements extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
-	// TODO: Relationships unclear
-	//private Collection<Case> case;
+	// TODO: Relationships unclear, var identifier "case" produces issues /w
+	// hibernate
+	// private Collection<Case> case;
 
 	// TODO: Relationships unclear
 	private Car car;
 
 	public Requirements() {
 
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }

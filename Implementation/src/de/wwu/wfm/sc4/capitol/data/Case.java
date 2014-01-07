@@ -27,4 +27,32 @@ public class Case extends AbstractDataClass {
 	@OneToOne
 	private Contract contract;
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Requirements getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(Requirements requirements) {
+		this.requirements = requirements;
+	}
+
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 }

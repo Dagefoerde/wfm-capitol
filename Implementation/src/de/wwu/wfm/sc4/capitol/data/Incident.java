@@ -72,4 +72,36 @@ public class Incident extends AbstractDataClass {
 		// return invoices;
 	}
 
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
+	public AccidentReport getAccidentReport() {
+		return accidentReport;
+	}
+
+	public void setAccidentReport(AccidentReport accidentReport) {
+		this.accidentReport = accidentReport;
+	}
+
+	public DamageReport getDamageReport() {
+		return damageReport;
+	}
+
+	public void setDamageReport(DamageReport damageReport) {
+		this.damageReport = damageReport;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setInvoices(List<Invoice> invoices) {
+		this.invoices = invoices;
+	}
+
 }

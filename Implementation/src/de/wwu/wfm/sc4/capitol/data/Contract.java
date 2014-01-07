@@ -32,4 +32,32 @@ public class Contract extends AbstractDataClass {
 	@OneToOne
 	private Car car;
 
+	public Incident getIncident() {
+		return incident;
+	}
+
+	public void setIncident(Incident incident) {
+		this.incident = incident;
+	}
+
+	public Collection<Customer> getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Collection<Customer> customer) {
+		this.customer = customer;
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 }

@@ -41,4 +41,40 @@ public class Car extends AbstractDataClass {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Collection<Requirements> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(Collection<Requirements> requirements) {
+		this.requirements = requirements;
+	}
+
+	public Incident getIncident() {
+		return incident;
+	}
+
+	public void setIncident(Incident incident) {
+		this.incident = incident;
+	}
+
+	public Collection<Contract> getContract() {
+		return contract;
+	}
+
+	public void setContract(Collection<Contract> contract) {
+		this.contract = contract;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 }
