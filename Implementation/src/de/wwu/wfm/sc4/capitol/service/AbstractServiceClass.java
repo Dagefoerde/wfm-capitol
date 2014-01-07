@@ -21,18 +21,14 @@ public class AbstractServiceClass<A extends AbstractDataClass> {
 	}
 	
 	public void persist(A current){
-		// TODO
-		/*
-		 * Example
-		 * Session s = getSession();
-		 * s.save(A);
-		 * s.getTransaction().commit();
-		 * s.closeSession();
-		 */
+		 Session s = getSession();
+		 s.save(current);
+		 s.getTransaction().commit();
+		 s.close();
 	}
 	
 	public A findById(int id){
-		//TODO
+		// TODO
 		return null;
 	}
 	

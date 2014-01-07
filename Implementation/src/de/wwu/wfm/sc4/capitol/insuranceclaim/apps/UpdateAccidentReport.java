@@ -2,10 +2,11 @@ package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
 import de.wwu.wfm.sc4.capitol.data.AccidentReport;
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.data.service.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class UpdateAccidentReport {
-	IncidentService service = IncidentService.getSingleton();
+	IncidentService service = ServiceInitializer.getProvider().getIncidentService();
 	private Incident incident;
 	private AccidentReport accidentReport;
 	

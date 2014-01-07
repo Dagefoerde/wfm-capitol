@@ -1,7 +1,7 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.data.service.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class RetrieveIncidentByID {
 	private int incidentID;
@@ -11,6 +11,6 @@ public class RetrieveIncidentByID {
 	}
 	
 	public Incident complete() {
-		return IncidentService.getSingleton().getByID(incidentID);
+		return ServiceInitializer.getProvider().getIncidentService().findById(incidentID);
 	}
 }
