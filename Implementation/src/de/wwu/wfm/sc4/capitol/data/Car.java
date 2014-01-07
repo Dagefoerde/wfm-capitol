@@ -14,6 +14,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "car")
 public class Car extends AbstractDataClass {
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+
+	@Column(name = "name")
+	private String name;
+
 	// TODO: Relationships unclear
 	@OneToMany
 	private Collection<Requirements> requirements;
@@ -24,5 +32,13 @@ public class Car extends AbstractDataClass {
 
 	@OneToMany
 	private Collection<Contract> contract;
+
+	public Car() {
+
+	}
+
+	public Car(String name) {
+		this.name = name;
+	}
 
 }

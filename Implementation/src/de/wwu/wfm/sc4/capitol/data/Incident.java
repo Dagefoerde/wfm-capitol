@@ -3,6 +3,7 @@ package de.wwu.wfm.sc4.capitol.data;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "incident")
 public class Incident extends AbstractDataClass {
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
 
 	@OneToOne
 	private Contract contract;
