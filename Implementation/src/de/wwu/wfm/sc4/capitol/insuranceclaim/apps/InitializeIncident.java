@@ -3,7 +3,7 @@ package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 import DTO.DataTransferObject;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.data.service.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class InitializeIncident {
 	private int incidentID;
@@ -50,7 +50,7 @@ public class InitializeIncident {
 		// do not add claim data yet, as this is done in a later activity explicitly.
 		
 		// persist
-		IncidentService.getSingleton().persist(incident);
+		ServiceInitializer.getProvider().getIncidentService().persist(incident);
 		
 		return incident;
 	}
