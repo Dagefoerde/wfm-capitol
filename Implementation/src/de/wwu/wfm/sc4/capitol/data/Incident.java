@@ -34,6 +34,12 @@ public class Incident implements Serializable{
 		return null;
 	}
 	
+	public void setContract(Contract c) {
+		// TODO
+		//contractID = c.getID();
+		contract = c;
+	}
+	
 	public List<Invoice> getInvoices() {
 		if (invoices != null)
 			return invoices;
