@@ -1,7 +1,7 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.data.service.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.IncidentService;
 
 public class RetrieveIncidentByID {
 	private int incidentID;

@@ -3,7 +3,7 @@ package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 import DTO.DataTransferObject;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.data.service.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.IncidentService;
 
 public class InitializeIncident {
 	private int incidentID;

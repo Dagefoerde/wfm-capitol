@@ -3,7 +3,7 @@ package de.wwu.wfm.sc4.capitol.data;
 import java.io.Serializable;
 import java.util.List;
 
-public class Incident implements Serializable{
+public class Incident extends AbstractDataClass {
 	
 	private Integer incidentID;
 
