@@ -728,8 +728,8 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10224" Type="serializable">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Case"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Case"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -824,8 +824,8 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10392" Type="serializable">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Requirements"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Requirements"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -854,8 +854,8 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10449" Type="serializable">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Contract"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Contract"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -863,7 +863,7 @@
 </DataField>
 </DataFields>
 <WorkflowProcesses>
-<WorkflowProcess Id="claimHandling_CapitolDamageReport" Name="Receive Damage Report and create Coverage Decision" AccessLevel="PUBLIC">
+<WorkflowProcess Id="claimHandling_CapitolAccidentReport" Name="Receive Customer Accident Report and create Coverage Decision" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="RetrieveIncident" Name="Retrieve incident">
@@ -1610,7 +1610,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="claimHandling_CapitolAccidentReport" Name="Receive Accident Report" AccessLevel="PUBLIC">
+<WorkflowProcess Id="claimHandling_CapitolDamageReport" Name="Receive Damage Report with Cost Estimates" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="CheckForExistingContract" Name="Check for existing contract">
