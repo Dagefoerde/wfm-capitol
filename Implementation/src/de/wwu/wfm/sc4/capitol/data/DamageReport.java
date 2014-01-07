@@ -10,10 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "damage_report")
-public class DamageReport implements Serializable {
-	@Id
-	@GeneratedValue
-	private int id;
+public class DamageReport extends AbstractDataClass {
 
 	@OneToOne
 	private Incident incident;

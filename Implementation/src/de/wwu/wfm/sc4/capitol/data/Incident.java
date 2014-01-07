@@ -12,11 +12,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "incident")
-public class Incident implements Serializable {
+public class Incident extends AbstractDataClass {
 
-	@Id
-	@GeneratedValue
-	private int id;
 	@OneToOne
 	private Contract contract;
 	// private Integer contractID;

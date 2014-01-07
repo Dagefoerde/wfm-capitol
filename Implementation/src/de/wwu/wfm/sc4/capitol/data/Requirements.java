@@ -10,10 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "requirements")
-public class Requirements implements Serializable {
-	@Id
-	@GeneratedValue
-	private int id;
+public class Requirements extends AbstractDataClass {
+
 	// TODO: Relationships unclear
 	private Collection<Case> case0;
 

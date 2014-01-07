@@ -10,13 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="accident_report")
-public class AccidentReport implements Serializable{
-	
-	@Id
-	@GeneratedValue
-	@Column(name="id")
-	private int id;
-	
+public class AccidentReport extends AbstractDataClass{
 	@OneToOne
 	private Incident incident;
 

@@ -12,10 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "contract")
-public class Contract implements Serializable {
-	@Id
-	@GeneratedValue
-	private int id;
+public class Contract extends AbstractDataClass {
 
 	@OneToMany
 	private Collection<Case> case0;

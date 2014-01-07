@@ -13,13 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "car")
-public class Car implements Serializable {
+public class Car extends AbstractDataClass {
 	// TODO: Relationships unclear
-	@Id
-	@GeneratedValue
-	@Column(name = "id")
-	private int id;
-
 	@OneToMany
 	private Collection<Requirements> requirements;
 

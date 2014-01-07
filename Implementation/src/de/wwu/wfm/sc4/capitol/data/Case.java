@@ -10,12 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "case")
-public class Case implements Serializable {
+public class Case extends AbstractDataClass {
 	// TODO Relationships are unclear
-	@Id
-	@GeneratedValue
-	private int id;
-
 	@OneToOne
 	private Customer customer;
 
