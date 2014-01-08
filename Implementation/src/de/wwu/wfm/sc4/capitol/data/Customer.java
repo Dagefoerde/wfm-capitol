@@ -19,11 +19,30 @@ public class Customer extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 	
+	@Column(name = "firstname")
+	private String firstname;
+	
+	@Column(name = "lastname")
+	private String lastname;
+	
+	@Column(name = "username")
+	private String username;
+	
+	@Column(name = "phone")
+	private String phone;
+	
 	@OneToMany
 	private Collection<Case> case0;
 
 	@OneToOne
 	private Contract contract;
+	
+	public Customer(String firstname,String lastname,String username,String phone){
+		this.firstname=firstname;
+		this.lastname=lastname;
+		this.username=username;
+		this.phone=phone;
+	}
 
 	public Contract getContract() {
 		return contract;
@@ -35,6 +54,38 @@ public class Customer extends AbstractDataClass {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPhone() {
+		return phone;
 	}
 
 }

@@ -1,6 +1,5 @@
 package de.wwu.wfm.sc4.capitol.data;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -19,14 +18,21 @@ public class Car extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "licencePlate")
+	private String licencePlate;
+	
+	@Column(name = "type")
+	private String type;
+	
+	@Column(name = "color")
+	private String color;
 
-	// TODO: Relationships unclear
+	@Column(name = "buyingPrice")
+	private Double buyingPrice;
+	
 	@OneToOne
 	private Requirements requirements;
 
-	// TODO check Relationship: Car does not store related incidents
 	@OneToMany
 	private Collection<Incident> incident;
 
@@ -37,16 +43,19 @@ public class Car extends AbstractDataClass {
 
 	}
 
-	public Car(String name) {
-		this.name = name;
+	public Car(String licencePlate,String type,String color,Double buyingPrice) {
+		this.licencePlate = licencePlate;
+		this.type=type;
+		this.color=color;
+		this.buyingPrice=buyingPrice;
 	}
 
-	public String getName() {
-		return name;
+	public String getLicencePlate() {
+		return licencePlate;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String licencePlate) {
+		this.licencePlate = licencePlate;
 	}
 
 	public int getId() {
@@ -79,6 +88,30 @@ public class Car extends AbstractDataClass {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public void setBuyingPrice(Double buyingPrice) {
+		this.buyingPrice = buyingPrice;
+	}
+
+	public Double getBuyingPrice() {
+		return buyingPrice;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }
