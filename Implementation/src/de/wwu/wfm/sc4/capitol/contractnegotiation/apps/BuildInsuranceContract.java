@@ -25,6 +25,9 @@ public class BuildInsuranceContract {
 		contract= new Contract();
 		contract.setCustomer(contractingCase.getCustomer());
 		contract.setCars(customerRequirements.getCars());
+		contract.setHumanInsured(customerRequirements.getHumanInsured());
+		contract.setNaturalInsured(customerRequirements.getNaturalInsured());
+		contract.setPickupService(customerRequirements.getPickupService());
 	}
 	public Contract getContract(){
 		return null;
