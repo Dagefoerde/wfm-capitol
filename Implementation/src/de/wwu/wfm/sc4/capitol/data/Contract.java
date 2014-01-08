@@ -31,6 +31,15 @@ public class Contract extends AbstractDataClass {
 	@OneToMany
 	private Collection<Car> cars;
 	
+	@Column(name = "naturalInsured")
+	private Boolean naturalInsured;
+	
+	@Column(name = "pickupService")
+	private Boolean pickupService;
+	
+	@Column(name = "humanInsured")
+	private Double humanInsured;
+	
 	public Case getCase0() {
 		return case0;
 	}
@@ -65,6 +74,30 @@ public class Contract extends AbstractDataClass {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setNaturalInsured(Boolean naturalInsured) {
+		this.naturalInsured = naturalInsured;
+	}
+
+	public Boolean getNaturalInsured() {
+		return naturalInsured;
+	}
+
+	public void setPickupService(Boolean pickupService) {
+		this.pickupService = pickupService;
+	}
+
+	public Boolean getPickupService() {
+		return pickupService;
+	}
+
+	public void setHumanInsured(Double humanInsured) {
+		this.humanInsured = humanInsured;
+	}
+
+	public Double getHumanInsured() {
+		return humanInsured;
 	}
 
 }
