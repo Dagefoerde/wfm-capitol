@@ -21,19 +21,15 @@ public class Incident extends AbstractDataClass {
 
 	@OneToOne
 	private Contract contract;
-	// private Integer contractID;
 
 	@OneToOne
 	private Car car;
-	// private Integer carID;
 
 	@OneToOne(optional = true)
 	private AccidentReport accidentReport;
-	// private Integer accidentReportID;
 
 	@OneToOne
 	private DamageReport damageReport;
-	// private Integer damageReportID;
 
 	@OneToMany
 	private List<Invoice> invoices;

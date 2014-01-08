@@ -1,11 +1,13 @@
 package de.wwu.wfm.sc4.capitol.data;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,15 +19,14 @@ public class Case extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
-	// TODO Relationships are unclear
 	@OneToOne
 	private Customer customer;
 
-	@OneToOne
-	private Requirements requirements;
+	@OneToMany
+	private Collection<Requirements> requirements;
 
-	@OneToOne
-	private Contract contract;
+	@OneToMany
+	private Collection<Contract> contract;
 
 	public Customer getCustomer() {
 		return customer;
@@ -35,24 +36,24 @@ public class Case extends AbstractDataClass {
 		this.customer = customer;
 	}
 
-	public Requirements getRequirements() {
+	public int getId() {
+		return id;
+	}
+
+	public Collection<Requirements> getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(Requirements requirements) {
+	public void setRequirements(Collection<Requirements> requirements) {
 		this.requirements = requirements;
 	}
 
-	public Contract getContract() {
+	public Collection<Contract> getContract() {
 		return contract;
 	}
 
-	public void setContract(Contract contract) {
+	public void setContract(Collection<Contract> contract) {
 		this.contract = contract;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 }

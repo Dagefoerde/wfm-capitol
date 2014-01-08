@@ -23,15 +23,15 @@ public class Car extends AbstractDataClass {
 	private String name;
 
 	// TODO: Relationships unclear
-	@OneToMany
-	private Collection<Requirements> requirements;
+	@OneToOne
+	private Requirements requirements;
 
 	// TODO check Relationship: Car does not store related incidents
-	@OneToOne
-	private Incident incident;
-
 	@OneToMany
-	private Collection<Contract> contract;
+	private Collection<Incident> incident;
+
+	@OneToOne
+	private Contract contract;
 
 	public Car() {
 
@@ -49,32 +49,36 @@ public class Car extends AbstractDataClass {
 		this.name = name;
 	}
 
-	public Collection<Requirements> getRequirements() {
+	public int getId() {
+		return id;
+	}
+
+	public Requirements getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(Collection<Requirements> requirements) {
+	public void setRequirements(Requirements requirements) {
 		this.requirements = requirements;
 	}
 
-	public Incident getIncident() {
+	public Collection<Incident> getIncident() {
 		return incident;
 	}
 
-	public void setIncident(Incident incident) {
+	public void setIncident(Collection<Incident> incident) {
 		this.incident = incident;
 	}
 
-	public Collection<Contract> getContract() {
+	public Contract getContract() {
 		return contract;
 	}
 
-	public void setContract(Collection<Contract> contract) {
+	public void setContract(Contract contract) {
 		this.contract = contract;
 	}
 
-	public int getId() {
-		return id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,27 +19,34 @@ public class Requirements extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
-	// TODO: Relationships unclear, var identifier "case" produces issues /w
-	// hibernate
-	// private Collection<Case> case;
+	@OneToOne
+	private Case case0;
 
-	// TODO: Relationships unclear
-	private Car car;
+	@OneToMany
+	private Collection<Car> car;
 
 	public Requirements() {
 
 	}
 
-	public Car getCar() {
+	public int getId() {
+		return id;
+	}
+
+	public Case getCase0() {
+		return case0;
+	}
+
+	public void setCase0(Case case0) {
+		this.case0 = case0;
+	}
+
+	public Collection<Car> getCar() {
 		return car;
 	}
 
-	public void setCar(Car car) {
+	public void setCar(Collection<Car> car) {
 		this.car = car;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 }

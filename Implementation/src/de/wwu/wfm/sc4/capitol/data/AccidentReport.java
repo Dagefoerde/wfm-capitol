@@ -15,8 +15,10 @@ public class AccidentReport extends AbstractDataClass{
 	@GeneratedValue
 	@Column(name="id")
 	private int id;
+	
 	@OneToOne
 	private Incident incident;
+	
 	public Incident getIncident() {
 		return incident;
 	}

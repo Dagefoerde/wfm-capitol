@@ -19,42 +19,49 @@ public class Contract extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 	
-	@OneToMany
-	private Collection<Case> case0;
-	// TODO: check relationship, contract does not store multiple incidents
-	// right now
 	@OneToOne
-	private Incident incident;
+	private Case case0;
+	
+	public Case getCase0() {
+		return case0;
+	}
 
-	@OneToMany
-	private Collection<Customer> customer;
+	public void setCase0(Case case0) {
+		this.case0 = case0;
+	}
 
-	@OneToOne
-	private Car car;
-
-	public Incident getIncident() {
+	public Collection<Incident> getIncident() {
 		return incident;
 	}
 
-	public void setIncident(Incident incident) {
+	public void setIncident(Collection<Incident> incident) {
 		this.incident = incident;
 	}
 
-	public Collection<Customer> getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Collection<Customer> customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-	public Car getCar() {
+	public Collection<Car> getCar() {
 		return car;
 	}
 
-	public void setCar(Car car) {
+	public void setCar(Collection<Car> car) {
 		this.car = car;
 	}
+
+	@OneToMany
+	private Collection<Incident> incident;
+
+	@OneToOne
+	private Customer customer;
+
+	@OneToMany
+	private Collection<Car> car;
 
 	public int getId() {
 		return id;
