@@ -1,0 +1,20 @@
+.iceOutTxt, .iceOutLbl {
+    	font-family: Verdana;
+	color: blue;
+	}
+	div#loginBox .logo {
+    	background: url("./css-images/login-logo.jpg") repeat scroll left top transparent;
+   		border-bottom: 1px solid #CCCCCC;
+    	clear: both;
+    	color: #708090;
+    	font-weight: bold;
+    	height: 70px;
+    	line-height: 70px;
+    	width: auto;
+	}
+	.banner{
+        height: 70px;
+        width 100%;
+        background: #000000 url(./images/login-logo.jpg) left no-repeat;
+        border-bottom: 3px solid #000000;
+      }
