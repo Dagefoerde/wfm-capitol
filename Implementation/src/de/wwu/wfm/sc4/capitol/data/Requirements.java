@@ -23,7 +23,16 @@ public class Requirements extends AbstractDataClass {
 	private Case case0;
 
 	@OneToMany
-	private Collection<Car> car;
+	private Collection<Car> cars;
+	
+	@Column(name = "naturalInsured")
+	private Boolean naturalInsured;
+	
+	@Column(name = "pickupService")
+	private Boolean pickupService;
+	
+	@Column(name = "humanInsured")
+	private Double humanInsured;
 
 	public Requirements() {
 
@@ -41,12 +50,36 @@ public class Requirements extends AbstractDataClass {
 		this.case0 = case0;
 	}
 
-	public Collection<Car> getCar() {
-		return car;
+	public Collection<Car> getCars() {
+		return cars;
 	}
 
-	public void setCar(Collection<Car> car) {
-		this.car = car;
+	public void setCars(Collection<Car> cars) {
+		this.cars = cars;
+	}
+
+	public void setNaturalInsured(Boolean naturalInsured) {
+		this.naturalInsured = naturalInsured;
+	}
+
+	public Boolean getNaturalInsured() {
+		return naturalInsured;
+	}
+
+	public void setPickupService(Boolean pickupService) {
+		this.pickupService = pickupService;
+	}
+
+	public Boolean getPickupService() {
+		return pickupService;
+	}
+
+	public void setHumanInsured(Double humanInsured) {
+		this.humanInsured = humanInsured;
+	}
+
+	public Double getHumanInsured() {
+		return humanInsured;
 	}
 
 }

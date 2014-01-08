@@ -22,6 +22,15 @@ public class Contract extends AbstractDataClass {
 	@OneToOne
 	private Case case0;
 	
+	@OneToMany
+	private Collection<Incident> incident;
+
+	@OneToOne
+	private Customer customer;
+
+	@OneToMany
+	private Collection<Car> cars;
+	
 	public Case getCase0() {
 		return case0;
 	}
@@ -46,22 +55,13 @@ public class Contract extends AbstractDataClass {
 		this.customer = customer;
 	}
 
-	public Collection<Car> getCar() {
-		return car;
+	public Collection<Car> getCars() {
+		return cars;
 	}
 
-	public void setCar(Collection<Car> car) {
-		this.car = car;
+	public void setCars(Collection<Car> cars) {
+		this.cars = cars;
 	}
-
-	@OneToMany
-	private Collection<Incident> incident;
-
-	@OneToOne
-	private Customer customer;
-
-	@OneToMany
-	private Collection<Car> car;
 
 	public int getId() {
 		return id;

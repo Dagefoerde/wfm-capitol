@@ -42,7 +42,10 @@ public class Car extends AbstractDataClass {
 	public Car() {
 
 	}
-
+	
+	public Car(String licencePlate){
+		this.licencePlate=licencePlate;
+	}
 	public Car(String licencePlate,String type,String color,Double buyingPrice) {
 		this.licencePlate = licencePlate;
 		this.type=type;
