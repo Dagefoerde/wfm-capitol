@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.contractnegotiation;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
@@ -13,7 +14,11 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.Utilities;
 import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfCopy;
+import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
@@ -195,8 +200,31 @@ public class CapitolContract {
 		try {
 			CapitolContract capitolContract=new CapitolContract();
 			//System.out.println(capitolContract.outputStream.toString());
-			FileOutputStream output= new FileOutputStream("Capitol.pdf");
+			FileOutputStream output= new FileOutputStream("Capitol2.pdf");
+//			PdfReader reader=new PdfReader("Test.pdf");
+//			PdfReader createdDoc= new PdfReader(capitolContract.outputStream.toByteArray());
+//			PdfStamper stamper= new PdfStamper(createdDoc,output);
+//			stamper.insertPage(1, reader.getPageSize(1));
 			output.write(capitolContract.outputStream.toByteArray());			
+
+	        Document document=new Document();
+	        PdfCopy copy= new PdfCopy(document,new FileOutputStream("Capitol.pdf"));
+	        document.open();
+	        PdfReader reader=new PdfReader(new ByteArrayInputStream(capitolContract.outputStream.toByteArray()));
+	        Integer n = reader.getNumberOfPages();
+            for (int page = 0; page < n; ) {
+                copy.addPage(copy.getImportedPage(reader, ++page));
+            }
+            copy.freeReader(reader);
+            reader.close();
+	        reader=new PdfReader("LegalContractingPart.pdf");
+	        n = reader.getNumberOfPages();
+           for (int page = 0; page < n; ) {
+               copy.addPage(copy.getImportedPage(reader, ++page));
+           }
+            copy.freeReader(reader);
+            reader.close();
+            document.close();
 		}
 		catch (Exception e) {
 			System.out.println(e);
