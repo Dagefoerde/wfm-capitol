@@ -14,8 +14,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQObjectMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
 
-import de.wwu.wfm.sc4.msg.insuranceclaim.DamageReportMessage;
-import de.wwu.wfm.sc4.msg.insuranceclaim.data.DamageEntry;
+import DTO.DataTransferObject;
 
 public class Main {
 
@@ -42,7 +41,7 @@ public class Main {
 			System.out.println(session);
 			System.out.println(q);
 			//consume(session, q);
-			produceCreateCoverageDecision(session, q); //Initialize Capitols process for the creation of the coverage decision.
+			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,29 +67,12 @@ public class Main {
 		}
 	}
 
-	private static void produceCreateCoverageDecision(Session session, Queue q) throws JMSException, IOException {
-		DamageReportMessage drm = new DamageReportMessage("ManuallySend");
-		drm.addDamageEntry(new DamageEntry("Engine", 2500.0));
-		drm.addDamageEntry(new DamageEntry("Window", 500.0));
-		drm.addDamageEntry(new DamageEntry("Wheels", 500.0));
-		drm.addDamageEntry(new DamageEntry("Door", 1000.0));
+	private static void createDTOForCreateContractFromCustomerRequirements(Session session, Queue q) throws JMSException, IOException {
+		DataTransferObject dto= new DataTransferObject();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "CreateCoverageDecision");
-		message.setObject(drm);
-		producer.send(message);
-		
-	}
-	private static void produceDR(Session session, Queue q) throws JMSException, IOException {
-		DamageReportMessage drm = new DamageReportMessage("ManuallySend");
-		drm.addDamageEntry(new DamageEntry("Engine", 2000.0));
-		drm.addDamageEntry(new DamageEntry("Window", 360.0));
-		drm.addDamageEntry(new DamageEntry("Wheels", 166.0));
-		drm.addDamageEntry(new DamageEntry("Door", 437.0));
-		MessageProducer producer = session.createProducer(q);
-		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "CuC_DamageReport");
-		message.setObject(new String("ManuallySend"));
+		message.setStringProperty("processID", "contracting_CapitolnewCustomerRequirements");
+		message.setObject(dto);
 		producer.send(message);
 		
 	}
