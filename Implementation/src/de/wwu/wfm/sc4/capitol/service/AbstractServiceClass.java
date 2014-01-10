@@ -1,6 +1,7 @@
 package de.wwu.wfm.sc4.capitol.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.hibernate.Session;
 
@@ -27,13 +28,17 @@ public class AbstractServiceClass<A extends AbstractDataClass> {
 		 s.close();
 	}
 	
-	public A findById(int id){
-		// TODO
-		return null;
+	public A findById(Class<A> clazz, int id){
+		Session s = getSession();
+		A out = (A) s.get(clazz, id);
+		s.close();
+		return out;		
 	}
 	
-	public Collection<A> findAll(){
-		//TODO
-		return null;
+	public Collection<A> findAll(Class<A> clazz){
+		Session s = getSession();
+		List<A> out = (List<A>) s.createCriteria(clazz).list();
+		s.close();
+		return out;
 	}
 }
