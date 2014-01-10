@@ -1,5 +1,8 @@
 package de.wwu.wfm.sc4.capitol.service;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -14,9 +17,21 @@ public class IncidentService extends AbstractServiceClass<Incident>{
 	}
 	
 	public List<Incident> findIncidentsWithReminderOlderThan(int days) {
+		if (days < 0) throw new IllegalArgumentException("Argument 'days' needs to be positive or zero.");
+		
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.add( Calendar.DAY_OF_YEAR, -days);
+		Date daysLowerBound = cal.getTime();
+		
 		Session session = getSession();
 		Query q = session.createQuery("from Incident i where "
-				+" i.accidentReport is null"); // TODO date older than now - days
+				+" i.accidentReport is null and "
+				+" i.lastReminder >= :daysLowerBound");
+		q.setDate("daysLowerBound", daysLowerBound);
+
 		return (List<Incident>)q.list();
 	}
 }
