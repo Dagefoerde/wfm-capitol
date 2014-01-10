@@ -18,30 +18,40 @@ public class Customer extends AbstractDataClass {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "firstname")
 	private String firstname;
-	
+
 	@Column(name = "lastname")
 	private String lastname;
-	
+
 	@Column(name = "username")
 	private String username;
-	
+
 	@Column(name = "phone")
 	private String phone;
-	
+
+	@Column(name = "street")
+	private String street;
+
+	@Column(name = "streetNumber")
+	private int streetNumber;
+
+	@Column(name = "postalCode")
+	private String postalCode;
+
 	@OneToMany
 	private Collection<Case> case0;
 
 	@OneToOne
 	private Contract contract;
-	
-	public Customer(String firstname,String lastname,String username,String phone){
-		this.firstname=firstname;
-		this.lastname=lastname;
-		this.username=username;
-		this.phone=phone;
+
+	public Customer(String firstname, String lastname, String username,
+			String phone) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.phone = phone;
 	}
 
 	public Contract getContract() {
@@ -86,6 +96,30 @@ public class Customer extends AbstractDataClass {
 
 	public String getPhone() {
 		return phone;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public int getStreetNumber() {
+		return streetNumber;
+	}
+
+	public void setStreetNumber(int streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 
 }
