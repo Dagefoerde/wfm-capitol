@@ -34,6 +34,6 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.4.0.jar"/>
-	<classpathentry kind="lib" path="E:/Dropbox/WFM - IO - Scenario 4/Data Exchange/JMS/Test Interorganizational/activemq-all-5.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/activemq-all-5.4.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
