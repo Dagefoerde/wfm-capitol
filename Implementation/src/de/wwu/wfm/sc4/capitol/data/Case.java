@@ -1,6 +1,5 @@
 package de.wwu.wfm.sc4.capitol.data;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -12,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "case")
+@Table(name = "contractcase")
 public class Case extends AbstractDataClass {
 	@Id
 	@GeneratedValue
