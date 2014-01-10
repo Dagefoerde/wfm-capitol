@@ -1,9 +1,9 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.wwu.wfm.sc4.capitol.data.Incident;
+import de.wwu.wfm.sc4.capitol.service.IncidentService;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class RetrieveCandidateIncidents {
@@ -16,6 +16,8 @@ public class RetrieveCandidateIncidents {
 		 * 2) 8 days have passed since the last reminder
 		 * AND no accident report was received yet.
 		 */
-		return new ArrayList<Incident>();// ServiceInitializer.getProvider().getIncidentService().findById();
+		IncidentService service = ServiceInitializer.p().getIncidentService();
+		return service.findIncidentsWithReminderOlderThan(8)
+		;// ServiceInitializer.getProvider().getIncidentService().findById();
 	}
 }
