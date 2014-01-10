@@ -23,22 +23,20 @@ public class AbstractServiceClass<A extends AbstractDataClass> {
 	
 	public void persist(A current){
 		 Session s = getSession();
+		 s.beginTransaction();
 		 s.save(current);
 		 s.getTransaction().commit();
-		 s.close();
 	}
 	
 	public A findById(Class<A> clazz, int id){
 		Session s = getSession();
 		A out = (A) s.get(clazz, id);
-		s.close();
 		return out;		
 	}
 	
 	public Collection<A> findAll(Class<A> clazz){
 		Session s = getSession();
 		List<A> out = (List<A>) s.createCriteria(clazz).list();
-		s.close();
 		return out;
 	}
 }

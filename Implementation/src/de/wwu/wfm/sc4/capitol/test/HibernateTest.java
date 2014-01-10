@@ -4,21 +4,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import de.wwu.wfm.sc4.capitol.data.*;
+import de.wwu.wfm.sc4.capitol.service.CarService;
+import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class HibernateTest {
 
 	public static void main(String[] args) {
 		System.out.println("Hibernate Test");
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
+		CarService cs = ServiceInitializer.getProvider().getCarService();
 		Car c1 = new Car("bla");
 		Car c2 = new Car("blub");
 
-		session.save(c1);
-		session.save(c2);
-		session.getTransaction().commit();
-		session.close();
-
+		cs.persist(c1);
+		cs.persist(c2);
+		
+		System.out.println(cs.findById(Car.class,2));
+		
+		cs.closeSession();
 	}
 }
