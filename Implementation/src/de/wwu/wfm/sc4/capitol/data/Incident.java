@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.data;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,6 +33,8 @@ public class Incident extends AbstractDataClass {
 
 	@OneToMany
 	private List<Invoice> invoices;
+	
+	private Date lastReminder;
 
 	public Contract getContract() {
 		if (contract != null)
@@ -97,6 +100,14 @@ public class Incident extends AbstractDataClass {
 
 	public void setInvoices(List<Invoice> invoices) {
 		this.invoices = invoices;
+	}
+
+	public void setLastReminder(Date lastReminder) {
+		this.lastReminder = lastReminder;
+	}
+
+	public Date getLastReminder() {
+		return lastReminder;
 	}
 
 }

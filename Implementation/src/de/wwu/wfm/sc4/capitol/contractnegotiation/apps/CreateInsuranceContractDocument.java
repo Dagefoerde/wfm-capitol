@@ -1,6 +1,8 @@
 package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.itextpdf.text.Chunk;
@@ -93,7 +95,7 @@ public class CreateInsuranceContractDocument {
         t1.addCell(new Phrase(": "+contract.getCustomer().getFirstname()+" "+contract.getCustomer().getLastname(), Fonts.NORMAL));
         t1.getDefaultCell().setBorder(Rectangle.NO_BORDER);
         t1.addCell(new Phrase("Address", Fonts.NORMAL));
-        t1.addCell(new Phrase(": Hophop Str. 13, 48149 Muenster, Germany", Fonts.NORMAL));
+        t1.addCell(new Phrase(": "+contract.getCustomer().getStreet()+" "+contract.getCustomer().getStreetNumber()+", "+contract.getCustomer().getPostalCode(), Fonts.NORMAL));
         t1.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), (Utilities.millimetersToPoints(242) - tableHeight), canvas);
         tableHeight = tableHeight + t1.getTotalHeight();
 
@@ -216,8 +218,16 @@ public class CreateInsuranceContractDocument {
 
         document.close();
         ContractData cd=new ContractData();
-        cd.setInsuranceContract(new InsuranceContract(byteArrayOutputStream.toByteArray()));
-        dto.setContractData(new ContractData());}
+        InsuranceContract insuranceContract=new InsuranceContract();
+        insuranceContract.setContractCapitol(byteArrayOutputStream.toByteArray());
+        cd.setInsuranceContract(insuranceContract);
+        dto.setContractData(new ContractData());
+        //write pdf to file
+        SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
+        String path="contracts/Contract-"+contractingCase.getId()+"-"+contract.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
+        FileOutputStream output=new FileOutputStream(path);
+        output.write(byteArrayOutputStream.toByteArray());
+		}
 		catch(Exception e){
 			
 		}
