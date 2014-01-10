@@ -8,7 +8,7 @@ public class ServiceInitializer {
 	private static ServiceInitializer provider;
 
 	public static ServiceInitializer getProvider() {
-		if (provider != null)
+		if (provider == null)
 			provider = new ServiceInitializer();
 		return provider;
 	}
