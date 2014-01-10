@@ -6,4 +6,8 @@ public class RequirementsService extends AbstractServiceClass<Requirements> {
 	protected RequirementsService(){
 		super();
 	}
+	
+	public Requirements findById(int id) {
+		return findById(Requirements.class, id);
+	}
 }

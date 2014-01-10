@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -15,29 +14,29 @@ public class IncidentService extends AbstractServiceClass<Incident> {
 	protected IncidentService() {
 		super();
 	}
-<<<<<<< HEAD
 
 	public Incident findById(int id) {
 		return findById(Incident.class, id);
-=======
-	
+	}
+
 	public List<Incident> findIncidentsWithReminderOlderThan(int days) {
-		if (days < 0) throw new IllegalArgumentException("Argument 'days' needs to be positive or zero.");
-		
+		if (days < 0)
+			throw new IllegalArgumentException(
+					"Argument 'days' needs to be positive or zero.");
+
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
-		cal.add( Calendar.DAY_OF_YEAR, -days);
+		cal.add(Calendar.DAY_OF_YEAR, -days);
 		Date daysLowerBound = cal.getTime();
-		
+
 		Session session = getSession();
 		Query q = session.createQuery("from Incident i where "
-				+" i.accidentReport is null and "
-				+" i.lastReminder >= :daysLowerBound");
+				+ " i.accidentReport is null and "
+				+ " i.lastReminder >= :daysLowerBound");
 		q.setDate("daysLowerBound", daysLowerBound);
 
-		return (List<Incident>)q.list();
->>>>>>> 3f0fbae74f963405319838d38fb494f92efd1880
+		return (List<Incident>) q.list();
 	}
 }

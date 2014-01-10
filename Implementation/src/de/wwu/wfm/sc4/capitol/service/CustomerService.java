@@ -6,4 +6,8 @@ public class CustomerService extends AbstractServiceClass<Customer> {
 	protected CustomerService(){
 		super();
 	}
+	
+	public Customer findById(int id) {
+		return findById(Customer.class, id);
+	}
 }

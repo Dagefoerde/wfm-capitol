@@ -6,4 +6,8 @@ public class InvoiceService extends AbstractServiceClass<Invoice> {
 	protected InvoiceService(){
 		super();
 	}
+	
+	public Invoice findById(int id) {
+		return findById(Invoice.class, id);
+	}
 }

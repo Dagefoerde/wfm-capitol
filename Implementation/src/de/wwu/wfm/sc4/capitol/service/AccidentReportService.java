@@ -6,4 +6,8 @@ public class AccidentReportService extends AbstractServiceClass<AccidentReport> 
 	protected AccidentReportService(){
 		super();
 	}
+	
+	public AccidentReport findById(int id) {
+		return findById(AccidentReport.class, id);
+	}
 }

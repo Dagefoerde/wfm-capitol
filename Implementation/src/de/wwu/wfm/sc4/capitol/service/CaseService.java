@@ -6,4 +6,8 @@ public class CaseService extends AbstractServiceClass<Case> {
 	protected CaseService(){
 		super();
 	}
+
+	public Case findById(int id) {
+		return findById(Case.class, id);
+	}
 }

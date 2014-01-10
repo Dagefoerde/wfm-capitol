@@ -1,4 +1,4 @@
-package de.wwu.wfm.sc4.capitol.contractnegotiation;
+package de.wwu.wfm.sc4.capitol.ContractNegotiation;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

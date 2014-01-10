@@ -1,4 +1,4 @@
-package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
+package de.wwu.wfm.sc4.capitol.ContractNegotiation.apps;
 
 import java.util.ArrayList;
 import java.util.Collection;

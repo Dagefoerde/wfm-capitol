@@ -6,4 +6,8 @@ public class DamageReportService extends AbstractServiceClass<DamageReport> {
 	protected DamageReportService(){
 		super();
 	}
+	
+	public DamageReport findById(int id) {
+		return findById(DamageReport.class, id);
+	}
 }
