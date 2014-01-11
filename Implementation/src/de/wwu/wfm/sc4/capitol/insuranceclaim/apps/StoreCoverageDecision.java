@@ -1,38 +1,39 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
 import DTO.DataTransferObject;
-import de.wwu.wfm.sc4.capitol.data.AccidentReport;
 import de.wwu.wfm.sc4.capitol.data.Incident;
 import de.wwu.wfm.sc4.capitol.service.IncidentService;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
-public class UpdateAccidentReport {
+public class StoreCoverageDecision {
 	IncidentService service = ServiceInitializer.getProvider().getIncidentService();
 	private Incident incident;
-	private AccidentReport accidentReport;
-	private DataTransferObject dto;
+	private DataTransferObject originalDTO;
 	
-	public Incident complete() {
+	public DataTransferObject complete() {
 	
 		/*if (incident.getAccidentReport() != null) {
 			throw new IllegalStateException("Trying to add an accident report where there is one already!");
 		}
-		// TODO get AccidentReport from DTO
+		
 		incident.setAccidentReport(accidentReport);
 		service.persist(incident);
 		
 		return incident;*/
+		System.out.println("StoreCoverageDecision#complete()");
 		
+		DataTransferObject outgoingDTO = new DataTransferObject();
+		// TODO assemble DTO
 		
-		System.out.println("UpdateAccidentReport#complete()");
-		return null;
+		return outgoingDTO;
 	}
 	
 	public void setIncident(Incident incident) {
 		this.incident = incident;
 	}
 
-	public void setDTO(DataTransferObject dto) {
-		this.dto = dto;
+	public void setOriginalDTO(DataTransferObject originalDTO) {
+		this.originalDTO = originalDTO;
 	}
+
 }
