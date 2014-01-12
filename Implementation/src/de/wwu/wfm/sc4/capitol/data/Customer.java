@@ -1,6 +1,7 @@
 package de.wwu.wfm.sc4.capitol.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -41,25 +42,30 @@ public class Customer extends AbstractDataClass {
 	private String postalCode;
 
 	@OneToMany
-	private Collection<Case> case0;
+	private Collection<Case> cases;
 
-	@OneToOne
-	private Contract contract;
+	@OneToMany
+	private Collection<Contract> contracts;
 
+	public Customer(){
+		this.cases=new ArrayList<Case>();
+		this.contracts=new ArrayList<Contract>();
+	}
 	public Customer(String firstname, String lastname, String username,
 			String phone) {
+		this();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.phone = phone;
 	}
 
-	public Contract getContract() {
-		return contract;
+	public Collection<Contract> getContracts() {
+		return contracts;
 	}
 
-	public void setContract(Contract contract) {
-		this.contract = contract;
+	public void setContracts(Collection<Contract> contracts) {
+		this.contracts = contracts;
 	}
 
 	public int getId() {
@@ -120,6 +126,14 @@ public class Customer extends AbstractDataClass {
 
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+
+	public void setCases(Collection<Case> cases) {
+		this.cases = cases;
+	}
+
+	public Collection<Case> getCases() {
+		return cases;
 	}
 
 }
