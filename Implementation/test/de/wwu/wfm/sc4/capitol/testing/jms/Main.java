@@ -14,7 +14,14 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQObjectMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
 
+import ContractData.Car;
+import ContractData.ContractData;
+import ContractData.Requirements;
+import CustomerData.Customer;
 import DTO.DataTransferObject;
+import General.Address;
+
+import java.util.*;
 
 public class Main {
 
@@ -68,7 +75,7 @@ public class Main {
 	}
 
 	private static void createDTOForCreateContractFromCustomerRequirements(Session session, Queue q) throws JMSException, IOException {
-		DataTransferObject dto= new DataTransferObject();
+		DataTransferObject dto = createTestDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
 		message.setStringProperty("processID", "contracting_CapitolnewCustomerRequirements");
@@ -77,6 +84,17 @@ public class Main {
 		
 	}
 	
-	
+	private static DataTransferObject createTestDTO(){
+
+		DataTransferObject dto = new DataTransferObject();
+		ArrayList<Car> cars = new ArrayList<Car>();
+		float value = 89000;
+		cars.add(new Car("SU:FF:1337", "Black", "Limousine", value));
+		Requirements req = new Requirements("Open", 100.0,100.0,true,cars);
+		
+		dto.setContractData(new ContractData(1,req,null,null));
+		dto.setCustomer(new Customer("sn00per", "sn00per@gmx.de", "Marvin", "Franke", "01709036540", 1337, 1337, new Address(21,"Hermann-Hesse-Straﬂe", "48161")));
+		return dto;
+	}
 
 }
