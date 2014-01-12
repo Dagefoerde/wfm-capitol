@@ -27,10 +27,18 @@ public class Case extends AbstractDataClass {
 
 	@OneToMany
 	private Collection<Contract> contracts;
+	
+	@Column(name="negotiationState")
+	private NegotiationState negotiationState;
+	
+	public static enum NegotiationState{
+		inNegotiation,Terminated,Accepted;
+	}
 
 	public Case(){
 		requirements=new ArrayList<Requirements>();
 		contracts=new ArrayList<Contract>();
+		negotiationState=NegotiationState.inNegotiation;
 	}
 	
 	public Customer getCustomer() {
@@ -59,6 +67,14 @@ public class Case extends AbstractDataClass {
 
 	public void setContract(Collection<Contract> contract) {
 		this.contracts = contract;
+	}
+
+	public void setNegotiationState(NegotiationState negotiationState) {
+		this.negotiationState = negotiationState;
+	}
+
+	public NegotiationState getNegotiationState() {
+		return negotiationState;
 	}
 
 }
