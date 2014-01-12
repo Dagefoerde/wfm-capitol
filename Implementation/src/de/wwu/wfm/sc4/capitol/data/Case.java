@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.data;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -25,8 +26,13 @@ public class Case extends AbstractDataClass {
 	private Collection<Requirements> requirements;
 
 	@OneToMany
-	private Collection<Contract> contract;
+	private Collection<Contract> contracts;
 
+	public Case(){
+		requirements=new ArrayList<Requirements>();
+		contracts=new ArrayList<Contract>();
+	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -48,11 +54,11 @@ public class Case extends AbstractDataClass {
 	}
 
 	public Collection<Contract> getContract() {
-		return contract;
+		return contracts;
 	}
 
 	public void setContract(Collection<Contract> contract) {
-		this.contract = contract;
+		this.contracts = contract;
 	}
 
 }

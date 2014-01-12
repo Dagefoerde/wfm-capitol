@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
 
+
 import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
