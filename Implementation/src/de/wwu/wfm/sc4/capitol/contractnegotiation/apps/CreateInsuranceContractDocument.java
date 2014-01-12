@@ -1,9 +1,13 @@
-package de.wwu.wfm.sc4.capitol.ContractNegotiation.apps;
+package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import ContractData.ContractData;
+import ContractData.InsuranceContract;
+import DTO.DataTransferObject;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -18,10 +22,7 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import ContractData.ContractData;
-import ContractData.InsuranceContract;
-import DTO.DataTransferObject;
-import de.wwu.wfm.sc4.capitol.ContractNegotiation.Fonts;
+import de.wwu.wfm.sc4.capitol.contractnegotiation.Fonts;
 import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.data.Contract;

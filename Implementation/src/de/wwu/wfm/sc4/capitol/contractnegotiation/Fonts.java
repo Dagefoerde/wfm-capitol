@@ -1,4 +1,4 @@
-package de.wwu.wfm.sc4.capitol.ContractNegotiation;
+package de.wwu.wfm.sc4.capitol.contractnegotiation;
 
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
