@@ -1,4 +1,4 @@
-package de.wwu.wfm.sc4.capitol.ContractNegotiation.apps;
+package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -21,7 +21,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import ContractData.ContractData;
 import ContractData.InsuranceContract;
 import DTO.DataTransferObject;
-import de.wwu.wfm.sc4.capitol.ContractNegotiation.Fonts;
+import de.wwu.wfm.sc4.capitol.contractnegotiation.Fonts;
 import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.data.Contract;
@@ -152,7 +152,7 @@ public class CreateInsuranceContractDocument {
         t4.addCell(new Phrase(""));
         t4.getDefaultCell().setBorder(Rectangle.NO_BORDER);
         t4.addCell(new Phrase("Natural causes covered", Fonts.NORMAL));
-        t4.addCell(new Phrase(": "+(contract.getNaturalInsured()?"Yes":"No"), Fonts.NORMAL));
+        t4.addCell(new Phrase(": EUR " + String.format("%1$,.2f", contract.getNaturalInsured()), Fonts.NORMAL));
         t4.addCell(new Phrase("Pickup service covered", Fonts.NORMAL));
         t4.addCell(new Phrase(": "+(contract.getPickupService()?"Yes":"No"), Fonts.NORMAL));
         t4.addCell(new Phrase("Total Sum Insured", Fonts.NORMAL));
