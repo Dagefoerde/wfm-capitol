@@ -1,6 +1,5 @@
 package de.wwu.wfm.sc4.capitol.data;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -14,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contract")
 public class Contract extends AbstractDataClass {
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
@@ -39,6 +39,9 @@ public class Contract extends AbstractDataClass {
 	
 	@Column(name = "humanInsured")
 	private Double humanInsured;
+	
+	@Column(name = "signedInsuranceContract")
+	private byte[] signedInsuranceContract;
 	
 	public Case getCase0() {
 		return case0;
@@ -98,6 +101,14 @@ public class Contract extends AbstractDataClass {
 
 	public Double getHumanInsured() {
 		return humanInsured;
+	}
+
+	public void setSignedInsuranceContract(byte[] signedInsuranceContract) {
+		this.signedInsuranceContract = signedInsuranceContract;
+	}
+
+	public byte[] getSignedInsuranceContract() {
+		return signedInsuranceContract;
 	}
 
 }
