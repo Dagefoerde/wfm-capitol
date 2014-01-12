@@ -17,6 +17,7 @@ public class ExtractCustomerRequirements {
 	
 	public void complete(){
 		req = new Requirements();
+		
 		Collection <Car> cars = new ArrayList<Car>();
 		for(int i = 0; i<dto.getContractData().getRequirements().getCars().size(); i++)
 			cars.add(new Car(dto.getContractData().getRequirements().getCars().get(i).getLicensePlate(),
@@ -25,7 +26,7 @@ public class ExtractCustomerRequirements {
 					dto.getContractData().getRequirements().getCars().get(i).getValue()));
 		req.setCars(cars);
 		req.setHumanInsured(dto.getContractData().getRequirements().getHumanInsured());
-		//req.setNaturalInsured(dto.getContractData().getRequirements().getNaturalInsured());
+		req.setNaturalInsured(dto.getContractData().getRequirements().getNaturalInsured());
 		req.setPickupService(dto.getContractData().getRequirements().isPickUpService());
 	}
 	public Requirements getCustomerRequirements(){

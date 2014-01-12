@@ -153,7 +153,7 @@ public class CreateInsuranceContractDocument {
         t4.addCell(new Phrase(""));
         t4.getDefaultCell().setBorder(Rectangle.NO_BORDER);
         t4.addCell(new Phrase("Natural causes covered", Fonts.NORMAL));
-        t4.addCell(new Phrase(": "+(contract.getNaturalInsured()?"Yes":"No"), Fonts.NORMAL));
+        t4.addCell(new Phrase(": EUR " + String.format("%1$,.2f", contract.getNaturalInsured()), Fonts.NORMAL));
         t4.addCell(new Phrase("Pickup service covered", Fonts.NORMAL));
         t4.addCell(new Phrase(": "+(contract.getPickupService()?"Yes":"No"), Fonts.NORMAL));
         t4.addCell(new Phrase("Total Sum Insured", Fonts.NORMAL));

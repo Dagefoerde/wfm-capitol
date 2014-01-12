@@ -26,7 +26,7 @@ public class Requirements extends AbstractDataClass {
 	private Collection<Car> cars;
 	
 	@Column(name = "naturalInsured")
-	private Boolean naturalInsured;
+	private Double naturalInsured;
 	
 	@Column(name = "pickupService")
 	private Boolean pickupService;
@@ -58,11 +58,11 @@ public class Requirements extends AbstractDataClass {
 		this.cars = cars;
 	}
 
-	public void setNaturalInsured(Boolean naturalInsured) {
+	public void setNaturalInsured(Double naturalInsured) {
 		this.naturalInsured = naturalInsured;
 	}
 
-	public Boolean getNaturalInsured() {
+	public Double getNaturalInsured() {
 		return naturalInsured;
 	}
 
