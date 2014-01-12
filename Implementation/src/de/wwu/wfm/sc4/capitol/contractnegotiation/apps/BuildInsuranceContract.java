@@ -30,6 +30,6 @@ public class BuildInsuranceContract {
 		contract.setPickupService(customerRequirements.getPickupService());
 	}
 	public Contract getContract(){
-		return null;
+		return contract;
 	}
 }

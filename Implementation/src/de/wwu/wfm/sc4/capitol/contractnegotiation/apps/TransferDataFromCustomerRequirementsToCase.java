@@ -9,38 +9,43 @@ import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.data.Customer;
 
 public class TransferDataFromCustomerRequirementsToCase {
-	
+
 	private DataTransferObject dto;
 	private Case case0;
-	
-	
-	public TransferDataFromCustomerRequirementsToCase(){
-		
-		
-		
+
+	public TransferDataFromCustomerRequirementsToCase() {
+
 	}
-	public void setCustomerRequirements(DataTransferObject dto ){
-		
+
+	public void setCustomerRequirements(DataTransferObject dto) {
+
 		this.dto = dto;
-		
+
 	}
-	public Case getCase(){
-		return case0;		
+
+	public Case getCase() {
+		return case0;
 	}
-	public void complete(){
-		Customer cust = new Customer (dto.getCustomer().getFirstName(), dto.getCustomer().getLastName(), dto.getCustomer().getUsername(), dto.getCustomer().getPhone());
+
+	public void complete() {
+		case0=new Case();
+		Customer cust = new Customer(dto.getCustomer().getFirstName(), dto
+				.getCustomer().getLastName(), dto.getCustomer().getUsername(),
+				dto.getCustomer().getPhone());
 		cust.setStreet(dto.getCustomer().getAddress().getStreet());
 		cust.setStreetNumber(dto.getCustomer().getAddress().getStreetNumber());
 		cust.setPostalCode(dto.getCustomer().getAddress().getPostalCode());
 		case0.setCustomer(cust);
-		
-		
-		Collection <Car> cars = new ArrayList<Car>();
-		for(int i = 0; i<dto.getContractData().getRequirements().getCars().size(); i++)
-			cars.add(new Car(dto.getContractData().getRequirements().getCars().get(i).getLicensePlate(),
-					dto.getContractData().getRequirements().getCars().get(i).getType(), 
-					dto.getContractData().getRequirements().getCars().get(i).getColor(), 
-					dto.getContractData().getRequirements().getCars().get(i).getValue()));		
+
+		Collection<Car> cars = new ArrayList<Car>();
+		for (int i = 0; i < dto.getContractData().getRequirements().getCars()
+				.size(); i++)
+			cars.add(new Car(dto.getContractData().getRequirements().getCars()
+					.get(i).getLicensePlate(), dto.getContractData()
+					.getRequirements().getCars().get(i).getType(), dto
+					.getContractData().getRequirements().getCars().get(i)
+					.getColor(), dto.getContractData().getRequirements()
+					.getCars().get(i).getValue()));
 	}
 
 }

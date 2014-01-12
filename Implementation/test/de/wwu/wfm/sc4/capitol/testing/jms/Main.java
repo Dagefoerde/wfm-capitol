@@ -78,7 +78,7 @@ public class Main {
 		DataTransferObject dto = createTestDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "contracting_CapitolnewCustomerRequirements");
+		message.setStringProperty("processID", "contracting_newCR");
 		message.setObject(dto);
 		producer.send(message);
 		

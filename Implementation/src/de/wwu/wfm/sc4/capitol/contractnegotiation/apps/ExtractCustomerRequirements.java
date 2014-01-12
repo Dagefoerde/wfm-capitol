@@ -16,6 +16,7 @@ public class ExtractCustomerRequirements {
 	}
 	
 	public void complete(){
+		System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		req = new Requirements();
 		
 		Collection <Car> cars = new ArrayList<Car>();

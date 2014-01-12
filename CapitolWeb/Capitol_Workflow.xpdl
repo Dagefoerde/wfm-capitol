@@ -484,18 +484,18 @@
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
 <carnot:Attribute Name="carnot:engine:className" Value="java.lang.String"/>
-<carnot:Attribute Name="carnot:engine:defaultValue" Value="contracting_BVISnewInsuranceContract"/>
+<carnot:Attribute Name="carnot:engine:defaultValue" Value="contracting_BVIS"/>
 <carnot:Attribute Name="carnot:engine:jms.location" Value="HEADER" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
 </carnot:Attributes>
 </carnot:AccessPoint>
 </carnot:AccessPoints>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:type" Value="out" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSDirection"/>
-<carnot:Attribute Name="carnot:engine:queue.jndiName" Value="java:comp/env/jms/CarnotApplicationQUeue"/>
+<carnot:Attribute Name="carnot:engine:queue.jndiName" Value="java:comp/env/jms/CarnotApplicationQueue2"/>
 <carnot:Attribute Name="carnot:engine:messageProvider" Value="ag.carnot.workflow.spi.providers.applications.jms.DefaultMessageProvider"/>
 <carnot:Attribute Name="carnot:engine:requestMessageType" Value="Object" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
-<carnot:Attribute Name="carnot:engine:includeOidHeaders" Value="false" Type="boolean"/>
-<carnot:Attribute Name="carnot:engine:queueConnectionFactory.jndiName" Value="java:comp/env/jms/CarnotXAConnectionFactoryBVIS"/>
+<carnot:Attribute Name="carnot:engine:includeOidHeaders" Value="true" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:queueConnectionFactory.jndiName" Value="java:comp/env/jms/CarnotXAConnectionFactoryCapitol"/>
 </carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
@@ -974,8 +974,8 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10486" Type="serializable">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="DTO.DataTransferObject"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:className" Value="DTO.DataTransferObject"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -2653,7 +2653,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="contracting_CapitolnewCustomerRequirements" Name="Create contract from customer requirements" AccessLevel="PUBLIC">
+<WorkflowProcess Id="contracting_newCR" Name="Create contract from customer requirements" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="RetrieveCase" Name="Retrieve case">
@@ -3124,7 +3124,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="ACTIVITY" Oid="10436" X="250" Y="30" Width="171" Height="51" ModelElement="ExtractCustomerRequirements"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10438" X="10" Y="-40" Width="170" Height="40" ModelElement="ExtractCustomerRequirements"/>
 <carnot:Symbol Kind="DATA" Oid="10442" X="-45" Y="290" Width="130" Height="60" ModelElement="CustomerRequirements"/>
-<carnot:Symbol Kind="DATA" Oid="10450" X="155" Y="475" Width="110" Height="60" ModelElement="Contract"/>
+<carnot:Symbol Kind="DATA" Oid="10450" X="-10" Y="475" Width="110" Height="60" ModelElement="Contract"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10573" X="300" Y="375" Width="151" Height="51" ModelElement="AddRequirementsToCase"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10575" X="-45" Y="385" Width="150" Height="40" ModelElement="AddRequirementsToCase"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10578" X="355" Y="310" Width="42" Height="42" ModelElement="10573" FlowKind="join"/>
@@ -3165,6 +3165,9 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connection Kind="TRANSITION" Oid="10613" ModelElement="Transition_12" SourceSymbol="10366" TargetSymbol="10611" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10614" SourceSymbol="10611" TargetSymbol="10367" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10617" SourceSymbol="10616" TargetSymbol="10611"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10626" SourceSymbol="10391" TargetSymbol="10573"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10627" SourceSymbol="10391" TargetSymbol="10611"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10628" SourceSymbol="10442" TargetSymbol="10573"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
