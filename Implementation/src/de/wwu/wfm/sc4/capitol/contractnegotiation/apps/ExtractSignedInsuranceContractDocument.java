@@ -29,6 +29,7 @@ public class ExtractSignedInsuranceContractDocument {
 					dto.getContractData().getRequirements().getCars().get(i).getType(), 
 					dto.getContractData().getRequirements().getCars().get(i).getColor(), 
 					dto.getContractData().getRequirements().getCars().get(i).getValue()));	
+		contract.setCars(cars);
 		contract.setHumanInsured(dto.getContractData().getRequirements().getHumanInsured());
 		contract.setNaturalInsured(dto.getContractData().getRequirements().getNaturalInsured());
 		contract.setPickupService(dto.getContractData().getRequirements().isPickUpService());
