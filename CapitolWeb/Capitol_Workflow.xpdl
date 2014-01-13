@@ -300,14 +300,20 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
-<Application Id="UpdateIncidentInArchive" Name="Update incident in archive">
+<Application Id="CopyClaimDataIntoIncident" Name="Copy Claim Data Into Incident">
 <Description>Store or update the incident object in our internal database.</Description>
-<ExternalReference location="" xref=""/>
+<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.CopyClaimDataIntoIncident" xref="complete:"/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10330" Type="plainJava">
 <carnot:ApplicationContexts/>
 <carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.CopyClaimDataIntoIncident"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+<carnot:Attribute Name="carnot:engine:constructorName" Value="CopyClaimDataIntoIncident()"/>
+</carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
 </ExtendedAttributes>
@@ -839,23 +845,6 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </DataField>
-<DataField Id="CostEstimation" Name="Cost estimation" IsArray="FALSE">
-<DataType>
-<DeclaredType Id="CostEstimation"/>
-</DataType>
-<Description>Cost estimation created by C&amp;C</Description>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:DataField Oid="10221" Type="struct">
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
-<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
-<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
-</carnot:Attributes>
-</carnot:DataField>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</DataField>
 <DataField Id="Case" Name="Case" IsArray="FALSE">
 <DataType>
 <ExternalReference location="de.wwu.wfm.sc4.capitol.data.Case"/>
@@ -883,39 +872,6 @@
 <carnot:Attributes>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
 <carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Contract"/>
-</carnot:Attributes>
-</carnot:DataField>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</DataField>
-<DataField Id="DamageReport" Name="Damage report" IsArray="FALSE">
-<DataType>
-<DeclaredType Id="DamageReport"/>
-</DataType>
-<Description>Damage report created by C&amp;C</Description>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:DataField Oid="10332" Type="struct">
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:path:separator" Value="/"/>
-<carnot:Attribute Name="carnot:engine:data:bidirectional" Value="true" Type="boolean"/>
-<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
-</carnot:Attributes>
-</carnot:DataField>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</DataField>
-<DataField Id="CustomerData" Name="Customer data" IsArray="FALSE">
-<DataType>
-<BasicType Type="STRING"/>
-</DataType>
-<Description>Additional data about the Customer that was added by BVIS</Description>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:DataField Oid="10338" Type="primitive">
-<carnot:Attributes>
-<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="carnot:engine:type" Value="String" Type="ag.carnot.workflow.spi.providers.data.java.Type"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -1768,17 +1724,12 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttributes>
 </Activity>
 <Activity Id="UpdateIncident" Name="Update Incident">
-<Description/>
 <Implementation>
-<Tool Id="UpdateIncidentInArchive" Type="APPLICATION">
+<Tool Id="CopyClaimDataIntoIncident" Type="APPLICATION">
 <ActualParameters>
-<ActualParameter>CustomerData</ActualParameter>
-<ActualParameter>CostEstimation</ActualParameter>
-<ActualParameter>DamageReport</ActualParameter>
 <ActualParameter>Incident</ActualParameter>
-<ActualParameter>Incident</ActualParameter>
+<ActualParameter>DTO</ActualParameter>
 </ActualParameters>
-<Description/>
 </Tool>
 </Implementation>
 <StartMode>
@@ -1792,25 +1743,13 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Activity Oid="10180" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
-<carnot:DataFlow Oid="10181" Id="CustomerData" Name="CustomerData" Direction="IN" Context="application">
-<carnot:DataRef Id="CustomerData"/>
-<carnot:AccessPointRef/>
-</carnot:DataFlow>
-<carnot:DataFlow Oid="10182" Id="CostEstimation" Name="CostEstimation" Direction="IN" Context="application">
-<carnot:DataRef Id="CostEstimation"/>
-<carnot:AccessPointRef/>
-</carnot:DataFlow>
-<carnot:DataFlow Oid="10183" Id="DamageReport" Name="DamageReport" Direction="IN" Context="application">
-<carnot:DataRef Id="DamageReport"/>
-<carnot:AccessPointRef/>
-</carnot:DataFlow>
-<carnot:DataFlow Oid="10184" Id="Case" Name="Case" Direction="IN" Context="application">
+<carnot:DataFlow Oid="10184" Id="Incident" Name="Incident" Direction="IN" Context="application">
 <carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef/>
+<carnot:AccessPointRef Id="setIncident(de.wwu.wfm.sc4.capitol.data.Incident)"/>
 </carnot:DataFlow>
-<carnot:DataFlow Oid="10185" Id="Case" Name="Case" Direction="OUT" Context="application">
-<carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef/>
+<carnot:DataFlow Oid="10629" Id="DTO" Name="DTO" Direction="IN" Context="application">
+<carnot:DataRef Id="DTO"/>
+<carnot:AccessPointRef Id="setDTO(DTO.DataTransferObject)"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
@@ -1892,14 +1831,11 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="ACTIVITY" Oid="10195" X="225" Y="270" Width="141" Height="51" ModelElement="UpdateIncident"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10196" X="135" Y="155" Width="42" Height="42" ModelElement="10192" FlowKind="split"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10197" X="-5" Y="205" Width="110" Height="40" ModelElement="NotificationToBVIS"/>
-<carnot:Symbol Kind="DATA" Oid="10198" X="450" Y="190" Width="100" Height="60" ModelElement="DamageReport"/>
-<carnot:Symbol Kind="DATA" Oid="10199" X="455" Y="255" Width="100" Height="60" ModelElement="CostEstimation"/>
-<carnot:Symbol Kind="DATA" Oid="10200" X="440" Y="335" Width="90" Height="60" ModelElement="CustomerData"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10201" X="275" Y="390" Width="40" Height="40"/>
 <carnot:Symbol Kind="DATA" Oid="10202" X="470" Y="60" Width="175" Height="60" ModelElement="Incident"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10203" X="130" Y="210" Width="130" Height="40" ModelElement="UpdateIncidentInArchive"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10203" X="130" Y="210" Width="130" Height="40" ModelElement="CopyClaimDataIntoIncident"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10204" X="-70" Y="60" Width="100" Height="40" ModelElement="InitializeIncident"/>
-<carnot:Symbol Kind="DATA" Oid="10487" X="235" Y="-5" Width="110" Height="60" ModelElement="DTO"/>
+<carnot:Symbol Kind="DATA" Oid="10487" X="330" Y="120" Width="110" Height="60" ModelElement="DTO"/>
 <carnot:Symbol Kind="ANNOTATION" Oid="10492" X="-20" Y="340" Width="130" Height="40">
 <carnot:Text>BVIS doesn't yet have a process to handle this!!</carnot:Text>
 </carnot:Symbol>
@@ -1911,15 +1847,13 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connection Kind="TRANSITION" Oid="10208" ModelElement="Transition_2" SourceSymbol="10196" TargetSymbol="10195" SourceAnchor="center" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10209" SourceSymbol="10192" TargetSymbol="10196" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10210" SourceSymbol="10197" TargetSymbol="10193"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10211" SourceSymbol="10200" TargetSymbol="10195"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10212" SourceSymbol="10199" TargetSymbol="10195"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10213" SourceSymbol="10198" TargetSymbol="10195"/>
 <carnot:Connection Kind="TRANSITION" Oid="10214" SourceSymbol="10195" TargetSymbol="10201" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10215" SourceSymbol="10202" TargetSymbol="10192"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10216" SourceSymbol="10202" TargetSymbol="10195"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10217" SourceSymbol="10203" TargetSymbol="10195"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10218" SourceSymbol="10204" TargetSymbol="10192"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10491" SourceSymbol="10487" TargetSymbol="10192"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10630" SourceSymbol="10487" TargetSymbol="10195"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
