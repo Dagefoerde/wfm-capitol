@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contract")
 public class Contract extends AbstractDataClass {
+	private static final long serialVersionUID = 3684205372429187300L;
 
 	@Id
 	@GeneratedValue

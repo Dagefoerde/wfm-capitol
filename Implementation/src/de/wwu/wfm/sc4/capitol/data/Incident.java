@@ -14,10 +14,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "incident")
 public class Incident extends AbstractDataClass {
+	private static final long serialVersionUID = 6374331148916365902L;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+
+	/**
+	 * Stores the ID that identifies an incident across the company's boundaries
+	 */
+	@Column(unique = true)
+	private int sharedIncidentID;
 
 	@OneToOne
 	private Contract contract;
@@ -33,41 +41,19 @@ public class Incident extends AbstractDataClass {
 
 	@OneToMany
 	private List<Invoice> invoices;
-	
+
 	private Date lastReminder;
 
 	public Contract getContract() {
-		if (contract != null)
-			return contract;
-
-		else {
-			// TODO
-			// contract = ContractService.getSingleton().getById(contractID);
-			// return contract;
-		}
-		return null;
+		return contract;
 	}
 
 	public void setContract(Contract c) {
-		// TODO
-		// contractID = c.getID();
 		contract = c;
 	}
 
 	public List<Invoice> getInvoices() {
-		if (invoices != null)
-			return invoices;
-
-		else {
-			// incident is not saved yet, therefore there are no related
-			// invoices!
-			return null;
-		}
-
-		// TODO
-		// invoices =
-		// InvoiceService.getSingleton().getAllByIncidentId(incidentID);
-		// return invoices;
+		return invoices;
 	}
 
 	public Car getCar() {
@@ -108,6 +94,14 @@ public class Incident extends AbstractDataClass {
 
 	public Date getLastReminder() {
 		return lastReminder;
+	}
+
+	public void setSharedIncidentID(int sharedIncidentID) {
+		this.sharedIncidentID = sharedIncidentID;
+	}
+
+	public int getSharedIncidentID() {
+		return sharedIncidentID;
 	}
 
 }
