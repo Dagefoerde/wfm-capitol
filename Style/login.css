@@ -17,4 +17,13 @@
         width 100%;
         background: #000000 url(./images/login-logo.jpg) left no-repeat;
         border-bottom: 3px solid #000000;
+
+	.topMenu{
+	height: 23px;
+	line-height:23px;
+	background: #111111;
+	border-top:1px solid #666666;
+	border-bottom:1px solid #000000;
+	color: #DDDDDD;
+}
       }
