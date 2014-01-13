@@ -26,7 +26,7 @@ public class SaveSignedInsuranceContract {
 		FileOutputStream output;
 		try {
 			output = new FileOutputStream(path);
-			output.write(contract.getSignedInsuranceContract());
+			output.write(contract.getSignedInsuranceContract()); // TODO does this mean that we save the contract as PDF file AND in the db? why?
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
