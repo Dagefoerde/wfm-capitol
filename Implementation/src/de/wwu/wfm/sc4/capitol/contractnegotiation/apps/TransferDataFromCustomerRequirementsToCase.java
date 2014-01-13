@@ -46,6 +46,9 @@ public class TransferDataFromCustomerRequirementsToCase {
 					.getContractData().getRequirements().getCars().get(i)
 					.getColor(), dto.getContractData().getRequirements()
 					.getCars().get(i).getValue()));
+		// TODO The collection "cars" is not assigned anywhere! What is it good for? 
+		// Aren't cars part of the Requirements (and therefore not necessary/sensible here)?
+		// Also, they will be part of the (final) contract, but not of the customer directly...
 	}
 
 }
