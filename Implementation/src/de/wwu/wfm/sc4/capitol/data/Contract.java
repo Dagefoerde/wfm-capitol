@@ -19,6 +19,9 @@ public class Contract extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 	
+	@Column(unique = true)
+	private int sharedContractId;
+	
 	@OneToOne
 	private Case case0;
 	

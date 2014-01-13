@@ -1,6 +1,5 @@
 package de.wwu.wfm.sc4.capitol.data;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,12 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "customer")
 public class Customer extends AbstractDataClass {
+	private static final long serialVersionUID = 6915034605905511136L;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
@@ -26,8 +26,11 @@ public class Customer extends AbstractDataClass {
 	@Column(name = "lastname")
 	private String lastname;
 
-	@Column(name = "username")
+	@Column(name = "username", unique=true)
 	private String username;
+
+	@Column(name = "eMail", unique=true)
+	private String eMail;
 
 	@Column(name = "phone")
 	private String phone;
@@ -134,6 +137,12 @@ public class Customer extends AbstractDataClass {
 
 	public Collection<Case> getCases() {
 		return cases;
+	}
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
+	}
+	public String getEMail() {
+		return eMail;
 	}
 
 }

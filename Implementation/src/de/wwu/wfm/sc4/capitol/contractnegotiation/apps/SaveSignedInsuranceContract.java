@@ -39,6 +39,8 @@ public class SaveSignedInsuranceContract {
 		ServiceInitializer.getProvider().getCustomerService().persist(customer);
 		Case case0=contract.getCase0();
 		case0.setNegotiationState(Case.NegotiationState.Accepted);
+		// TODO save flag for contract, stating that it is accepted!
+		// TODO save shared contract id (if this is not done before). This is to identify this contract later, when BVIS supplies us with a claim... 
 		ServiceInitializer.getProvider().getCaseService().persist(case0);
 	}
 
