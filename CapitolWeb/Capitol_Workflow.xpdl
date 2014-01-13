@@ -998,7 +998,7 @@
 </carnot:DataFlow>
 <carnot:DataFlow Oid="10511" Id="Incident" Name="Incident" Direction="OUT" Context="application">
 <carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef Id="complete()"/>
+<carnot:AccessPointRef Id="returnValue"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
