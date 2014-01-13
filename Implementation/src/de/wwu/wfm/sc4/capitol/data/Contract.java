@@ -115,4 +115,12 @@ public class Contract extends AbstractDataClass {
 		return signedInsuranceContract;
 	}
 
+	public void setSharedContractId(int sharedContractId) {
+		this.sharedContractId = sharedContractId;
+	}
+
+	public int getSharedContractId() {
+		return sharedContractId;
+	}
+
 }
