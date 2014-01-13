@@ -3,6 +3,7 @@ package de.wwu.wfm.sc4.capitol.data;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class Incident extends AbstractDataClass {
 	@OneToOne(optional = true)
 	private AccidentReport accidentReport;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private DamageReport damageReport;
 
 	@OneToMany
@@ -78,6 +79,7 @@ public class Incident extends AbstractDataClass {
 
 	public void setDamageReport(DamageReport damageReport) {
 		this.damageReport = damageReport;
+		damageReport.setIncident(this);
 	}
 
 	public int getId() {

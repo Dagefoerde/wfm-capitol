@@ -35,6 +35,7 @@
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Case" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Contract" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Customer" />
+		<mapping class="de.wwu.wfm.sc4.capitol.data.DamageReportEntry" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.DamageReport" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Incident" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Invoice" />
