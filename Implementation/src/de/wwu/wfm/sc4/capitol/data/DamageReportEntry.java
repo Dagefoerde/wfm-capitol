@@ -1,9 +1,13 @@
 package de.wwu.wfm.sc4.capitol.data;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "damage_report_entry")
 public class DamageReportEntry extends AbstractDataClass {
 	private static final long serialVersionUID = -5013844272346758457L;
 
