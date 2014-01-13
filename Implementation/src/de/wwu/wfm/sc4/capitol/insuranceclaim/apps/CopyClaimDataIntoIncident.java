@@ -33,7 +33,9 @@ public class CopyClaimDataIntoIncident {
 		// add dmg report
 		List<Entry> dtoDamageList = dto.getClaimData().getDamageReport().getDamageList();
 		ArrayList<DamageReportEntry> damages = new ArrayList<DamageReportEntry>(dtoDamageList.size());
-		
+
+		DamageReport damageReport = new DamageReport();
+		damageReport.setEntries(damages);
 		for (Entry e : dtoDamageList) {
 			DamageReportEntry damage = new DamageReportEntry();
 			damage.setPosition(e.getiD());
@@ -42,13 +44,13 @@ public class CopyClaimDataIntoIncident {
 			damage.setCoverageDecision(e.getCoverageDecision() == null? false : e.getCoverageDecision());
 			
 			damages.add(damage);
+			damage.setDamageReport(damageReport);
 		}
 		
-		DamageReport damageReport = new DamageReport();
-		damageReport.setEntries(damages);
 		incident.setDamageReport(damageReport);
 		
 		// persist
 		ServiceInitializer.p().getIncidentService().persist(incident);
+		ServiceInitializer.p().getDamageReportService().persist(damageReport);
 	}
 }

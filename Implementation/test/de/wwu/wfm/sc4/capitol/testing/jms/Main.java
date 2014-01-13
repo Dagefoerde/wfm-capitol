@@ -14,6 +14,10 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQObjectMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
 
+import ClaimData.ClaimData;
+import ClaimData.ClaimReport;
+import ClaimData.DamageReport;
+import ClaimData.Entry;
 import ContractData.Car;
 import ContractData.ContractData;
 import ContractData.Requirements;
@@ -48,7 +52,8 @@ public class Main {
 			System.out.println(session);
 			System.out.println(q);
 			//consume(session, q);
-			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
+			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
+			createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +80,7 @@ public class Main {
 	}
 
 	private static void createDTOForCreateContractFromCustomerRequirements(Session session, Queue q) throws JMSException, IOException {
-		DataTransferObject dto = createTestDTO();
+		DataTransferObject dto = createCreateContractDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
 		message.setStringProperty("processID", "contracting_newCR");
@@ -83,8 +88,17 @@ public class Main {
 		producer.send(message);
 		
 	}
+	private static void createDTOForDamageReports(Session session, Queue q) throws JMSException, IOException {
+		DataTransferObject dto = createDamageReportDTO();
+		MessageProducer producer = session.createProducer(q);
+		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
+		message.setStringProperty("processID", "claimHandling_CapitolDamageReport");
+		message.setObject(dto);
+		producer.send(message);
+		
+	}
 	
-	private static DataTransferObject createTestDTO(){
+	private static DataTransferObject createCreateContractDTO(){
 
 		DataTransferObject dto = new DataTransferObject();
 		ArrayList<Car> cars = new ArrayList<Car>();
@@ -94,6 +108,26 @@ public class Main {
 		
 		dto.setContractData(new ContractData(1,req,null,null));
 		dto.setCustomer(new Customer("sn00per", "sn00per@gmx.de", "Marvin", "Franke", "01709036540", 1337, 1337, new Address(21,"Hermann-Hesse-Straﬂe", "48161")));
+		return dto;
+	}
+	
+	private static DataTransferObject createDamageReportDTO(){
+
+		DataTransferObject dto = new DataTransferObject();
+		dto.setCommunicationReason("claimHandling_CapitolDamageReport");
+		ClaimReport claimReport = new ClaimReport(null, null, null, new Car(), null, null, false, false);
+		
+		ArrayList<Entry> damages = new ArrayList<Entry>();
+		damages.add(new Entry(1, "Broken Window", 1000));
+		damages.add(new Entry(2, "Gas pedal", 70));
+		damages.add(new Entry(1, "Heater", 2500));
+		
+		DamageReport damageReport = new DamageReport(damages, null, null);
+		ClaimData claimData = new ClaimData(123, claimReport, null, damageReport, null, null, null);
+		
+		dto.setClaimData(claimData);
+		dto.setContractData(new ContractData(22, null, null, null));
+		
 		return dto;
 	}
 

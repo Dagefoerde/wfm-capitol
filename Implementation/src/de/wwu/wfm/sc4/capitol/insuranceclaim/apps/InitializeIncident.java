@@ -39,6 +39,8 @@ public class InitializeIncident {
 	public Incident complete() {
 		Contract contract = ServiceInitializer.p().getContractService()
 				.findBySharedId(dto.getContractData().getContractId());
+		// TODO do we actually get contract data?! probably not.
+		// Maybe retrieve via ClaimData->ClaimReport->Car
 
 		if (contract == null) {
 			// contract not found,
