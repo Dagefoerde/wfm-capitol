@@ -18,6 +18,18 @@ public class IncidentService extends AbstractServiceClass<Incident> {
 	public Incident findById(int id) {
 		return findById(Incident.class, id);
 	}
+	
+	public Incident findBySharedId(int sharedId) {
+		Session s = getSession();
+		Query q = s.createQuery("from Incident i" +
+				" where i.sharedIncidentId = :id");
+		q.setInteger("id", sharedId);
+		
+		List<?> results = q.list();
+		
+		if (results.size() == 0) return null;
+		return (Incident)results.get(0);		
+	}
 
 	public List<Incident> findIncidentsWithReminderOlderThan(int days) {
 		if (days < 0)
