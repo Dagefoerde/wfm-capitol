@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "car")
 public class Car extends AbstractDataClass {
+	private static final long serialVersionUID = 7913323976741736959L;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")

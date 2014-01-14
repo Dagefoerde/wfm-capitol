@@ -1,6 +1,5 @@
 package de.wwu.wfm.sc4.capitol.data;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -14,6 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "requirements")
 public class Requirements extends AbstractDataClass {
+	private static final long serialVersionUID = 4287543792137629436L;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")

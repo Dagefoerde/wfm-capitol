@@ -26,6 +26,7 @@ public class ServiceInitializer {
 	private IncidentService incidentService;
 	private InvoiceService invoiceService;
 	private RequirementsService requirementsService;
+	private AddressService addressService;
 
 	private SessionFactory sessionFactory;
 	private Session session;
@@ -40,6 +41,7 @@ public class ServiceInitializer {
 		incidentService = new IncidentService();
 		invoiceService = new InvoiceService();
 		requirementsService = new RequirementsService();
+		addressService = new AddressService();
 
 		sessionFactory = new AnnotationConfiguration().configure()
 				.buildSessionFactory();
@@ -91,5 +93,9 @@ public class ServiceInitializer {
 		if (session != null)
 			session.close();
 		session = null;
+	}
+
+	public AddressService getAddressService() {
+		return addressService;
 	}
 }

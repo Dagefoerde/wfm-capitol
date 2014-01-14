@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contractcase")
 public class Case extends AbstractDataClass {
+	private static final long serialVersionUID = -5614119743408419861L;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
