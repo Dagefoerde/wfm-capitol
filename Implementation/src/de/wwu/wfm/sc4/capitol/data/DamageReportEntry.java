@@ -59,7 +59,4 @@ public class DamageReportEntry extends AbstractDataClass {
 	public DamageReport getDamageReport() {
 		return damageReport;
 	}
-	
-	
-
 }

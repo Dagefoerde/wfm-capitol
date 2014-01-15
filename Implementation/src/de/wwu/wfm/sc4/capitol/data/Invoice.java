@@ -161,15 +161,25 @@ public class Invoice extends AbstractDataClass {
 	public void setBankAccountHolder(String bankAccountHolder) {
 		this.bankAccountHolder = bankAccountHolder;
 	}
-	
-	public double getTotal(){
-		//TODO
-		return 0;
+
+	public double getTotal() {
+		return getDueSum();
 	}
-	
-	public double getEstimatedTotal(){
-		//TODO
-		return 0;
+
+	public double getEstimatedTotal() throws Exception {
+		if (incident == null) {
+			throw new Exception("Invoice is not connected to an incident.");
+		}
+		DamageReport damageReport = incident.getDamageReport();
+		if (damageReport == null) {
+			throw new Exception("DamageReport is not existent in incident.");
+		}
+		double estimatedTotal = 0;
+
+		for (DamageReportEntry d : damageReport.getEntries()) {
+			estimatedTotal += d.getCostEstimation();
+		}
+		return estimatedTotal;
 	}
 
 }

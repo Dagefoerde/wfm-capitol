@@ -1,8 +1,10 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
+import java.util.Date;
 import java.util.List;
 
 import de.wwu.wfm.sc4.capitol.data.Incident;
+import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class ReminderEmail {
 
@@ -11,12 +13,11 @@ public class ReminderEmail {
 		
 		for(Incident incident : incidents) {
 			synchronized (incident) { // work on db objects with mutual exclusion!
-				// send email
 				
-				// update reminder date
+				// TODO send email
 				
-				// update incident in db
-				
+				incident.setLastReminder(new Date());
+				ServiceInitializer.getProvider().getIncidentService().persist(incident);
 			}
 		}
 	}
