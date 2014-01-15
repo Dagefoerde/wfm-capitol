@@ -2,6 +2,7 @@ package de.wwu.wfm.sc4.capitol.data;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class AccidentReport extends AbstractDataClass {
 	private boolean isMaintenace;
 	private boolean needsTow;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Incident incident;
 
 	public AccidentReport() {

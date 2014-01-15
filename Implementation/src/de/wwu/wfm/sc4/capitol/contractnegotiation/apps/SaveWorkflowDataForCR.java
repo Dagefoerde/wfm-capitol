@@ -17,7 +17,7 @@ public class SaveWorkflowDataForCR {
 	public void complete(){
 		ServiceInitializer.getProvider().getCaseService().persist(case0);
 		
-		ServiceInitializer.getProvider().getCustomerService().persist(case0.getCustomer());
+		/*ServiceInitializer.getProvider().getCustomerService().persist(case0.getCustomer());
 		
 		Collection<Requirements> reqs = case0.getRequirements();
 		Requirements currentReq = null;
@@ -40,7 +40,7 @@ public class SaveWorkflowDataForCR {
 		Iterator<Contract> iteratorCon = cons.iterator();
 		while (iteratorCon.hasNext())
 		currentCon=iteratorCon.next();
-		ServiceInitializer.getProvider().getContractService().persist(currentCon);
+		ServiceInitializer.getProvider().getContractService().persist(currentCon);*/
 	}
 
 }

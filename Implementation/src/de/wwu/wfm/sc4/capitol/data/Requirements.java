@@ -2,6 +2,7 @@ package de.wwu.wfm.sc4.capitol.data;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +21,10 @@ public class Requirements extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Case case0;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Car> cars;
 	
 	@Column(name = "naturalInsured")

@@ -3,6 +3,7 @@ package de.wwu.wfm.sc4.capitol.data;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,10 +45,10 @@ public class Customer extends AbstractDataClass {
 	@Column(name = "postalCode")
 	private String postalCode;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Case> cases;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Contract> contracts;
 
 	public Customer(){

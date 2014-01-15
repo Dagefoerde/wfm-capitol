@@ -2,6 +2,7 @@ package de.wwu.wfm.sc4.capitol.data;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,13 +33,13 @@ public class Car extends AbstractDataClass {
 	@Column(name = "buyingPrice")
 	private Double buyingPrice;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Requirements requirements;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Incident> incident;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Contract contract;
 
 	public Car() {

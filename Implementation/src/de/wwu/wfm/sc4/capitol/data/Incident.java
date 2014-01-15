@@ -29,19 +29,19 @@ public class Incident extends AbstractDataClass {
 	@Column(unique = true)
 	private int sharedIncidentID;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Contract contract;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Car car;
 
-	@OneToOne(optional = true)
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
 	private AccidentReport accidentReport;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private DamageReport damageReport;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Invoice> invoices;
 
 	private Date lastReminder;

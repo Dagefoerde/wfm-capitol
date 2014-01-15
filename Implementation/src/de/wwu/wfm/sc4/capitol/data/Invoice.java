@@ -2,6 +2,7 @@ package de.wwu.wfm.sc4.capitol.data;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,7 +50,7 @@ public class Invoice extends AbstractDataClass {
 	@Column(name = "bankAccountHolder")
 	private String bankAccountHolder;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Incident incident;
 
 	public Invoice(Date date, String pointOfContact, double dueSum,

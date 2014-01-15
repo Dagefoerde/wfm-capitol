@@ -1,6 +1,8 @@
 package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,7 +25,9 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.Utilities;
 import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.wwu.wfm.sc4.capitol.contractnegotiation.Fonts;
@@ -50,10 +54,11 @@ public class CreateInsuranceContractDocument {
 	public void setContract(Contract contract) {
 		this.contract=contract;
 	}
+	public void setDataTransferObject(DataTransferObject dto) {
+		this.dto=dto;
+	}
 
-	public void complete() {
-		dto=new DataTransferObject();
-		
+	public void complete() {		
 		ByteArrayOutputStream byteArrayOutputStream;
 		/* Basic document attributes */
 		byteArrayOutputStream= new ByteArrayOutputStream();
@@ -76,7 +81,7 @@ public class CreateInsuranceContractDocument {
 		/* Header - Logo and document title*/
 		Image img;
 		try {
-			img = Image.getInstance("C:/Capitol.png");
+			img = Image.getInstance("Capitol.png");
 		
         img.scaleToFit(Utilities.millimetersToPoints(25),Utilities.millimetersToPoints(25));
         img.setAbsolutePosition(Utilities.millimetersToPoints(175), Utilities.millimetersToPoints(262));
@@ -292,18 +297,38 @@ public class CreateInsuranceContractDocument {
 		}
 
         document.close();
-        ContractData cd=new ContractData();
+        ByteArrayOutputStream byteArrayOutputStreamConcat=new ByteArrayOutputStream();
+        try{
+        Document document2=new Document();
+        
+        PdfCopy copy= new PdfCopy(document2,byteArrayOutputStreamConcat);
+        document2.open();
+        PdfReader reader=new PdfReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+        Integer n = reader.getNumberOfPages();
+        for (int page = 0; page < n; ) {
+            copy.addPage(copy.getImportedPage(reader, ++page));
+        }
+        copy.freeReader(reader);
+        reader.close();
+        reader=new PdfReader("C:/LegalContractingPart.pdf");
+        n = reader.getNumberOfPages();
+       for (int page = 0; page < n; ) {
+           copy.addPage(copy.getImportedPage(reader, ++page));
+       }
+        copy.freeReader(reader);
+        reader.close();
+        document2.close();}
+        catch (Exception e){e.printStackTrace();}
+        ContractData cd=dto.getContractData();
         InsuranceContract insuranceContract=new InsuranceContract();
-        insuranceContract.setContractCapitol(byteArrayOutputStream.toByteArray());
+        insuranceContract.setContractCapitol(byteArrayOutputStreamConcat.toByteArray());
         cd.setInsuranceContract(insuranceContract);
-        dto.setContractData(new ContractData());
         //write pdf to file
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
         String path="C:/contracts/Contract-"+contractingCase.getId()+"-"+contract.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
         try {
             FileOutputStream output=new FileOutputStream(path);
-			output.write(byteArrayOutputStream.toByteArray());
+			output.write(byteArrayOutputStreamConcat.toByteArray());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

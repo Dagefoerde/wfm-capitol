@@ -3,6 +3,7 @@ package de.wwu.wfm.sc4.capitol.data;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "contractcase")
@@ -21,13 +23,13 @@ public class Case extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Customer customer;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Requirements> requirements;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Contract> contracts;
 	
 	@Column(name="negotiationState")

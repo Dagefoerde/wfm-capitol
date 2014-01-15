@@ -2,6 +2,7 @@ package de.wwu.wfm.sc4.capitol.data;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,16 +24,16 @@ public class Contract extends AbstractDataClass {
 	@Column(unique = true)
 	private int sharedContractId;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Case case0;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Incident> incident;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Customer customer;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Car> cars;
 	
 	@Column(name = "naturalInsured")

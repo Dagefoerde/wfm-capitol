@@ -490,18 +490,18 @@
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
 <carnot:Attribute Name="carnot:engine:className" Value="java.lang.String"/>
-<carnot:Attribute Name="carnot:engine:defaultValue" Value="contracting_BVIS"/>
+<carnot:Attribute Name="carnot:engine:defaultValue" Value="CO2_PreContract"/>
 <carnot:Attribute Name="carnot:engine:jms.location" Value="HEADER" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
 </carnot:Attributes>
 </carnot:AccessPoint>
 </carnot:AccessPoints>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:type" Value="out" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSDirection"/>
-<carnot:Attribute Name="carnot:engine:queue.jndiName" Value="java:comp/env/jms/CarnotApplicationQueue2"/>
+<carnot:Attribute Name="carnot:engine:queue.jndiName" Value="java:comp/env/jms/CarnotApplicationQueue"/>
 <carnot:Attribute Name="carnot:engine:messageProvider" Value="ag.carnot.workflow.spi.providers.applications.jms.DefaultMessageProvider"/>
 <carnot:Attribute Name="carnot:engine:requestMessageType" Value="Object" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
 <carnot:Attribute Name="carnot:engine:includeOidHeaders" Value="true" Type="boolean"/>
-<carnot:Attribute Name="carnot:engine:queueConnectionFactory.jndiName" Value="java:comp/env/jms/CarnotXAConnectionFactoryCapitol"/>
+<carnot:Attribute Name="carnot:engine:queueConnectionFactory.jndiName" Value="java:comp/env/jms/CarnotXAConnectionFactoryBVIS"/>
 </carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
@@ -1483,7 +1483,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="contracting_CapitolTerminationNotification" Name="Termination of contracting" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CO_B_Term" Name="Termination of contracting" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="ArchiveCase" Name="Archive case">
@@ -2365,7 +2365,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="contracting_CapitolAcceptanceNotification" Name="Acceptance of contract" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CO_B_Acc" Name="Acceptance of contract" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="RetrieveCase" Name="Retrieve case">
@@ -2587,7 +2587,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="contracting_newCR" Name="Create contract from customer requirements" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CO_B_NewCR" Name="Create contract from customer requirements" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="RetrieveCase" Name="Retrieve case">
@@ -2735,6 +2735,7 @@ AND no accident report was received yet.</carnot:Text>
 <ActualParameter>DataTransferObject</ActualParameter>
 <ActualParameter>Contract</ActualParameter>
 <ActualParameter>Case</ActualParameter>
+<ActualParameter>DataTransferObject</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -2760,6 +2761,10 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:DataFlow Oid="10464" Id="Case" Name="Case" Direction="IN" Context="application">
 <carnot:DataRef Id="Case"/>
 <carnot:AccessPointRef Id="setCase(de.wwu.wfm.sc4.capitol.data.Case)"/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10631" Id="DataTransferObject_1" Name="DataTransferObject_1" Direction="IN" Context="application">
+<carnot:DataRef Id="DataTransferObject"/>
+<carnot:AccessPointRef Id="setDataTransferObject(DTO.DataTransferObject)"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>

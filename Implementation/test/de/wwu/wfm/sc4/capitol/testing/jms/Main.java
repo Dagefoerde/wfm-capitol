@@ -52,8 +52,8 @@ public class Main {
 			System.out.println(session);
 			System.out.println(q);
 			//consume(session, q);
-			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
-			createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
+			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
+			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class Main {
 		DataTransferObject dto = createCreateContractDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "contracting_newCR");
+		message.setStringProperty("processID", "CO_B_NewCR");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -92,7 +92,7 @@ public class Main {
 		DataTransferObject dto = createDamageReportDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "claimHandling_CapitolDamageReport");
+		message.setStringProperty("processID", "CO_B_NewCR");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -106,7 +106,7 @@ public class Main {
 		cars.add(new Car("SU:FF:1337", "Black", "Limousine", value));
 		Requirements req = new Requirements("Open", 100.0,100.0,true,cars);
 		
-		dto.setContractData(new ContractData(1,req,null,null));
+		dto.setContractData(new ContractData(12,req,null,null));
 		dto.setCustomer(new Customer("sn00per", "sn00per@gmx.de", "Marvin", "Franke", "01709036540", 1337, 1337, new Address(21,"Hermann-Hesse-Straﬂe", "48161")));
 		return dto;
 	}
