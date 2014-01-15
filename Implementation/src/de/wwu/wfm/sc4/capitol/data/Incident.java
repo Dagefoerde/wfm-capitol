@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class Incident extends AbstractDataClass {
 	@OneToOne(optional = true)
 	private AccidentReport accidentReport;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private DamageReport damageReport;
 
 	@OneToMany
@@ -104,6 +105,12 @@ public class Incident extends AbstractDataClass {
 
 	public int getSharedIncidentID() {
 		return sharedIncidentID;
+	}
+
+	public void addInvoice(Invoice invoice) {
+		if (invoices == null)
+			invoices = new ArrayList<Invoice>();
+		invoices.add(invoice);
 	}
 
 }

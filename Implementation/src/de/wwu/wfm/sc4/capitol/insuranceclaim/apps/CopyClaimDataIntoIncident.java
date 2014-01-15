@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ClaimData.Entry;
+import ContractData.Car;
 import DTO.DataTransferObject;
 import de.wwu.wfm.sc4.capitol.data.DamageReport;
 import de.wwu.wfm.sc4.capitol.data.DamageReportEntry;
@@ -25,9 +26,8 @@ public class CopyClaimDataIntoIncident {
 
 	public void complete() {
 		// add car
-		ContractData.Car car = dto.getClaimData().getClaimReport().getCar();
-		// TODO convert into internal db car!
-		incident.setCar(null);
+		Car car = dto.getClaimData().getClaimReport().getCar();
+		incident.setCar(ServiceInitializer.getProvider().getCarService().findByLicencePlate(car.getLicensePlate()));
 		
 		
 		// add dmg report

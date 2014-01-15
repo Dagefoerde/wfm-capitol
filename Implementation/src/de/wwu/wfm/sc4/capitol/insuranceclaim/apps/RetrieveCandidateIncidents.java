@@ -17,7 +17,7 @@ public class RetrieveCandidateIncidents {
 		 * AND no accident report was received yet.
 		 */
 		IncidentService service = ServiceInitializer.p().getIncidentService();
-		return service.findIncidentsWithReminderOlderThan(8)
-		;// ServiceInitializer.getProvider().getIncidentService().findById();
+		return service.findIncidentsWithReminderOlderThan(8);
+		// ServiceInitializer.getProvider().getIncidentService().findById();
 	}
 }

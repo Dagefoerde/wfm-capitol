@@ -28,8 +28,6 @@ public class InitializeIncident {
 		if (dto.getClaimData() == null) {
 			throw new IllegalArgumentException("dto has no claim data set");
 		}
-		// if (dto.getClaimData().getiD() == null) {
-		// cannot be null, as it is int (not Integer).
 
 		if (dto.getClaimData().getDamageReport() == null) {
 			throw new IllegalArgumentException("dto has no damage report set");
