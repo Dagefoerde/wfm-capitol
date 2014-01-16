@@ -13,4 +13,9 @@ public class AddressService extends AbstractServiceClass<Address> {
 		ServiceInitializer.getProvider().getAddressService().persist(address);
 		return address;
 	}
+
+	public General.Address convertToDTOAddress(Address address) {
+		return new General.Address(address.getStreetNumber(), address
+				.getStreet(), address.getPostalCode());
+	}
 }

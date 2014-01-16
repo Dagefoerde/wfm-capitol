@@ -22,41 +22,55 @@ public class DamageReportEntry extends AbstractDataClass {
 	private String description;
 	private int costEstimation;
 	private boolean coverageDecision;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private DamageReport damageReport;
-		
+
 	public int getPosition() {
 		return position;
 	}
+
 	public void setPosition(int position) {
 		this.position = position;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public int getCostEstimation() {
 		return costEstimation;
 	}
+
 	public void setCostEstimation(int costEstimation) {
 		this.costEstimation = costEstimation;
 	}
+
 	public boolean isCoverageDecision() {
 		return coverageDecision;
 	}
+
 	public void setCoverageDecision(boolean coverageDecision) {
 		this.coverageDecision = coverageDecision;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setDamageReport(DamageReport damageReport) {
 		this.damageReport = damageReport;
 	}
+
 	public DamageReport getDamageReport() {
 		return damageReport;
+	}
+
+	public Boolean getCoverageDecision() {
+		return coverageDecision;
 	}
 }
