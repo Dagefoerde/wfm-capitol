@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.data;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -52,6 +54,9 @@ public class Invoice extends AbstractDataClass {
 
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Incident incident;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	private Collection<InvoiceElement> invoiceElements;
 
 	public Invoice(Date date, String pointOfContact, double dueSum,
 			int invoiceNumber, String invoiceText, Date paymentTerm,
@@ -181,6 +186,14 @@ public class Invoice extends AbstractDataClass {
 			estimatedTotal += d.getCostEstimation();
 		}
 		return estimatedTotal;
+	}
+
+	public void setInvoiceElements(Collection<InvoiceElement> invoiceElements) {
+		this.invoiceElements = invoiceElements;
+	}
+
+	public Collection<InvoiceElement> getInvoiceElements() {
+		return invoiceElements;
 	}
 
 }
