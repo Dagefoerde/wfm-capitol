@@ -5,6 +5,7 @@ import DTO.DataTransferObject;
 import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Incident;
+import de.wwu.wfm.sc4.capitol.exception.CarNotFoundException;
 import de.wwu.wfm.sc4.capitol.exception.ContractNotFoundException;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
@@ -44,8 +45,10 @@ public class InitializeIncident {
 		
 		//fetch car out of our DB by license plate
 		Car ourCar = ServiceInitializer.p().getCarService().findByLicencePlate(licensePlateFromCar);
+		if(ourCar == null){
+			throw new CarNotFoundException("Car not found in our database");
+		}
 		Contract actualContract = ServiceInitializer.p().getContractService().findById(ourCar.getContract().getId());
-		
 		//if there is an actualContract -> create incident
 		if(actualContract != null){
 			de.wwu.wfm.sc4.capitol.data.Incident newIncident = new Incident();

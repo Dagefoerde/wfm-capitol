@@ -23,6 +23,7 @@ public class UpdateAccidentReport {
 		accidentReport = ServiceInitializer.getProvider()
 				.getAccidentReportService().createFromDTO(dto, incident);
 		incident.setAccidentReport(accidentReport);
+		incident.setCar(accidentReport.getCar());
 		service.persist(incident); // update Incident in database
 	}
 
