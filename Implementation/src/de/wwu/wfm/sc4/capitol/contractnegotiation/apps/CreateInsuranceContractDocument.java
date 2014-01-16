@@ -2,7 +2,6 @@ package de.wwu.wfm.sc4.capitol.contractnegotiation.apps;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -81,7 +80,7 @@ public class CreateInsuranceContractDocument {
 		/* Header - Logo and document title*/
 		Image img;
 		try {
-			img = Image.getInstance("Capitol.png");
+			img = Image.getInstance("Settings/Capitol.png");
 		
         img.scaleToFit(Utilities.millimetersToPoints(25),Utilities.millimetersToPoints(25));
         img.setAbsolutePosition(Utilities.millimetersToPoints(175), Utilities.millimetersToPoints(262));
@@ -277,7 +276,7 @@ public class CreateInsuranceContractDocument {
         tlast.writeSelectedRows(0, -1, Utilities.millimetersToPoints(110), (Utilities.millimetersToPoints(50) + tlast.getTotalHeight()), canvas);
         Image siggy=null;
 		try {
-			siggy = Image.getInstance("C:/logo.jpg");
+			siggy = Image.getInstance("Settings/logo.jpg");
 		
         siggy.scaleToFit(Utilities.millimetersToPoints(40), Utilities.millimetersToPoints(25));
         siggy.setAbsolutePosition(Utilities.millimetersToPoints(130), Utilities.millimetersToPoints(20));
@@ -310,7 +309,7 @@ public class CreateInsuranceContractDocument {
         }
         copy.freeReader(reader);
         reader.close();
-        reader=new PdfReader("C:/LegalContractingPart.pdf");
+        reader=new PdfReader("Settings/LegalContractingPart.pdf");
         n = reader.getNumberOfPages();
        for (int page = 0; page < n; ) {
            copy.addPage(copy.getImportedPage(reader, ++page));
@@ -325,7 +324,7 @@ public class CreateInsuranceContractDocument {
         cd.setInsuranceContract(insuranceContract);
         //write pdf to file
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-        String path="C:/contracts/Contract-"+contractingCase.getId()+"-"+contract.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
+        String path="Contracts/Contract-"+contractingCase.getId()+"-"+contract.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
         try {
             FileOutputStream output=new FileOutputStream(path);
 			output.write(byteArrayOutputStreamConcat.toByteArray());
