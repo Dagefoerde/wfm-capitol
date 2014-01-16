@@ -33,6 +33,15 @@ public class DamageReport extends AbstractDataClass {
 	@OneToMany(mappedBy="damageReport", cascade=CascadeType.ALL)
 	private Collection<DamageReportEntry> entries;
 
+	public DamageReport(String contactPerson, ServiceStation serviceStation,
+			Incident incident, Collection<DamageReportEntry> entries) {
+		super();
+		this.contactPerson = contactPerson;
+		this.serviceStation = serviceStation;
+		this.incident = incident;
+		this.entries = entries;
+	}
+
 	public Incident getIncident() {
 		return incident;
 	}

@@ -32,10 +32,13 @@ public class Address extends AbstractDataClass {
 
 	}
 
-	public Address(int a, String b, String c) {
-		this.streetNumber = a;
-		this.street = b;
-		this.postalCode = c;
+	public Address(int streetNumber, String street, String postalCode,
+			String city) {
+		super();
+		this.streetNumber = streetNumber;
+		this.street = street;
+		this.postalCode = postalCode;
+		this.city = city;
 	}
 
 	public int getId() {

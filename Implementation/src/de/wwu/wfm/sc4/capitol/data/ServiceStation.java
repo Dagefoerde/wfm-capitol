@@ -28,6 +28,12 @@ public class ServiceStation extends AbstractDataClass {
 		this.address = address;
 	}
 
+	public ServiceStation(String phone, Address address) {
+		super();
+		this.phone = phone;
+		this.address = address;
+	}
+
 	public String getPhone() {
 		return phone;
 	}

@@ -27,30 +27,20 @@ public class CopyClaimDataIntoIncident {
 	public void complete() {
 		// add car
 		Car car = dto.getClaimData().getClaimReport().getCar();
-		incident.setCar(ServiceInitializer.getProvider().getCarService().findByLicencePlate(car.getLicensePlate()));
-		
-		
-		// add dmg report
-		List<Entry> dtoDamageList = dto.getClaimData().getDamageReport().getDamageList();
-		ArrayList<DamageReportEntry> damages = new ArrayList<DamageReportEntry>(dtoDamageList.size());
+		incident.setCar(ServiceInitializer.getProvider().getCarService()
+				.findByLicencePlate(car.getLicensePlate()));
 
-		DamageReport damageReport = new DamageReport();
-		damageReport.setEntries(damages);
-		for (Entry e : dtoDamageList) {
-			DamageReportEntry damage = new DamageReportEntry();
-			damage.setPosition(e.getiD());
-			damage.setDescription(e.getDescription());
-			damage.setCostEstimation(e.getCostEstimation());
-			damage.setCoverageDecision(e.getCoverageDecision() == null? false : e.getCoverageDecision());
-			
-			damages.add(damage);
-			damage.setDamageReport(damageReport);
-		}
-		
+		// add dmg report
+		List<Entry> dtoDamageList = dto.getClaimData().getDamageReport()
+				.getDamageList();
+
+		DamageReport damageReport = ServiceInitializer.getProvider()
+				.getDamageReportService().convertFromDTODamageReport(
+						dto.getClaimData().getDamageReport(), incident);
+
 		incident.setDamageReport(damageReport);
-		
+
 		// persist
 		ServiceInitializer.p().getIncidentService().persist(incident);
-		ServiceInitializer.p().getDamageReportService().persist(damageReport);
 	}
 }

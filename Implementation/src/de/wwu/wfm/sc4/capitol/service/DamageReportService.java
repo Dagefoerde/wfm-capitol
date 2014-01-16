@@ -6,6 +6,7 @@ import java.util.Collection;
 import ClaimData.Entry;
 import de.wwu.wfm.sc4.capitol.data.DamageReport;
 import de.wwu.wfm.sc4.capitol.data.DamageReportEntry;
+import de.wwu.wfm.sc4.capitol.data.Incident;
 
 public class DamageReportService extends AbstractServiceClass<DamageReport> {
 	protected DamageReportService() {
@@ -16,7 +17,8 @@ public class DamageReportService extends AbstractServiceClass<DamageReport> {
 		return findById(DamageReport.class, id);
 	}
 
-	public ClaimData.DamageReport convertToDTODamageReport(DamageReport damageReport) {
+	public ClaimData.DamageReport convertToDTODamageReport(
+			DamageReport damageReport) {
 		return new ClaimData.DamageReport(convertToDTODamageList(damageReport
 				.getEntries()), damageReport.getContactPerson(),
 				ServiceInitializer.p().getServiceStationService()
@@ -33,4 +35,28 @@ public class DamageReportService extends AbstractServiceClass<DamageReport> {
 		}
 		return null;
 	}
+
+	public DamageReport convertFromDTODamageReport(
+			ClaimData.DamageReport damageReport, Incident incident) {
+		DamageReport dr = new DamageReport(damageReport.getContactPerson(),
+				ServiceInitializer.p().getServiceStationService()
+						.convertFromDTOServiceStation(
+								damageReport.getServiceStation()), incident,
+				null);
+		dr
+				.setEntries(convertFromDTODamageList(damageReport
+						.getDamageList(), dr));
+		return dr;
+	}
+
+	private ArrayList<DamageReportEntry> convertFromDTODamageList(
+			Collection<Entry> entries, DamageReport damageReport) {
+		ArrayList<DamageReportEntry> damages = new ArrayList<DamageReportEntry>();
+		for (Entry entry : entries) {
+			damages.add(ServiceInitializer.p().getDamageReportEntryService()
+					.convertFromDTOEntry(entry, damageReport));
+		}
+		return damages;
+	}
+
 }
