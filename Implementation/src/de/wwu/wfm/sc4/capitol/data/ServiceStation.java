@@ -17,6 +17,15 @@ public class ServiceStation extends AbstractDataClass {
 	
 	@OneToOne
 	private Address address;
+	
+	public ServiceStation(){
+		
+	}
+	
+	public ServiceStation(String phone, Address address){
+		this.phone = phone;
+		this.address = address;
+	}
 
 	public String getPhone() {
 		return phone;

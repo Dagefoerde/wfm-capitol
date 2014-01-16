@@ -7,8 +7,7 @@ public class ServiceStationService extends AbstractServiceClass<ServiceStation> 
 	public ClaimData.ServiceStation convertToDTOServiceStation(
 			ServiceStation serviceStation) {
 		return new ClaimData.ServiceStation(serviceStation.getPhone(),
-				ServiceInitializer.p().getAddressService().convertToDTOAddress(
-						serviceStation.getAddress()));
+			ServiceInitializer.p().getAddressService().convertToDTOAddress(serviceStation.getAddress()));
 	}
 
 }
