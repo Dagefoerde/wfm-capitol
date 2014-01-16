@@ -112,5 +112,7 @@ public class Incident extends AbstractDataClass {
 			invoices = new ArrayList<Invoice>();
 		invoices.add(invoice);
 	}
-
+	public Incident(){
+		
+	}
 }

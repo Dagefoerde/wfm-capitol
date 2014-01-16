@@ -1,8 +1,11 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
+import ClaimData.ClaimReport;
 import DTO.DataTransferObject;
+import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Incident;
+import de.wwu.wfm.sc4.capitol.exception.ContractNotFoundException;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class InitializeIncident {
@@ -12,7 +15,6 @@ public class InitializeIncident {
 		this.dto = dto;
 		if (dto == null)
 			throw new IllegalArgumentException("dto may not be null");
-
 		// Debugging code
 		System.out
 				.println("Expected communication reason: claimHandling_CapitolDamageReport");
@@ -35,23 +37,26 @@ public class InitializeIncident {
 	}
 
 	public Incident complete() {
-		Contract contract = ServiceInitializer.p().getContractService()
-				.findBySharedId(dto.getContractData().getContractId());
-		// TODO do we actually get contract data?! probably not.
-		// Maybe retrieve via ClaimData->ClaimReport->Car
+		// Retrieve our Contract by ClaimReport->Car(LicensePlate)->Contract
+		ClaimReport cr = dto.getClaimData().getClaimReport();
+		ContractData.Car actualCar = cr.getCar();
+		String licensePlateFromCar = actualCar.getLicensePlate();
+		
+		//fetch car out of our DB by license plate
+		Car ourCar = ServiceInitializer.p().getCarService().findByLicencePlate(licensePlateFromCar);
+		Contract actualContract = ServiceInitializer.p().getContractService().findById(ourCar.getContract().getId());
+		
+		//if there is an actualContract -> create incident
+		if(actualContract != null){
+			de.wwu.wfm.sc4.capitol.data.Incident newIncident = new Incident();
+			newIncident.setContract(actualContract);
+			newIncident.setSharedIncidentID(dto.getClaimData().getiD());
 
-		/* TODO REMOVE if (contract == null) {
-			// contract not found,
-			return null;
-		}*/
-
-		// create new incident with contract
-		Incident incident = new Incident();
-		incident.setContract(contract);
-		incident.setSharedIncidentID(dto.getClaimData().getiD());
-		// do not add claim data yet, as this is done in a later activity
-		// explicitly.
-
-		return incident;
+			return newIncident;
+		}
+		//no incident created cause of missing contract (not found in our db)
+		else{
+			throw new ContractNotFoundException("Contract could not be found in our database");
+		}
 	}
 }
