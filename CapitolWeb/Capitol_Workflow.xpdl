@@ -967,6 +967,21 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </DataField>
+<DataField Id="Invoice" Name="Invoice" IsArray="FALSE">
+<DataType>
+<ExternalReference location="de.wwu.wfm.sc4.capitol.data.Invoice"/>
+</DataType>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:DataField Oid="10661" Type="serializable">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Invoice"/>
+<carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+</carnot:Attributes>
+</carnot:DataField>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</DataField>
 </DataFields>
 <WorkflowProcesses>
 <WorkflowProcess Id="claimHandling_CapitolAccidentReport" Name="Receive Customer Accident Report and create Coverage Decision" AccessLevel="PUBLIC">
@@ -2060,7 +2075,7 @@ AND no accident report was received yet.</carnot:Text>
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
 <ActualParameter>DTO</ActualParameter>
-<ActualParameter>Incident</ActualParameter>
+<ActualParameter>Invoice</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -2093,8 +2108,8 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:DataRef Id="DTO"/>
 <carnot:AccessPointRef/>
 </carnot:DataFlow>
-<carnot:DataFlow Oid="10660" Id="Incident" Name="Incident" Direction="OUT" Context="application">
-<carnot:DataRef Id="Incident"/>
+<carnot:DataFlow Oid="10660" Id="Invoice" Name="Invoice" Direction="OUT" Context="application">
+<carnot:DataRef Id="Invoice"/>
 <carnot:AccessPointRef Id="returnValue"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
@@ -2178,7 +2193,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_10" Name="Transition 10" From="AddInvoiceToIncident" To="SendRejectionNoticeToBVIS">
-<Condition Type="CONDITION">Incident.getInvoice().hasPositionsNotCovered() || Incident.getInvoice().hasUnknownPositions();</Condition>
+<Condition Type="CONDITION">Invoice.hasPositionsNotCovered() || Invoice.hasUnknownPositions();</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Transition Oid="10644" IsForkingOnTraversal="false"/>
@@ -2194,7 +2209,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_12" Name="Transition 12" From="RouteActivity" To="ClarifyInvoiceWithCarsCo">
-<Condition Type="CONDITION">Incident.getInvoice().getDueSum() &gt; (Incident.getInvoice().getEstimatedTotal() * 1.10);</Condition>
+<Condition Type="CONDITION">Invoice.getDueSum() &gt; (Invoice.getEstimatedTotal() * 1.10);</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Transition Oid="10654" IsForkingOnTraversal="false"/>
@@ -2274,6 +2289,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="GATEWAY" Oid="10642" X="240" Y="235" Width="42" Height="42" ModelElement="10554" FlowKind="split"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10651" X="170" Y="375" Width="181" Height="51" ModelElement="RouteActivity"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10658" X="240" Y="495" Width="42" Height="42" ModelElement="10651" FlowKind="split"/>
+<carnot:Symbol Kind="DATA" Oid="10662" X="80" Y="245" Width="110" Height="70" ModelElement="Invoice"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
@@ -2306,7 +2322,9 @@ AND no accident report was received yet.</carnot:Text>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
-<carnot:Connections/>
+<carnot:Connections>
+<carnot:Connection Kind="DATA_FLOW" Oid="10663" SourceSymbol="10662" TargetSymbol="10554"/>
+</carnot:Connections>
 </carnot:Diagram>
 </carnot:Diagrams>
 </carnot:WorkflowProcess>

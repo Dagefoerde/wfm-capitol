@@ -18,6 +18,5 @@ public class RetrieveCandidateIncidents {
 		 */
 		IncidentService service = ServiceInitializer.p().getIncidentService();
 		return service.findIncidentsWithReminderOlderThan(8);
-		// ServiceInitializer.getProvider().getIncidentService().findById();
 	}
 }

@@ -12,13 +12,10 @@ public class ReminderEmail {
 	public void complete(List<Incident> incidents) {
 		
 		for(Incident incident : incidents) {
-			synchronized (incident) { // work on db objects with mutual exclusion!
-				
 				// TODO send email
 				
 				incident.setLastReminder(new Date());
 				ServiceInitializer.getProvider().getIncidentService().persist(incident);
-			}
 		}
 	}
 }
