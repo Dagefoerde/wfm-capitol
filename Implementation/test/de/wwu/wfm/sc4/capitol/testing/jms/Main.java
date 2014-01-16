@@ -107,7 +107,7 @@ public class Main {
 		Requirements req = new Requirements("Open", 100.0,100.0,true,cars);
 		
 		dto.setContractData(new ContractData(12,req,null,null));
-		dto.setCustomer(new Customer("sn00per", "sn00per@gmx.de", "Marvin", "Franke", "01709036540", 1337, 1337, new Address(21,"Hermann-Hesse-Straﬂe", "48161")));
+		dto.setCustomer(new Customer("sn00per", "sn00per@gmx.de", "Marvin", "Franke", "01709036540", 1337, 1337, new Address(21,"Hermann-Hesse-Straﬂe", "48161", "M¸nster")));
 		return dto;
 	}
 	
@@ -127,6 +127,25 @@ public class Main {
 		
 		dto.setClaimData(claimData);
 		dto.setContractData(new ContractData(22, null, null, null));
+		
+		return dto;
+	}
+	
+	private static DataTransferObject createAccidentReportDTO(){
+
+		DataTransferObject dto = new DataTransferObject();
+		dto.setCommunicationReason("claimHandling_CapitolAccidentReport");
+		
+		Address addr = new Address(12, "Poitzen", "D-29328", "Faﬂberg");
+		
+		Car car = new Car();
+		
+		ClaimReport claimReport = new ClaimReport(addr, Calendar.getInstance().getTime()
+				, null, car, "cause", "description", false, true);
+		
+		ClaimData claimData = new ClaimData(123, claimReport, null, null, null, null, null);
+		
+		dto.setClaimData(claimData);
 		
 		return dto;
 	}
