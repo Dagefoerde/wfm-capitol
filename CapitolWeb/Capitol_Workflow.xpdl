@@ -672,6 +672,28 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
+<Application Id="CreateCoverageDecisionApp" Name="CreateCoverageDecisionApp">
+<ExternalReference location="ag.carnot.workflow.model.IApplication" xref="INTERACTIVE"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10634" IsInteractive="true">
+<carnot:ApplicationContexts>
+<carnot:ApplicationContext Oid="10635" Type="jsf">
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="jsf:componentKind" Value="facelets"/>
+<carnot:Attribute Name="jsf:url" Value="/xhtml/capitolweb/capitol_workflow/claimhandling_capitolaccidentreport/CreateCoverageDecisionPanel.iface"/>
+<carnot:Attribute Name="jsf:managedBeanName" Value="CreateCoverageDecisionBean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.CreateCoverageDecisionBean"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+</carnot:Attributes>
+</carnot:ApplicationContext>
+</carnot:ApplicationContexts>
+<carnot:AccessPoints/>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
 </Applications>
 <DataFields>
 <DataField Id="LAST_ACTIVITY_PERFORMER" Name="Last Activity Performer" IsArray="FALSE">
@@ -1056,18 +1078,23 @@
 </Activity>
 <Activity Id="CreateCoverageDecision" Name="Create coverage decision">
 <Implementation>
-<No/>
+<Tool Id="CreateCoverageDecisionApp" Type="APPLICATION">
+<ActualParameters>
+<ActualParameter>Incident</ActualParameter>
+<ActualParameter>Incident</ActualParameter>
+</ActualParameters>
+</Tool>
 </Implementation>
 <Performer>InsuranceClerk</Performer>
 <StartMode>
 <Automatic/>
 </StartMode>
 <FinishMode>
-<Manual/>
+<Automatic/>
 </FinishMode>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10056" Implementation="Manual" IsAbortableByPerformer="false" IsHibernatedOnCreation="false">
+<carnot:Activity Oid="10056" Implementation="Application" IsAbortableByPerformer="false" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10517" Id="Incident" Name="Incident" Direction="IN" Context="default">
@@ -1314,6 +1341,7 @@
 <carnot:Symbol Kind="ANNOTATION" Oid="10546" X="530" Y="530" Width="155" Height="20">
 <carnot:Text>TODO processID</carnot:Text>
 </carnot:Symbol>
+<carnot:Symbol Kind="APPLICATION" Oid="10636" X="331" Y="240" Width="-1" Height="-1" ModelElement="CreateCoverageDecisionApp"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10061" ModelElement="Transition_2" SourceSymbol="10048" TargetSymbol="10055" SourceAnchor="center" TargetAnchor="center"/>
@@ -1338,6 +1366,7 @@
 <carnot:Connection Kind="DATA_FLOW" Oid="10539" SourceSymbol="10507" TargetSymbol="10065"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10541" SourceSymbol="10507" TargetSymbol="10067"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10543" SourceSymbol="10507" TargetSymbol="10069"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10637" SourceSymbol="10636" TargetSymbol="10057"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -3311,6 +3340,12 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Attribute Name="carnot:defdesk:panel" Value="ag.carnot.workflow.spi.providers.contexts.jsp.JSPContextTypePanel"/>
 <carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.workflow.spi.providers.contexts.jsp.JSPValidator"/>
 <carnot:Attribute Name="carnot:engine:runtimeValidator" Value="ag.carnot.workflow.model.validation.impl.spi.contextTypes.JSPValidator"/>
+</carnot:Attributes>
+</carnot:ApplicationContextType>
+<carnot:ApplicationContextType Oid="10633" Id="jsf" Name="JSF Application" IsPredefined="true" HasApplicationPath="true">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:accessPointProvider" Value="ag.carnot.bpm.web.jsf.application.JSFAccessPointProvider"/>
+<carnot:Attribute Name="carnot:engine:validator" Value="ag.carnot.bpm.web.jsf.application.JSFValidator"/>
 </carnot:Attributes>
 </carnot:ApplicationContextType>
 </carnot:ApplicationContextTypes>
