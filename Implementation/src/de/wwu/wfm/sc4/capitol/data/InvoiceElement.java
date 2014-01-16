@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "invoice_element")
-public class InvoiceElement {
+public class InvoiceElement extends AbstractDataClass {
 
 	private static final long serialVersionUID = 12L;
 

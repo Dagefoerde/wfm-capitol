@@ -7,15 +7,15 @@
 
    <bean id="AmqJmsCapitolAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
       >
-      <property name="serverUrl" value="tcp://wi-wfm3.uni-muenster.de:61616" />
+      <property name="serverUrl" value="tcp://localhost:61616" />
    </bean>
    <bean id="AmqJmsBVISAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
       >
-      <property name="serverUrl" value="tcp://wi-vm028.uni-muenster.de:61616" />
+      <property name="serverUrl" value="tcp://localhost:61616" />
    </bean>
    <bean id="AmqJmsCarsCoAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
       >
-      <property name="serverUrl" value="tcp://wi-vm028.uni-muenster.de:61617" />
+      <property name="serverUrl" value="tcp://localhost:61616" />
    </bean>
 
    <bean id="JencksAmqJmsConnectionManager" class="org.jencks.factory.ConnectionManagerFactoryBean">
