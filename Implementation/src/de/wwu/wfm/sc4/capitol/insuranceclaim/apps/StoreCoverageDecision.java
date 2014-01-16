@@ -13,11 +13,6 @@ public class StoreCoverageDecision {
 	private DataTransferObject dto;
 
 	public DataTransferObject complete() {
-
-		if (incident.getAccidentReport() != null) {
-			throw new IllegalStateException(
-					"Trying to add an accident report where there is one already!");
-		}
 		service.persist(incident);
 
 		DamageReportService drs = ServiceInitializer.p()
