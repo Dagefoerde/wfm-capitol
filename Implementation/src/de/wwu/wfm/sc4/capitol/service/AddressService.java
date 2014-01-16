@@ -15,7 +15,9 @@ public class AddressService extends AbstractServiceClass<Address> {
 	}
 
 	public General.Address convertToDTOAddress(Address address) {
-		return new General.Address(address.getStreetNumber(), address
-				.getStreet(), address.getPostalCode());
+		return new General.Address(	address.getStreetNumber(), 
+									address.getStreet(),
+									address.getPostalCode(),
+									address.getCity());
 	}
 }

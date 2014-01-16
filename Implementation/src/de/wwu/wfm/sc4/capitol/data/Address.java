@@ -20,6 +20,9 @@ public class Address extends AbstractDataClass {
 
 	@Column(name = "postalCode")
 	private String postalCode;
+	
+	@Column(name = "city")
+	private String city;
 
 	public Address() {
 
@@ -57,5 +60,13 @@ public class Address extends AbstractDataClass {
 
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 }
