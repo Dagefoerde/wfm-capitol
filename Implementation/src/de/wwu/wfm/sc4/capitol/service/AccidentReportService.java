@@ -18,13 +18,16 @@ public class AccidentReportService extends AbstractServiceClass<AccidentReport> 
 			Incident incident) {
 		ClaimReport c = dto.getClaimData().getClaimReport();
 		ServiceInitializer p = ServiceInitializer.getProvider();
-		AccidentReport accidentReport = new AccidentReport(p
-				.getAddressService().createFromClaimReport(c), c.getDate(), p
-				.getCustomerService().findByUsername(
-						c.getCustomer().getUsername()), p.getCarService()
-				.findByLicencePlate(c.getCar().getLicensePlate()),
-				c.getCause(), c.getDescription(), c.isMaintenace(), c
-						.isNeedsTow(), incident);
+		AccidentReport accidentReport = 
+			new AccidentReport(	p.getAddressService().createFromClaimReport(c), 
+								c.getDate(), 
+								p.getCustomerService().findByUsername(
+								c.getCustomer().getUsername()), 
+								p.getCarService().findByLicencePlate(c.getCar().getLicensePlate()),
+								c.getCause(), 
+								c.getDescription(), 
+								c.isMaintenace(), 
+								c.isNeedsTow(), incident);
 		// persist newly created AccidentReport
 		p.getAccidentReportService().persist(accidentReport);
 		return accidentReport;
