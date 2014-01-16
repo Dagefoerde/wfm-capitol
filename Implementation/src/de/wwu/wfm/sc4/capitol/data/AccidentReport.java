@@ -1,6 +1,6 @@
 package de.wwu.wfm.sc4.capitol.data;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
