@@ -178,7 +178,7 @@ public class Invoice extends AbstractDataClass {
 		return getDueSum();
 	}
 
-	public double getEstimatedTotal() throws Exception {
+	public int getEstimatedTotal() throws Exception {
 		if (incident == null) {
 			throw new Exception("Invoice is not connected to an incident.");
 		}
@@ -186,12 +186,8 @@ public class Invoice extends AbstractDataClass {
 		if (damageReport == null) {
 			throw new Exception("DamageReport is not existent in incident.");
 		}
-		double estimatedTotal = 0;
-
-		for (DamageReportEntry d : damageReport.getEntries()) {
-			estimatedTotal += d.getCostEstimation();
-		}
-		return estimatedTotal;
+		
+		return damageReport.getEstimatedTotal();
 	}
 
 	public void setInvoiceElements(Collection<InvoiceElement> invoiceElements) {

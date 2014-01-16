@@ -20,17 +20,17 @@ public class DamageReport extends AbstractDataClass {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
-	@Column(name="contactPerson")
+
+	@Column(name = "contactPerson")
 	String contactPerson;
-	
-	@OneToOne(cascade = {CascadeType.ALL})
+
+	@OneToOne(cascade = { CascadeType.ALL })
 	ServiceStation serviceStation;
 
-	@OneToOne(mappedBy="damageReport", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "damageReport", cascade = CascadeType.ALL)
 	private Incident incident;
-	
-	@OneToMany(mappedBy="damageReport", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "damageReport", cascade = CascadeType.ALL)
 	private Collection<DamageReportEntry> entries;
 
 	public DamageReport(String contactPerson, ServiceStation serviceStation,
@@ -41,7 +41,7 @@ public class DamageReport extends AbstractDataClass {
 		this.incident = incident;
 		this.entries = entries;
 	}
-	
+
 	public DamageReport() {
 		super();
 	}
@@ -80,6 +80,16 @@ public class DamageReport extends AbstractDataClass {
 
 	public void setServiceStation(ServiceStation serviceStation) {
 		this.serviceStation = serviceStation;
+	}
+
+	public int getEstimatedTotal() {
+		int estimatedTotal = 0;
+
+		for (DamageReportEntry d : getEntries()) {
+			estimatedTotal += d.getCostEstimation();
+		}
+
+		return estimatedTotal;
 	}
 
 }
