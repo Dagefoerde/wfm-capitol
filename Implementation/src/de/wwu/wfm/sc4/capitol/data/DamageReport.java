@@ -20,6 +20,12 @@ public class DamageReport extends AbstractDataClass {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+	
+	@Column(name="contactPerson")
+	String contactPerson;
+	
+	@OneToOne
+	ServiceStation serviceStation;
 
 	@OneToOne(mappedBy="damageReport", cascade=CascadeType.ALL)
 	private Incident incident;
@@ -45,6 +51,22 @@ public class DamageReport extends AbstractDataClass {
 
 	public Collection<DamageReportEntry> getEntries() {
 		return entries;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
+	public ServiceStation getServiceStation() {
+		return serviceStation;
+	}
+
+	public void setServiceStation(ServiceStation serviceStation) {
+		this.serviceStation = serviceStation;
 	}
 
 }

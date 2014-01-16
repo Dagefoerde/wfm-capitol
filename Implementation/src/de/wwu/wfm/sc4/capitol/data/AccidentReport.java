@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
+import de.wwu.wfm.sc4.capitol.data.Address;
 
 @Entity
 @Table(name = "accident_report")
@@ -37,10 +37,10 @@ public class AccidentReport extends AbstractDataClass {
 	public AccidentReport() {
 	}
 
-	public AccidentReport(Address crashAddress, Date date, Customer customer,
+	public AccidentReport(Address address,  Date date, Customer customer,
 			Car car, String cause, String description, boolean isMaintenance,
 			boolean needsTow, Incident incident) {
-		this.crashAddress = crashAddress;
+		this.crashAddress = address;
 		this.date = date;
 		this.customer = customer;
 		this.car = car;
