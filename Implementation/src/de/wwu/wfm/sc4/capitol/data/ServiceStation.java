@@ -2,10 +2,12 @@ package de.wwu.wfm.sc4.capitol.data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Entity
 public class ServiceStation extends AbstractDataClass {
 
 	@Id
@@ -21,11 +23,6 @@ public class ServiceStation extends AbstractDataClass {
 	
 	public ServiceStation(){
 		
-	}
-	
-	public ServiceStation(String phone, Address address){
-		this.phone = phone;
-		this.address = address;
 	}
 
 	public ServiceStation(String phone, Address address) {

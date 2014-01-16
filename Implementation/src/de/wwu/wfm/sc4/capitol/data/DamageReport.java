@@ -41,6 +41,10 @@ public class DamageReport extends AbstractDataClass {
 		this.incident = incident;
 		this.entries = entries;
 	}
+	
+	public DamageReport() {
+		super();
+	}
 
 	public Incident getIncident() {
 		return incident;
