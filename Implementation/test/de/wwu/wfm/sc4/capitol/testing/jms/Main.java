@@ -52,8 +52,9 @@ public class Main {
 			System.out.println(session);
 			System.out.println(q);
 			//consume(session, q);
-			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
-			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
+			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
+			createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
+			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +93,16 @@ public class Main {
 		DataTransferObject dto = createDamageReportDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "CO_B_NewCR");
+		message.setStringProperty("processID", "claimHandling_CapitolDamageReport");
+		message.setObject(dto);
+		producer.send(message);
+		
+	}
+	private static void createDTOForAccidentReports(Session session, Queue q) throws JMSException, IOException {
+		DataTransferObject dto = createAccidentReportDTO();
+		MessageProducer producer = session.createProducer(q);
+		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
+		message.setStringProperty("processID", "claimHandling_CapitolAccidentReport");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -139,6 +149,7 @@ public class Main {
 		Address addr = new Address(12, "Poitzen", "D-29328", "Faﬂberg");
 		
 		Car car = new Car();
+		car.setLicensePlate("MS-MS 2020");
 		
 		ClaimReport claimReport = new ClaimReport(addr, Calendar.getInstance().getTime()
 				, null, car, "cause", "description", false, true);
