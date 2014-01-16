@@ -57,6 +57,10 @@ public class Invoice extends AbstractDataClass {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<InvoiceElement> invoiceElements;
+	
+	public Invoice() {
+		super();
+	}
 
 	public Invoice(Date date, String pointOfContact, double dueSum,
 			int invoiceNumber, String invoiceText, Date paymentTerm,
