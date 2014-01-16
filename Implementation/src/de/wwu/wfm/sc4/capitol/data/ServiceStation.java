@@ -1,5 +1,6 @@
 package de.wwu.wfm.sc4.capitol.data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ public class ServiceStation extends AbstractDataClass {
 	@Column(name = "phone")
 	private String phone;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Address address;
 	
 	public ServiceStation(){
