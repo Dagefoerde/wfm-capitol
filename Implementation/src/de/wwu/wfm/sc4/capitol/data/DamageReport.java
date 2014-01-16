@@ -24,7 +24,7 @@ public class DamageReport extends AbstractDataClass {
 	@Column(name="contactPerson")
 	String contactPerson;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	ServiceStation serviceStation;
 
 	@OneToOne(mappedBy="damageReport", cascade=CascadeType.ALL)
