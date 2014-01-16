@@ -12,7 +12,11 @@ public class RetrieveIncidentByID {
 	}
 
 	public Incident complete() {
-		return ServiceInitializer.getProvider().getIncidentService()
+		Incident incident = ServiceInitializer.p().getIncidentService()
 				.findBySharedId(dto.getClaimData().getiD());
+		if (incident != null) {
+			ServiceInitializer.p().getIncidentService().initializeIncident(incident);
+		}
+		return incident;
 	}
 }

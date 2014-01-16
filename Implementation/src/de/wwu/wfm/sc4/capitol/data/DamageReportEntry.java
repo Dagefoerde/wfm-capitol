@@ -25,6 +25,10 @@ public class DamageReportEntry extends AbstractDataClass {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private DamageReport damageReport;
+	
+	public DamageReportEntry() {
+		super();
+	}
 
 	public DamageReportEntry(int position, String description,
 			int costEstimation, boolean coverageDecision,
