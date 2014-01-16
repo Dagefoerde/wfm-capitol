@@ -37,9 +37,10 @@ public class InvoiceElement extends AbstractDataClass {
 
 	}
 	
-	public InvoiceElement(String description, int amount){
+	public InvoiceElement(String description, int amount, Invoice invoice){
 		this.description = description;
 		this.amount = amount;		
+		this.invoice = invoice;
 	}
 	
 	public int getId() {

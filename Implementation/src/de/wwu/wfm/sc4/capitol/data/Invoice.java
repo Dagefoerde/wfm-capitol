@@ -65,7 +65,8 @@ public class Invoice extends AbstractDataClass {
 	public Invoice(Date date, String pointOfContact, double dueSum,
 			int invoiceNumber, String invoiceText, Date paymentTerm,
 			String bankAccount, String bankName, String bankCode,
-			String bankAccountHolder, Incident incident) {
+			String bankAccountHolder, Incident incident,
+			Collection<InvoiceElement> invoiceElements) {
 		super();
 		this.date = date;
 		this.pointOfContact = pointOfContact;
@@ -78,6 +79,7 @@ public class Invoice extends AbstractDataClass {
 		this.bankCode = bankCode;
 		this.bankAccountHolder = bankAccountHolder;
 		this.incident = incident;
+		this.invoiceElements = invoiceElements;
 	}
 
 	public Incident getIncident() {

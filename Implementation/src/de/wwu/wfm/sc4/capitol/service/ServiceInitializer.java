@@ -29,6 +29,7 @@ public class ServiceInitializer {
 	private AddressService addressService;
 	private ServiceStationService serviceStationService;
 	private DamageReportEntryService damageReportEntryService;
+	private InvoiceElementService invoiceElementService;
 
 	private SessionFactory sessionFactory;
 	private Session session;
@@ -46,6 +47,7 @@ public class ServiceInitializer {
 		addressService = new AddressService();
 		serviceStationService = new ServiceStationService();
 		damageReportEntryService = new DamageReportEntryService();
+		invoiceElementService = new InvoiceElementService();
 
 		sessionFactory = new AnnotationConfiguration().configure()
 				.buildSessionFactory();
@@ -109,5 +111,9 @@ public class ServiceInitializer {
 
 	public DamageReportEntryService getDamageReportEntryService() {
 		return damageReportEntryService;
+	}
+
+	public InvoiceElementService getInvoiceElementService() {
+		return invoiceElementService;
 	}
 }
