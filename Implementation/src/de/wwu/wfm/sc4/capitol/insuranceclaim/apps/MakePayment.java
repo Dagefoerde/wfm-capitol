@@ -1,9 +1,9 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
-import de.wwu.wfm.sc4.capitol.data.Incident;
+import de.wwu.wfm.sc4.capitol.data.Invoice;
 
 public class MakePayment {
-	private Incident incident;
+	private Invoice invoice;
 
 	private final String BANK_APP_IP = "127.0.0.1";
 	private final String CAPITOL_ACCOUNT_NUMBER = "1";
@@ -14,10 +14,14 @@ public class MakePayment {
 	private final String DESCRIPTION = "&description=";
 
 	public void complete() {
-		String paymentUrl = BANK_APP_URL + TO + incident.getInvoices();
+		String description = "Invoice #" + invoice.getInvoiceNumber() + " ("
+				+ invoice.getDate().toString() + ")";
+		String paymentUrl = BANK_APP_URL + TO + invoice.getBankAccount()
+				+ AMOUNT + invoice.getDueSum() + DESCRIPTION + description;
+		//TODO call URL and check response for okay
 	}
 
-	public void setIncident(Incident incident) {
-		this.incident = incident;
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
 }

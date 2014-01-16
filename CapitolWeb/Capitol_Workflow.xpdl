@@ -1967,11 +1967,11 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttributes>
 </Activity>
 <Activity Id="MakePayment" Name="Make Payment">
-<Description/>
 <Implementation>
 <Tool Id="MakePayment" Type="APPLICATION">
-<ActualParameters/>
-<Description/>
+<ActualParameters>
+<ActualParameter>Invoice</ActualParameter>
+</ActualParameters>
 </Tool>
 </Implementation>
 <StartMode>
@@ -1989,7 +1989,12 @@ AND no accident report was received yet.</carnot:Text>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10234" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
-<carnot:DataFlows/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10664" Id="Invoice" Name="Invoice" Direction="IN" Context="application">
+<carnot:DataRef Id="Invoice"/>
+<carnot:AccessPointRef Id="setInvoice(de.wwu.wfm.sc4.capitol.data.Invoice)"/>
+</carnot:DataFlow>
+</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
 <carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
@@ -2289,7 +2294,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="GATEWAY" Oid="10642" X="240" Y="235" Width="42" Height="42" ModelElement="10554" FlowKind="split"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10651" X="170" Y="375" Width="181" Height="51" ModelElement="RouteActivity"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10658" X="240" Y="495" Width="42" Height="42" ModelElement="10651" FlowKind="split"/>
-<carnot:Symbol Kind="DATA" Oid="10662" X="80" Y="245" Width="110" Height="70" ModelElement="Invoice"/>
+<carnot:Symbol Kind="DATA" Oid="10662" X="-10" Y="390" Width="110" Height="70" ModelElement="Invoice"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
@@ -2324,6 +2329,7 @@ AND no accident report was received yet.</carnot:Text>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="DATA_FLOW" Oid="10663" SourceSymbol="10662" TargetSymbol="10554"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10665" SourceSymbol="10662" TargetSymbol="10259"/>
 </carnot:Connections>
 </carnot:Diagram>
 </carnot:Diagrams>
