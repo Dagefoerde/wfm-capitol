@@ -252,20 +252,6 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
-<Application Id="CompareDecisionWithInvoice" Name="Compare Decision with Invoice">
-<ExternalReference location="" xref=""/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Application Oid="10299" Type="plainJava">
-<carnot:ApplicationContexts/>
-<carnot:AccessPoints/>
-<carnot:Attributes>
-<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
-</carnot:Attributes>
-</carnot:Application>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Application>
 <Application Id="RejectionNoticeToBVIS" Name="Rejection notice to BVIS">
 <Description>Notice that the Invoice in its current form is rejected will be sent to the C&amp;C and BVIS.</Description>
 <FormalParameters/>
@@ -281,20 +267,6 @@
 <carnot:Attribute Name="carnot:engine:requestMessageType" Value="Map" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
 <carnot:Attribute Name="carnot:engine:includeOidHeaders" Value="false" Type="boolean"/>
 <carnot:Attribute Name="carnot:engine:queueConnectionFactory.jndiName" Value="java:comp/env/jms/CarnotXAConnectionFactoryBVIS"/>
-</carnot:Attributes>
-</carnot:Application>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Application>
-<Application Id="CompareEstimationWithInvoice" Name="Compare Estimation with Invoice">
-<ExternalReference location="" xref=""/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Application Oid="10329" Type="plainJava">
-<carnot:ApplicationContexts/>
-<carnot:AccessPoints/>
-<carnot:Attributes>
-<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
 </carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
@@ -1937,54 +1909,6 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Activity>
-<Activity Id="CompareDecisionWithInvoice" Name="Compare Decision with Invoice">
-<Description/>
-<Implementation>
-<Tool Id="CompareDecisionWithInvoice" Type="APPLICATION">
-<ActualParameters>
-<ActualParameter>Incident</ActualParameter>
-</ActualParameters>
-<Description/>
-</Tool>
-</Implementation>
-<StartMode>
-<Automatic/>
-</StartMode>
-<FinishMode>
-<Automatic/>
-</FinishMode>
-<TransitionRestrictions>
-<TransitionRestriction>
-<Split Type="XOR">
-<TransitionRefs>
-<TransitionRef Id="Transition_2"/>
-<TransitionRef Id="Transition_3"/>
-</TransitionRefs>
-</Split>
-</TransitionRestriction>
-</TransitionRestrictions>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10229" Implementation="Application" IsHibernatedOnCreation="false">
-<carnot:EventHandlers/>
-<carnot:DataFlows>
-<carnot:DataFlow Oid="10230" Id="Case" Name="Case" Direction="IN" Context="application">
-<carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef/>
-</carnot:DataFlow>
-</carnot:DataFlows>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
-<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
-<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
-</carnot:Attributes>
-</carnot:Activity>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Activity>
 <Activity Id="SendRejectionNoticeToBVIS" Name="Send rejection notice to BVIS">
 <Description/>
 <Implementation>
@@ -2009,54 +1933,6 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Activity Oid="10231" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows/>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
-<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
-<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
-</carnot:Attributes>
-</carnot:Activity>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Activity>
-<Activity Id="CompareEstimationWithInvoice" Name="Compare Estimation with Invoice">
-<Description/>
-<Implementation>
-<Tool Id="CompareEstimationWithInvoice" Type="APPLICATION">
-<ActualParameters>
-<ActualParameter>Incident</ActualParameter>
-</ActualParameters>
-<Description/>
-</Tool>
-</Implementation>
-<StartMode>
-<Automatic/>
-</StartMode>
-<FinishMode>
-<Automatic/>
-</FinishMode>
-<TransitionRestrictions>
-<TransitionRestriction>
-<Split Type="XOR">
-<TransitionRefs>
-<TransitionRef Id="Transition_4"/>
-<TransitionRef Id="Transition_5"/>
-</TransitionRefs>
-</Split>
-</TransitionRestriction>
-</TransitionRestrictions>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10232" Implementation="Application" IsHibernatedOnCreation="false">
-<carnot:EventHandlers/>
-<carnot:DataFlows>
-<carnot:DataFlow Oid="10233" Id="Case" Name="Case" Direction="IN" Context="application">
-<carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef/>
-</carnot:DataFlow>
-</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
 <carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
@@ -2187,6 +2063,16 @@ AND no accident report was received yet.</carnot:Text>
 <FinishMode>
 <Automatic/>
 </FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="Transition_10"/>
+<TransitionRef Id="Transition_11"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10553" Implementation="Application">
@@ -2208,40 +2094,41 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Activity>
+<Activity Id="RouteActivity" Name="Route Activity">
+<Implementation>
+<No/>
+</Implementation>
+<Performer/>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Manual/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="Transition_12"/>
+<TransitionRef Id="Transition_13"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Activity Oid="10650">
+<carnot:EventHandlers/>
+<carnot:DataFlows/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Activity>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity>
 </Activities>
 <Transitions>
-<Transition Id="Transition_2" Name="Transition 2" From="CompareDecisionWithInvoice" To="SendRejectionNoticeToBVIS">
-<Condition Type="CONDITION">Invoice.hasPositionsNotCovered() || Invoice.hasUnknownPositions();</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10238" IsForkingOnTraversal="false"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
-<Transition Id="Transition_3" Name="Transition 3" From="CompareDecisionWithInvoice" To="CompareEstimationWithInvoice">
-<Condition Type="OTHERWISE"/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10239" IsForkingOnTraversal="false"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
-<Transition Id="Transition_4" Name="Transition 4" From="CompareEstimationWithInvoice" To="MakePayment">
-<Condition Type="OTHERWISE"/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10240" IsForkingOnTraversal="false"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
-<Transition Id="Transition_5" Name="Transition 5" From="CompareEstimationWithInvoice" To="ClarifyInvoiceWithCarsCo">
-<Condition Type="CONDITION">Invoice.getTotal() &gt; (Invoice.getEstimatedTotal() * 1.10);</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10241" IsForkingOnTraversal="false"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
 <Transition Id="Transition_6" Name="Transition 6" From="ClarifyInvoiceWithCarsCo" To="MakePayment">
 <Condition Type="OTHERWISE"/>
 <ExtendedAttributes>
@@ -2274,11 +2161,35 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
-<Transition Id="Transition_10" Name="Transition 10" From="AddInvoiceToIncident" To="CompareDecisionWithInvoice">
-<Condition Type="CONDITION">true</Condition>
+<Transition Id="Transition_10" Name="Transition 10" From="AddInvoiceToIncident" To="SendRejectionNoticeToBVIS">
+<Condition Type="CONDITION">Incident.getInvoice().hasPositionsNotCovered() || Incident.getInvoice().hasUnknownPositions();</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10563"/>
+<carnot:Transition Oid="10644" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_11" Name="Transition 11" From="AddInvoiceToIncident" To="RouteActivity">
+<Condition Type="OTHERWISE"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10652" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_12" Name="Transition 12" From="RouteActivity" To="ClarifyInvoiceWithCarsCo">
+<Condition Type="CONDITION">Incident.getInvoice().getDueSum() &gt; (Incident.getInvoice().getEstimatedTotal() * 1.10);</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10654" IsForkingOnTraversal="false"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_13" Name="Transition 13" From="RouteActivity" To="MakePayment">
+<Condition Type="OTHERWISE"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10656" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -2326,45 +2237,34 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="STARTEVENT" Oid="10248" X="215" Y="-45" Width="90" Height="50" ModelElement="ReceiveInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10249" X="180" Y="20" Width="151" Height="51" ModelElement="LoadIncidentData"/>
 <carnot:Symbol Kind="DATA" Oid="10251" X="35" Y="180" Width="40" Height="60" ModelElement="Incident"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10252" X="170" Y="190" Width="171" Height="51" ModelElement="CompareDecisionWithInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10253" X="690" Y="695" Width="161" Height="51" ModelElement="SendRejectionNoticeToBVIS"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10254" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveIncidentByID"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10255" X="870" Y="665" Width="130" Height="70" ModelElement="RejectionNoticeToBVIS"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10256" X="750" Y="870" Width="40" Height="40"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10257" X="170" Y="370" Width="181" Height="51" ModelElement="CompareEstimationWithInvoice"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10258" X="240" Y="265" Width="42" Height="42" ModelElement="10252" FlowKind="split"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10259" X="190" Y="730" Width="141" Height="51" ModelElement="MakePayment"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10260" X="370" Y="490" Width="211" Height="51" ModelElement="ClarifyInvoiceWithCarsCo"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10261" X="240" Y="450" Width="42" Height="42" ModelElement="10257" FlowKind="split"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10262" X="240" Y="810" Width="40" Height="40"/>
 <carnot:Symbol Kind="ROLE" Oid="10263" X="640" Y="490" Width="120" Height="40" ModelElement="AccountantSpecialist"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10264" X="240" Y="625" Width="42" Height="42" ModelElement="10259" FlowKind="join"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10265" X="455" Y="625" Width="42" Height="42" ModelElement="10260" FlowKind="split"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10266" X="750" Y="625" Width="42" Height="42" ModelElement="10253" FlowKind="join"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10267" X="-5" Y="685" Width="130" Height="40" ModelElement="MakePayment"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10268" X="375" Y="185" Width="130" Height="40" ModelElement="CompareDecisionWithInvoice"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10269" X="380" Y="360" Width="130" Height="40" ModelElement="CompareEstimationWithInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10270" X="690" Y="780" Width="161" Height="51" ModelElement="SendRejectionNoticeToCC"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10271" X="880" Y="790" Width="130" Height="40" ModelElement="RejectionNoticeToCC"/>
 <carnot:Symbol Kind="DATA" Oid="10550" X="435" Y="10" Width="40" Height="60" ModelElement="DTO"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10554" X="185" Y="110" Width="141" Height="55" ModelElement="AddInvoiceToIncident"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10554" X="190" Y="130" Width="141" Height="55" ModelElement="AddInvoiceToIncident"/>
 <carnot:Symbol Kind="DATA" Oid="10566" X="620" Y="565" Width="90" Height="60" ModelElement="RejectInvoice"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10570" X="400" Y="110" Width="130" Height="40" ModelElement="UpdateInvoice"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10642" X="240" Y="235" Width="42" Height="42" ModelElement="10554" FlowKind="split"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10651" X="170" Y="375" Width="181" Height="51" ModelElement="RouteActivity"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10658" X="240" Y="495" Width="42" Height="42" ModelElement="10651" FlowKind="split"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10274" SourceSymbol="10254" TargetSymbol="10249"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10275" SourceSymbol="10255" TargetSymbol="10253"/>
-<carnot:Connection Kind="TRANSITION" Oid="10277" ModelElement="Transition_2" SourceSymbol="10258" TargetSymbol="10266" SourceAnchor="center" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10278" ModelElement="Transition_8" SourceSymbol="10253" TargetSymbol="10270" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10279" ModelElement="Transition_3" SourceSymbol="10258" TargetSymbol="10257" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10280" SourceSymbol="10252" TargetSymbol="10258" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10281" SourceSymbol="10251" TargetSymbol="10249"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10282" SourceSymbol="10251" TargetSymbol="10252"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10283" SourceSymbol="10251" TargetSymbol="10257"/>
-<carnot:Connection Kind="TRANSITION" Oid="10284" ModelElement="Transition_4" SourceSymbol="10261" TargetSymbol="10264" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10285" ModelElement="Transition_5" SourceSymbol="10261" TargetSymbol="10260" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10286" SourceSymbol="10257" TargetSymbol="10261" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10287" SourceSymbol="10259" TargetSymbol="10262" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="PERFORMS" Oid="10288" SourceSymbol="10263" TargetSymbol="10260"/>
 <carnot:Connection Kind="TRANSITION" Oid="10289" ModelElement="Transition_6" SourceSymbol="10265" TargetSymbol="10264" SourceAnchor="center" TargetAnchor="center"/>
@@ -2373,17 +2273,20 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connection Kind="TRANSITION" Oid="10292" ModelElement="Transition_7" SourceSymbol="10265" TargetSymbol="10266" SourceAnchor="center" TargetAnchor="left"/>
 <carnot:Connection Kind="TRANSITION" Oid="10293" SourceSymbol="10266" TargetSymbol="10253" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10294" SourceSymbol="10267" TargetSymbol="10259"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10295" SourceSymbol="10268" TargetSymbol="10252"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10296" SourceSymbol="10269" TargetSymbol="10257"/>
 <carnot:Connection Kind="TRANSITION" Oid="10297" SourceSymbol="10270" TargetSymbol="10256" SourceAnchor="bottom" TargetAnchor="bottom"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10298" SourceSymbol="10271" TargetSymbol="10270"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10552" SourceSymbol="10550" TargetSymbol="10249"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10556" SourceSymbol="10251" TargetSymbol="10554"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10558" SourceSymbol="10550" TargetSymbol="10554"/>
 <carnot:Connection Kind="TRANSITION" Oid="10562" ModelElement="Transition_9" SourceSymbol="10249" TargetSymbol="10554" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10564" ModelElement="Transition_10" SourceSymbol="10554" TargetSymbol="10252" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10568" SourceSymbol="10566" TargetSymbol="10260"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10571" SourceSymbol="10570" TargetSymbol="10554"/>
+<carnot:Connection Kind="TRANSITION" Oid="10643" SourceSymbol="10554" TargetSymbol="10642" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10645" ModelElement="Transition_10" SourceSymbol="10642" TargetSymbol="10266" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10653" ModelElement="Transition_11" SourceSymbol="10642" TargetSymbol="10651" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10655" ModelElement="Transition_12" SourceSymbol="10658" TargetSymbol="10260" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10657" ModelElement="Transition_13" SourceSymbol="10658" TargetSymbol="10264" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10659" SourceSymbol="10651" TargetSymbol="10658" SourceAnchor="center" TargetAnchor="center"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
