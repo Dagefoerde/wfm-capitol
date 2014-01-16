@@ -22,7 +22,7 @@ public class IncidentService extends AbstractServiceClass<Incident> {
 	public Incident findBySharedId(int sharedId) {
 		Session s = getSession();
 		Query q = s.createQuery("from Incident i" +
-				" where i.sharedIncidentId = :id");
+				" where i.sharedIncidentID = :id");
 		q.setInteger("id", sharedId);
 		
 		List<?> results = q.list();

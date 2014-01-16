@@ -40,10 +40,10 @@ public class InitializeIncident {
 		// TODO do we actually get contract data?! probably not.
 		// Maybe retrieve via ClaimData->ClaimReport->Car
 
-		if (contract == null) {
+		/* TODO REMOVE if (contract == null) {
 			// contract not found,
 			return null;
-		}
+		}*/
 
 		// create new incident with contract
 		Incident incident = new Incident();
