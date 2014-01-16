@@ -52,12 +52,12 @@ public class Invoice extends AbstractDataClass {
 	@Column(name = "bankAccountHolder")
 	private String bankAccountHolder;
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = { CascadeType.ALL })
 	private Incident incident;
-	
-	@OneToMany(cascade = {CascadeType.ALL})
+
+	@OneToMany(cascade = { CascadeType.ALL })
 	private Collection<InvoiceElement> invoiceElements;
-	
+
 	public Invoice() {
 		super();
 	}
@@ -186,7 +186,7 @@ public class Invoice extends AbstractDataClass {
 		if (damageReport == null) {
 			throw new Exception("DamageReport is not existent in incident.");
 		}
-		
+
 		return damageReport.getEstimatedTotal();
 	}
 
@@ -198,4 +198,31 @@ public class Invoice extends AbstractDataClass {
 		return invoiceElements;
 	}
 
+	public boolean hasPositionsNotCovered() {
+		boolean checkResult = false;
+		Collection<DamageReportEntry> damageReportEntries = this.incident
+				.getDamageReport().getEntries();
+		
+		// check for different collection sizes
+		if (damageReportEntries.size() != this.invoiceElements.size())
+			checkResult = true;
+		else {
+		// check for not covered elements
+			int countListElements = this.invoiceElements.size();
+			for (InvoiceElement ie : this.invoiceElements) {
+				for (DamageReportEntry dre : damageReportEntries) {
+					if (ie.getDescription() == dre.getDescription()) {
+						countListElements--;
+						if (dre.getCoverageDecision() == false) {
+							checkResult = true;
+						}
+					}
+				}
+			}
+		//check for correct entries
+		if(countListElements != 0)
+			checkResult = true;
+		}
+		return checkResult;
+	}
 }
