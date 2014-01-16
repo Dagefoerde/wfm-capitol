@@ -24,7 +24,7 @@ public class AbstractServiceClass<A extends AbstractDataClass> {
 	public void persist(A current){
 		 Session s = getSession();
 		 s.beginTransaction();
-		 s.saveOrUpdate(current);
+		 s.merge(current);
 		 s.getTransaction().commit();
 	}
 	
