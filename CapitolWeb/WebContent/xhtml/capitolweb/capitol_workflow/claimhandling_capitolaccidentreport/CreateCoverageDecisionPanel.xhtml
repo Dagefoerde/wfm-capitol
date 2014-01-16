@@ -1,17 +1,61 @@
 <ice:outputHtml xmlns:ice="http://www.icesoft.com/icefaces/component"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
-  <ice:outputHead>
-    <ice:outputStyle href="/plugins/common/css/nirvanaRime.css"/>
-    <ice:outputStyle href="/plugins/common/css/nirvanaRime-override.css"/>
-    <ice:outputStyle href="/plugins/common/css/nirvanaPortal.css"/>
-    <ice:outputStyle href="/plugins/common/css/portalComponentStyle.css"/>
-    <ice:outputStyle href="/plugins/common/css/alerts.css"/>
-    </ice:outputHead>
-  <ice:outputBody>
-    <ice:form id="ipp_form">
-      <h:panelGrid id="data_mappings" columns="2" styleClass="table-form" columnClasses="table-label-column,table-component-column">
-      </h:panelGrid>
-    </ice:form>
-  </ice:outputBody>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ice:outputHead>
+		<ice:outputStyle href="/plugins/common/css/nirvanaRime.css" />
+		<ice:outputStyle href="/plugins/common/css/nirvanaRime-override.css" />
+		<ice:outputStyle href="/plugins/common/css/nirvanaPortal.css" />
+		<ice:outputStyle href="/plugins/common/css/portalComponentStyle.css" />
+		<ice:outputStyle href="/plugins/common/css/alerts.css" />
+	</ice:outputHead>
+	<ice:outputBody>
+		<ice:form id="ipp_form">
+			<h:panelGrid id="contract_data" columns="4" styleClass="table-form"
+				columnClasses="claim-contract-label,claim-contract-entry,claim-contract-label,claim-contract-entry">
+				<ice:outputText value="Incident ID (internal):" />
+				<ice:outputText value="#{CreateCoverageDecisionBean.incident.id}" />
+				<ice:outputText value="Incident ID (shared):" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.sharedIncidentID}" />
+
+
+				<ice:outputText value="Contract [+Customer]" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.contract}" />
+				<ice:outputText value="Car" />
+				<ice:outputText value="#{CreateCoverageDecisionBean.incident.car}" />
+			</h:panelGrid>
+
+			<div><b><ice:outputText
+				value="Damage Report from Cars&amp;Co" /></b><br />
+			<ice:outputText
+				value="#{CreateCoverageDecisionBean.incident.damageReport}" /></div>
+			<br />
+
+			<div><b><ice:outputText
+				value="Accident Report from Customer" /></b><br />
+			<ice:outputText
+				value="#{CreateCoverageDecisionBean.incident.accidentReport}" /></div>
+			<br />
+
+			<table>
+				<tr>
+					<td><b><ice:outputText value="Is covered" /></b></td>
+					<td><b><ice:outputText value="Position" /></b></td>
+					<td><b><ice:outputText value="Costs" /></b></td>
+				</tr>
+				<ui:repeat
+					value="#{CreateCoverageDecisionBean.incident.damageReport.entries}"
+					var="cd">
+					<tr>
+						<td><ice:selectBooleanCheckbox value="#{cd.coverageDecision}" /></td>
+						<td><ice:outputText value="#{cd.description}" /></td>
+						<td><ice:outputText value="#{cd.costEstimation}" /></td>
+					</tr>
+				</ui:repeat>
+			</table>
+			
+		</ice:form>
+	</ice:outputBody>
 </ice:outputHtml>
