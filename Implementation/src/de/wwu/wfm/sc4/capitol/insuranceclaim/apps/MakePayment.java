@@ -1,4 +1,6 @@
-package de.wwu.wfm.sc4.capitol.data;
+package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
+
+import de.wwu.wfm.sc4.capitol.data.Incident;
 
 public class MakePayment {
 	Incident incident;

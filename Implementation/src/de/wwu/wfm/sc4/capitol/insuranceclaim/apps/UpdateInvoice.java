@@ -9,11 +9,12 @@ public class UpdateInvoice {
 	private Incident incident;
 	private DataTransferObject dto;
 	
-	public void complete(){
+	public Incident complete(){
 		ServiceInitializer s = ServiceInitializer.getProvider();
 		Invoice invoice = s.getInvoiceService().createFromClaimData(dto.getClaimData(), incident);
-		s.getInvoiceService().persist(invoice);
 		incident.addInvoice(invoice);
+		s.getIncidentService().persist(incident);
+		return incident;
 	}
 	
 	

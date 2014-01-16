@@ -331,7 +331,7 @@
 </ExtendedAttributes>
 </Application>
 <Application Id="MakePayment" Name="MakePayment">
-<ExternalReference location="" xref=""/>
+<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.MakePayment" xref="complete:"/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10337" Type="plainJava">
@@ -339,6 +339,9 @@
 <carnot:AccessPoints/>
 <carnot:Attributes>
 <carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.MakePayment"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+<carnot:Attribute Name="carnot:engine:constructorName" Value="MakePayment()"/>
 </carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
@@ -580,7 +583,7 @@
 </ExtendedAttributes>
 </Application>
 <Application Id="UpdateInvoice" Name="UpdateInvoice">
-<ExternalReference location="" xref=""/>
+<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.UpdateInvoice" xref="complete:"/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Application Oid="10569" Type="plainJava">
@@ -588,6 +591,9 @@
 <carnot:AccessPoints/>
 <carnot:Attributes>
 <carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.UpdateInvoice"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+<carnot:Attribute Name="carnot:engine:constructorName" Value="UpdateInvoice()"/>
 </carnot:Attributes>
 </carnot:Application>
 </ExtendedAttribute>
@@ -2054,6 +2060,7 @@ AND no accident report was received yet.</carnot:Text>
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
 <ActualParameter>DTO</ActualParameter>
+<ActualParameter>Incident</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -2075,7 +2082,7 @@ AND no accident report was received yet.</carnot:Text>
 </TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10553" Implementation="Application">
+<carnot:Activity Oid="10553" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10555" Id="Incident" Name="Incident" Direction="IN" Context="application">
@@ -2086,9 +2093,18 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:DataRef Id="DTO"/>
 <carnot:AccessPointRef/>
 </carnot:DataFlow>
+<carnot:DataFlow Oid="10660" Id="Incident" Name="Incident" Direction="OUT" Context="application">
+<carnot:DataRef Id="Incident"/>
+<carnot:AccessPointRef Id="returnValue"/>
+</carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
 </carnot:Attributes>
 </carnot:Activity>
 </ExtendedAttribute>
@@ -2235,7 +2251,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="POOL" Oid="10247" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
 <carnot:Symbol Kind="STARTEVENT" Oid="10248" X="215" Y="-45" Width="90" Height="50" ModelElement="ReceiveInvoice"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10249" X="180" Y="20" Width="151" Height="51" ModelElement="LoadIncidentData"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10249" X="185" Y="20" Width="151" Height="51" ModelElement="LoadIncidentData"/>
 <carnot:Symbol Kind="DATA" Oid="10251" X="35" Y="180" Width="40" Height="60" ModelElement="Incident"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10253" X="690" Y="695" Width="161" Height="51" ModelElement="SendRejectionNoticeToBVIS"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10254" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveIncidentByID"/>
