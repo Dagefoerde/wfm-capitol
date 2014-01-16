@@ -39,6 +39,7 @@
 		<mapping class="de.wwu.wfm.sc4.capitol.data.DamageReport" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Incident" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Invoice" />
+		<mapping class="de.wwu.wfm.sc4.capitol.data.InvoiceElement" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Requirements" />
 
 	</session-factory>
