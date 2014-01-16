@@ -31,16 +31,18 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<mapping class="de.wwu.wfm.sc4.capitol.data.AccidentReport" />
+		<mapping class="de.wwu.wfm.sc4.capitol.data.Address" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Car" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Case" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Contract" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Customer" />
-		<mapping class="de.wwu.wfm.sc4.capitol.data.DamageReportEntry" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.DamageReport" />
+		<mapping class="de.wwu.wfm.sc4.capitol.data.DamageReportEntry" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Incident" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Invoice" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.InvoiceElement" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Requirements" />
+		<mapping class="de.wwu.wfm.sc4.capitol.data.ServiceStation" />
 
 	</session-factory>
 

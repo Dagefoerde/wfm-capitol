@@ -22,6 +22,7 @@ public class AccidentReport extends AbstractDataClass {
 	@Column(name = "id")
 	private int id;
 
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Address crashAddress;
 	private Date date;
 	private Customer customer;

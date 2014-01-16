@@ -53,8 +53,8 @@ public class Main {
 			System.out.println(q);
 			//consume(session, q);
 			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
-			createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
-			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
+			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
+			createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -148,11 +148,14 @@ public class Main {
 		
 		Address addr = new Address(12, "Poitzen", "D-29328", "Faﬂberg");
 		
+		Customer customer = new Customer();
+		customer.setUsername("abcd");
+		
 		Car car = new Car();
 		car.setLicensePlate("MS-MS 2020");
 		
 		ClaimReport claimReport = new ClaimReport(addr, Calendar.getInstance().getTime()
-				, null, car, "cause", "description", false, true);
+				, customer, car, "cause", "description", false, true);
 		
 		ClaimData claimData = new ClaimData(123, claimReport, null, null, null, null, null);
 		
