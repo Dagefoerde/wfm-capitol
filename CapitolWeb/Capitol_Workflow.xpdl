@@ -975,8 +975,8 @@
 <ExtendedAttribute Name="CarnotExt">
 <carnot:DataField Oid="10661" Type="serializable">
 <carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Invoice"/>
 <carnot:Attribute Name="authorization:data.readDataValues" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.data.Invoice"/>
 </carnot:Attributes>
 </carnot:DataField>
 </ExtendedAttribute>
@@ -984,7 +984,7 @@
 </DataField>
 </DataFields>
 <WorkflowProcesses>
-<WorkflowProcess Id="claimHandling_CapitolAccidentReport" Name="Receive Customer Accident Report and create Coverage Decision" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CL3_B_AccRep" Name="CL3_B_AccRep Receive Customer Accident Report and create Coverage Decision" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="RetrieveIncident" Name="Retrieve incident">
@@ -1365,7 +1365,7 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="RemindCustomer" Name="Remind customer" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CL2_ManualRemindCustomer" Name="CL2_Manual Remind customer" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="RemindCustomers" Name="Remind Customers">
@@ -1465,6 +1465,13 @@
 </carnot:Triggers>
 <carnot:DataPaths/>
 <carnot:EventHandlers/>
+<carnot:Attributes>
+<carnot:Attribute Name="authorization:processDefinition.abortProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.modifyProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.deleteProcessInstances[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:processDefinition.readProcessInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:processDefinition.manageEventHandlers[0]" Value="Administrator"/>
+</carnot:Attributes>
 <carnot:Diagrams>
 <carnot:Diagram Oid="10118" Name="Default" Orientation="Vertical" Mode="MODE_4_0_0">
 <carnot:Symbols>
@@ -1660,7 +1667,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="claimHandling_CapitolDamageReport" Name="Receive Damage Report with Cost Estimates" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CL1_B_Init" Name="CL1_B_Init Receive Damage Report with Cost Estimates" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="CheckForExistingContract" Name="Check for existing contract">
@@ -1886,7 +1893,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </WorkflowProcess>
-<WorkflowProcess Id="claimHandling_CapitolInvoice" Name="Receive Invoice and make Payment" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CL4_CC_Invoi" Name="CL4_CC_Invoi Receive Invoice and make Payment" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
 <Activity Id="LoadIncidentData" Name="Load Incident Data">
