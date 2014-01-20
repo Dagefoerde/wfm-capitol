@@ -13,7 +13,7 @@ public class RetrieveIncidentByID {
 
 	public Incident complete() {
 		Incident incident = ServiceInitializer.p().getIncidentService()
-				.findBySharedId(dto.getClaimData().getiD());
+				.findBySharedId(dto.getClaimData().getId());
 		if (incident != null) {
 			ServiceInitializer.p().getIncidentService().initializeIncident(incident);
 		}

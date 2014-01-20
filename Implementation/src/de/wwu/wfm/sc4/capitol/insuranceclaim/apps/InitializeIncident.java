@@ -53,7 +53,7 @@ public class InitializeIncident {
 		if(actualContract != null){
 			de.wwu.wfm.sc4.capitol.data.Incident newIncident = new Incident();
 			newIncident.setContract(actualContract);
-			newIncident.setSharedIncidentID(dto.getClaimData().getiD());
+			newIncident.setSharedIncidentID(dto.getClaimData().getId());
 
 			return newIncident;
 		}
