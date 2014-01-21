@@ -14,10 +14,13 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQObjectMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
 
+import de.wwu.wfm.sc4.capitol.data.Case;
+
 import ClaimData.ClaimData;
 import ClaimData.ClaimReport;
 import ClaimData.DamageReport;
 import ClaimData.Entry;
+import ClaimData.ServiceStation;
 import ContractData.Car;
 import ContractData.ContractData;
 import ContractData.Requirements;
@@ -53,8 +56,8 @@ public class Main {
 			System.out.println(q);
 			//consume(session, q);
 			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
-			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
-			createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
+			createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
+			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,7 +96,7 @@ public class Main {
 		DataTransferObject dto = createDamageReportDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "claimHandling_CapitolDamageReport");
+		message.setStringProperty("processID", "CL1_B_Init");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -125,14 +128,14 @@ public class Main {
 
 		DataTransferObject dto = new DataTransferObject();
 		dto.setCommunicationReason("claimHandling_CapitolDamageReport");
-		ClaimReport claimReport = new ClaimReport(null, null, null, new Car(), null, null, false, false);
+		ClaimReport claimReport = new ClaimReport(null, null, null, new Car("CE-JM 999","green","PKW",999), null, null, false, false);
 		
 		ArrayList<Entry> damages = new ArrayList<Entry>();
 		damages.add(new Entry(1, "Broken Window", 1000));
 		damages.add(new Entry(2, "Gas pedal", 70));
 		damages.add(new Entry(1, "Heater", 2500));
 		
-		DamageReport damageReport = new DamageReport(damages, null, null);
+		DamageReport damageReport = new DamageReport(damages, "Hans Wurst", new ServiceStation("0800/29923",new Address(9,"Kartoffelweg","29223","Celle")));
 		ClaimData claimData = new ClaimData(123, claimReport, null, damageReport, null, null, null);
 		
 		dto.setClaimData(claimData);
