@@ -2114,11 +2114,11 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10555" Id="Incident" Name="Incident" Direction="IN" Context="application">
 <carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef/>
+<carnot:AccessPointRef Id="setIncident(de.wwu.wfm.sc4.capitol.data.Incident)"/>
 </carnot:DataFlow>
 <carnot:DataFlow Oid="10557" Id="DTO" Name="DTO" Direction="IN" Context="application">
 <carnot:DataRef Id="DTO"/>
-<carnot:AccessPointRef/>
+<carnot:AccessPointRef Id="setDto(DTO.DataTransferObject)"/>
 </carnot:DataFlow>
 <carnot:DataFlow Oid="10660" Id="Invoice" Name="Invoice" Direction="OUT" Context="application">
 <carnot:DataRef Id="Invoice"/>
