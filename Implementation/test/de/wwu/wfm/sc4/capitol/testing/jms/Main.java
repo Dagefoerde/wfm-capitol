@@ -105,7 +105,7 @@ public class Main {
 		DataTransferObject dto = createAccidentReportDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "claimHandling_CapitolAccidentReport");
+		message.setStringProperty("processID", "CL3_B_AccRep");
 		message.setObject(dto);
 		producer.send(message);
 		
