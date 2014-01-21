@@ -20,6 +20,8 @@ import ClaimData.ClaimData;
 import ClaimData.ClaimReport;
 import ClaimData.DamageReport;
 import ClaimData.Entry;
+import ClaimData.Invoice;
+import ClaimData.InvoiceElement;
 import ClaimData.ServiceStation;
 import ContractData.Car;
 import ContractData.ContractData;
@@ -56,8 +58,9 @@ public class Main {
 			System.out.println(q);
 			//consume(session, q);
 			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
-			createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
+			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
 			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
+			createDTOForInvoices(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,6 +109,16 @@ public class Main {
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
 		message.setStringProperty("processID", "CL3_B_AccRep");
+		message.setObject(dto);
+		producer.send(message);
+		
+	}
+	
+	private static void createDTOForInvoices(Session session, Queue q) throws JMSException, IOException {
+		DataTransferObject dto = createInvoiceDTO();
+		MessageProducer producer = session.createProducer(q);
+		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
+		message.setStringProperty("processID", "CL4_CC_Invoi");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -161,6 +174,43 @@ public class Main {
 				, customer, car, "cause", "description", false, true);
 		
 		ClaimData claimData = new ClaimData(123, claimReport, null, null, null, null, null);
+		
+		dto.setClaimData(claimData);
+		
+		return dto;
+	}
+	
+	private static DataTransferObject createInvoiceDTO(){
+
+		DataTransferObject dto = new DataTransferObject();
+		dto.setCommunicationReason("claimHandling_CapitolReceiveInvoice");
+		
+		Invoice invoice = new Invoice(null);
+		invoice.setDate(new Date());
+		invoice.setPointOfContact("Pointi");
+		invoice.setDueSum(3500);
+		invoice.setInvoiceNumber(122);
+		invoice.setInvoiceText("Helloooo");
+		invoice.setPaymentTerm(new Date());
+		invoice.setBankAccount("123456789");
+		invoice.setBankCode("25750001");
+		invoice.setBankAccountHolder("C&C");
+		invoice.setBankName("Spk Ms Ost");
+		
+		List<InvoiceElement> list = new ArrayList<InvoiceElement>();
+		
+		InvoiceElement inv1 = new InvoiceElement();
+		inv1.setAmount(1000);
+		inv1.setDescription("Broken Window");
+		list.add(inv1);
+		InvoiceElement inv3 = new InvoiceElement();
+		inv3.setAmount(2500);
+		inv3.setDescription("Heater");
+		list.add(inv3);
+		
+		invoice.setInvoiceElements(list);
+		
+		ClaimData claimData = new ClaimData(123, null, null, null, null, invoice, null);
 		
 		dto.setClaimData(claimData);
 		
