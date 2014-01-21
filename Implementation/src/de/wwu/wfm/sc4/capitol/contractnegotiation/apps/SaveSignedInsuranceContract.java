@@ -21,7 +21,7 @@ public class SaveSignedInsuranceContract {
 	}
 	
 	public void complete() {
-		SimpleDateFormat df=new SimpleDateFormat("YYYYMMDD");
+		SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
 		String path="C:/WFM/contracts/"+df.format(new Date())+"-"+contract.getCustomer().getUsername()+contract.getCustomer().getContracts().size();
 		FileOutputStream output;
 		try {

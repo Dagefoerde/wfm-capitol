@@ -33,7 +33,7 @@ public class ExtractSignedInsuranceContractDocument {
 		contract.setHumanInsured(dto.getContractData().getRequirements().getHumanInsured());
 		contract.setNaturalInsured(dto.getContractData().getRequirements().getNaturalInsured());
 		contract.setPickupService(dto.getContractData().getRequirements().isPickUpService());
-		contract.setSignedInsuranceContract(dto.getContractData().getInsuranceContract().getContractCapitol());
+		//contract.setSignedInsuranceContract(dto.getContractData().getInsuranceContract().getContractCapitol());
 	}
 	public Contract getContract(){
 		return contract;
