@@ -29,6 +29,8 @@ public class TransferDataFromCustomerRequirementsToCase {
 		Customer customer;
 		if (dto.getCustomer()!=null){
 		customer = ServiceInitializer.getProvider().getCustomerService().findByUsername(dto.getCustomer().getUsername());
+		if (customer==null)
+			customer=new Customer();
 		//Update Data
 		customer.setFirstname(dto.getCustomer().getFirstName());
 		customer.setLastname(dto.getCustomer().getLastName());
