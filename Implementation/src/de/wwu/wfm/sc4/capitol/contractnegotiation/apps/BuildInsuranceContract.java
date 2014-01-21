@@ -23,11 +23,11 @@ public class BuildInsuranceContract {
 	}
 	public void complete(){
 		contract= new Contract();
-		contract.setCustomer(contractingCase.getCustomer());
 		contract.setCars(customerRequirements.getCars());
 		contract.setHumanInsured(customerRequirements.getHumanInsured());
 		contract.setNaturalInsured(customerRequirements.getNaturalInsured());
 		contract.setPickupService(customerRequirements.getPickupService());
+		contract.setCase0(contractingCase);
 	}
 	public Contract getContract(){
 		return contract;
