@@ -206,7 +206,7 @@
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-portal-api.jar">
 <dependency-type>uses</dependency-type>
 </dependent-module>
-<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-portal-common.jar">
+<dependent-module deploy-path="/WEB-INF/lib" handle="WebContent/WEB-INF/lib/ipp-portal-common.jar">
 <dependency-type>uses</dependency-type>
 </dependent-module>
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/var/IPP_PORTAL_LIBS/lib/ipp-views-common.jar">
