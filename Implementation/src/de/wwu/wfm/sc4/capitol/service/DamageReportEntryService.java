@@ -12,8 +12,13 @@ public class DamageReportEntryService extends
 				.getCostEstimation(), dre.getCoverageDecision());
 	}
 
-	public DamageReportEntry convertFromDTOEntry(Entry entry, DamageReport damageReport) {
-		return new DamageReportEntry(entry.getiD(),entry.getDescription(),entry.getCostEstimation(),entry.getCoverageDecision(),damageReport);
+	public DamageReportEntry convertFromDTOEntry(Entry entry,
+			DamageReport damageReport) {
+		boolean coverageDecision = false;
+		if (entry.getCoverageDecision() != null)
+			coverageDecision = entry.getCoverageDecision();
+		return new DamageReportEntry(entry.getiD(), entry.getDescription(),
+				entry.getCostEstimation(), coverageDecision, damageReport);
 	}
 
 }

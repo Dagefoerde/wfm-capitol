@@ -16,6 +16,8 @@ public class RetrieveIncidentByID {
 				.findBySharedId(dto.getClaimData().getId());
 		if (incident != null) {
 			ServiceInitializer.p().getIncidentService().initializeIncident(incident);
+		}else{
+			System.out.println("No Incident found in the database.");
 		}
 		return incident;
 	}

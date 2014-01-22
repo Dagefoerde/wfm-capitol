@@ -27,7 +27,7 @@ public class DamageReport extends AbstractDataClass {
 	@OneToOne(cascade = { CascadeType.ALL })
 	ServiceStation serviceStation;
 
-	@OneToOne(mappedBy = "damageReport", cascade = CascadeType.ALL)
+	@OneToOne
 	private Incident incident;
 
 	@OneToMany(mappedBy = "damageReport", cascade = CascadeType.ALL)
