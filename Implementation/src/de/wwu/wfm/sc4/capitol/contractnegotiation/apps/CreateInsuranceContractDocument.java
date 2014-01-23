@@ -29,6 +29,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import de.wwu.wfm.sc4.capitol.constants.CapitolConstants;
 import de.wwu.wfm.sc4.capitol.contractnegotiation.Fonts;
 import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Case;
@@ -123,7 +124,7 @@ public class CreateInsuranceContractDocument {
 			e7.printStackTrace();
 		}
         t0.addCell(new Phrase("Insurance Nr.", Fonts.NORMAL));
-        t0.addCell(new Phrase(": " + contract.getId(), Fonts.NORMAL));
+        t0.addCell(new Phrase(": " + contractingCase.getId(), Fonts.NORMAL));
         t0.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), Utilities.millimetersToPoints(242), canvas);
         tableHeight = t0.getTotalHeight();
         
@@ -140,10 +141,10 @@ public class CreateInsuranceContractDocument {
 			e6.printStackTrace();
 		}
         t1.addCell(new Phrase("Insured", Fonts.NORMAL));
-        t1.addCell(new Phrase(": "+contract.getCustomer().getFirstname()+" "+contract.getCustomer().getLastname(), Fonts.NORMAL));
+        t1.addCell(new Phrase(": "+contractingCase.getCustomer().getFirstname()+" "+contractingCase.getCustomer().getLastname(), Fonts.NORMAL));
         t1.getDefaultCell().setBorder(Rectangle.NO_BORDER);
         t1.addCell(new Phrase("Address", Fonts.NORMAL));
-        t1.addCell(new Phrase(": "+contract.getCustomer().getStreet()+" "+contract.getCustomer().getStreetNumber()+", "+contract.getCustomer().getPostalCode(), Fonts.NORMAL));
+        t1.addCell(new Phrase(": "+contractingCase.getCustomer().getStreet()+" "+contractingCase.getCustomer().getStreetNumber()+", "+contractingCase.getCustomer().getPostalCode() + " " + contractingCase.getCustomer().getCity(), Fonts.NORMAL));
         t1.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), (Utilities.millimetersToPoints(242) - tableHeight), canvas);
         tableHeight = tableHeight + t1.getTotalHeight();
 
@@ -160,35 +161,55 @@ public class CreateInsuranceContractDocument {
 			e5.printStackTrace();
 		}
         t2.addCell(new Phrase("Period of Insurance", Fonts.NORMAL));
-        //TODO: Not yet supported by datastructure
-        t2.addCell(new Phrase(": From 2013/10/01 to 2014/10/01",Fonts.NORMAL));
+		SimpleDateFormat dfForStartDate=new SimpleDateFormat("yyyy/MM/DD");
+
+        t2.addCell(new Phrase(": From "+dfForStartDate.format(contract.getStartDate())+ " to " + dfForStartDate.format(contract.getEndDate()),Fonts.NORMAL));
         t2.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), (Utilities.millimetersToPoints(242) - tableHeight), canvas);
         tableHeight = tableHeight + t2.getTotalHeight();
 
-		/* Insured Vehicle */
-        PdfPTable t3 = new PdfPTable(2);
-        t3.getDefaultCell().setBorder(Rectangle.TOP);
-        t3.getDefaultCell().setLeading(0f, 1.3f);
-        t3.getDefaultCell().setPaddingTop(0);
-        t3.getDefaultCell().setPaddingBottom(5);
+        /* Title Insured Vehicle */
+        PdfPTable t31 = new PdfPTable(1);
+        t31.getDefaultCell().setBorder(Rectangle.TOP);
+        t31.getDefaultCell().setLeading(0f, 1.3f);
+        t31.getDefaultCell().setPaddingTop(0);
+        t31.getDefaultCell().setPaddingBottom(5);
         try {
-			t3.setTotalWidth(new float[] {Utilities.millimetersToPoints(70), Utilities.millimetersToPoints(100)});
+			t31.setTotalWidth(new float[] {Utilities.millimetersToPoints(170)});
 		} catch (DocumentException e4) {
 			// TODO Auto-generated catch block
 			e4.printStackTrace();
 		}
-        t3.addCell(new Phrase("Insured Vehicle Details", Fonts.NORMAL));
-        t3.addCell("");
+        t31.addCell(new Phrase(" ", Fonts.NORMAL));
+        t31.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+        t31.addCell(new Phrase("Insured Vehicle Details", Fonts.NORMAL));
+        t31.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), (Utilities.millimetersToPoints(242) - tableHeight), canvas);
+        tableHeight = tableHeight + t31.getTotalHeight();
+        
+		/* Insured Vehicle */
+        PdfPTable t3 = new PdfPTable(5);
         t3.getDefaultCell().setBorder(Rectangle.NO_BORDER);
-        for (Car car:contract.getCars()){
+        t3.getDefaultCell().setLeading(0f, 1.3f);
+        t3.getDefaultCell().setPaddingTop(0);
+        t3.getDefaultCell().setPaddingBottom(5);
+        try {
+			t3.setTotalWidth(new float[] {Utilities.millimetersToPoints(10),Utilities.millimetersToPoints(40),Utilities.millimetersToPoints(50),Utilities.millimetersToPoints(30), Utilities.millimetersToPoints(40)});
+		} catch (DocumentException e4) {
+			// TODO Auto-generated catch block
+			e4.printStackTrace();
+		}
+        t3.getDefaultCell().setBorder(Rectangle.BOX);
+        t3.addCell(new Phrase(" ", Fonts.NORMAL));
         t3.addCell(new Phrase("Name of Vehicle", Fonts.NORMAL));
-        t3.addCell(new Phrase(": "+ car.getType(), Fonts.NORMAL));
         t3.addCell(new Phrase("License Plate Number", Fonts.NORMAL));
-        t3.addCell(new Phrase(": "+car.getLicencePlate(), Fonts.NORMAL));
         t3.addCell(new Phrase("Color", Fonts.NORMAL));
-        t3.addCell(new Phrase(": "+car.getColor(), Fonts.NORMAL));
         t3.addCell(new Phrase("Price at purchase", Fonts.NORMAL));
-        t3.addCell(new Phrase(": EUR"+ String.format("%1$,.2f", car.getBuyingPrice()), Fonts.NORMAL));}
+        int index=1;
+        for (Car car:contract.getCars()){
+        t3.addCell(new Phrase((index++)+"", Fonts.NORMAL));
+        t3.addCell(new Phrase(car.getType(), Fonts.NORMAL));
+        t3.addCell(new Phrase(car.getLicencePlate(), Fonts.NORMAL));
+        t3.addCell(new Phrase(car.getColor(), Fonts.NORMAL));
+        t3.addCell(new Phrase("EUR "+ String.format("%1$,.2f", car.getBuyingPrice()), Fonts.NORMAL));}
         //TODO: Not yet supported by datastructure
         //t3.addCell(new Phrase("Vehicle Identification Number", Fonts.NORMAL));
         //t3.addCell(new Phrase(": LJCPCBLCX11000237", Fonts.NORMAL));
@@ -198,10 +219,28 @@ public class CreateInsuranceContractDocument {
         //t3.addCell(new Phrase(": Espionage", Fonts.NORMAL));}
         t3.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), Utilities.millimetersToPoints(242) - tableHeight, canvas);
         tableHeight = tableHeight + t3.getTotalHeight();
-
+        
+        /* Title Insured Vehicle */
+        PdfPTable t41 = new PdfPTable(1);
+        t41.getDefaultCell().setBorder(Rectangle.TOP);
+        t41.getDefaultCell().setLeading(0f, 1.3f);
+        t41.getDefaultCell().setPaddingTop(0);
+        t41.getDefaultCell().setPaddingBottom(5);
+        try {
+			t41.setTotalWidth(new float[] {Utilities.millimetersToPoints(170)});
+		} catch (DocumentException e4) {
+			// TODO Auto-generated catch block
+			e4.printStackTrace();
+		}
+        t41.addCell(new Phrase(" ", Fonts.NORMAL));
+        t41.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+        t41.addCell(new Phrase("Insured Value Details", Fonts.NORMAL));
+        t41.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), (Utilities.millimetersToPoints(242) - tableHeight), canvas);
+        tableHeight = tableHeight + t41.getTotalHeight();
+        
 		/* Sum Insured */
         PdfPTable t4 = new PdfPTable(2);
-        t4.getDefaultCell().setBorder(Rectangle.TOP);
+        t4.getDefaultCell().setBorder(Rectangle.NO_BORDER);
         t4.getDefaultCell().setLeading(0f, 1.3f);
         t4.getDefaultCell().setPaddingTop(0);
         t4.getDefaultCell().setPaddingBottom(5);
@@ -211,15 +250,15 @@ public class CreateInsuranceContractDocument {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}
-        t4.addCell(new Phrase("Value Insured", Fonts.NORMAL));
-        t4.addCell(new Phrase(""));
-        t4.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+        t4.getDefaultCell().setBorder(Rectangle.BOX);
         t4.addCell(new Phrase("Natural causes covered", Fonts.NORMAL));
-        t4.addCell(new Phrase(": EUR " + String.format("%1$,.2f", contract.getNaturalInsured()), Fonts.NORMAL));
+        t4.addCell(new Phrase("EUR " + String.format("%1$,.2f", contract.getNaturalInsured()), Fonts.NORMAL));
         t4.addCell(new Phrase("Pickup service covered", Fonts.NORMAL));
-        t4.addCell(new Phrase(": "+(contract.getPickupService()?"Yes":"No"), Fonts.NORMAL));
-        t4.addCell(new Phrase("Total Sum Insured", Fonts.NORMAL));
-        t4.addCell(new Phrase(": EUR " + String.format("%1$,.2f", contract.getHumanInsured()), Fonts.NORMAL));
+        t4.addCell(new Phrase(""+(contract.getPickupService()?"Yes":"No"), Fonts.NORMAL));
+        t4.addCell(new Phrase("Human damage insured", Fonts.NORMAL));
+        t4.addCell(new Phrase("EUR " + String.format("%1$,.2f", contract.getHumanInsured()), Fonts.NORMAL));
+        t4.addCell(new Phrase("Total damage insured", Fonts.NORMAL));
+        t4.addCell(new Phrase("EUR " + String.format("%1$,.2f", contract.getHumanInsured()+contract.getNaturalInsured()), Fonts.NORMAL));      
         t4.writeSelectedRows(0, -1, Utilities.millimetersToPoints(20), (Utilities.millimetersToPoints(242) - tableHeight), canvas);
         tableHeight = tableHeight + t4.getTotalHeight();
 		
@@ -276,7 +315,7 @@ public class CreateInsuranceContractDocument {
         tlast.writeSelectedRows(0, -1, Utilities.millimetersToPoints(110), (Utilities.millimetersToPoints(50) + tlast.getTotalHeight()), canvas);
         Image siggy=null;
 		try {
-			siggy = Image.getInstance("Settings/logo.jpg");
+			siggy = Image.getInstance(CapitolConstants.SETTINGS_PATH+"/logo.jpg");
 		
         siggy.scaleToFit(Utilities.millimetersToPoints(40), Utilities.millimetersToPoints(25));
         siggy.setAbsolutePosition(Utilities.millimetersToPoints(130), Utilities.millimetersToPoints(20));
@@ -309,7 +348,7 @@ public class CreateInsuranceContractDocument {
         }
         copy.freeReader(reader);
         reader.close();
-        reader=new PdfReader("Settings/LegalContractingPart.pdf");
+        reader=new PdfReader(CapitolConstants.SETTINGS_PATH+"/LegalContractingPart.pdf");
         n = reader.getNumberOfPages();
        for (int page = 0; page < n; ) {
            copy.addPage(copy.getImportedPage(reader, ++page));
@@ -324,7 +363,8 @@ public class CreateInsuranceContractDocument {
         cd.setInsuranceContract(insuranceContract);
         //write pdf to file
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-        String path="Contracts/Contract-"+contractingCase.getId()+"-"+contract.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
+        String path=CapitolConstants.PRELIMINARY_CONTRACTS_PATH+"/Contract-"+contractingCase.getId()+"-"+contractingCase.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
+        contract.setPath(path);
         try {
             FileOutputStream output=new FileOutputStream(path);
 			output.write(byteArrayOutputStreamConcat.toByteArray());
