@@ -10,7 +10,7 @@ public class ArchiveCase {
 		this.case0=case0;
 	}
 	public void complete(){
-		case0.setNegotiationState(Case.NegotiationState.Accepted);
+		case0.setNegotiationState(Case.NegotiationState.Terminated);
 		ServiceInitializer.getProvider().getCaseService().persist(case0);
 	}
 }
