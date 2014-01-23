@@ -25,7 +25,9 @@ public class AccidentReport extends AbstractDataClass {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Address crashAddress;
 	private Date date;
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Customer customer;
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Car car;
 	private String cause;
 	private String description;
