@@ -28,6 +28,9 @@ public class BuildInsuranceContract {
 		contract.setNaturalInsured(customerRequirements.getNaturalInsured());
 		contract.setPickupService(customerRequirements.getPickupService());
 		contract.setCase0(contractingCase);
+		contract.setStartDate(customerRequirements.getStartDate());
+		contract.setEndDate(customerRequirements.getEndDate());
+		contractingCase.getContract().add(contract);
 	}
 	public Contract getContract(){
 		return contract;

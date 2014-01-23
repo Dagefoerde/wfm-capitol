@@ -57,10 +57,10 @@ public class Main {
 			System.out.println(session);
 			System.out.println(q);
 			//consume(session, q);
-			//createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
+			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
 			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
 			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
-			createDTOForInvoices(session, q); //Initialize Capitols process for claim processing
+//			createDTOForInvoices(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,9 +130,13 @@ public class Main {
 		ArrayList<Car> cars = new ArrayList<Car>();
 		float value = 89000;
 		cars.add(new Car("SU:FF:1337", "Black", "Limousine", value));
+		cars.add(new Car("XX:YY:42", "Black", "Batmobil", 900000));
 		Requirements req = new Requirements("Open", 100.0,100.0,true,cars);
-		
-		dto.setContractData(new ContractData(12,req,null,null));
+		Date time = Calendar.getInstance().getTime();
+		req.setStartDate(Calendar.getInstance().getTime());
+		time.setYear(2016);
+		req.setEndDate(time);
+		dto.setContractData(new ContractData(13,req,null,null));
 		dto.setCustomer(new Customer("sn00per", "sn00per@gmx.de", "Marvin", "Franke", "01709036540", 1337, 1337, new Address(21,"Hermann-Hesse-Straße", "48161", "Münster")));
 		return dto;
 	}

@@ -19,7 +19,6 @@ public class Case extends AbstractDataClass {
 	private static final long serialVersionUID = -5614119743408419861L;
 
 	@Id
-	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 
@@ -43,6 +42,11 @@ public class Case extends AbstractDataClass {
 		requirements=new ArrayList<Requirements>();
 		contracts=new ArrayList<Contract>();
 		negotiationState=NegotiationState.inNegotiation;
+	}
+	
+	public Case(int id){
+		this();
+		this.id=id;
 	}
 	
 	public Customer getCustomer() {
