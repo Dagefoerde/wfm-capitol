@@ -34,6 +34,16 @@ import java.util.*;
 
 public class Main {
 
+	public static enum Methods{
+		consume,
+		createDTOForCreateContractFromCustomerRequirements,
+		createDTOForDamageReports,
+		createDTOForAccidentReports,
+		createDTOForInvoices,
+		produceDR,
+		createDTOForAccaptanceOfContract,
+		createDTOForTerminationOfContract;
+	}
 	/**
 	 * @param args
 	 * @throws JMSException
@@ -56,14 +66,21 @@ public class Main {
 			Queue q = session.createQueue("CarnotApplicationQueue");
 			System.out.println(session);
 			System.out.println(q);
-			//consume(session, q);
-			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
-			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
-			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
-			//createDTOForInvoices(session, q); //Initialize Capitols process for claim processing
-			//produceDR(session, q); //Initialize first Cars&Co process
-			createDTOForAccaptanceOfContract(session,q);
-			//createDTOForTerminationOfContract(session,q);
+			Methods method=Methods.valueOf(args[0]);
+			if (method!=null){
+				switch (method){
+				case consume: consume(session, q); break;
+				case createDTOForCreateContractFromCustomerRequirements: createDTOForCreateContractFromCustomerRequirements(session, q); break;//Initialize Capitols process for the creation of the coverage decision.
+				case createDTOForDamageReports:createDTOForDamageReports(session, q); break;//Initialize Capitols process for claim processing
+				case createDTOForAccidentReports:createDTOForAccidentReports(session, q); break;//Initialize Capitols process for claim processing
+				case createDTOForAccaptanceOfContract:	createDTOForAccaptanceOfContract(session,q); break;
+				case createDTOForInvoices: createDTOForInvoices(session, q); break;//Initialize Capitols process for claim processing
+				//case produceDR: produceDR(session, q); break;//Initialize first Cars&Co process
+				case createDTOForTerminationOfContract: createDTOForTerminationOfContract(session,q); break;
+				}
+					
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -206,7 +223,7 @@ public class Main {
 		ClaimReport claimReport = new ClaimReport(addr, Calendar.getInstance().getTime()
 				, customer, car, "cause", "description", false, true);
 		
-		ClaimData claimData = new ClaimData(13, claimReport, null, null, null, null, null);
+		ClaimData claimData = new ClaimData(123, claimReport, null, null, null, null, null);
 		
 		dto.setClaimData(claimData);
 		
