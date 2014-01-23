@@ -5,6 +5,14 @@
 		<param-name>ag.carnot.processportal.integration.LIVE_DIAGRAMS_URL</param-name>
 		<param-value>/eclipse/servlet/DiagramServlet</param-value>
 	</context-param>
+	<servlet>
+		<servlet-name>contractLoader</servlet-name>
+		<servlet-class>de.wwu.wfm.sc4.capitol.servlets.ContractLoaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>contractLoader</servlet-name>
+		<url-pattern>/contract-pdf/*</url-pattern>
+	</servlet-mapping>
 	<context-param>
 		<param-name>BIRT_VIEWER_LOCALE</param-name>
 		<param-value>en_US</param-value>
