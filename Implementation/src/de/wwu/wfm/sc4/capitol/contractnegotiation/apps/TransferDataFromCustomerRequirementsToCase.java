@@ -25,7 +25,7 @@ public class TransferDataFromCustomerRequirementsToCase {
 	}
 
 	public void complete() {
-		case0=new Case();
+		case0=new Case(dto.getContractData().getContractId());
 		Customer customer;
 		if (dto.getCustomer()!=null){
 		customer = ServiceInitializer.getProvider().getCustomerService().findByUsername(dto.getCustomer().getUsername());
@@ -39,6 +39,7 @@ public class TransferDataFromCustomerRequirementsToCase {
 		customer.setStreet(dto.getCustomer().getAddress().getStreet());
 		customer.setStreetNumber(dto.getCustomer().getAddress().getStreetNumber());
 		customer.setPostalCode(dto.getCustomer().getAddress().getPostalCode());		
+		customer.setCity(dto.getCustomer().getAddress().getCity());		
 		}
 		else {
 		customer = new Customer(dto.getCustomer().getFirstName(), dto
@@ -46,7 +47,8 @@ public class TransferDataFromCustomerRequirementsToCase {
 				dto.getCustomer().getPhone());
 		customer.setStreet(dto.getCustomer().getAddress().getStreet());
 		customer.setStreetNumber(dto.getCustomer().getAddress().getStreetNumber());
-		customer.setPostalCode(dto.getCustomer().getAddress().getPostalCode());}
+		customer.setPostalCode(dto.getCustomer().getAddress().getPostalCode());
+		customer.setCity(dto.getCustomer().getAddress().getCity());}
 		case0.setCustomer(customer);
 	}
 
