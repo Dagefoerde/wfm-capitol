@@ -363,7 +363,8 @@ public class CreateInsuranceContractDocument {
         cd.setInsuranceContract(insuranceContract);
         //write pdf to file
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-        String path=CapitolConstants.PRELIMINARY_CONTRACTS_PATH+"/Contract-"+contractingCase.getId()+"-"+contractingCase.getCustomer().getLastname()+"-"+contractingCase.getContract().size()+"-"+df.format(new Date())+".pdf";
+        
+        String path=CapitolConstants.PRELIMINARY_CONTRACTS_PATH+"/"+df.format(new Date())+"-"+contractingCase.getCustomer().getUsername()+"-"+contractingCase.getContract().size()+".pdf";
         contract.setPath(path);
         try {
             FileOutputStream output=new FileOutputStream(path);

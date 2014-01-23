@@ -10,6 +10,7 @@ import java.util.Date;
 import DTO.DataTransferObject;
 
 import de.wwu.wfm.sc4.capitol.constants.CapitolConstants;
+import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Customer;
@@ -32,7 +33,11 @@ public class AcceptContract {
 		Contract contract=(Contract) case0.getContract().toArray()[case0.getContract().size()-1];
 		contract.setCustomer(case0.getCustomer());
 		SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-		String path=CapitolConstants.CONTRACTS_PATH+"/"+df.format(new Date())+"-"+contract.getCustomer().getUsername()+contract.getCustomer().getContracts().size();
+		String path=CapitolConstants.CONTRACTS_PATH+"/"+df.format(new Date())+"-"+contract.getCustomer().getUsername()+"-"+contract.getCustomer().getContracts().size()+".pdf";
+		contract.setPath(path);
+		for (Car car:contract.getCars()){
+			car.setContract(contract);
+		}
 		FileOutputStream output;
 		try {
 			output = new FileOutputStream(path);
