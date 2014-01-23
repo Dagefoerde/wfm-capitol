@@ -35,7 +35,7 @@ public class ContractLoaderServlet extends HttpServlet {
     public void init() throws ServletException {
 
         // Define base path somehow. You can define it as init-param of the servlet.
-        this.filePath = "C:/WFM/contracts";
+        this.filePath = de.wwu.wfm.sc4.capitol.constants.CapitolConstants.CONTRACTS_PATH;
 
         // In a Windows environment with the Applicationserver running on the
         // c: volume, the above path is exactly the same as "c:\files".
