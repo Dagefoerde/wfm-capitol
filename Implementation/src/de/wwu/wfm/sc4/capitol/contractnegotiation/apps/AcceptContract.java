@@ -7,26 +7,36 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import DTO.DataTransferObject;
+
+import de.wwu.wfm.sc4.capitol.constants.CapitolConstants;
 import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Customer;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
-public class SaveSignedInsuranceContract {
+public class AcceptContract {
 	
-	private Contract contract;
+	private Case case0;
+	private DataTransferObject dto;
 	
-	public void setContract(Contract contract){
-		this.contract=contract;
+	public void setCase(Case case0){
+		this.case0=case0;
+	}
+	
+	public void setDTO(DataTransferObject dto){
+		this.dto=dto;
 	}
 	
 	public void complete() {
+		Contract contract=(Contract) case0.getContract().toArray()[case0.getContract().size()-1];
+		contract.setCustomer(case0.getCustomer());
 		SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-		String path="C:/WFM/contracts/"+df.format(new Date())+"-"+contract.getCustomer().getUsername()+contract.getCustomer().getContracts().size();
+		String path=CapitolConstants.CONTRACTS_PATH+"/"+df.format(new Date())+"-"+contract.getCustomer().getUsername()+contract.getCustomer().getContracts().size();
 		FileOutputStream output;
 		try {
 			output = new FileOutputStream(path);
-			output.write(contract.getSignedInsuranceContract()); // TODO does this mean that we save the contract as PDF file AND in the db? why?
+			output.write(contract.getSignedInsuranceContract());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +50,6 @@ public class SaveSignedInsuranceContract {
 		Case case0=contract.getCase0();
 		case0.setNegotiationState(Case.NegotiationState.Accepted);
 		// TODO save flag for contract, stating that it is accepted!
-		// TODO save shared contract id (if this is not done before). This is to identify this contract later, when BVIS supplies us with a claim... 
 		ServiceInitializer.getProvider().getCaseService().persist(case0);
 	}
 
