@@ -1,6 +1,7 @@
 package de.wwu.wfm.sc4.capitol.data;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,9 +21,6 @@ public class Contract extends AbstractDataClass {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
-	@Column(unique = true)
-	private int sharedContractId;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Case case0;
@@ -47,6 +45,15 @@ public class Contract extends AbstractDataClass {
 	
 	@Column(name = "signedInsuranceContract")
 	private byte[] signedInsuranceContract;
+	
+	@Column(name = "path")
+	private String path;
+	
+	@Column(name = "startDate")
+	private Date startDate;
+	
+	@Column(name = "endDate")
+	private Date endDate;
 	
 	public Case getCase0() {
 		return case0;
@@ -116,12 +123,28 @@ public class Contract extends AbstractDataClass {
 		return signedInsuranceContract;
 	}
 
-	public void setSharedContractId(int sharedContractId) {
-		this.sharedContractId = sharedContractId;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
-	public int getSharedContractId() {
-		return sharedContractId;
+	public String getPath() {
+		return path;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
 	}
 
 }

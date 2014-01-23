@@ -34,7 +34,6 @@ public class CreateTestData {
 		contract1.setCars(carList1);
 		car1.setContract(contract1);
 		contract1.setCustomer(customer1);
-		contract1.setSharedContractId(1);
 		contract1.setCase0(case1);
 		contract1.setNaturalInsured(500.10);
 		contract1.setHumanInsured(3000.99);
@@ -47,7 +46,6 @@ public class CreateTestData {
 		contract3.setCars(carList3);
 		car3.setContract(contract3);
 		contract3.setCustomer(customer3);
-		contract3.setSharedContractId(2);
 		contract3.setCase0(case3);
 		contract3.setNaturalInsured(700.10);
 		contract3.setHumanInsured(100.99);
