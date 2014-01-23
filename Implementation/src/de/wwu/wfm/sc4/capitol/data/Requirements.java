@@ -1,6 +1,7 @@
 package de.wwu.wfm.sc4.capitol.data;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +36,12 @@ public class Requirements extends AbstractDataClass {
 	
 	@Column(name = "humanInsured")
 	private Double humanInsured;
+	
+	@Column(name = "startDate")
+	private Date startDate;
+	
+	@Column(name = "endDate")
+	private Date endDate;
 
 	public Requirements() {
 
@@ -82,6 +89,22 @@ public class Requirements extends AbstractDataClass {
 
 	public Double getHumanInsured() {
 		return humanInsured;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
 	}
 
 }
