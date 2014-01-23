@@ -12,7 +12,9 @@ public class RetrieveCaseById {
 	}
 	
 	public Case complete(){
-		return ServiceInitializer.getProvider().getCaseService().findById(caseID);
+		Case output= ServiceInitializer.getProvider().getCaseService().findById(caseID);
+		if (output==null) System.out.println("WARNING - The Case with id \""+caseID+"\" is not in the database");
+		return output;
 	}
 
 }

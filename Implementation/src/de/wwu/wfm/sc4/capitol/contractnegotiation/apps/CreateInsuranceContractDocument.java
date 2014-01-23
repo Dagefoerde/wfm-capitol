@@ -372,6 +372,7 @@ public class CreateInsuranceContractDocument {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		contract.setSignedInsuranceContract(byteArrayOutputStreamConcat.toByteArray());
 
 	}
 
