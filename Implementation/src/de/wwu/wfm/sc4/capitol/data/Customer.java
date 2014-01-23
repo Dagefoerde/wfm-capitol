@@ -44,6 +44,9 @@ public class Customer extends AbstractDataClass {
 
 	@Column(name = "postalCode")
 	private String postalCode;
+	
+	@Column(name = "city")
+	private String city;
 
 	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Case> cases;
@@ -144,6 +147,12 @@ public class Customer extends AbstractDataClass {
 	}
 	public String getEMail() {
 		return eMail;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCity() {
+		return city;
 	}
 
 }
