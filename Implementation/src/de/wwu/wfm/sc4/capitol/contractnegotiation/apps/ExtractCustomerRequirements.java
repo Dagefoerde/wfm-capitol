@@ -16,7 +16,6 @@ public class ExtractCustomerRequirements {
 	}
 	
 	public void complete(){
-		System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		req = new Requirements();
 		
 		Collection <Car> cars = new ArrayList<Car>();
@@ -29,6 +28,8 @@ public class ExtractCustomerRequirements {
 		req.setHumanInsured(dto.getContractData().getRequirements().getHumanInsured());
 		req.setNaturalInsured(dto.getContractData().getRequirements().getNaturalInsured());
 		req.setPickupService(dto.getContractData().getRequirements().isPickUpService());
+		req.setStartDate(dto.getContractData().getRequirements().getStartDate());
+		req.setEndDate(dto.getContractData().getRequirements().getEndDate());
 	}
 	public Requirements getCustomerRequirements(){
 		return req;
