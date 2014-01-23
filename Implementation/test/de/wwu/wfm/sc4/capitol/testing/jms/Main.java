@@ -60,8 +60,10 @@ public class Main {
 			createDTOForCreateContractFromCustomerRequirements(session, q); //Initialize Capitols process for the creation of the coverage decision.
 			//createDTOForDamageReports(session, q); //Initialize Capitols process for claim processing
 			//createDTOForAccidentReports(session, q); //Initialize Capitols process for claim processing
-//			createDTOForInvoices(session, q); //Initialize Capitols process for claim processing
+			//createDTOForInvoices(session, q); //Initialize Capitols process for claim processing
 			//produceDR(session, q); //Initialize first Cars&Co process
+			createDTOForAccaptanceOfContract(session,q);
+			//createDTOForTerminationOfContract(session,q);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -70,6 +72,8 @@ public class Main {
 		}
 
 	}
+
+
 
 	private static void consume(Session session, Queue q) throws JMSException {
 
@@ -91,6 +95,31 @@ public class Main {
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
 		message.setStringProperty("processID", "CO_B_NewCR");
+		message.setObject(dto);
+		producer.send(message);
+		
+	}
+	private static void createDTOForTerminationOfContract(Session session,
+			Queue q) throws JMSException, IOException {
+		DataTransferObject dto = new DataTransferObject();
+		dto.setContractData(new ContractData());
+		dto.getContractData().setContractId(13);
+		MessageProducer producer = session.createProducer(q);
+		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
+		message.setStringProperty("processID", "CO_B_Term");
+		message.setObject(dto);
+		producer.send(message);
+		
+	}
+
+	private static void createDTOForAccaptanceOfContract(Session session,
+			Queue q) throws JMSException, IOException {
+		DataTransferObject dto = new DataTransferObject();
+		dto.setContractData(new ContractData());
+		dto.getContractData().setContractId(13);		
+		MessageProducer producer = session.createProducer(q);
+		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
+		message.setStringProperty("processID", "CO_B_Acc");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -145,7 +174,7 @@ public class Main {
 
 		DataTransferObject dto = new DataTransferObject();
 		dto.setCommunicationReason("claimHandling_CapitolDamageReport");
-		ClaimReport claimReport = new ClaimReport(null, null, null, new Car("CE-JM 999","green","PKW",999), null, null, false, false);
+		ClaimReport claimReport = new ClaimReport(null, null, null, new Car("XX:YY:42","green","PKW",999), null, null, false, false);
 		
 		ArrayList<Entry> damages = new ArrayList<Entry>();
 		damages.add(new Entry(1, "Broken Window", 1000));
@@ -156,7 +185,7 @@ public class Main {
 		ClaimData claimData = new ClaimData(123, claimReport, null, damageReport, null, null, null);
 		
 		dto.setClaimData(claimData);
-		dto.setContractData(new ContractData(22, null, null, null));
+		dto.setContractData(new ContractData(13, null, null, null));
 		
 		return dto;
 	}
@@ -172,12 +201,12 @@ public class Main {
 		customer.setUsername("abcd");
 		
 		Car car = new Car();
-		car.setLicensePlate("MS-MS 2020");
+		car.setLicensePlate("XX:YY:42");
 		
 		ClaimReport claimReport = new ClaimReport(addr, Calendar.getInstance().getTime()
 				, customer, car, "cause", "description", false, true);
 		
-		ClaimData claimData = new ClaimData(123, claimReport, null, null, null, null, null);
+		ClaimData claimData = new ClaimData(13, claimReport, null, null, null, null, null);
 		
 		dto.setClaimData(claimData);
 		
