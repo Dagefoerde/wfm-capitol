@@ -82,7 +82,10 @@ public class ContractLoaderServlet extends HttpServlet {
         response.setBufferSize(DEFAULT_BUFFER_SIZE);
         response.setContentType(contentType);
         response.setHeader("Content-Length", String.valueOf(file.length()));
-        //response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+        
+        if (request.getParameter("download") != null) {
+        	response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+        }
 
         // Prepare streams.
         BufferedInputStream input = null;
