@@ -15,7 +15,7 @@
    </bean>
    <bean id="AmqJmsCarsCoAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter"
       >
-      <property name="serverUrl" value="tcp://wi-vm028.uni-muenster.de:61617" />
+      <property name="serverUrl" value="tcp://wi-wfm10.uni-muenster.de:61616" />
    </bean>
 
    <bean id="JencksAmqJmsConnectionManager" class="org.jencks.factory.ConnectionManagerFactoryBean">

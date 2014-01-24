@@ -1,17 +1,22 @@
 package de.wwu.wfm.sc4.capitol.insuranceclaim.apps;
 
+import DTO.DataTransferObject;
 import de.wwu.wfm.sc4.capitol.data.Incident;
-import de.wwu.wfm.sc4.capitol.insuranceclaim.logic.IncidentService;
+import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class RetrieveIncidentByID {
-	IncidentService service = new IncidentService();
-	private int incidentID;
-	
-	public void setIncidentID(int id) {
-		incidentID = id;
+	private DataTransferObject dto;
+
+	public void setDTO(DataTransferObject dto) {
+		this.dto = dto;
 	}
-	
+
 	public Incident complete() {
-		return service.getByID(incidentID);
+		Incident incident = ServiceInitializer.p().getIncidentService()
+				.findBySharedId(dto.getClaimData().getId());
+		if (incident != null) {
+			ServiceInitializer.p().getIncidentService().initializeIncident(incident);
+		}
+		return incident;
 	}
 }

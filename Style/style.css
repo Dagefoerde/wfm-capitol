@@ -1,0 +1,6 @@
+      .banner{
+        height: 70px;
+        width 100%;
+        background: #FFFFFF url(./images/header_logo.gif) left no-repeat;
+        border-bottom: 3px solid #FFFFFF;
+      }
