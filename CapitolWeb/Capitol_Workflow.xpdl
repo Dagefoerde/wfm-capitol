@@ -1752,7 +1752,9 @@ AND no accident report was received yet.</carnot:Text>
 <Activity Id="SendRejectionNoticeToCC" Name="Send rejection notice to C&amp;C">
 <Implementation>
 <Tool Id="RejectionNoticeToCC" Type="APPLICATION">
-<ActualParameters/>
+<ActualParameters>
+<ActualParameter>DTO</ActualParameter>
+</ActualParameters>
 </Tool>
 </Implementation>
 <StartMode>
@@ -1768,11 +1770,21 @@ AND no accident report was received yet.</carnot:Text>
 </TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10236" Implementation="Application">
+<carnot:Activity Oid="10236" Implementation="Application" IsHibernatedOnCreation="false">
 <carnot:EventHandlers/>
-<carnot:DataFlows/>
+<carnot:DataFlows>
+<carnot:DataFlow Oid="10730" Id="DTO" Name="DTO" Direction="IN" Context="application">
+<carnot:DataRef Id="DTO"/>
+<carnot:AccessPointRef Id="processID"/>
+</carnot:DataFlow>
+</carnot:DataFlows>
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
+<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
+<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
+<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
 </carnot:Attributes>
 </carnot:Activity>
 </ExtendedAttribute>
@@ -1959,8 +1971,8 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="GATEWAY" Oid="10264" X="240" Y="615" Width="42" Height="42" ModelElement="10259" FlowKind="join"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10267" X="-5" Y="685" Width="130" Height="40" ModelElement="MakePayment"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10270" X="470" Y="730" Width="161" Height="51" ModelElement="SendRejectionNoticeToCC"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10271" X="670" Y="735" Width="130" Height="40" ModelElement="RejectionNoticeToCC"/>
-<carnot:Symbol Kind="DATA" Oid="10550" X="435" Y="10" Width="40" Height="60" ModelElement="DTO"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10271" X="665" Y="735" Width="130" Height="40" ModelElement="RejectionNoticeToCC"/>
+<carnot:Symbol Kind="DATA" Oid="10550" X="670" Y="-5" Width="40" Height="60" ModelElement="DTO"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10554" X="190" Y="130" Width="141" Height="55" ModelElement="AddInvoiceToIncident"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10570" X="400" Y="110" Width="130" Height="40" ModelElement="UpdateInvoice"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10642" X="240" Y="235" Width="42" Height="42" ModelElement="10554" FlowKind="split"/>
@@ -1969,6 +1981,9 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="DATA" Oid="10662" X="-10" Y="390" Width="110" Height="70" ModelElement="Invoice"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10720" X="530" Y="495" Width="42" Height="42" ModelElement="10270" FlowKind="join"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10728" X="-5" Y="25" Width="140" Height="40" ModelElement="RetrieveIncident"/>
+<carnot:Symbol Kind="ANNOTATION" Oid="10731" X="805" Y="730" Width="140" Height="40">
+<carnot:Text>TODO replace processID with real one</carnot:Text>
+</carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
@@ -1997,6 +2012,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connections>
 <carnot:Connection Kind="DATA_FLOW" Oid="10663" SourceSymbol="10662" TargetSymbol="10554"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10665" SourceSymbol="10662" TargetSymbol="10259"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10732" SourceSymbol="10550" TargetSymbol="10270"/>
 </carnot:Connections>
 </carnot:Diagram>
 </carnot:Diagrams>
