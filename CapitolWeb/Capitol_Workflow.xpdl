@@ -624,6 +624,23 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Application>
+<Application Id="RetrieveIncident" Name="Retrieve Incident">
+<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.RetrieveIncidentByID" xref="complete:"/>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Application Oid="10727" Type="plainJava">
+<carnot:ApplicationContexts/>
+<carnot:AccessPoints/>
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.RetrieveIncidentByID"/>
+<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
+<carnot:Attribute Name="carnot:engine:constructorName" Value="RetrieveIncidentByID()"/>
+<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
+</carnot:Attributes>
+</carnot:Application>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Application>
 </Applications>
 <DataFields>
 <DataField Id="LAST_ACTIVITY_PERFORMER" Name="Last Activity Performer" IsArray="FALSE">
@@ -1652,7 +1669,7 @@ AND no accident report was received yet.</carnot:Text>
 <Activities>
 <Activity Id="LoadIncidentData" Name="Load Incident Data">
 <Implementation>
-<Tool Id="" Type="APPLICATION">
+<Tool Id="RetrieveIncident" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
 <ActualParameter>DTO</ActualParameter>
@@ -1951,6 +1968,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="GATEWAY" Oid="10658" X="240" Y="495" Width="42" Height="42" ModelElement="10651" FlowKind="split"/>
 <carnot:Symbol Kind="DATA" Oid="10662" X="-10" Y="390" Width="110" Height="70" ModelElement="Invoice"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10720" X="530" Y="495" Width="42" Height="42" ModelElement="10270" FlowKind="join"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10728" X="-5" Y="25" Width="140" Height="40" ModelElement="RetrieveIncident"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
@@ -1972,6 +1990,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connection Kind="TRANSITION" Oid="10719" ModelElement="Transition_16" SourceSymbol="10658" TargetSymbol="10720" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10721" SourceSymbol="10720" TargetSymbol="10270" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10723" ModelElement="Transition_17" SourceSymbol="10658" TargetSymbol="10264" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="EXECUTED_BY" Oid="10729" SourceSymbol="10728" TargetSymbol="10249"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
