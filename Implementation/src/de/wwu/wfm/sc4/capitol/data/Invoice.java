@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "invoice")
 public class Invoice extends AbstractDataClass {
@@ -57,6 +59,13 @@ public class Invoice extends AbstractDataClass {
 
 	@OneToMany(cascade = { CascadeType.ALL })
 	private Collection<InvoiceElement> invoiceElements;
+	
+	@Type(type="org.hibernate.type.PrimitiveByteArrayBlobType") 
+	@Column(name = "InvoiceDocument")
+	private byte[] invoiceDocument;
+	
+	@Column(name = "path")
+	private String path;
 
 	public Invoice() {
 		super();
@@ -205,7 +214,7 @@ public class Invoice extends AbstractDataClass {
 		
 		// check for different collection sizes
 		if (damageReportEntries.size() != this.invoiceElements.size())
-			checkResult = true;
+			checkResult = false;
 		else {
 		// check for not covered elements
 			int countListElements = this.invoiceElements.size();
@@ -214,15 +223,31 @@ public class Invoice extends AbstractDataClass {
 					if (ie.getDescription().equals(dre.getDescription())) {
 						countListElements--;
 						if (dre.getCoverageDecision() == false) {
-							checkResult = true;
+							checkResult = false;
 						}
 					}
 				}
 			}
 		//check for correct entries
 		if(countListElements != 0)
-			checkResult = true;
+			checkResult = false;
 		}
 		return checkResult;
+	}
+	
+	public void setInvoiceDocument(byte[] invoiceDocument) {
+		this.invoiceDocument = invoiceDocument;
+	}
+
+	public byte[] getInvoiceDocument() {
+		return invoiceDocument;
+	}
+	
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getPath() {
+		return path;
 	}
 }

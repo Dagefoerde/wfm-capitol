@@ -35,9 +35,6 @@ public class Incident extends AbstractDataClass {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Car car;
 
-	@OneToOne(optional = true, cascade = CascadeType.ALL)
-	private AccidentReport accidentReport;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	private DamageReport damageReport;
 
@@ -64,14 +61,6 @@ public class Incident extends AbstractDataClass {
 
 	public void setCar(Car car) {
 		this.car = car;
-	}
-
-	public AccidentReport getAccidentReport() {
-		return accidentReport;
-	}
-
-	public void setAccidentReport(AccidentReport accidentReport) {
-		this.accidentReport = accidentReport;
 	}
 
 	public DamageReport getDamageReport() {

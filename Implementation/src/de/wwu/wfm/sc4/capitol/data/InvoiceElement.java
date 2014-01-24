@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
  */
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "invoice_element")
 public class InvoiceElement extends AbstractDataClass {
@@ -32,6 +34,7 @@ public class InvoiceElement extends AbstractDataClass {
 
 	@OneToOne
 	private Invoice invoice;
+	
 
 	public InvoiceElement() {
 
@@ -66,6 +69,7 @@ public class InvoiceElement extends AbstractDataClass {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+	
 	public Invoice getInvoice() {
 		return invoice;
 	}
@@ -73,6 +77,7 @@ public class InvoiceElement extends AbstractDataClass {
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 	}
+	
 
 
 

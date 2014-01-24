@@ -8,4 +8,6 @@ public class CapitolConstants {
 	
 	public static final String PRELIMINARY_CONTRACTS_PATH="PreliminaryContracts";
 	
+	public static final String INVOICE_PATH="Invoice";
+	
 }
