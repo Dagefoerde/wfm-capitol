@@ -30,7 +30,6 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="de.wwu.wfm.sc4.capitol.data.AccidentReport" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Address" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Car" />
 		<mapping class="de.wwu.wfm.sc4.capitol.data.Case" />

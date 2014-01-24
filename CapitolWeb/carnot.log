@@ -7004,3 +7004,187 @@ java.lang.ClassNotFoundException: de.wwu.wfm.sc4.capitol.insuranceclaim.apps.Noo
 18:35:33 INFO - [main           ] efaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2c7ac5: defining beans [propertyConfigurer,carnotHttpInvokerRequestExecutor,carnotWorkflowService,carnotUserService,carnotQueryService,carnotAdministrationService,carnotDocumentManagementService]; root of factory hierarchy
 18:35:33 WARN - [main           ] SpringUtils               - Bootstrapped new Spring application context org.springframework.context.support.ClassPathXmlApplicationContext@13bc30a: display name [org.springframework.context.support.ClassPathXmlApplicationContext@13bc30a]; startup date [Wed Jan 15 18:35:33 CET 2014]; root of context hierarchy
 18:35:43 INFO - [WT-EventQueue-0] Parameters                - CARNOT version: 5.3.11.4-r48203
+23:57:11 INFO - [main           ] ModelDeploymentTool       - Starting ...
+23:57:11 INFO - [main           ] ModelDeploymentTool       - Deploying model from file C:\Users\Public\GitRepo\wfm-capitol\CapitolWeb\Capitol_Workflow.xpdl
+23:57:12 INFO - [main           ] Parameters                - CARNOT version: 5.3.11.4-r48203
+23:57:12 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.config.DefaultPropertiesProvider$Factory (priority 1).
+23:57:12 INFO - [main           ] DefaultPropertiesProvider - Property bundle carnot.properties bootstrapped from classloader sun.misc.Launcher$AppClassLoader@198dfaf:
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Logging.LogLevel = INFO
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Type = DERBY
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Logging.Filters = 
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Schema = 
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   License.LicenseFilePath = C:/carnot.license
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.URL = jdbc:derby://localhost/carnot
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultPartition = default
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultRealm = carnot
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Password = ag
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptDomain = false
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Mail.Sender = your-mail-address
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Logging.Format = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%t] (%x) %c{2} - %m%n
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Mail.Host = your-mail-host
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Secure.Session.Factory = 
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UseLockTables = true
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.User = carnot
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Configuration.UseDocumentRepository = true
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Client.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.FixAutoCommit = true
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UsePreparedStatements = true
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptPartition = false
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   QueryService.Guarded = true
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptRealm = false
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Spring.ApplicationContextFile = carnot-spring-client.xml
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Carnot.ProcessPortal.AssemblyLineActivityProvider = com.infinity.bpm.ui.web.processportal.common.DefaultAssemblyLineActivityProvider
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Logging.MaxFileSize = 4194304
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Logging.Directory = 
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Web.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Security.Authentication.ConfigurationName = 
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   Credential.Provider = 
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DataSource = java:/AuditTrail.DataSource
+23:57:12 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DriverClass = org.apache.derby.jdbc.ClientDriver
+23:57:12 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.workflow.runtime.spring.web.SpringAppContextPropertiesProviderFactory (priority 4).
+23:57:12 INFO - [main           ] ContextPropertiesProvider -   ag.carnot.workflow.runtime.spring.cachedApplicationContext = null
+23:57:23 INFO - [main           ] PathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@19d9c0d: display name [org.springframework.context.support.ClassPathXmlApplicationContext@19d9c0d]; startup date [Thu Jan 23 23:57:23 CET 2014]; root of context hierarchy
+23:57:23 INFO - [main           ] XmlBeanDefinitionReader   - Loading XML bean definitions from class path resource [carnot-spring-client.xml]
+23:57:23 INFO - [main           ] PathXmlApplicationContext - Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@19d9c0d]: org.springframework.beans.factory.support.DefaultListableBeanFactory@92eb86
+23:57:23 INFO - [main           ] ertyPlaceholderConfigurer - Loading properties file from class path resource [carnot-spring-client.properties]
+23:57:23 INFO - [main           ] efaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@92eb86: defining beans [propertyConfigurer,carnotHttpInvokerRequestExecutor,carnotWorkflowService,carnotUserService,carnotQueryService,carnotAdministrationService,carnotDocumentManagementService]; root of factory hierarchy
+23:57:24 WARN - [main           ] SpringUtils               - Bootstrapped new Spring application context org.springframework.context.support.ClassPathXmlApplicationContext@19d9c0d: display name [org.springframework.context.support.ClassPathXmlApplicationContext@19d9c0d]; startup date [Thu Jan 23 23:57:23 CET 2014]; root of context hierarchy
+23:57:29 INFO - [WT-EventQueue-0] Parameters                - CARNOT version: 5.3.11.4-r48203
+10:59:28 INFO - [main           ] ModelDeploymentTool       - Starting ...
+10:59:28 INFO - [main           ] ModelDeploymentTool       - Deploying model from file C:\Users\Public\GitRepo\wfm-capitol\CapitolWeb\Capitol_Workflow.xpdl
+10:59:28 INFO - [main           ] Parameters                - CARNOT version: 5.3.11.4-r48203
+10:59:29 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.config.DefaultPropertiesProvider$Factory (priority 1).
+10:59:29 INFO - [main           ] DefaultPropertiesProvider - Property bundle carnot.properties bootstrapped from classloader sun.misc.Launcher$AppClassLoader@198dfaf:
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.LogLevel = INFO
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Type = DERBY
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.Filters = 
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Schema = 
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   License.LicenseFilePath = C:/carnot.license
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.URL = jdbc:derby://localhost/carnot
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultPartition = default
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultRealm = carnot
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Password = ag
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptDomain = false
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Mail.Sender = your-mail-address
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.Format = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%t] (%x) %c{2} - %m%n
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Mail.Host = your-mail-host
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Secure.Session.Factory = 
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UseLockTables = true
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.User = carnot
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Configuration.UseDocumentRepository = true
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Client.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.FixAutoCommit = true
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UsePreparedStatements = true
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptPartition = false
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   QueryService.Guarded = true
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptRealm = false
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Spring.ApplicationContextFile = carnot-spring-client.xml
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Carnot.ProcessPortal.AssemblyLineActivityProvider = com.infinity.bpm.ui.web.processportal.common.DefaultAssemblyLineActivityProvider
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.MaxFileSize = 4194304
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.Directory = 
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Web.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Security.Authentication.ConfigurationName = 
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   Credential.Provider = 
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DataSource = java:/AuditTrail.DataSource
+10:59:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DriverClass = org.apache.derby.jdbc.ClientDriver
+10:59:29 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.workflow.runtime.spring.web.SpringAppContextPropertiesProviderFactory (priority 4).
+10:59:29 INFO - [main           ] ContextPropertiesProvider -   ag.carnot.workflow.runtime.spring.cachedApplicationContext = null
+10:59:37 INFO - [main           ] PathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@95c5ec: display name [org.springframework.context.support.ClassPathXmlApplicationContext@95c5ec]; startup date [Fri Jan 24 10:59:37 CET 2014]; root of context hierarchy
+10:59:37 INFO - [main           ] XmlBeanDefinitionReader   - Loading XML bean definitions from class path resource [carnot-spring-client.xml]
+10:59:37 INFO - [main           ] PathXmlApplicationContext - Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@95c5ec]: org.springframework.beans.factory.support.DefaultListableBeanFactory@182c2d9
+10:59:37 INFO - [main           ] ertyPlaceholderConfigurer - Loading properties file from class path resource [carnot-spring-client.properties]
+10:59:37 INFO - [main           ] efaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@182c2d9: defining beans [propertyConfigurer,carnotHttpInvokerRequestExecutor,carnotWorkflowService,carnotUserService,carnotQueryService,carnotAdministrationService,carnotDocumentManagementService]; root of factory hierarchy
+10:59:37 WARN - [main           ] SpringUtils               - Bootstrapped new Spring application context org.springframework.context.support.ClassPathXmlApplicationContext@95c5ec: display name [org.springframework.context.support.ClassPathXmlApplicationContext@95c5ec]; startup date [Fri Jan 24 10:59:37 CET 2014]; root of context hierarchy
+10:59:50 INFO - [WT-EventQueue-0] Parameters                - CARNOT version: 5.3.11.4-r48203
+15:20:01 INFO - [main           ] ModelDeploymentTool       - Starting ...
+15:20:01 INFO - [main           ] ModelDeploymentTool       - Deploying model from file C:\Users\Public\GitRepo\wfm-capitol\CapitolWeb\Capitol_Workflow.xpdl
+15:20:02 INFO - [main           ] Parameters                - CARNOT version: 5.3.11.4-r48203
+15:20:02 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.config.DefaultPropertiesProvider$Factory (priority 1).
+15:20:02 INFO - [main           ] DefaultPropertiesProvider - Property bundle carnot.properties bootstrapped from classloader sun.misc.Launcher$AppClassLoader@198dfaf:
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Logging.LogLevel = INFO
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Type = DERBY
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Logging.Filters = 
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Schema = 
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   License.LicenseFilePath = C:/carnot.license
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.URL = jdbc:derby://localhost/carnot
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultPartition = default
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultRealm = carnot
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Password = ag
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptDomain = false
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Mail.Sender = your-mail-address
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Logging.Format = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%t] (%x) %c{2} - %m%n
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Mail.Host = your-mail-host
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Secure.Session.Factory = 
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UseLockTables = true
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.User = carnot
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Configuration.UseDocumentRepository = true
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Client.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.FixAutoCommit = true
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UsePreparedStatements = true
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptPartition = false
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   QueryService.Guarded = true
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptRealm = false
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Spring.ApplicationContextFile = carnot-spring-client.xml
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Carnot.ProcessPortal.AssemblyLineActivityProvider = com.infinity.bpm.ui.web.processportal.common.DefaultAssemblyLineActivityProvider
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Logging.MaxFileSize = 4194304
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Logging.Directory = 
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Web.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Security.Authentication.ConfigurationName = 
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   Credential.Provider = 
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DataSource = java:/AuditTrail.DataSource
+15:20:02 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DriverClass = org.apache.derby.jdbc.ClientDriver
+15:20:02 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.workflow.runtime.spring.web.SpringAppContextPropertiesProviderFactory (priority 4).
+15:20:02 INFO - [main           ] ContextPropertiesProvider -   ag.carnot.workflow.runtime.spring.cachedApplicationContext = null
+15:20:09 INFO - [main           ] PathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5c1eae: display name [org.springframework.context.support.ClassPathXmlApplicationContext@5c1eae]; startup date [Fri Jan 24 15:20:09 CET 2014]; root of context hierarchy
+15:20:09 INFO - [main           ] XmlBeanDefinitionReader   - Loading XML bean definitions from class path resource [carnot-spring-client.xml]
+15:20:09 INFO - [main           ] PathXmlApplicationContext - Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@5c1eae]: org.springframework.beans.factory.support.DefaultListableBeanFactory@e4d0cd
+15:20:09 INFO - [main           ] ertyPlaceholderConfigurer - Loading properties file from class path resource [carnot-spring-client.properties]
+15:20:09 INFO - [main           ] efaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@e4d0cd: defining beans [propertyConfigurer,carnotHttpInvokerRequestExecutor,carnotWorkflowService,carnotUserService,carnotQueryService,carnotAdministrationService,carnotDocumentManagementService]; root of factory hierarchy
+15:20:10 WARN - [main           ] SpringUtils               - Bootstrapped new Spring application context org.springframework.context.support.ClassPathXmlApplicationContext@5c1eae: display name [org.springframework.context.support.ClassPathXmlApplicationContext@5c1eae]; startup date [Fri Jan 24 15:20:09 CET 2014]; root of context hierarchy
+15:20:19 INFO - [WT-EventQueue-0] Parameters                - CARNOT version: 5.3.11.4-r48203
+16:30:29 INFO - [main           ] ModelDeploymentTool       - Starting ...
+16:30:29 INFO - [main           ] ModelDeploymentTool       - Deploying model from file C:\Users\Public\GitRepo\wfm-capitol\CapitolWeb\Capitol_Workflow.xpdl
+16:30:29 INFO - [main           ] Parameters                - CARNOT version: 5.3.11.4-r48203
+16:30:29 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.config.DefaultPropertiesProvider$Factory (priority 1).
+16:30:29 INFO - [main           ] DefaultPropertiesProvider - Property bundle carnot.properties bootstrapped from classloader sun.misc.Launcher$AppClassLoader@198dfaf:
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.LogLevel = INFO
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Type = DERBY
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.Filters = 
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Schema = 
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   License.LicenseFilePath = C:/carnot.license
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.URL = jdbc:derby://localhost/carnot
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultPartition = default
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Security.DefaultRealm = carnot
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.Password = ag
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptDomain = false
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Mail.Sender = your-mail-address
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.Format = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%t] (%x) %c{2} - %m%n
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Mail.Host = your-mail-host
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Secure.Session.Factory = 
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UseLockTables = true
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.User = carnot
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Configuration.UseDocumentRepository = true
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Client.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.FixAutoCommit = true
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.UsePreparedStatements = true
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptPartition = false
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   QueryService.Guarded = true
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Security.PromptRealm = false
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Carnot.Spring.ApplicationContextFile = carnot-spring-client.xml
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Carnot.ProcessPortal.AssemblyLineActivityProvider = com.infinity.bpm.ui.web.processportal.common.DefaultAssemblyLineActivityProvider
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.MaxFileSize = 4194304
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Logging.Directory = 
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Web.ServiceFactory = ag.carnot.workflow.runtime.spring.SpringServiceFactory
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Security.Authentication.ConfigurationName = 
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   Credential.Provider = 
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DataSource = java:/AuditTrail.DataSource
+16:30:29 INFO - [main           ] DefaultPropertiesProvider -   AuditTrail.DriverClass = org.apache.derby.jdbc.ClientDriver
+16:30:29 INFO - [main           ] GlobalParameters          - Loading properties via provider factory ag.carnot.workflow.runtime.spring.web.SpringAppContextPropertiesProviderFactory (priority 4).
+16:30:29 INFO - [main           ] ContextPropertiesProvider -   ag.carnot.workflow.runtime.spring.cachedApplicationContext = null
+16:30:34 INFO - [main           ] PathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@749436: display name [org.springframework.context.support.ClassPathXmlApplicationContext@749436]; startup date [Fri Jan 24 16:30:34 CET 2014]; root of context hierarchy
+16:30:34 INFO - [main           ] XmlBeanDefinitionReader   - Loading XML bean definitions from class path resource [carnot-spring-client.xml]
+16:30:35 INFO - [main           ] PathXmlApplicationContext - Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@749436]: org.springframework.beans.factory.support.DefaultListableBeanFactory@b1684
+16:30:35 INFO - [main           ] ertyPlaceholderConfigurer - Loading properties file from class path resource [carnot-spring-client.properties]
+16:30:35 INFO - [main           ] efaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@b1684: defining beans [propertyConfigurer,carnotHttpInvokerRequestExecutor,carnotWorkflowService,carnotUserService,carnotQueryService,carnotAdministrationService,carnotDocumentManagementService]; root of factory hierarchy
+16:30:35 WARN - [main           ] SpringUtils               - Bootstrapped new Spring application context org.springframework.context.support.ClassPathXmlApplicationContext@749436: display name [org.springframework.context.support.ClassPathXmlApplicationContext@749436]; startup date [Fri Jan 24 16:30:34 CET 2014]; root of context hierarchy
+16:30:38 INFO - [WT-EventQueue-0] Parameters                - CARNOT version: 5.3.11.4-r48203
