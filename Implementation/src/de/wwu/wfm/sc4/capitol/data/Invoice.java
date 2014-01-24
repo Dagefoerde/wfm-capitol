@@ -211,7 +211,7 @@ public class Invoice extends AbstractDataClass {
 			int countListElements = this.invoiceElements.size();
 			for (InvoiceElement ie : this.invoiceElements) {
 				for (DamageReportEntry dre : damageReportEntries) {
-					if (ie.getDescription() == dre.getDescription()) {
+					if (ie.getDescription().equals(dre.getDescription())) {
 						countListElements--;
 						if (dre.getCoverageDecision() == false) {
 							checkResult = true;
