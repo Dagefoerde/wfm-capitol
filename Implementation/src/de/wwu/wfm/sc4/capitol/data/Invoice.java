@@ -205,7 +205,7 @@ public class Invoice extends AbstractDataClass {
 		
 		// check for different collection sizes
 		if (damageReportEntries.size() != this.invoiceElements.size())
-			checkResult = true;
+			checkResult = false;
 		else {
 		// check for not covered elements
 			int countListElements = this.invoiceElements.size();
@@ -214,14 +214,14 @@ public class Invoice extends AbstractDataClass {
 					if (ie.getDescription().equals(dre.getDescription())) {
 						countListElements--;
 						if (dre.getCoverageDecision() == false) {
-							checkResult = true;
+							checkResult = false;
 						}
 					}
 				}
 			}
 		//check for correct entries
 		if(countListElements != 0)
-			checkResult = true;
+			checkResult = false;
 		}
 		return checkResult;
 	}
