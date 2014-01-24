@@ -136,40 +136,6 @@
 </Participant>
 </Participants>
 <Applications>
-<Application Id="RetrieveIncidentByID" Name="Retrieve incident by ID">
-<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.RetrieveIncidentByID" xref="complete:"/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Application Oid="10085" Type="plainJava">
-<carnot:ApplicationContexts/>
-<carnot:AccessPoints/>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.RetrieveIncidentByID"/>
-<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
-<carnot:Attribute Name="carnot:engine:constructorName" Value="RetrieveIncidentByID()"/>
-<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
-</carnot:Attributes>
-</carnot:Application>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Application>
-<Application Id="UpdateAccidentReport" Name="Update accident report">
-<ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.UpdateAccidentReport" xref="complete:"/>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Application Oid="10088" Type="plainJava">
-<carnot:ApplicationContexts/>
-<carnot:AccessPoints/>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:engine:className" Value="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.UpdateAccidentReport"/>
-<carnot:Attribute Name="carnot:engine:methodName" Value="complete()"/>
-<carnot:Attribute Name="carnot:engine:constructorName" Value="UpdateAccidentReport()"/>
-<carnot:Attribute Name="synchronous:retry:enable" Value="false" Type="boolean"/>
-</carnot:Attributes>
-</carnot:Application>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Application>
 <Application Id="ReminderE_Mail" Name="Reminder E-Mail">
 <Description>Email to the customer, reminding him to submit his accident report. Also updates the "last reminded" timestamp.</Description>
 <ExternalReference location="de.wwu.wfm.sc4.capitol.insuranceclaim.apps.ReminderEmail" xref="complete:java.util.List&lt;de.wwu.wfm.sc4.capitol.data.Incident&gt;"/>
@@ -939,79 +905,9 @@
 </DataField>
 </DataFields>
 <WorkflowProcesses>
-<WorkflowProcess Id="CL1_B_DmRepReceiveDamageReportAndCreateCoverageDecision" Name="CL1_B_ DmRep Receive Damage Report and create Coverage Decision" AccessLevel="PUBLIC">
+<WorkflowProcess Id="CL1_B_DmRep" Name="CL1_B_ DmRep Receive Damage Report and create Coverage Decision" AccessLevel="PUBLIC">
 <ProcessHeader/>
 <Activities>
-<Activity Id="RetrieveIncident" Name="Retrieve incident">
-<Implementation>
-<Tool Id="RetrieveIncidentByID" Type="APPLICATION">
-<ActualParameters>
-<ActualParameter>DTO</ActualParameter>
-<ActualParameter>Incident</ActualParameter>
-</ActualParameters>
-</Tool>
-</Implementation>
-<StartMode>
-<Automatic/>
-</StartMode>
-<FinishMode>
-<Automatic/>
-</FinishMode>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10047" Implementation="Application" IsHibernatedOnCreation="false">
-<carnot:EventHandlers/>
-<carnot:DataFlows>
-<carnot:DataFlow Oid="10508" Id="DTO" Name="DTO" Direction="IN" Context="application">
-<carnot:DataRef Id="DTO"/>
-<carnot:AccessPointRef Id="setDTO(DTO.DataTransferObject)"/>
-</carnot:DataFlow>
-<carnot:DataFlow Oid="10511" Id="Incident" Name="Incident" Direction="OUT" Context="application">
-<carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef Id="returnValue"/>
-</carnot:DataFlow>
-</carnot:DataFlows>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
-<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
-<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
-</carnot:Attributes>
-</carnot:Activity>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Activity>
-<Activity Id="AddAccidentReport" Name="Add accident report">
-<Implementation>
-<Tool Id="UpdateAccidentReport" Type="APPLICATION">
-<ActualParameters/>
-</Tool>
-</Implementation>
-<StartMode>
-<Automatic/>
-</StartMode>
-<FinishMode>
-<Automatic/>
-</FinishMode>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Activity Oid="10054" Implementation="Application" IsHibernatedOnCreation="false">
-<carnot:EventHandlers/>
-<carnot:DataFlows/>
-<carnot:Attributes>
-<carnot:Attribute Name="carnot:pwh:includeTime" Value="false" Type="boolean"/>
-<carnot:Attribute Name="authorization:activity.delegateToOther" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.delegateToDepartment[0]" Value="Administrator"/>
-<carnot:Attribute Name="authorization:activity.manageEventHandlers" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.readActivityInstanceData" Value="__carnot_internal_all_permissions__"/>
-<carnot:Attribute Name="authorization:activity.abortActivityInstances" Value="__carnot_internal_owner_permission__"/>
-</carnot:Attributes>
-</carnot:Activity>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Activity>
 <Activity Id="CreateCoverageDecision" Name="Create coverage decision">
 <Implementation>
 <Tool Id="CreateCoverageDecisionApp" Type="APPLICATION">
@@ -1292,22 +1188,6 @@
 </Activity>
 </Activities>
 <Transitions>
-<Transition Id="Transition_2" Name="Transition 2" From="RetrieveIncident" To="AddAccidentReport">
-<Condition Type="CONDITION">true</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10060"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
-<Transition Id="Transition_3" Name="Transition 3" From="AddAccidentReport" To="CreateCoverageDecision">
-<Condition Type="CONDITION">true</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10062"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
 <Transition Id="Transition_4" Name="Transition 4" From="CreateCoverageDecision" To="StoreCoverageDecisionAndAssembleDTO">
 <Condition Type="CONDITION">true</Condition>
 <ExtendedAttributes>
@@ -1348,7 +1228,7 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
-<Transition Id="Transition_9" Name="Transition 9" From="UpdateIncident" To="RetrieveIncident">
+<Transition Id="Transition_9" Name="Transition 9" From="UpdateIncident" To="CreateCoverageDecision">
 <Condition Type="CONDITION">true</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -1397,34 +1277,30 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="POOL" Oid="10046" Id="_default_pool__1" Name="Default Pool" X="0" Y="0" Width="-1" Height="-1">
 <carnot:Symbols>
-<carnot:Symbol Kind="ACTIVITY" Oid="10048" X="200" Y="350" Width="141" Height="51" ModelElement="RetrieveIncident"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10055" X="200" Y="430" Width="141" Height="51" ModelElement="AddAccidentReport"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10057" X="200" Y="500" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10065" X="140" Y="580" Width="255" Height="51" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10067" X="175" Y="650" Width="185" Height="51" ModelElement="SendCoverageDecisionToBVIS"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10069" X="165" Y="725" Width="205" Height="51" ModelElement="SendCoverageDecisionToCC"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10086" X="385" Y="325" Width="130" Height="40" ModelElement="RetrieveIncidentByID"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10089" X="380" Y="420" Width="130" Height="40" ModelElement="UpdateAccidentReport"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10096" X="250" Y="830" Width="40" Height="40"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10057" X="205" Y="375" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10065" X="150" Y="490" Width="255" Height="51" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10067" X="185" Y="585" Width="185" Height="51" ModelElement="SendCoverageDecisionToBVIS"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10069" X="175" Y="680" Width="205" Height="51" ModelElement="SendCoverageDecisionToCC"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10096" X="260" Y="760" Width="40" Height="40"/>
 <carnot:Symbol Kind="STARTEVENT" Oid="10503" X="205" Y="15" Width="140" Height="50" ModelElement="InitialContact"/>
-<carnot:Symbol Kind="DATA" Oid="10507" X="25" Y="495" Width="40" Height="60" ModelElement="DTO"/>
+<carnot:Symbol Kind="DATA" Oid="10507" X="-30" Y="410" Width="40" Height="60" ModelElement="DTO"/>
 <carnot:Symbol Kind="DATA" Oid="10510" X="675" Y="360" Width="60" Height="60" ModelElement="Incident"/>
-<carnot:Symbol Kind="ROLE" Oid="10527" X="405" Y="520" Width="90" Height="40" ModelElement="InsuranceClerk"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10530" X="400" Y="725" Width="170" Height="40" ModelElement="SendCoverageDecisionToCC"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10532" X="375" Y="655" Width="170" Height="40" ModelElement="SendCoverageDecisionToBVIS"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10536" X="455" Y="570" Width="230" Height="40" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10545" X="550" Y="650" Width="165" Height="40">
+<carnot:Symbol Kind="ROLE" Oid="10527" X="435" Y="400" Width="90" Height="40" ModelElement="InsuranceClerk"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10530" X="400" Y="670" Width="170" Height="40" ModelElement="SendCoverageDecisionToCC"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10532" X="380" Y="585" Width="170" Height="40" ModelElement="SendCoverageDecisionToBVIS"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10536" X="460" Y="480" Width="230" Height="40" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
+<carnot:Symbol Kind="ANNOTATION" Oid="10545" X="555" Y="560" Width="165" Height="40">
 <carnot:Text>TODO processID</carnot:Text>
 </carnot:Symbol>
-<carnot:Symbol Kind="ANNOTATION" Oid="10546" X="580" Y="740" Width="155" Height="20">
+<carnot:Symbol Kind="ANNOTATION" Oid="10546" X="585" Y="650" Width="155" Height="20">
 <carnot:Text>TODO processID</carnot:Text>
 </carnot:Symbol>
-<carnot:Symbol Kind="APPLICATION" Oid="10636" X="351" Y="470" Width="-1" Height="-1" ModelElement="CreateCoverageDecisionApp"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10636" X="385" Y="350" Width="-1" Height="-1" ModelElement="CreateCoverageDecisionApp"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10686" X="189" Y="100" Width="175" Height="51" ModelElement="CheckForExistingContract"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10689" X="5" Y="100" Width="100" Height="40" ModelElement="InitializeIncident"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10691" X="255" Y="170" Width="42" Height="42" ModelElement="10686" FlowKind="split"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10697" X="205" Y="275" Width="141" Height="51" ModelElement="UpdateIncident"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10698" X="380" Y="265" Width="130" Height="40" ModelElement="CopyClaimDataIntoIncident"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10698" X="395" Y="270" Width="130" Height="40" ModelElement="CopyClaimDataIntoIncident"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10704" X="15" Y="315" Width="40" Height="40"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10705" X="-35" Y="165" Width="141" Height="51" ModelElement="SendNotification"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10706" X="-95" Y="260" Width="110" Height="40" ModelElement="NotificationToBVIS"/>
@@ -1433,16 +1309,10 @@
 </carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
-<carnot:Connection Kind="TRANSITION" Oid="10061" ModelElement="Transition_2" SourceSymbol="10048" TargetSymbol="10055" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10063" ModelElement="Transition_3" SourceSymbol="10055" TargetSymbol="10057" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10071" ModelElement="Transition_4" SourceSymbol="10057" TargetSymbol="10065" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10073" ModelElement="Transition_5" SourceSymbol="10065" TargetSymbol="10067" SourceAnchor="center" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10075" ModelElement="Transition_6" SourceSymbol="10067" TargetSymbol="10069" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10087" SourceSymbol="10086" TargetSymbol="10048"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10090" SourceSymbol="10089" TargetSymbol="10055"/>
 <carnot:Connection Kind="TRANSITION" Oid="10097" SourceSymbol="10069" TargetSymbol="10096" SourceAnchor="center" TargetAnchor="bottom"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10509" SourceSymbol="10507" TargetSymbol="10048"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10512" SourceSymbol="10510" TargetSymbol="10048"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10518" SourceSymbol="10510" TargetSymbol="10057"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10521" SourceSymbol="10510" TargetSymbol="10065"/>
 <carnot:Connection Kind="PERFORMS" Oid="10528" SourceSymbol="10527" TargetSymbol="10057"/>
@@ -1461,7 +1331,7 @@
 <carnot:Connection Kind="TRANSITION" Oid="10708" SourceSymbol="10705" TargetSymbol="10704" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10709" SourceSymbol="10706" TargetSymbol="10705"/>
 <carnot:Connection Kind="TRANSITION" Oid="10711" ModelElement="Transition_8" SourceSymbol="10691" TargetSymbol="10705" SourceAnchor="center" TargetAnchor="right"/>
-<carnot:Connection Kind="TRANSITION" Oid="10726" ModelElement="Transition_9" SourceSymbol="10697" TargetSymbol="10048" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10726" ModelElement="Transition_9" SourceSymbol="10697" TargetSymbol="10057" SourceAnchor="center" TargetAnchor="center"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
@@ -1782,7 +1652,7 @@ AND no accident report was received yet.</carnot:Text>
 <Activities>
 <Activity Id="LoadIncidentData" Name="Load Incident Data">
 <Implementation>
-<Tool Id="RetrieveIncidentByID" Type="APPLICATION">
+<Tool Id="" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
 <ActualParameter>DTO</ActualParameter>
@@ -2066,7 +1936,6 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="STARTEVENT" Oid="10248" X="215" Y="-45" Width="90" Height="50" ModelElement="ReceiveInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10249" X="185" Y="20" Width="151" Height="51" ModelElement="LoadIncidentData"/>
 <carnot:Symbol Kind="DATA" Oid="10251" X="35" Y="180" Width="40" Height="60" ModelElement="Incident"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10254" X="-10" Y="70" Width="140" Height="40" ModelElement="RetrieveIncidentByID"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10256" X="530" Y="820" Width="40" Height="40"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10259" X="190" Y="730" Width="141" Height="51" ModelElement="MakePayment"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10262" X="240" Y="810" Width="40" Height="40"/>
@@ -2085,7 +1954,6 @@ AND no accident report was received yet.</carnot:Text>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="EXECUTED_BY" Oid="10274" SourceSymbol="10254" TargetSymbol="10249"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10281" SourceSymbol="10251" TargetSymbol="10249"/>
 <carnot:Connection Kind="TRANSITION" Oid="10287" SourceSymbol="10259" TargetSymbol="10262" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="TRANSITION" Oid="10290" SourceSymbol="10264" TargetSymbol="10259" SourceAnchor="center" TargetAnchor="center"/>
