@@ -14,6 +14,7 @@ public class Fonts {
     public static final Font CHARBOLD = new Font(FontFamily.COURIER, 8, Font.BOLD);
     public static final Font SMALLCHAR = new Font(FontFamily.COURIER, 6, Font.NORMAL);
     public static final Font SMALLCHARBOLD = new Font(FontFamily.COURIER, 6, Font.BOLD);
+    public static final Font SMALLCHARITALIC = new Font(FontFamily.COURIER, 6, Font.ITALIC);
     public static final Font TITLE = new Font(FontFamily.COURIER, 18, Font.BOLD);
 
 }
