@@ -17,7 +17,6 @@ public class ServiceInitializer {
 		return getProvider();
 	}
 
-	private AccidentReportService accidentReportService;
 	private CarService carService;
 	private CaseService caseService;
 	private ContractService contractService;
@@ -35,7 +34,6 @@ public class ServiceInitializer {
 	private Session session;
 
 	private ServiceInitializer() {
-		accidentReportService = new AccidentReportService();
 		carService = new CarService();
 		caseService = new CaseService();
 		contractService = new ContractService();
@@ -51,10 +49,6 @@ public class ServiceInitializer {
 
 		sessionFactory = new AnnotationConfiguration().configure()
 				.buildSessionFactory();
-	}
-
-	public AccidentReportService getAccidentReportService() {
-		return accidentReportService;
 	}
 
 	public CarService getCarService() {
