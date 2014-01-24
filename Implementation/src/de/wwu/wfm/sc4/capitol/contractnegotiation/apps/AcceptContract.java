@@ -33,8 +33,8 @@ public class AcceptContract {
 		Contract contract=(Contract) case0.getContract().toArray()[case0.getContract().size()-1];
 		contract.setCustomer(case0.getCustomer());
 		SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-		String path=CapitolConstants.CONTRACTS_PATH+"/"+df.format(new Date())+"-"+contract.getCustomer().getUsername()+"-"+contract.getCustomer().getContracts().size()+".pdf";
-		contract.setPath(path);
+		String fileName=contract.getPath();
+		String path=CapitolConstants.CONTRACTS_PATH+"/"+fileName;
 		for (Car car:contract.getCars()){
 			car.setContract(contract);
 		}
