@@ -213,7 +213,12 @@
 </Application>
 <Application Id="RejectionNoticeToCC" Name="Rejection notice to C&amp;C">
 <FormalParameters>
-<FormalParameter Id="processID" Index="1" Mode="IN">
+<FormalParameter Id="content" Index="1" Mode="IN">
+<DataType>
+<ExternalReference location="DTO.DataTransferObject"/>
+</DataType>
+</FormalParameter>
+<FormalParameter Id="processID" Index="2" Mode="IN">
 <DataType>
 <ExternalReference location="java.lang.String"/>
 </DataType>
@@ -224,7 +229,14 @@
 <carnot:Application Oid="10339" Type="jms">
 <carnot:ApplicationContexts/>
 <carnot:AccessPoints>
-<carnot:AccessPoint Oid="10724" Id="processID" Name="ProcessID" Direction="IN" Type="serializable">
+<carnot:AccessPoint Oid="10734" Id="content" Name="Content" Direction="IN" Type="serializable">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:className" Value="DTO.DataTransferObject"/>
+<carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:jms.location" Value="BODY" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
+</carnot:Attributes>
+</carnot:AccessPoint>
+<carnot:AccessPoint Oid="10735" Id="processID" Name="processID" Direction="IN" Type="serializable">
 <carnot:Attributes>
 <carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
 <carnot:Attribute Name="carnot:engine:className" Value="java.lang.String"/>
@@ -238,7 +250,7 @@
 <carnot:Attribute Name="carnot:engine:queueConnectionFactory.jndiName" Value="java:comp/env/jms/CarnotXAConnectionFactoryCarsCo"/>
 <carnot:Attribute Name="carnot:engine:queue.jndiName" Value="java:comp/env/jms/CarnotApplicationQueue"/>
 <carnot:Attribute Name="carnot:engine:messageProvider" Value="ag.carnot.workflow.spi.providers.applications.jms.DefaultMessageProvider"/>
-<carnot:Attribute Name="carnot:engine:requestMessageType" Value="Map" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
+<carnot:Attribute Name="carnot:engine:requestMessageType" Value="Object" Type="ag.carnot.workflow.spi.providers.applications.jms.MessageType"/>
 <carnot:Attribute Name="carnot:engine:includeOidHeaders" Value="false" Type="boolean"/>
 </carnot:Attributes>
 </carnot:Application>
@@ -1780,7 +1792,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:DataFlows>
 <carnot:DataFlow Oid="10730" Id="DTO" Name="DTO" Direction="IN" Context="application">
 <carnot:DataRef Id="DTO"/>
-<carnot:AccessPointRef Id="processID"/>
+<carnot:AccessPointRef Id="content"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
