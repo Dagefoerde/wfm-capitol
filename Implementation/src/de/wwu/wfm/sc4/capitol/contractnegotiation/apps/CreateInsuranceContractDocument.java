@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import ContractData.ContractData;
 import ContractData.InsuranceContract;
@@ -424,7 +425,7 @@ public class CreateInsuranceContractDocument {
         cd.setInsuranceContract(insuranceContract);
         //write pdf to file
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
-        String fileName=df.format(new Date())+"-"+contractingCase.getCustomer().getId()+"-"+contractingCase.getContract().size()+".pdf";
+        String fileName=df.format(new Date())+"-"+UUID.randomUUID().toString()+"-"+contractingCase.getCustomer().getId()+"-"+contractingCase.getId()+"-"+contractingCase.getContract().size()+".pdf";
         String path=CapitolConstants.PRELIMINARY_CONTRACTS_PATH+"/"+fileName;
         System.out.println(fileName);
         contract.setPath(fileName);
