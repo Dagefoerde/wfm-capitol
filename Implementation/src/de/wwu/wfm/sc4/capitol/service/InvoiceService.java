@@ -26,6 +26,7 @@ public class InvoiceService extends AbstractServiceClass<Invoice> {
 				.getBankAccountHolder(), incident, null);
 		invoice.setInvoiceElements(convertFromDTOInvoiceElements(c.getInvoice()
 				.getInvoiceElements(), invoice));
+		invoice.setInvoiceDocument(c.getInvoice().getInvoice());
 		return invoice;
 	}
 
