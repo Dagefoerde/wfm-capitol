@@ -10,8 +10,8 @@ import de.wwu.wfm.sc4.capitol.data.Invoice;
 public class MakePayment {
 	private Invoice invoice;
 
-	private final String BANK_APP_IP = "127.0.0.1";
-	private final String CAPITOL_ACCOUNT_NUMBER = "1";
+	private final String BANK_APP_IP = "tcp://wi-wfm10.uni-muenster.de:9999";
+	private final String CAPITOL_ACCOUNT_NUMBER = "3";
 	private final String BANK_APP_URL = BANK_APP_IP
 			+ "/wfmbank/rest/account/add/tx?account=" + CAPITOL_ACCOUNT_NUMBER;
 	private final String TO = "&to=";
@@ -19,8 +19,7 @@ public class MakePayment {
 	private final String DESCRIPTION = "&description=";
 
 	public void complete() throws IOException {
-		String description = "Invoice #" + invoice.getInvoiceNumber() + " ("
-				+ invoice.getDate().toString() + ")";
+		String description = Integer.toString(invoice.getInvoiceNumber());
 		String paymentUrl = BANK_APP_URL + TO + invoice.getBankAccount()
 				+ AMOUNT + invoice.getDueSum() + DESCRIPTION + description;
 		
