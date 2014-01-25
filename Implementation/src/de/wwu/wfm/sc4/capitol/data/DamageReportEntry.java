@@ -56,9 +56,13 @@ public class DamageReportEntry extends AbstractDataClass {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public int getCostEstimation() {
 		return costEstimation;
+	}
+	
+	public String getCostEstimationFormatted() {
+		return String.format("%1$,.2f", costEstimation);
 	}
 
 	public void setCostEstimation(int costEstimation) {

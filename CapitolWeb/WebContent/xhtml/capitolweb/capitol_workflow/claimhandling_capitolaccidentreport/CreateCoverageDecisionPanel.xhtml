@@ -56,7 +56,7 @@
 								<td><ice:selectBooleanCheckbox
 									value="#{cd.coverageDecision}" /></td>
 								<td><ice:outputText value="#{cd.description}" /></td>
-								<td><ice:outputText value="#{cd.costEstimation}" /></td>
+								<td><ice:outputText value="EUR #{cd.costEstimationFormatted}" /></td>
 							</tr>
 						</ui:repeat>
 					</table>
