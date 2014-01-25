@@ -18,7 +18,29 @@
       <property name="serverUrl" value="tcp://wi-wfm10.uni-muenster.de:61616" />
    </bean>
 
-   <bean id="JencksAmqJmsConnectionManager" class="org.jencks.factory.ConnectionManagerFactoryBean">
+    <bean id="JencksAmqJmsConnectionManagerCapitol" class="org.jencks.factory.ConnectionManagerFactoryBean">
+      <property name="transactionManager" ref="xaTransactionManager" />
+      
+      <property name="transaction" value="xa" />
+      
+      <property name="pooling" value="true" />
+      <property name="poolMinSize" value="10" />
+      <property name="poolMaxSize" value="50" />
+      
+   </bean>
+   
+   <bean id="JencksAmqJmsConnectionManagerBVIS" class="org.jencks.factory.ConnectionManagerFactoryBean">
+      <property name="transactionManager" ref="xaTransactionManager" />
+      
+      <property name="transaction" value="xa" />
+      
+      <property name="pooling" value="true" />
+      <property name="poolMinSize" value="10" />
+      <property name="poolMaxSize" value="50" />
+      
+   </bean>
+   
+      <bean id="JencksAmqJmsConnectionManagerCarsCo" class="org.jencks.factory.ConnectionManagerFactoryBean">
       <property name="transactionManager" ref="xaTransactionManager" />
       
       <property name="transaction" value="xa" />
@@ -40,7 +62,7 @@
                </bean>
             </property>
 
-            <property name="connectionManager" ref="JencksAmqJmsConnectionManager" />
+            <property name="connectionManager" ref="JencksAmqJmsConnectionManagerCapitol" />
 
          </bean>
       </property>
@@ -58,7 +80,7 @@
                </bean>
             </property>
 
-            <property name="connectionManager" ref="JencksAmqJmsConnectionManager" />
+            <property name="connectionManager" ref="JencksAmqJmsConnectionManagerBVIS" />
 
          </bean>
       </property>
@@ -75,7 +97,7 @@
                </bean>
             </property>
 
-            <property name="connectionManager" ref="JencksAmqJmsConnectionManager" />
+            <property name="connectionManager" ref="JencksAmqJmsConnectionManagerCarsCo" />
 
          </bean>
       </property>
