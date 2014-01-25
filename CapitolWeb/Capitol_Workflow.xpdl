@@ -1175,6 +1175,7 @@
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
 <ActualParameter>DTO</ActualParameter>
+<ActualParameter>Incident</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -1196,6 +1197,10 @@
 <carnot:DataFlow Oid="10696" Id="DTO" Name="DTO" Direction="IN" Context="application">
 <carnot:DataRef Id="DTO"/>
 <carnot:AccessPointRef Id="setDTO(DTO.DataTransferObject)"/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10738" Id="Incident_1" Name="Incident_1" Direction="OUT" Context="application">
+<carnot:DataRef Id="Incident"/>
+<carnot:AccessPointRef Id="getIncident()"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
@@ -1384,6 +1389,8 @@
 <carnot:Connections>
 <carnot:Connection Kind="DATA_FLOW" Oid="10712" SourceSymbol="10507" TargetSymbol="10686"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10713" SourceSymbol="10510" TargetSymbol="10686"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10739" SourceSymbol="10510" TargetSymbol="10697"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10740" SourceSymbol="10507" TargetSymbol="10697"/>
 </carnot:Connections>
 </carnot:Diagram>
 </carnot:Diagrams>
