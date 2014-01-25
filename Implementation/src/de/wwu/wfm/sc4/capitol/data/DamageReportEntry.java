@@ -62,7 +62,7 @@ public class DamageReportEntry extends AbstractDataClass {
 	}
 	
 	public String getCostEstimationFormatted() {
-		return String.format("%1$,.2f", costEstimation);
+		return String.format("%,d", costEstimation)+",00";
 	}
 
 	public void setCostEstimation(int costEstimation) {

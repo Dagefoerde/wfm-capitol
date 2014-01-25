@@ -968,6 +968,7 @@
 <Tool Id="CreateCoverageDecisionApp" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
+<ActualParameter>Incident</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -986,6 +987,10 @@
 <carnot:DataFlow Oid="10517" Id="Incident" Name="Incident_1" Direction="IN" Context="jsf">
 <carnot:DataRef Id="Incident"/>
 <carnot:AccessPointRef Id="setIncident(de.wwu.wfm.sc4.capitol.data.Incident)"/>
+</carnot:DataFlow>
+<carnot:DataFlow Oid="10747" Id="Incident_1" Name="Incident_1" Direction="OUT" Context="jsf">
+<carnot:DataRef Id="Incident"/>
+<carnot:AccessPointRef Id="getIncident()"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
