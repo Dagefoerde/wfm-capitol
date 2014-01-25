@@ -397,6 +397,11 @@
 <ExternalReference location="DTO.DataTransferObject"/>
 </DataType>
 </FormalParameter>
+<FormalParameter Id="processID" Index="2" Mode="IN">
+<DataType>
+<ExternalReference location="java.lang.String"/>
+</DataType>
+</FormalParameter>
 </FormalParameters>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -408,6 +413,14 @@
 <carnot:Attribute Name="carnot:engine:className" Value="DTO.DataTransferObject"/>
 <carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
 <carnot:Attribute Name="carnot:engine:jms.location" Value="BODY" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
+</carnot:Attributes>
+</carnot:AccessPoint>
+<carnot:AccessPoint Oid="10737" Id="processID" Name="processID" Direction="IN" Type="serializable">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:className" Value="java.lang.String"/>
+<carnot:Attribute Name="carnot:engine:defaultValue" Value="3c_UpdateResp"/>
+<carnot:Attribute Name="carnot:engine:jms.location" Value="HEADER" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
 </carnot:Attributes>
 </carnot:AccessPoint>
 </carnot:AccessPoints>
@@ -430,6 +443,11 @@
 <ExternalReference location="DTO.DataTransferObject"/>
 </DataType>
 </FormalParameter>
+<FormalParameter Id="processID" Index="2" Mode="IN">
+<DataType>
+<ExternalReference location="java.lang.String"/>
+</DataType>
+</FormalParameter>
 </FormalParameters>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
@@ -441,6 +459,14 @@
 <carnot:Attribute Name="carnot:engine:className" Value="DTO.DataTransferObject"/>
 <carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
 <carnot:Attribute Name="carnot:engine:jms.location" Value="BODY" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
+</carnot:Attributes>
+</carnot:AccessPoint>
+<carnot:AccessPoint Oid="10736" Id="processID" Name="processID" Direction="IN" Type="serializable">
+<carnot:Attributes>
+<carnot:Attribute Name="carnot:engine:browsable" Value="false" Type="boolean"/>
+<carnot:Attribute Name="carnot:engine:defaultValue" Value="CL7_InsuranceCov"/>
+<carnot:Attribute Name="carnot:engine:className" Value="java.lang.String"/>
+<carnot:Attribute Name="carnot:engine:jms.location" Value="HEADER" Type="ag.carnot.workflow.spi.providers.applications.jms.JMSLocation"/>
 </carnot:Attributes>
 </carnot:AccessPoint>
 </carnot:AccessPoints>
@@ -1318,12 +1344,6 @@
 <carnot:Symbol Kind="APPLICATION" Oid="10530" X="400" Y="670" Width="170" Height="40" ModelElement="SendCoverageDecisionToCC"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10532" X="380" Y="585" Width="170" Height="40" ModelElement="SendCoverageDecisionToBVIS"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10536" X="460" Y="480" Width="230" Height="40" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10545" X="555" Y="560" Width="165" Height="40">
-<carnot:Text>TODO processID</carnot:Text>
-</carnot:Symbol>
-<carnot:Symbol Kind="ANNOTATION" Oid="10546" X="585" Y="650" Width="155" Height="20">
-<carnot:Text>TODO processID</carnot:Text>
-</carnot:Symbol>
 <carnot:Symbol Kind="APPLICATION" Oid="10636" X="385" Y="350" Width="-1" Height="-1" ModelElement="CreateCoverageDecisionApp"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10686" X="189" Y="100" Width="175" Height="51" ModelElement="CheckForExistingContract"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10689" X="5" Y="100" Width="100" Height="40" ModelElement="InitializeIncident"/>
@@ -1333,9 +1353,6 @@
 <carnot:Symbol Kind="ENDEVENT" Oid="10704" X="15" Y="315" Width="40" Height="40"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10705" X="-35" Y="165" Width="141" Height="51" ModelElement="SendNotification"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10706" X="-95" Y="260" Width="110" Height="40" ModelElement="NotificationToBVIS"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10707" X="50" Y="235" Width="130" Height="40">
-<carnot:Text>BVIS doesn't yet have a process to handle this!!</carnot:Text>
-</carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10071" ModelElement="Transition_4" SourceSymbol="10057" TargetSymbol="10065" SourceAnchor="center" TargetAnchor="center"/>
