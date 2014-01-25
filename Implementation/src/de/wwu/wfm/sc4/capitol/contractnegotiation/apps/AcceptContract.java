@@ -14,6 +14,7 @@ import de.wwu.wfm.sc4.capitol.data.Car;
 import de.wwu.wfm.sc4.capitol.data.Case;
 import de.wwu.wfm.sc4.capitol.data.Contract;
 import de.wwu.wfm.sc4.capitol.data.Customer;
+import de.wwu.wfm.sc4.capitol.service.FileService;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class AcceptContract {
@@ -34,6 +35,7 @@ public class AcceptContract {
 		contract.setCustomer(case0.getCustomer());
 		SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
 		String fileName=contract.getPath();
+        FileService.createFolderIfItDoesNotExist(CapitolConstants.CONTRACTS_PATH);
 		String path=CapitolConstants.CONTRACTS_PATH+"/"+fileName;
 		for (Car car:contract.getCars()){
 			car.setContract(contract);

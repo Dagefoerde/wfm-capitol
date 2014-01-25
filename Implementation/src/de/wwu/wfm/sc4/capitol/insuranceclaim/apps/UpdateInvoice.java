@@ -13,6 +13,7 @@ import DTO.DataTransferObject;
 import de.wwu.wfm.sc4.capitol.constants.CapitolConstants;
 import de.wwu.wfm.sc4.capitol.data.Incident;
 import de.wwu.wfm.sc4.capitol.data.Invoice;
+import de.wwu.wfm.sc4.capitol.service.FileService;
 import de.wwu.wfm.sc4.capitol.service.ServiceInitializer;
 
 public class UpdateInvoice {
@@ -28,6 +29,7 @@ public class UpdateInvoice {
       
         //save pdf to file
 		String fileName = invoice.getDate()+"-"+ invoice.getInvoiceNumber() +".pdf";
+        FileService.createFolderIfItDoesNotExist(CapitolConstants.INVOICE_PATH);
         String path=CapitolConstants.INVOICE_PATH+"/"+fileName;
         invoice.setPath(fileName);
         try {
