@@ -55,7 +55,7 @@ public class IncidentService extends AbstractServiceClass<Incident> {
 	public void initializeIncident(Incident i) {
 		// accesses collection(s) in order to avoid "no 
 		// session or session was closed" Hibernate exception
-		if (i.getDamageReport() != null) {
+		if (i.getDamageReport() != null && i.getDamageReport().getEntries() != null) {
 			i.getDamageReport().getEntries().size();
 		}
 	}

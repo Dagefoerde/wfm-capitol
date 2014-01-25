@@ -154,7 +154,7 @@ public class Main {
 		DataTransferObject dto = createAccidentReportDTO();
 		MessageProducer producer = session.createProducer(q);
 		ActiveMQObjectMessage message = new ActiveMQObjectMessage();
-		message.setStringProperty("processID", "CL3_B_AccRep");
+		message.setStringProperty("processID", "CL1_B_DmRep");
 		message.setObject(dto);
 		producer.send(message);
 		
@@ -223,7 +223,15 @@ public class Main {
 		ClaimReport claimReport = new ClaimReport(addr, Calendar.getInstance().getTime()
 				, customer, car, "cause", "description", false, true);
 		
-		ClaimData claimData = new ClaimData(123, claimReport, null, null, null, null, null);
+		ArrayList<Entry> damages = new ArrayList<Entry>();
+		damages.add(new Entry(1, "Broken Window", 1000));
+		damages.add(new Entry(2, "Gas pedal", 70));
+		damages.add(new Entry(1, "Heater", 2500));
+		
+		DamageReport damageReport = new DamageReport(damages, "Hans Wurst", new ServiceStation("0800/29923",new Address(9,"Kartoffelweg","29223","Celle")));
+		
+		
+		ClaimData claimData = new ClaimData(123, claimReport, null, damageReport, null, null, null);
 		
 		dto.setClaimData(claimData);
 		

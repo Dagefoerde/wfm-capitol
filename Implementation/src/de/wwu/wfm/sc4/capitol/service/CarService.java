@@ -22,10 +22,8 @@ public class CarService extends AbstractServiceClass<Car> {
 	public Car findByLicencePlate(String licencePlate) {
 		Session s = ServiceInitializer.getProvider().getSession();
 		Query q = s.createQuery("from Car c" +
-				" where c.licencePlate = :licencePlate" +
-				" and c.contract.startDate < :today and c.contract.endDate > :today ");
+				" where c.licencePlate = :licencePlate");
 		q.setString("licencePlate", licencePlate);
-		q.setDate("today", Calendar.getInstance().getTime()); // TODO Date of accident, not today!! --> parameter; maybe second method.
 		
 		List<?> results = q.list();
 		

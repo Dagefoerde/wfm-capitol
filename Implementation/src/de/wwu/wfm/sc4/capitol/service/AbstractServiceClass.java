@@ -21,11 +21,12 @@ public class AbstractServiceClass<A extends AbstractDataClass> {
 		ServiceInitializer.getProvider().closeSession();
 	}
 	
-	public void persist(A current){
+	public Object persist(A current){
 		 Session s = getSession();
 		 s.beginTransaction();
-		 s.merge(current);
+		 Object o = s.merge(current);
 		 s.getTransaction().commit();
+		 return o;
 	}
 	
 	public A findById(Class<A> clazz, int id){

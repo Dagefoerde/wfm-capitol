@@ -23,6 +23,12 @@ public class CopyClaimDataIntoIncident {
 	public void setIncident(Incident incident) {
 		this.incident = incident;
 	}
+	
+	public Incident getIncident() {
+		return this.incident;
+	}
+	
+	
 
 	public void complete() {
 		// add car
@@ -41,6 +47,7 @@ public class CopyClaimDataIntoIncident {
 		incident.setDamageReport(damageReport);
 
 		// persist
-		ServiceInitializer.p().getIncidentService().persist(incident);
+		Object result = ServiceInitializer.p().getIncidentService().persist(incident);
+		if (result != null) incident = (Incident)result;
 	}
 }
