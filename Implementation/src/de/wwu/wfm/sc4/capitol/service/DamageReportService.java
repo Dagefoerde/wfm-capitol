@@ -33,7 +33,7 @@ public class DamageReportService extends AbstractServiceClass<DamageReport> {
 			list.add(ServiceInitializer.p().getDamageReportEntryService()
 					.convertToDTOEntry(dre));
 		}
-		return null;
+		return list;
 	}
 
 	public DamageReport convertFromDTODamageReport(
