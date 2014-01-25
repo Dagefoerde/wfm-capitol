@@ -968,7 +968,6 @@
 <Tool Id="CreateCoverageDecisionApp" Type="APPLICATION">
 <ActualParameters>
 <ActualParameter>Incident</ActualParameter>
-<ActualParameter>Incident</ActualParameter>
 </ActualParameters>
 </Tool>
 </Implementation>
@@ -987,10 +986,6 @@
 <carnot:DataFlow Oid="10517" Id="Incident" Name="Incident_1" Direction="IN" Context="jsf">
 <carnot:DataRef Id="Incident"/>
 <carnot:AccessPointRef Id="setIncident(de.wwu.wfm.sc4.capitol.data.Incident)"/>
-</carnot:DataFlow>
-<carnot:DataFlow Oid="10741" Id="Incident_1" Name="Incident_1" Direction="OUT" Context="jsf">
-<carnot:DataRef Id="Incident"/>
-<carnot:AccessPointRef Id="getIncident()"/>
 </carnot:DataFlow>
 </carnot:DataFlows>
 <carnot:Attributes>
@@ -1021,6 +1016,16 @@
 <FinishMode>
 <Automatic/>
 </FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="AND">
+<TransitionRefs>
+<TransitionRef Id="Transition_5"/>
+<TransitionRef Id="Transition_10"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10064" Implementation="Application" IsHibernatedOnCreation="false">
@@ -1203,7 +1208,7 @@
 <carnot:DataRef Id="DTO"/>
 <carnot:AccessPointRef Id="setDTO(DTO.DataTransferObject)"/>
 </carnot:DataFlow>
-<carnot:DataFlow Oid="10738" Id="Incident_1" Name="Incident_1" Direction="OUT" Context="application">
+<carnot:DataFlow Oid="10744" Id="Incident_1" Name="Incident_1" Direction="OUT" Context="application">
 <carnot:DataRef Id="Incident"/>
 <carnot:AccessPointRef Id="getIncident()"/>
 </carnot:DataFlow>
@@ -1269,14 +1274,6 @@
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
-<Transition Id="Transition_6" Name="Transition 6" From="SendCoverageDecisionToBVIS" To="SendCoverageDecisionToCC">
-<Condition Type="CONDITION">true</Condition>
-<ExtendedAttributes>
-<ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10074"/>
-</ExtendedAttribute>
-</ExtendedAttributes>
-</Transition>
 <Transition Id="Transition_7" Name="Transition 7" From="CheckForExistingContract" To="UpdateIncident">
 <Condition Type="CONDITION">Incident != null</Condition>
 <ExtendedAttributes>
@@ -1298,6 +1295,14 @@
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Transition Oid="10725"/>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Transition>
+<Transition Id="Transition_10" Name="Transition 10" From="StoreCoverageDecisionAndAssembleDTO" To="SendCoverageDecisionToCC">
+<Condition Type="CONDITION">true</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="CarnotExt">
+<carnot:Transition Oid="10738"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -1344,15 +1349,15 @@
 <carnot:Symbols>
 <carnot:Symbol Kind="ACTIVITY" Oid="10057" X="205" Y="375" Width="141" Height="51" ModelElement="CreateCoverageDecision"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10065" X="150" Y="490" Width="255" Height="51" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10067" X="185" Y="585" Width="185" Height="51" ModelElement="SendCoverageDecisionToBVIS"/>
-<carnot:Symbol Kind="ACTIVITY" Oid="10069" X="175" Y="680" Width="205" Height="51" ModelElement="SendCoverageDecisionToCC"/>
-<carnot:Symbol Kind="ENDEVENT" Oid="10096" X="260" Y="760" Width="40" Height="40"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10067" X="-15" Y="675" Width="185" Height="51" ModelElement="SendCoverageDecisionToBVIS"/>
+<carnot:Symbol Kind="ACTIVITY" Oid="10069" X="390" Y="670" Width="205" Height="51" ModelElement="SendCoverageDecisionToCC"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10096" X="475" Y="800" Width="40" Height="40"/>
 <carnot:Symbol Kind="STARTEVENT" Oid="10503" X="205" Y="15" Width="140" Height="50" ModelElement="InitialContact"/>
 <carnot:Symbol Kind="DATA" Oid="10507" X="-30" Y="410" Width="40" Height="60" ModelElement="DTO"/>
 <carnot:Symbol Kind="DATA" Oid="10510" X="675" Y="360" Width="60" Height="60" ModelElement="Incident"/>
 <carnot:Symbol Kind="ROLE" Oid="10527" X="435" Y="400" Width="90" Height="40" ModelElement="InsuranceClerk"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10530" X="400" Y="670" Width="170" Height="40" ModelElement="SendCoverageDecisionToCC"/>
-<carnot:Symbol Kind="APPLICATION" Oid="10532" X="380" Y="585" Width="170" Height="40" ModelElement="SendCoverageDecisionToBVIS"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10530" X="610" Y="650" Width="170" Height="40" ModelElement="SendCoverageDecisionToCC"/>
+<carnot:Symbol Kind="APPLICATION" Oid="10532" X="190" Y="680" Width="170" Height="40" ModelElement="SendCoverageDecisionToBVIS"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10536" X="460" Y="480" Width="230" Height="40" ModelElement="StoreCoverageDecisionAndAssembleDTO"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10636" X="385" Y="350" Width="-1" Height="-1" ModelElement="CreateCoverageDecisionApp"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10686" X="189" Y="100" Width="175" Height="51" ModelElement="CheckForExistingContract"/>
@@ -1363,11 +1368,12 @@
 <carnot:Symbol Kind="ENDEVENT" Oid="10704" X="15" Y="315" Width="40" Height="40"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10705" X="-35" Y="165" Width="141" Height="51" ModelElement="SendNotification"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10706" X="-95" Y="260" Width="110" Height="40" ModelElement="NotificationToBVIS"/>
+<carnot:Symbol Kind="GATEWAY" Oid="10740" X="255" Y="560" Width="42" Height="42" ModelElement="10065" FlowKind="split"/>
+<carnot:Symbol Kind="ENDEVENT" Oid="10742" X="60" Y="800" Width="40" Height="40"/>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10071" ModelElement="Transition_4" SourceSymbol="10057" TargetSymbol="10065" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10073" ModelElement="Transition_5" SourceSymbol="10065" TargetSymbol="10067" SourceAnchor="center" TargetAnchor="top"/>
-<carnot:Connection Kind="TRANSITION" Oid="10075" ModelElement="Transition_6" SourceSymbol="10067" TargetSymbol="10069" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10073" ModelElement="Transition_5" SourceSymbol="10740" TargetSymbol="10067" SourceAnchor="center" TargetAnchor="top"/>
 <carnot:Connection Kind="TRANSITION" Oid="10097" SourceSymbol="10069" TargetSymbol="10096" SourceAnchor="center" TargetAnchor="bottom"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10518" SourceSymbol="10510" TargetSymbol="10057"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10521" SourceSymbol="10510" TargetSymbol="10065"/>
@@ -1388,14 +1394,17 @@
 <carnot:Connection Kind="EXECUTED_BY" Oid="10709" SourceSymbol="10706" TargetSymbol="10705"/>
 <carnot:Connection Kind="TRANSITION" Oid="10711" ModelElement="Transition_8" SourceSymbol="10691" TargetSymbol="10705" SourceAnchor="center" TargetAnchor="right"/>
 <carnot:Connection Kind="TRANSITION" Oid="10726" ModelElement="Transition_9" SourceSymbol="10697" TargetSymbol="10057" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10739" ModelElement="Transition_10" SourceSymbol="10740" TargetSymbol="10069" SourceAnchor="center" TargetAnchor="top"/>
+<carnot:Connection Kind="TRANSITION" Oid="10741" SourceSymbol="10065" TargetSymbol="10740" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10743" SourceSymbol="10067" TargetSymbol="10742" SourceAnchor="center" TargetAnchor="bottom"/>
 </carnot:Connections>
 </carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="DATA_FLOW" Oid="10712" SourceSymbol="10507" TargetSymbol="10686"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10713" SourceSymbol="10510" TargetSymbol="10686"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10739" SourceSymbol="10510" TargetSymbol="10697"/>
-<carnot:Connection Kind="DATA_FLOW" Oid="10740" SourceSymbol="10507" TargetSymbol="10697"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10745" SourceSymbol="10507" TargetSymbol="10697"/>
+<carnot:Connection Kind="DATA_FLOW" Oid="10746" SourceSymbol="10510" TargetSymbol="10697"/>
 </carnot:Connections>
 </carnot:Diagram>
 </carnot:Diagrams>
