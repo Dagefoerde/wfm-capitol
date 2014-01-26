@@ -8,25 +8,26 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 import de.wwu.wfm.sc4.capitol.data.Invoice;
 
 public class MakePayment {
 	private Invoice invoice;
-
-	private final String BANK_APP_IP = "http://wi-wfm10.uni-muenster.de:9999";
-	private final String CAPITOL_ACCOUNT_NUMBER = "3";
+	private final String BANK_APP_IP = "http://146.185.158.104";
+	private final String CAPITOL_ACCOUNT = "capitol";
+	private final String CC_ACCOUNT="carsco";
 	private final String BANK_APP_URL = BANK_APP_IP
-			+ "/wfmbank/rest/account/add/tx?account=" + CAPITOL_ACCOUNT_NUMBER;
+			+ "/api/v1/bankservice/transfer?";
 	private final String TO = "&to=";
+	private final String FROM = "&from=";
 	private final String AMOUNT = "&amount=";
-	private final String DESCRIPTION = "&description=";
+	private final String DESCRIPTION = "description=";
 
 	public void complete() throws IOException {
-		String description = Integer.toString(invoice.getInvoiceNumber());
-		String paymentUrl = BANK_APP_URL + TO + invoice.getBankAccount()
-				+ AMOUNT + invoice.getDueSum() + DESCRIPTION + description;
+		String description = "InvoiceNumber: " + Integer.toString(invoice.getInvoiceNumber());
+		String paymentUrl = BANK_APP_URL + DESCRIPTION + URLEncoder.encode(description,"UTF-8") + AMOUNT + URLEncoder.encode(invoice.getDueSum()+"","UTF-8") + FROM + CAPITOL_ACCOUNT + TO + CC_ACCOUNT;
 		System.out.println("Make Paymet with URL: "+paymentUrl);
 		// TODO call URL and check response for okay
 		String output=getURL(paymentUrl);

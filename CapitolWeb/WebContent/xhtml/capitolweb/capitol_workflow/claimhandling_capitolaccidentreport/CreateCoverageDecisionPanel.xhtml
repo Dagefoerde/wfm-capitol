@@ -11,38 +11,43 @@
 	</ice:outputHead>
 	<ice:outputBody>
 		<ice:form id="ipp_form">
-			<ice:panelTabSet style="opacity: 0.7">
+			<div class="cov"><h:panelGrid id="contract_data" columns="4"
+				styleClass="table-form"
+				columnClasses="claim-contract-label,claim-contract-entry,claim-contract-label,claim-contract-entry">
+				<ice:outputText value="Incident ID (internal):" />
+				<ice:outputText value="#{CreateCoverageDecisionBean.incident.id}" />
+				<ice:outputText value="Incident ID (shared):" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.sharedIncidentID}" />
+
+
+				<ice:outputText value="Car" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.car.type} (#{CreateCoverageDecisionBean.incident.car.color})" />
+				<ice:outputText value="License Plate" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.car.licencePlate}" />
+
+				<ice:outputText value="Customer" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.contract.customer.lastname}, #{CreateCoverageDecisionBean.incident.contract.customer.firstname}" />
+				<ice:outputText value="Phone" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.contract.customer.phone}" />
+
+
+				<ice:outputText value="Cars&amp;Co Service Station" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.damageReport.serviceStation.address.city} (Phone: #{CreateCoverageDecisionBean.incident.damageReport.serviceStation.phone})" />
+				<ice:outputText value="Cars&amp;Co Contact Person" />
+				<ice:outputText
+					value="#{CreateCoverageDecisionBean.incident.damageReport.contactPerson}" />
+			</h:panelGrid></div>
+			
+			
+			<ice:panelTabSet style="opacity: 0.7; margin-top: 15px" >
 				<ice:panelTab label="Coverage decision">
-				<div class="cov">
-					<h:panelGrid id="contract_data" columns="4" styleClass="table-form"
-						columnClasses="claim-contract-label,claim-contract-entry,claim-contract-label,claim-contract-entry">
-						<ice:outputText value="Incident ID (internal):" />
-						<ice:outputText value="#{CreateCoverageDecisionBean.incident.id}" />
-						<ice:outputText value="Incident ID (shared):" />
-						<ice:outputText
-							value="#{CreateCoverageDecisionBean.incident.sharedIncidentID}" />
-
-
-						<ice:outputText value="Car" />
-						<ice:outputText value="#{CreateCoverageDecisionBean.incident.car.type} (#{CreateCoverageDecisionBean.incident.car.color})" />
-						<ice:outputText value="License Plate" />
-						<ice:outputText
-							value="#{CreateCoverageDecisionBean.incident.car.licencePlate}" />
-
-						<ice:outputText value="Customer" />
-						<ice:outputText
-							value="#{CreateCoverageDecisionBean.incident.contract.customer.lastname}, #{CreateCoverageDecisionBean.incident.contract.customer.firstname}" />
-						<ice:outputText value="Phone" />
-						<ice:outputText value="#{CreateCoverageDecisionBean.incident.contract.customer.phone}" />
-
-
-						<ice:outputText value="Cars&amp;Co Service Station" />
-						<ice:outputText
-							value="#{CreateCoverageDecisionBean.incident.damageReport.serviceStation.address.city} (Phone: #{CreateCoverageDecisionBean.incident.damageReport.serviceStation.phone})" />
-						<ice:outputText value="Cars&amp;Co Contact Person" />
-						<ice:outputText value="#{CreateCoverageDecisionBean.incident.damageReport.contactPerson}" />
-					</h:panelGrid>
-
+					<div class="cov">
 					<table>
 						<tr>
 							<td><b><ice:outputText value="Is covered" /></b></td>
@@ -56,7 +61,8 @@
 								<td><ice:selectBooleanCheckbox
 									value="#{cd.coverageDecision}" /></td>
 								<td><ice:outputText value="#{cd.description}" /></td>
-								<td><ice:outputText value="EUR #{cd.costEstimationFormatted}" /></td>
+								<td><ice:outputText
+									value="EUR #{cd.costEstimationFormatted}" /></td>
 							</tr>
 						</ui:repeat>
 					</table>
@@ -64,16 +70,16 @@
 
 				</ice:panelTab>
 				<ice:panelTab label="Contract document">
-				<iframe width="100%" height="600" src="/CapitolWeb/contract-pdf/#{CreateCoverageDecisionBean.incident.contract.path}">
-				</iframe>
+					<iframe width="100%" height="600"
+						src="/CapitolWeb/contract-pdf/#{CreateCoverageDecisionBean.incident.contract.path}">
+					</iframe>
 				</ice:panelTab>
 			</ice:panelTabSet>
 		</ice:form>
 		<style type="text/css">
-			.cov td {
-				font-size: 11pt;
-			} 
-			
-		</style>
+.cov td {
+	font-size: 11pt;
+}
+</style>
 	</ice:outputBody>
 </ice:outputHtml>
