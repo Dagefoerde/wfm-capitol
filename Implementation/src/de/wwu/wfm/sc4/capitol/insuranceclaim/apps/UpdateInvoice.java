@@ -28,7 +28,8 @@ public class UpdateInvoice {
 		
       
         //save pdf to file
-		String fileName = invoice.getDate()+"-"+ invoice.getInvoiceNumber() +".pdf";
+		SimpleDateFormat df=new SimpleDateFormat("yyyyMMDD");
+		String fileName = df.format(invoice.getDate())+"-"+ invoice.getInvoiceNumber() +".pdf";
         FileService.createFolderIfItDoesNotExist(CapitolConstants.INVOICE_PATH);
         String path=CapitolConstants.INVOICE_PATH+"/"+fileName;
         invoice.setPath(fileName);

@@ -235,6 +235,13 @@ public class Invoice extends AbstractDataClass {
 		return checkResult;
 	}
 	
+	public boolean isInvoiceCorrect() throws Exception{
+		double dueSum=getDueSum();
+		double estimatedTotal=getEstimatedTotal()*1.1;
+		boolean result=(dueSum>estimatedTotal);
+		return result;
+	}
+	
 	public void setInvoiceDocument(byte[] invoiceDocument) {
 		this.invoiceDocument = invoiceDocument;
 	}

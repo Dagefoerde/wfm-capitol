@@ -1782,11 +1782,6 @@ AND no accident report was received yet.</carnot:Text>
 <FinishMode>
 <Automatic/>
 </FinishMode>
-<TransitionRestrictions>
-<TransitionRestriction>
-<Join Type="XOR"/>
-</TransitionRestriction>
-</TransitionRestrictions>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Activity Oid="10234" Implementation="Application" IsHibernatedOnCreation="false">
@@ -1966,7 +1961,7 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_16" Name="Transition 16" From="RouteActivity" To="SendRejectionNoticeToCC">
-<Condition Type="CONDITION">if(Invoice.getDueSum()&gt;Invoice.getEstimatedTotal()*1.1);</Condition>
+<Condition Type="CONDITION">Invoice.isInvoiceCorrect();</Condition>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
 <carnot:Transition Oid="10718" IsForkingOnTraversal="false"/>
@@ -1974,10 +1969,10 @@ AND no accident report was received yet.</carnot:Text>
 </ExtendedAttributes>
 </Transition>
 <Transition Id="Transition_17" Name="Transition 17" From="RouteActivity" To="MakePayment">
-<Condition Type="CONDITION">true</Condition>
+<Condition Type="OTHERWISE"/>
 <ExtendedAttributes>
 <ExtendedAttribute Name="CarnotExt">
-<carnot:Transition Oid="10722"/>
+<carnot:Transition Oid="10722" IsForkingOnTraversal="false"/>
 </ExtendedAttribute>
 </ExtendedAttributes>
 </Transition>
@@ -2024,11 +2019,10 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbols>
 <carnot:Symbol Kind="STARTEVENT" Oid="10248" X="215" Y="-45" Width="90" Height="50" ModelElement="ReceiveInvoice"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10249" X="185" Y="20" Width="151" Height="51" ModelElement="LoadIncidentData"/>
-<carnot:Symbol Kind="DATA" Oid="10251" X="35" Y="180" Width="40" Height="60" ModelElement="Incident"/>
+<carnot:Symbol Kind="DATA" Oid="10251" X="35" Y="180" Width="65" Height="60" ModelElement="Incident"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10256" X="530" Y="820" Width="40" Height="40"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10259" X="190" Y="730" Width="141" Height="51" ModelElement="MakePayment"/>
 <carnot:Symbol Kind="ENDEVENT" Oid="10262" X="240" Y="810" Width="40" Height="40"/>
-<carnot:Symbol Kind="GATEWAY" Oid="10264" X="240" Y="615" Width="42" Height="42" ModelElement="10259" FlowKind="join"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10267" X="-5" Y="685" Width="130" Height="40" ModelElement="MakePayment"/>
 <carnot:Symbol Kind="ACTIVITY" Oid="10270" X="470" Y="730" Width="161" Height="51" ModelElement="SendRejectionNoticeToCC"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10271" X="665" Y="735" Width="130" Height="40" ModelElement="RejectionNoticeToCC"/>
@@ -2041,15 +2035,11 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Symbol Kind="DATA" Oid="10662" X="-10" Y="390" Width="110" Height="70" ModelElement="Invoice"/>
 <carnot:Symbol Kind="GATEWAY" Oid="10720" X="530" Y="495" Width="42" Height="42" ModelElement="10270" FlowKind="join"/>
 <carnot:Symbol Kind="APPLICATION" Oid="10728" X="-5" Y="25" Width="140" Height="40" ModelElement="RetrieveIncident"/>
-<carnot:Symbol Kind="ANNOTATION" Oid="10731" X="805" Y="730" Width="140" Height="40">
-<carnot:Text>TODO replace processID with real one</carnot:Text>
-</carnot:Symbol>
 </carnot:Symbols>
 <carnot:Connections>
 <carnot:Connection Kind="TRANSITION" Oid="10272" SourceSymbol="10248" TargetSymbol="10249" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="DATA_FLOW" Oid="10281" SourceSymbol="10251" TargetSymbol="10249"/>
 <carnot:Connection Kind="TRANSITION" Oid="10287" SourceSymbol="10259" TargetSymbol="10262" SourceAnchor="center" TargetAnchor="bottom"/>
-<carnot:Connection Kind="TRANSITION" Oid="10290" SourceSymbol="10264" TargetSymbol="10259" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10294" SourceSymbol="10267" TargetSymbol="10259"/>
 <carnot:Connection Kind="TRANSITION" Oid="10297" SourceSymbol="10270" TargetSymbol="10256" SourceAnchor="bottom" TargetAnchor="bottom"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10298" SourceSymbol="10271" TargetSymbol="10270"/>
@@ -2064,7 +2054,7 @@ AND no accident report was received yet.</carnot:Text>
 <carnot:Connection Kind="TRANSITION" Oid="10717" ModelElement="Transition_15" SourceSymbol="10642" TargetSymbol="10651" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10719" ModelElement="Transition_16" SourceSymbol="10658" TargetSymbol="10720" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="TRANSITION" Oid="10721" SourceSymbol="10720" TargetSymbol="10270" SourceAnchor="center" TargetAnchor="center"/>
-<carnot:Connection Kind="TRANSITION" Oid="10723" ModelElement="Transition_17" SourceSymbol="10658" TargetSymbol="10264" SourceAnchor="center" TargetAnchor="center"/>
+<carnot:Connection Kind="TRANSITION" Oid="10723" ModelElement="Transition_17" SourceSymbol="10658" TargetSymbol="10259" SourceAnchor="center" TargetAnchor="center"/>
 <carnot:Connection Kind="EXECUTED_BY" Oid="10729" SourceSymbol="10728" TargetSymbol="10249"/>
 </carnot:Connections>
 </carnot:Symbol>
